@@ -1,23 +1,28 @@
-using System;
 using CommunityToolkit.Mvvm.Input;
-using SimulationFIN31.Services;
+using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.ViewModels;
 
 public partial class HomeViewModel : ViewModelBase
 {
-    private readonly NavigationService _navigationService;
+    private readonly INavigationService _navigationService;
 
-    // DI injiziert den Service und eine Factory für das Ziel-VM
-    public HomeViewModel(NavigationService navService)
+    public HomeViewModel(INavigationService navigationService)
     {
-        _navigationService = navService;
+        _navigationService = navigationService;
     }
 
-    [RelayCommand] // Erzeugt automatisch einen Command "GoToLoginCommand"
-    private void GoToLogin()
+    // Aus einer Methode wird automatisch ein Command generiert:
+    // Name im XAML wird: "NavigateSettingsCommand" (Das "Async" oder Methoden-Suffix wird Command)
+    [RelayCommand]
+    private void NavigateSettings()
     {
-        var newVm = _loginVmFactory();
-        _navigationService.NavigateTo(newVm);
+        _navigationService.NavigateTo<SettingsViewModel>();
+    }
+
+    [RelayCommand]
+    private void NavigateSimulation()
+    {
+        _navigationService.NavigateTo<SimulationViewModel>();
     }
 }

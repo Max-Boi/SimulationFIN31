@@ -1,6 +1,10 @@
+using System.ComponentModel;
+using SimulationFIN31.ViewModels;
+
 namespace SimulationFIN31.Services.Interfaces;
 
-public interface INavigationService
+public interface INavigationService : INotifyPropertyChanged
 {
-    void OnCurrentViewmodel();
+    ViewModelBase CurrentViewModel { get; }
+    void NavigateTo<T>() where T : ViewModelBase;
 }

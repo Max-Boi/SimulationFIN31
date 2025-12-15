@@ -1,18 +1,35 @@
 using System;
-using SimulationFIN31.ViewModels;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
+using ReactiveUI;
+using SimulationFIN31.Services.Interfaces;
+using SimulationFIN31.ViewModels;
+
 namespace SimulationFIN31.Services;
 
-public partial class NavigationService : ObservableObject
+public partial class NavigationService : ObservableObject, INavigationService
 {
-    // Erstellt automatisch: 
-    // 1. Property "CurrentViewModel"
-    // 2. Event "PropertyChanged" (darauf lauscht Avalonia UI direkt)
-    [ObservableProperty] 
-    private ViewModelBase? _currentViewModel; 
+    private readonly Func<Type, ViewModelBase> _viewModelFactory;
 
-    public void NavigateTo(ViewModelBase viewModel)
+    // Das [ObservableProperty] Attribut generiert automatisch:
+    // public ViewModelBase CurrentViewModel { get; set; }
+    // und kümmert sich um PropertyChanged Events.
+    [ObservableProperty]
+    private ViewModelBase _currentViewModel;
+
+    public NavigationService(Func<Type, ViewModelBase> viewModelFactory)
     {
-        CurrentViewModel = viewModel;
+        _viewModelFactory = viewModelFactory;
+    }
+
+    public void NavigateTo<T>() where T : ViewModelBase
+    {
+        var viewModel = _viewModelFactory(typeof(T));
+
+        // Sicherheitshalber immer auf den UI-Thread zwingen
+        Dispatcher.UIThread.Post(() =>
+        {
+            CurrentViewModel = viewModel;
+        });
     }
 }

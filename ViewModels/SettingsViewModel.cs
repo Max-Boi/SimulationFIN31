@@ -1,6 +1,6 @@
 namespace SimulationFIN31.ViewModels;
 
-public class SettingsViewModel
+public class SettingsViewModel : ViewModelBase
 {
     
 }
