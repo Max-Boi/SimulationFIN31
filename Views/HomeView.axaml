@@ -13,25 +13,37 @@
     </Design.DataContext>
     
     <Grid RenderOptions.BitmapInterpolationMode="HighQuality">
-        <Grid.Background >
-            <ImageBrush Source="{Binding CherryBlossomPic}"
-                        Stretch="UniformToFill"/>
-        </Grid.Background>
-        <Rectangle Fill="#66101018" />
+        
+        <Image Source="{Binding SunsetPic}"
+               Stretch="UniformToFill"
+               IsHitTestVisible="False"/>
+        
+        <Rectangle Fill="#66101018"
+                   IsHitTestVisible="False"/>
         
         <Grid Margin="60">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            
+            <Border Background="#6614181F" CornerRadius="32" Padding="45" VerticalAlignment="Center">
         <StackPanel>
             <Button Content="Zu den Einstellungen" 
+                    Classes="Glass"
+                    Height="150"
+                    Width="250"
+                    FontSize="20"
+                    Margin="0 , 0, 0 , 5"
                     Command="{Binding NavigateSettingsCommand}" />
                     
             <Button Content="Zur Simulation" 
+                    Classes="Glass" 
+                    Height="150"
+                    Width="250"
+                    FontSize="20"
                     Command="{Binding NavigateSimulationCommand}" />
         </StackPanel>
+            </Border>
     </Grid>
-        
+    </Grid>
 </UserControl>

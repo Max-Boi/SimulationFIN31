@@ -9,15 +9,18 @@ public partial class HomeViewModel : ViewModelBase
 {
     
     public Bitmap? CherryBlossomPic { get; } 
+    public Bitmap? SunsetPic { get; }
     
     private readonly INavigationService _navigationService;
 
     public HomeViewModel(INavigationService navigationService)
     {
-        var assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-        string path = $"avares://{assemblyName}/Assets/blossom.png";
-
-        CherryBlossomPic = ImageHelper.LoadFromResource(path);
+        string assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        string cherryPath = $"avares://{assemblyName}/Assets/blossom.png";
+        string sunsetPath = $"avares://{assemblyName}/Assets/sunset.png";
+        
+        SunsetPic = ImageHelper.LoadFromResource(sunsetPath);
+        CherryBlossomPic = ImageHelper.LoadFromResource(cherryPath);
         _navigationService = navigationService;
     }
 

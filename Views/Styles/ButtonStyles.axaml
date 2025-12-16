@@ -1,0 +1,59 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="Button">
+        <Setter Property="Padding" Value="20,10"/>
+        <Setter Property="CornerRadius" Value="25"/> <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.Glass">
+        <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+        
+    <Style Selector="Button.Glass:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GlassSurfaceHoverBrush}"/>
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+    </Style>
+
+        <!-- Pressed State -->
+        <Style Selector="Button.Glass:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="RenderTransform" Value="scale(0.96)"/>
+            <Setter Property="Background" Value="#30FFFFFF"/>
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+   
+
+    <Style Selector="Button.Accent">
+        <Setter Property="Background" Value="{DynamicResource SystemAccentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+        
+        <Style Selector="Button.Accent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemAccentHoverBrush}"/>
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        </Style>
+
+        <!-- Pressed State -->
+        <Style Selector="Button.Accent:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="RenderTransform" Value="scale(0.96)"/>
+            <Setter Property="Background" Value="{DynamicResource SystemAccentHoverBrush}"/>
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        </Style>
+    
+
+</Styles>
