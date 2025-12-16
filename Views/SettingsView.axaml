@@ -121,7 +121,7 @@
                                     <TextBlock Text="Beziehungsqualität der Eltern"
                                                Classes="SettingsLabel"/>
                                     <ComboBox Classes="SettingsPicker"
-                                              Items="{Binding ParentsRelationshipOptions}"
+                                              ItemsSource="{Binding ParentsRelationshipOptions}"
                                               SelectedItem="{Binding ParentsRelationshipQuality, Mode=TwoWay}"/>
                                 </StackPanel>
 
@@ -188,7 +188,7 @@
                                     <TextBlock Text="Soziale Energie"
                                                Classes="SettingsLabel"/>
                                     <ComboBox Classes="SettingsPicker"
-                                              Items="{Binding SocialEnergyOptions}"
+                                              ItemsSource="{Binding SocialEnergyOptions}"
                                               SelectedItem="{Binding SocialEnergyLevel, Mode=TwoWay}"/>
                                 </StackPanel>
                             </Grid>
