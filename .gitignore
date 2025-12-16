@@ -9,14 +9,6 @@
 *.userprefs
 *.suo
 
-## --- Visual Studio (falls mal gewechselt wird) ---
-.vs/
-*.userosscache
-
-## --- OS Files (Mac/Windows Müll) ---
-.DS_Store
-Thumbs.db
-
 ## --- Avalonia / Spezifisches ---
 # Falls Logs erstellt werden
 *.log
