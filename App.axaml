@@ -12,13 +12,13 @@
                 <ResourceDictionary>
                <ResourceDictionary.MergedDictionaries>
                    <ResourceInclude Source="/Views/Styles/Colors.axaml"/>
-                   <ResourceInclude Source="/Views/Styles/SettingsStyles.axaml"/>
+                   
                </ResourceDictionary.MergedDictionaries>
            </ResourceDictionary>
            </Application.Resources>
             
              
     <Application.Styles>
-        <FluentTheme /> <StyleInclude Source="/Views/Styles/ButtonStyles.axaml"/>
+        <FluentTheme /> <StyleInclude Source="/Views/Styles/ButtonStyles.axaml"/> <StyleInclude Source="/Views/Styles/SettingsStyles.axaml"/>
     </Application.Styles>
 </Application>

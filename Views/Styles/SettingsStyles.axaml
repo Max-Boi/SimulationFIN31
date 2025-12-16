@@ -6,7 +6,7 @@
             <GradientStop Color="#15FFFFFF" Offset="1" />
         </LinearGradientBrush>
         <SolidColorBrush x:Key="SettingsGlassBorder" Color="#35FFFFFF"/>
-        <DropShadowEffect x:Key="SettingsShadow" BlurRadius="12" Opacity="0.2" ShadowDepth="3" />
+        <DropShadowEffect x:Key="SettingsShadow" BlurRadius="12" Opacity="0.2" />
     </Styles.Resources>
 
     <Style Selector="Border.SettingsCard">
