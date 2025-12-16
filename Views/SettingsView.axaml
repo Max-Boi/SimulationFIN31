@@ -9,10 +9,61 @@
     <Design.DataContext>
         <vm:SettingsViewModel />
     </Design.DataContext>
-    <StackPanel>
-        <Button
-            Command="{Binding NavigateStartCommand}"
-            Content="Zurück"
-            Classes="Accent"/>
-    </StackPanel>
+    
+    <Grid Background="{StaticResource Brush.AppBackground}">
+        <Rectangle Fill="{StaticResource Brush.BackdropGradient}" />
+        
+        <Grid Margin="48">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+        
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                
+                <Button
+                Command="{Binding NavigateStartCommand}"
+                Content="Zurück"
+                Classes="Accent"/>
+        
+                <StackPanel Grid.Column="2">
+                    <Button  Content="Einstellungen speichern"  Command="{Binding SaveSettings}"/>
+                    <Button  Content="Einstellungen zurücksetzen" Command="{Binding ResetSettings}"/>
+                </StackPanel>
+    </Grid>
+            
+            <ScrollViewer Grid.Row="1"
+                            
+                          Margin="0,32,15,0"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel
+                    Orientation="Vertical">
+                    <Expander>
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="sozioökonomischer Status" VerticalAlignment="Center"/>
+            
+                                <Border Background="LightGray" 
+                                        CornerRadius="10" 
+                                        Width="20" Height="20"
+                                        ToolTip.Tip="{Binding SesToolTip}">
+                                    <TextBlock Text="?" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               FontSize="12"/>
+                                </Border>
+                            </StackPanel>
+                        </Expander.Header>
+                      
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        </Grid>
 </UserControl>
