@@ -1,13 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style Selector="Expander.SettingsExpander">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Padding" Value="4"/>
-        <Setter Property="Margin" Value="0,0,0,6"/>
-        <Setter Property="ExpandDirection" Value="Down"/>
-    </Style>
-
     <Style Selector="Border.SettingsCard">
         <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
