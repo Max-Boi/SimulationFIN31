@@ -4,7 +4,7 @@ public record SimulationSettings
 {
     public int IncomeLevel { get; init; }
     public int ParentsEducationLevel { get; init; }
-    public int CulturalPracticeLevel { get; init; }
+    public int JobStatus { get; init; }
     public int SocialEnvironmentLevel { get; init; }
     public bool HasAdhd { get; init; }
     public bool HasAutism { get; init; }

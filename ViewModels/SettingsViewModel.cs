@@ -23,7 +23,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     private const int DefaultIncomeLevel = 4;
     private const int DefaultParentsEducationLevel = 4;
-    private const int DefaultCulturalPracticeLevel = 4;
+    private const int DefaultJobStatus = 4;
     private const int DefaultSocialEnvironmentLevel = 4;
     private const int DefaultIntelligenceScore = 50;
     private const int DefaultAnxietyLevel = 40;
@@ -58,7 +58,7 @@ public partial class SettingsViewModel : ViewModelBase
     private int _parentsEducationLevel = DefaultParentsEducationLevel;
 
     [ObservableProperty]
-    private int _culturalPracticeLevel = DefaultCulturalPracticeLevel;
+    private int _jobStatus = DefaultJobStatus;
 
     [ObservableProperty]
     private int _socialEnvironmentLevel = DefaultSocialEnvironmentLevel;
@@ -73,16 +73,16 @@ public partial class SettingsViewModel : ViewModelBase
     private bool _parentsWithAddiction;
 
     [ObservableProperty]
-    private int _intelligenceScore = 50;
+    private int _intelligenceScore = DefaultIntelligenceScore;
 
     [ObservableProperty]
-    private int _anxietyLevel = 40;
+    private int _anxietyLevel = DefaultAnxietyLevel;
 
     [ObservableProperty]
     private string _parentsRelationshipQuality;
 
     [ObservableProperty]
-    private int _familyCloseness = 50;
+    private int _familyCloseness = DefaultFamilyCloseness;
 
     [ObservableProperty]
     private string _socialEnergyLevel;
@@ -103,7 +103,7 @@ public partial class SettingsViewModel : ViewModelBase
         {
             IncomeLevel = IncomeLevel,
             ParentsEducationLevel = ParentsEducationLevel,
-            CulturalPracticeLevel = CulturalPracticeLevel,
+            JobStatus = JobStatus,
             SocialEnvironmentLevel = SocialEnvironmentLevel,
             HasAdhd = HasAdhd,
             HasAutism = HasAutism,
@@ -132,7 +132,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         IncomeLevel = DefaultIncomeLevel;
         ParentsEducationLevel = DefaultParentsEducationLevel;
-        CulturalPracticeLevel = DefaultCulturalPracticeLevel;
+        JobStatus = DefaultJobStatus;
         SocialEnvironmentLevel = DefaultSocialEnvironmentLevel;
         HasAdhd = false;
         HasAutism = false;
