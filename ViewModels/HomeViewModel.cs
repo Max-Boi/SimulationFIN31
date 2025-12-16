@@ -1,14 +1,23 @@
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.Input;
 using SimulationFIN31.Services.Interfaces;
+using SimulationFIN31.ViewModels.Util;
 
 namespace SimulationFIN31.ViewModels;
 
 public partial class HomeViewModel : ViewModelBase
 {
+    
+    public Bitmap? CherryBlossomPic { get; } 
+    
     private readonly INavigationService _navigationService;
 
     public HomeViewModel(INavigationService navigationService)
     {
+        var assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        string path = $"avares://{assemblyName}/Assets/blossom.png";
+
+        CherryBlossomPic = ImageHelper.LoadFromResource(path);
         _navigationService = navigationService;
     }
 
