@@ -6,9 +6,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimulationFIN31.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
-    
+    <Design.DataContext>
+        <vm:SettingsViewModel />
+    </Design.DataContext>
     <StackPanel>
-        <TextBlock
-            Text="Settings gefunden!"/>
+        <Button
+            Command="{Binding NavigateStartCommand}"
+            Content="Zurück"
+            Classes="Accent"/>
     </StackPanel>
 </UserControl>

@@ -11,4 +11,9 @@
     
     <SolidColorBrush x:Key="TextPrimaryBrush" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="#CCFFFFFF"/>
+    
+    <LinearGradientBrush x:Key="Brush.BackdropGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#00101018" Offset="0" />
+        <GradientStop Color="#AA101018" Offset="1" />
+    </LinearGradientBrush>
 </ResourceDictionary>

@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.ViewModels;
 
 public partial class SettingsViewModel : ViewModelBase
 {
+    private INavigationService _navigationService;
     private readonly IReadOnlyList<string> ParentsRelationshipOptions = new[]
     {
         "harmonisch",
@@ -56,8 +60,15 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty]
     private string socialEnergyLevel;
 
-    public SettingsViewModel()
+    [RelayCommand]
+    public void  NavigateStart()
     {
+        _navigationService.NavigateTo<HomeViewModel>();
+    }
+    public SettingsViewModel(INavigationService navigationService)
+    {
+        _navigationService = navigationService;
+        
         socialEnergyLevel = SocialEnergyOptions[2];
         parentsRelationshipQuality = ParentsRelationshipOptions[1];
     }
