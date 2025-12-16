@@ -1,41 +1,54 @@
 # AGENTS.md
 
-## 1. Projekt Kontext & Tech Stack
-* **Framework:** Avalonia UI (Neueste Stable Version)
-* **Sprache:** C# 9.0+ (Nutzung moderner Features wie Records, Pattern Matching, Target-typed `new`)
-* **Architektur:** MVVM (Model-View-ViewModel)
-* **Styling:** Avalonia Styles (kein reines CSS, Nutzung von `.axaml` Styles)
+## 1. Project Context & Tech Stack
+* **Framework:** Avalonia UI (Latest Stable Version).
+* **Language:** C# 9.0+ (Use modern features: Records, Pattern Matching, Target-typed `new`).
+* **Architecture:** MVVM (Model-View-ViewModel).
+* **MVVM Framework:** CommunityToolkit.Mvvm (Source Generators).
+* **Styling:** Avalonia Styles (No raw CSS, use `.axaml` Styles/ControlThemes).
 
-## 2. Strikte Guardrails (NICHT IGNORIEREN)
-> **WARNUNG:** Verstöße gegen diese Regeln führen zum Abbruch der Generierung.
+## 2. Strict Guardrails (DO NOT IGNORE)
+> **WARNING:** Violating these rules will result in the rejection of the generation.
 
-1.  **Scope-Beschränkung:** Du darfst **NUR** Dateien bearbeiten oder erstellen, die im Prompt explizit erwähnt wurden oder direkt mit der angeforderten Änderung in Verbindung stehen. Das Bearbeiten von unbeteiligten Konfigurationsdateien (z.B. `.csproj`, `Program.cs`, `App.axaml`) ist ohne Aufforderung verboten.
-2.  **Dependency-Verbot:** Es ist **STRIKT VERBOTEN**, neue NuGet-Pakete zu installieren, `dotnet add package` auszuführen oder die Projektdatei (`.csproj`) zu ändern, um Referenzen hinzuzufügen. Nutze nur vorhandene Bibliotheken.
-3.  **Keine Business-Logik im Code-Behind:** `.axaml.cs` Dateien dürfen nur UI-spezifische Logik enthalten, die nicht im ViewModel abbildbar ist.
+1.  **Scope Restriction:** You may **ONLY** edit or create files explicitly mentioned in the prompt or directly related to the requested change. Editing unrelated configuration files (e.g., `.csproj`, `Program.cs`, `App.axaml`) is forbidden unless explicitly requested.
+2.  **No Dependency Changes:** It is **STRICTLY FORBIDDEN** to install new NuGet packages, run `dotnet add package`, or modify the project file (`.csproj`) to add references. Use only existing libraries.
+3.  **No Business Logic in Code-Behind:** `.axaml.cs` files must contain only UI-specific logic that cannot be handled in the ViewModel.
 
-## 3. Projektstruktur & Rollen
+## 3. Project Structure & Roles
 
 ### Frontend (Views & Styles)
-* **Dateitypen:** `*.axaml`, `*.axaml.cs`
-* **Verantwortung:** Definition des Layouts, Data-Binding und visuelles Design.
-* **Pfad:** `/Views`
+* **File Types:** `*.axaml`, `*.axaml.cs`
+* **ROLE:** AVALONIA EXPERT: Expert in UX Design and Desktop Frontend
+* **Responsibility:** Layout definition, Data-Binding, and visual design.
+* **Path:** `/Views`
 * **Best Practices:**
-    * Nutze `CompiledBinding` (`x:DataType`) für Typsicherheit und Performance.
-    * Verwende `Grid` und `StackPanel` für Layouts.
-    * Control-Namen (`x:Name`) nur verwenden, wenn absolut notwendig für Code-Behind Referenzen.
+  * Use `CompiledBinding` (`x:DataType`) for type safety and performance.
+  * Use `Grid` and `StackPanel` for layouts.
+  * Avoid `x:Name` unless absolutely necessary for code-behind references.
+  * Avoid the code-behind
 
 ### Backend (ViewModels & Models)
-* **Dateitypen:** `*.cs`
-* **Verantwortung:** Anwendungslogik, State-Management, Datenverarbeitung.
-* **Pfad:** `/ViewModels`, `/Models`, `/Services`
+* **File Types:** `*.cs`
+* * **ROLE:** DOTNET EXPERT: Expert in C# OOP and Architecture, you know when and how to use patterns and how to write maintainable code
+* **Responsibility:** Application logic, state management, data processing.
+* **Path:** `/ViewModels`, `/Models`, `/Services`
 * **Best Practices:**
-    * ViewModels erben von `ViewModelBase` (implementiert `INotifyPropertyChanged` / `ObservableObject`).
-    * Verwende `ObservableCollection<T>` für Listen, die an die UI gebunden sind.
-    * Asynchrone Operationen müssen `Task` (nicht `void`) zurückgeben und CancellationToken unterstützen, wo sinnvoll.
+  * ViewModels must inherit from `ViewModelBase` (ObservableObject).
+  * Use `ObservableCollection<T>` for lists bound to the UI.
+  * Asynchronous operations must return `Task` (not `void`) and support `CancellationToken` where appropriate.
 
 ## 4. Coding Conventions & Patterns
-* **ReactiveUI / CommunityToolkit:** Wenn im Projekt vorhanden, nutze die entsprechenden Attribute (`[ObservableProperty]`, `[RelayCommand]`) statt manuellem Boilerplate-Code.
+* **CommunityToolkit Usage:**
+  * MUST use source generators: `[ObservableProperty]` for fields, `[RelayCommand]` for methods.
+  * Do NOT write manual `INotifyPropertyChanged` boilerplate.
 * **Naming:**
-    * Views: `MainWindow`, `HomeView`
-    * ViewModels: `MainWindowViewModel`, `HomeViewModel`
-* **Nullability:** Nullable Reference Types sind aktiviert. Vermeide `null` wo möglich.
+  * Views: `MainWindow`, `HomeView`,`SettingView`, `SimulationView` 
+  * ViewModels: `MainWindowViewModel`, `HomeViewModel`, `SettingViewModel`, `SimulationViewModel`
+* **Nullability:** Nullable Reference Types are enabled. Avoid `null` where possible.
+
+## 5. Reasoning & Critical Thinking (REQUIRED)
+Before generating code, perform the following steps:
+1.  **Recall Best Practices:** Check your internal knowledge for the latest Avalonia and C# best practices relevant to the request.
+2.  **Critical Evaluation:** Question your first approach. Is there a more performant, cleaner, or more "Avalonia-native" way to solve this? (e.g., using a Converter vs. ViewModel logic).
+3.  **Justification:** After the code block, provide a brief "Why" section explaining why you chose this specific implementation and how it aligns with best practices.
+4. **Role:** Always name your current Role
