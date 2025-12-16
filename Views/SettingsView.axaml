@@ -12,58 +12,190 @@
     
     <Grid Background="{StaticResource Brush.AppBackground}">
         <Rectangle Fill="{StaticResource Brush.BackdropGradient}" />
-        
+
         <Grid Margin="48">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
-        
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Button
-                Command="{Binding NavigateStartCommand}"
-                Content="Zurück"
-                Classes="Accent"/>
-        
-                <StackPanel Grid.Column="2">
-                    <Button  Content="Einstellungen speichern"  Command="{Binding SaveSettings}"/>
-                    <Button  Content="Einstellungen zurücksetzen" Command="{Binding ResetSettings}"/>
+                    Command="{Binding NavigateStartCommand}"
+                    Content="Zurück"
+                    Classes="Accent"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                    <TextBlock
+                        Text="{Binding SaveStatusText}"
+                        IsVisible="{Binding ShowSaveConfirmation}"
+                        Classes="SettingsStatus"/>
+                    <Button Content="Einstellungen speichern"
+                            Classes="Glass"
+                            Command="{Binding SaveSettings}"/>
+                    <Button Content="Einstellungen zurücksetzen"
+                            Classes="Glass"
+                            Command="{Binding ResetSettings}"/>
                 </StackPanel>
-    </Grid>
-            
+            </Grid>
+
             <ScrollViewer Grid.Row="1"
-                            
                           Margin="0,32,15,0"
                           VerticalScrollBarVisibility="Auto">
                 <StackPanel
-                    Orientation="Vertical">
-                    <Expander>
-                        <Expander.Header>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                                <TextBlock Text="sozioökonomischer Status" VerticalAlignment="Center"/>
-            
-                                <Border Background="LightGray" 
-                                        CornerRadius="10" 
-                                        Width="20" Height="20"
+                    Orientation="Vertical"
+                    Spacing="16">
+                    <Border Classes="SettingsCard">
+                        <StackPanel Spacing="12">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <TextBlock Text="Sozioökonomischer Status"
+                                           Classes="SettingsSectionTitle"/>
+                                <Border Classes="SettingsInfoBadge"
                                         ToolTip.Tip="{Binding SesToolTip}">
-                                    <TextBlock Text="?" 
-                                               HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"
-                                               FontWeight="Bold"
-                                               FontSize="12"/>
+                                    <TextBlock Text="?"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
                                 </Border>
                             </StackPanel>
-                        </Expander.Header>
-                      
-                    </Expander>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="16" RowSpacing="10">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="Eltern – Bildungsniveau"
+                                               Classes="SettingsLabel"/>
+                                    <Slider Classes="SettingsSlider"
+                                            Minimum="1"
+                                            Maximum="7"
+                                            TickFrequency="1"
+                                            IsSnapToTickEnabled="True"
+                                            Value="{Binding ParentsEducationLevel, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Column="1">
+                                    <TextBlock Text="Kulturelle Praxis"
+                                               Classes="SettingsLabel"/>
+                                    <Slider Classes="SettingsSlider"
+                                            Minimum="1"
+                                            Maximum="7"
+                                            TickFrequency="1"
+                                            IsSnapToTickEnabled="True"
+                                            Value="{Binding CulturalPracticeLevel, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Row="1">
+                                    <TextBlock Text="Soziales Umfeld"
+                                               Classes="SettingsLabel"/>
+                                    <Slider Classes="SettingsSlider"
+                                            Minimum="1"
+                                            Maximum="7"
+                                            TickFrequency="1"
+                                            IsSnapToTickEnabled="True"
+                                            Value="{Binding SocialEnvironmentLevel, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Row="1" Grid.Column="1">
+                                    <TextBlock Text="Einkommensniveau"
+                                               Classes="SettingsLabel"/>
+                                    <Slider Classes="SettingsSlider"
+                                            Minimum="1"
+                                            Maximum="100"
+                                            TickFrequency="5"
+                                            Value="{Binding IncomeLevel, Mode=TwoWay}"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Classes="SettingsCard">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="Familie &amp; Beziehungen"
+                                       Classes="SettingsSectionTitle"/>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="16" RowSpacing="10">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="Beziehungsqualität der Eltern"
+                                               Classes="SettingsLabel"/>
+                                    <ComboBox Classes="SettingsPicker"
+                                              Items="{Binding ParentsRelationshipOptions}"
+                                              SelectedItem="{Binding ParentsRelationshipQuality, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Column="1">
+                                    <TextBlock Text="Nähe zur Familie"
+                                               Classes="SettingsLabel"/>
+                                    <Slider Classes="SettingsSlider"
+                                            Minimum="1"
+                                            Maximum="100"
+                                            TickFrequency="5"
+                                            Value="{Binding FamilyCloseness, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Row="1">
+                                    <TextBlock Text="Eltern mit Suchtproblemen"
+                                               Classes="SettingsLabel"/>
+                                    <ToggleSwitch Classes="SettingsToggle"
+                                                  IsChecked="{Binding ParentsWithAddiction, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Row="1" Grid.Column="1">
+                                    <TextBlock Text="Elternteil mit ADHD oder Autismus"
+                                               Classes="SettingsLabel"/>
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <ToggleSwitch Classes="SettingsToggle"
+                                                      Content="ADHD"
+                                                      IsChecked="{Binding HasAdhd, Mode=TwoWay}"/>
+                                        <ToggleSwitch Classes="SettingsToggle"
+                                                      Content="Autismus"
+                                                      IsChecked="{Binding HasAutism, Mode=TwoWay}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Classes="SettingsCard">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="Persönliche Ressourcen"
+                                       Classes="SettingsSectionTitle"/>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="16" RowSpacing="10">
+                                <StackPanel Spacing="6">
+                                    <TextBlock Text="Intelligenz-Score"
+                                               Classes="SettingsLabel"/>
+                                    <Slider Classes="SettingsSlider"
+                                            Minimum="1"
+                                            Maximum="100"
+                                            TickFrequency="5"
+                                            Value="{Binding IntelligenceScore, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Column="1">
+                                    <TextBlock Text="Angstlevel"
+                                               Classes="SettingsLabel"/>
+                                    <Slider Classes="SettingsSlider"
+                                            Minimum="1"
+                                            Maximum="100"
+                                            TickFrequency="5"
+                                            Value="{Binding AnxietyLevel, Mode=TwoWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="6" Grid.Row="1">
+                                    <TextBlock Text="Soziale Energie"
+                                               Classes="SettingsLabel"/>
+                                    <ComboBox Classes="SettingsPicker"
+                                              Items="{Binding SocialEnergyOptions}"
+                                              SelectedItem="{Binding SocialEnergyLevel, Mode=TwoWay}"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        </Grid>
+    </Grid>
 </UserControl>

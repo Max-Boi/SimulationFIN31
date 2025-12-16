@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
-using System.Windows.Input;
+using System.IO;
+using System.Text.Json;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SimulationFIN31.Models;
 using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.ViewModels;
@@ -16,8 +20,10 @@ public partial class SettingsViewModel : ViewModelBase
         " und begrenzen gleichzeitig die persönlichen Fähigkeiten, Krisen gesund zu bewältigen." +
         "\n\nUmgekehrt wirken ein sicheres Einkommen und ein hoher Berufsstatus als Schutzfaktoren," +
         " da sie dem Individuum mehr Kontrolle über das eigene Leben und besseren Zugang zu Hilfe ermöglichen.";
-    
+
     private readonly INavigationService _navigationService;
+    private readonly string _settingsFilePath = Path.Combine(Path.GetTempPath(), "simulationfin31_settings.json");
+    private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
     private readonly IReadOnlyList<string> _parentsRelationshipOptions =
     [
         "harmonisch",
@@ -33,17 +39,35 @@ public partial class SettingsViewModel : ViewModelBase
         "Eher extrovertiert",
         "Stark extrovertiert"
     ];
-    [ObservableProperty]
-    private int _incomeLevel = 4;
+
+    public IReadOnlyList<string> ParentsRelationshipOptions => _parentsRelationshipOptions;
+
+    public IReadOnlyList<string> SocialEnergyOptions => _socialEnergyOptions;
+
+    private const int DefaultIncomeLevel = 4;
+    private const int DefaultParentsEducationLevel = 4;
+    private const int DefaultCulturalPracticeLevel = 4;
+    private const int DefaultSocialEnvironmentLevel = 4;
+    private const int DefaultIntelligenceScore = 50;
+    private const int DefaultAnxietyLevel = 40;
+    private const int DefaultFamilyCloseness = 50;
 
     [ObservableProperty]
-    private int _parentsEducationLevel = 4;
+    private bool _showSaveConfirmation;
 
     [ObservableProperty]
-    private int _culturalPracticeLevel = 4;
+    private string _saveStatusText = string.Empty;
+    [ObservableProperty]
+    private int _incomeLevel = DefaultIncomeLevel;
 
     [ObservableProperty]
-    private int _socialEnvironmentLevel = 4;
+    private int _parentsEducationLevel = DefaultParentsEducationLevel;
+
+    [ObservableProperty]
+    private int _culturalPracticeLevel = DefaultCulturalPracticeLevel;
+
+    [ObservableProperty]
+    private int _socialEnvironmentLevel = DefaultSocialEnvironmentLevel;
 
     [ObservableProperty]
     private bool _hasAdhd;
@@ -55,22 +79,22 @@ public partial class SettingsViewModel : ViewModelBase
     private bool _parentsWithAddiction;
 
     [ObservableProperty]
-    private int _intelligenceScore = 50;
+    private int _intelligenceScore = DefaultIntelligenceScore;
 
     [ObservableProperty]
-    private int _anxietyLevel = 40;
+    private int _anxietyLevel = DefaultAnxietyLevel;
 
     [ObservableProperty]
     private string _parentsRelationshipQuality ;
 
     [ObservableProperty]
-    private int _familyCloseness = 50;
+    private int _familyCloseness = DefaultFamilyCloseness;
 
     [ObservableProperty]
     private string _socialEnergyLevel;
 
     [RelayCommand]
-    public void  NavigateStart()
+    public void NavigateStart()
     {
         _navigationService.NavigateTo<HomeViewModel>();
     }
@@ -78,18 +102,76 @@ public partial class SettingsViewModel : ViewModelBase
     [RelayCommand]
     public void SaveSettings()
     {
-        throw  new System.NotImplementedException();
+        var settings = new UserSettings
+        {
+            IncomeLevel = IncomeLevel,
+            ParentsEducationLevel = ParentsEducationLevel,
+            CulturalPracticeLevel = CulturalPracticeLevel,
+            SocialEnvironmentLevel = SocialEnvironmentLevel,
+            HasAdhd = HasAdhd,
+            HasAutism = HasAutism,
+            ParentsWithAddiction = ParentsWithAddiction,
+            IntelligenceScore = IntelligenceScore,
+            AnxietyLevel = AnxietyLevel,
+            ParentsRelationshipQuality = ParentsRelationshipQuality,
+            FamilyCloseness = FamilyCloseness,
+            SocialEnergyLevel = SocialEnergyLevel
+        };
+
+        var json = JsonSerializer.Serialize(settings, _jsonOptions);
+        File.WriteAllText(_settingsFilePath, json);
+
+        SaveStatusText = "Gespeichert";
+        ShowSaveConfirmation = true;
+        DispatcherTimer.RunOnce(() => ShowSaveConfirmation = false, TimeSpan.FromSeconds(1.2));
     }
     [RelayCommand]
     public void ResetSettings()
     {
-        throw  new System.NotImplementedException();
+        ApplyDefaultValues();
     }
     public SettingsViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
-        
+
         _socialEnergyLevel = _socialEnergyOptions[2];
         _parentsRelationshipQuality = _parentsRelationshipOptions[1];
+
+        AppDomain.CurrentDomain.ProcessExit += (_, _) => DeleteSavedSettingsFile();
+    }
+
+    private void ApplyDefaultValues()
+    {
+        IncomeLevel = DefaultIncomeLevel;
+        ParentsEducationLevel = DefaultParentsEducationLevel;
+        CulturalPracticeLevel = DefaultCulturalPracticeLevel;
+        SocialEnvironmentLevel = DefaultSocialEnvironmentLevel;
+        HasAdhd = false;
+        HasAutism = false;
+        ParentsWithAddiction = false;
+        IntelligenceScore = DefaultIntelligenceScore;
+        AnxietyLevel = DefaultAnxietyLevel;
+        ParentsRelationshipQuality = _parentsRelationshipOptions[1];
+        FamilyCloseness = DefaultFamilyCloseness;
+        SocialEnergyLevel = _socialEnergyOptions[2];
+        ShowSaveConfirmation = false;
+        SaveStatusText = string.Empty;
+    }
+
+    private void DeleteSavedSettingsFile()
+    {
+        if (!File.Exists(_settingsFilePath))
+        {
+            return;
+        }
+
+        try
+        {
+            File.Delete(_settingsFilePath);
+        }
+        catch (IOException)
+        {
+            // Ignore cleanup failures during shutdown
+        }
     }
 }
