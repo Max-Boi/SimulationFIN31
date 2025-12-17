@@ -90,8 +90,8 @@
                                 <TextBlock Text="{Binding ParentsEducationLevel, StringFormat='Aktueller Wert: {0}'}"/>
 
                                 <TextBlock Text="Beruflicher Status" Margin="0,8,0,0"/>
-                                <Slider Minimum="1" Maximum="7" Value="{Binding CulturalPracticeLevel}" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                <TextBlock Text="{Binding CulturalPracticeLevel, StringFormat='Aktueller Wert: {0}'}"/>
+                                <Slider Minimum="1" Maximum="7" Value="{Binding JobStatus}" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                <TextBlock Text="{Binding JobStatus, StringFormat='Aktueller Wert: {0}'}"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
