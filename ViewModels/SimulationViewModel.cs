@@ -6,6 +6,7 @@ namespace SimulationFIN31.ViewModels;
 
 public class SimulationViewModel : ViewModelBase
 {
+    #region -- Navigation --
     private readonly INavigationService _navigationService;
 
     public ICommand GoBackCommand { get; }
@@ -19,4 +20,7 @@ public class SimulationViewModel : ViewModelBase
             _navigationService.NavigateTo<HomeViewModel>();
         });
     }
+    #endregion
+    
+    
 }

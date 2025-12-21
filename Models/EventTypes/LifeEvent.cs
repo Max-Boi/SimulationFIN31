@@ -3,44 +3,145 @@ using System.Collections.Generic;
 using SimulationFIN31.Models.Enums;
 using SimulationFIN31.Models.structs;
 
-namespace SimulationFIN31.Models.EventTypes
+namespace SimulationFIN31.Models.EventTypes;
+
+/// <summary>
+/// Base class for all life events in the simulation.
+/// Events represent significant occurrences that affect mental health state.
+/// </summary>
+public class LifeEvent
 {
-    public class LifeEvent
+    /// <summary>
+    /// Unique identifier for the event. Used for tracking occurrence history
+    /// and preventing duplicate unique events.
+    /// </summary>
+    public string Id { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Display name of the event.
+    /// </summary>
+    public string Name { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Detailed description of the event for display purposes.
+    /// </summary>
+    public string Description { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Base probability of the event occurring (0.0 to 1.0).
+    /// Modified by influence factors during probability calculation.
+    /// </summary>
+    public double BaseProbability { get; init; }
+
+    /// <summary>
+    /// Minimum age at which this event can occur.
+    /// </summary>
+    public int MinAge { get; init; }
+
+    /// <summary>
+    /// Maximum age at which this event can occur.
+    /// </summary>
+    public int MaxAge { get; init; } = 100;
+
+    /// <summary>
+    /// Category of the event (Generic, Personal, or Coping).
+    /// </summary>
+    public EventCategory Category { get; init; }
+
+    /// <summary>
+    /// Factors that influence the probability of this event based on state attributes.
+    /// </summary>
+    public List<InfluenceFactor> InfluenceFactors { get; init; } = [];
+
+    /// <summary>
+    /// When true, this event can only occur once per simulation.
+    /// The CanOccur method checks EventHistory to enforce this constraint.
+    /// </summary>
+    public bool IsUnique { get; init; }
+
+    /// <summary>
+    /// Event IDs that must have occurred before this event can trigger.
+    /// Empty list means no prerequisites required.
+    /// </summary>
+    public List<string> Prerequisites { get; init; } = [];
+
+    /// <summary>
+    /// Event IDs that prevent this event from occurring if already in history.
+    /// Useful for mutually exclusive events (e.g., "ParentsDivorced" excludes "ParentsRenewedVows").
+    /// </summary>
+    public List<string> Exclusions { get; init; } = [];
+
+    /// <summary>
+    /// Impact on stress level (-100 to +100). Positive increases stress.
+    /// </summary>
+    public double StressImpact { get; init; }
+
+    /// <summary>
+    /// Impact on mood (-100 to +100). Positive improves mood.
+    /// </summary>
+    public double MoodImpact { get; init; }
+
+    /// <summary>
+    /// Impact on social belonging (0 to 100). Positive increases belonging.
+    /// </summary>
+    public double SocialBelongingImpact { get; init; }
+
+    /// <summary>
+    /// Impact on resilience score (0 to 100). Positive builds resilience.
+    /// </summary>
+    public double ResilienceImpact { get; init; }
+
+    /// <summary>
+    /// Impact on physical health (0 to 100). Positive improves health.
+    /// </summary>
+    public double HealthImpact { get; init; }
+
+    /// <summary>
+    /// Applies the event's effects to the simulation state.
+    /// Clamps all values to their valid ranges.
+    /// </summary>
+    /// <param name="state">The simulation state to modify.</param>
+    /// <exception cref="ArgumentNullException">When state is null.</exception>
+    public virtual void ApplyEffects(SimulationState state)
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double BaseProbability { get; set; }
-        public int MinAge { get; set; }
-        public int MaxAge { get; set; }
-        
-        public EventCategory Category { get; set; }
-        public List<InfluenceFactor> InfluenceFactors { get; set; }
-        
-        // Direkte Effekte
-        public double StressImpact { get; set; }
-        public double MoodImpact { get; set; }
-        public double SocialBelongingImpact { get; set; }
-        public double ResilienceImpact { get; set; }
-        public double HealthImpact { get; set; }
-        
-        public LifeEvent()
+        ArgumentNullException.ThrowIfNull(state);
+
+        state.CurrentStress = Math.Clamp(state.CurrentStress + StressImpact, 0, 100);
+        state.CurrentMood = Math.Clamp(state.CurrentMood + MoodImpact, -100, 100);
+        state.SocialBelonging = Math.Clamp(state.SocialBelonging + SocialBelongingImpact, 0, 100);
+        state.ResilienceScore = Math.Clamp(state.ResilienceScore + ResilienceImpact, 0, 100);
+        state.PhysicalHealth = Math.Clamp(state.PhysicalHealth + HealthImpact, 0, 100);
+    }
+
+    /// <summary>
+    /// Determines if this event can occur given the current simulation state.
+    /// Checks age constraints, unique event history, prerequisites, and exclusions.
+    /// </summary>
+    /// <param name="state">The current simulation state.</param>
+    /// <returns>True if the event can occur, false otherwise.</returns>
+    /// <exception cref="ArgumentNullException">When state is null.</exception>
+    public bool CanOccur(SimulationState state)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+
+        if (state.CurrentAge < MinAge || state.CurrentAge > MaxAge)
+            return false;
+
+        if (IsUnique && state.EventHistory.Contains(Id))
+            return false;
+
+        foreach (var prerequisite in Prerequisites)
         {
-            InfluenceFactors = new List<InfluenceFactor>();
-            MaxAge = 100;
+            if (!state.EventHistory.Contains(prerequisite))
+                return false;
         }
-        
-        public virtual void ApplyEffects(SimulationState profile)
+
+        foreach (var exclusion in Exclusions)
         {
-            profile.CurrentStress = Clamp(profile.CurrentStress + StressImpact, 0, 100);
-            profile.CurrentMood = Clamp(profile.CurrentMood + MoodImpact, -100, 100);
-            profile.SocialBelonging = Clamp(profile.SocialBelonging + SocialBelongingImpact, 0, 100);
-            profile.ResilienceScore = Clamp(profile.ResilienceScore + ResilienceImpact, 0, 100);
-            profile.PhysicalHealth = Clamp(profile.PhysicalHealth + HealthImpact, 0, 100);
+            if (state.EventHistory.Contains(exclusion))
+                return false;
         }
-        
-        protected double Clamp(double value, double min, double max)
-        {
-            return Math.Max(min, Math.Min(max, value));
-        }
+
+        return true;
     }
 } 
