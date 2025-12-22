@@ -15,6 +15,12 @@ public static class ServiceCollectionExtensions
         collection.AddTransient<SimulationViewModel>();
         collection.AddTransient<HomeViewModel>();
         collection.AddSingleton<INavigationService, NavigationService>();    
+        collection.AddSingleton<IFactorNormalizer, FactorNormalizer>();
+        collection.AddSingleton<IInfluenceCalculator, InfluenceCalculator>();
+        collection.AddSingleton<IEventWeightCalculator, EventWeightCalculator>();
+        collection.AddSingleton<ICopingTriggerChecker, CopingTriggerChecker>();
+        collection.AddSingleton<IWeightedRandomService, WeightedRandomService>();
+
         collection.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
     }
 }
