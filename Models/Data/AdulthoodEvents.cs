@@ -145,8 +145,11 @@ public static class AdulthoodEvents
             SocialEnergyChange = -10,
             InfluenceFactors =
             [
-                new InfluenceFactor("JobStatus", -1.3),
-                new InfluenceFactor("IncomeLevel", -1.2)
+                new InfluenceFactor("JobStatus", -3.5),
+                new InfluenceFactor("IncomeLevel", -3.0),
+                new InfluenceFactor("ParentsEducationLevel", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.5),
+                new InfluenceFactor("HasAdhd", 2.0)
             ]
         },
         new PersonalEvent
@@ -168,8 +171,11 @@ public static class AdulthoodEvents
             Prerequisites = ["adulthood_engagement"],
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsRelationshipQuality", -1.3),
-                new InfluenceFactor("FamilyCloseness", -0.8)
+                new InfluenceFactor("ParentsRelationshipQuality", -4.0),
+                new InfluenceFactor("FamilyCloseness", -3.0),
+                new InfluenceFactor("ParentsWithAddiction", 3.5),
+                new InfluenceFactor("IncomeLevel", -2.0),
+                new InfluenceFactor("AnxietyLevel", 2.5)
             ]
         },
         new PersonalEvent
@@ -320,8 +326,10 @@ public static class AdulthoodEvents
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -1.3),
-                new InfluenceFactor("JobStatus", -1.2)
+                new InfluenceFactor("IncomeLevel", -4.0),
+                new InfluenceFactor("JobStatus", -3.5),
+                new InfluenceFactor("ParentsEducationLevel", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
         new GenericEvent

@@ -20,17 +20,21 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
     /// <summary>
     /// Minimum value to prevent division by zero or extreme amplification.
     /// </summary>
-    private const double MinimumNormalizedValue = 0.01;
+    private const double MINIMUM_NORMALIZED_VALUE = 0.01;
 
     /// <summary>
-    /// Maximum multiplier to prevent runaway probability inflation.
+    /// Maximum multiplier to allow significant probability amplification
+    /// for events strongly correlated with adverse conditions.
+    /// Increased from 10.0 to create more realistic outcome differentiation.
     /// </summary>
-    private const double MaxMultiplier = 10.0;
+    private const double MAX_MULTIPLIER = 50.0;
 
     /// <summary>
-    /// Minimum multiplier to prevent probabilities from becoming negligible.
+    /// Minimum multiplier to allow significant probability reduction
+    /// for events that become unlikely under adverse conditions.
+    /// Reduced from 0.1 to create more realistic outcome differentiation.
     /// </summary>
-    private const double MinMultiplier = 0.1;
+    private const double MIN_MULTIPLIER = 0.02;
 
     /// <summary>
     /// Calculates the influence multiplier for an event based on a normalized state value and exponent.
@@ -55,7 +59,7 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
             return 1.0;
         }
 
-        var clampedValue = Math.Max(normalizedValue, MinimumNormalizedValue);
+        var clampedValue = Math.Max(normalizedValue, MINIMUM_NORMALIZED_VALUE);
 
         double influence;
 
@@ -66,10 +70,10 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
         else
         {
             var invertedValue = 1.0 - clampedValue;
-            invertedValue = Math.Max(invertedValue, MinimumNormalizedValue);
+            invertedValue = Math.Max(invertedValue, MINIMUM_NORMALIZED_VALUE);
             influence = Math.Pow(invertedValue, Math.Abs(exponent));
         }
 
-        return Math.Clamp(influence, MinMultiplier, MaxMultiplier);
+        return Math.Clamp(influence, MIN_MULTIPLIER, MAX_MULTIPLIER);
     }
 }

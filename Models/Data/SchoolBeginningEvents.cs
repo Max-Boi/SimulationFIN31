@@ -36,8 +36,9 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = 10,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
-                new InfluenceFactor("SocialEnergyLevel", 0.8)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.5),
+                new InfluenceFactor("SocialEnergyLevel", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5)
             ]
         },
         new PersonalEvent
@@ -58,8 +59,10 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.4),
-                new InfluenceFactor("ParentsEducationLevel", 1.2)
+                new InfluenceFactor("IntelligenceScore", 2.8),
+                new InfluenceFactor("ParentsEducationLevel", 2.5),
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
         new PersonalEvent
@@ -145,9 +148,12 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = -15,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", -0.8),
-                new InfluenceFactor("HasAutism", 1.3),
-                new InfluenceFactor("HasAdhd", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", -2.5),
+                new InfluenceFactor("HasAutism", 3.0),
+                new InfluenceFactor("HasAdhd", 2.5),
+                new InfluenceFactor("FamilyCloseness", -2.0),
+                new InfluenceFactor("IncomeLevel", -2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0)
             ]
         },
         new PersonalEvent
@@ -168,8 +174,10 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("HasAdhd", 1.5),
-                new InfluenceFactor("HasAutism", 1.4)
+                new InfluenceFactor("HasAdhd", 4.0),
+                new InfluenceFactor("HasAutism", 3.5),
+                new InfluenceFactor("IntelligenceScore", -2.0),
+                new InfluenceFactor("ParentsEducationLevel", -1.5)
             ]
         },
         new PersonalEvent
@@ -190,8 +198,12 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = -12,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", -0.6),
-                new InfluenceFactor("AnxietyLevel", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", -2.5),
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("HasAutism", 2.5),
+                new InfluenceFactor("HasAdhd", 2.0),
+                new InfluenceFactor("IncomeLevel", -1.8),
+                new InfluenceFactor("FamilyCloseness", -1.5)
             ]
         },
         new PersonalEvent
@@ -230,7 +242,7 @@ public static class SchoolBeginningEvents
             ResilienceImpact = 5,
             HealthImpact = -3,
             AnxietyChange = 15,
-            SocialEnergyChange = -8,
+            SocialEnergyChange = -15,
             Prerequisites = ["childhood_parents_divorce"],
             InfluenceFactors =
             [
@@ -341,8 +353,10 @@ public static class SchoolBeginningEvents
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -1.5),
-                new InfluenceFactor("JobStatus", -1.2)
+                new InfluenceFactor("IncomeLevel", -4.0),
+                new InfluenceFactor("JobStatus", -3.5),
+                new InfluenceFactor("ParentsEducationLevel", -2.0),
+                new InfluenceFactor("ParentsWithAddiction", 2.5)
             ]
         },
         new GenericEvent

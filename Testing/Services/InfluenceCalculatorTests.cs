@@ -47,7 +47,7 @@ public sealed class InfluenceCalculatorTests
 
         // Assert
         Assert.True(result < normalizedValue, "Low value with exponent > 1 should be further reduced");
-        Assert.True(result >= 0.1, "Result should not go below minimum multiplier");
+        Assert.True(result >= 0.02, "Result should not go below minimum multiplier");
     }
 
     [Fact]
@@ -143,7 +143,7 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.Equal(0.1, result, precision: 5);
+        Assert.Equal(0.02, result, precision: 5);
     }
 
     [Fact]
@@ -157,8 +157,8 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.True(result <= 10.0, "Result should be clamped to maximum multiplier");
-        Assert.True(result >= 0.1, "Result should be clamped to minimum multiplier");
+        Assert.True(result <= 50.0, "Result should be clamped to maximum multiplier");
+        Assert.True(result >= 0.02, "Result should be clamped to minimum multiplier");
     }
 
     [Theory]
@@ -175,7 +175,7 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.InRange(result, 0.1, 10.0);
+        Assert.InRange(result, 0.02, 50.0);
     }
 
     #endregion

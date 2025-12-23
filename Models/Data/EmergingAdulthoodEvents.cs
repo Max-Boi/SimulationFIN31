@@ -37,9 +37,11 @@ public static class EmergingAdulthoodEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.3),
-                new InfluenceFactor("IncomeLevel", 1.2)
+                new InfluenceFactor("IntelligenceScore", 3.0),
+                new InfluenceFactor("ParentsEducationLevel", 3.0),
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("ParentsWithAddiction", -2.5)
             ]
         },
         new PersonalEvent
@@ -167,9 +169,12 @@ public static class EmergingAdulthoodEvents
             Exclusions = ["emerging_degree_completion"],
             InfluenceFactors =
             [
-                new InfluenceFactor("HasAdhd", 1.4),
-                new InfluenceFactor("AnxietyLevel", 1.3),
-                new InfluenceFactor("IntelligenceScore", -0.8)
+                new InfluenceFactor("HasAdhd", 3.5),
+                new InfluenceFactor("AnxietyLevel", 3.0),
+                new InfluenceFactor("IntelligenceScore", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 3.0),
+                new InfluenceFactor("FamilyCloseness", -2.5),
+                new InfluenceFactor("IncomeLevel", -2.0)
             ]
         },
         new PersonalEvent
@@ -212,8 +217,11 @@ public static class EmergingAdulthoodEvents
             SocialEnergyChange = -8,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.3),
-                new InfluenceFactor("IntelligenceScore", 1.1)
+                new InfluenceFactor("AnxietyLevel", 3.0),
+                new InfluenceFactor("FamilyCloseness", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("ParentsRelationshipQuality", -2.0)
             ]
         },
         new PersonalEvent
@@ -322,7 +330,9 @@ public static class EmergingAdulthoodEvents
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -1.3)
+                new InfluenceFactor("IncomeLevel", -3.5),
+                new InfluenceFactor("JobStatus", -3.0),
+                new InfluenceFactor("ParentsEducationLevel", -2.0)
             ]
         },
         new GenericEvent
@@ -416,7 +426,9 @@ public static class EmergingAdulthoodEvents
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -1.4)
+                new InfluenceFactor("IncomeLevel", -3.5),
+                new InfluenceFactor("JobStatus", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
         new GenericEvent

@@ -166,8 +166,8 @@ public sealed class EventWeightCalculatorTests
         // Act
         var result = _sut.CalculateWeight(lifeEvent, state);
 
-        // Assert
-        Assert.Equal(0.001, result, precision: 5);
+        // Assert - result is clamped to MINIMUM_WHEIGHT (0.01)
+        Assert.Equal(0.01, result, precision: 5);
     }
 
     [Fact]

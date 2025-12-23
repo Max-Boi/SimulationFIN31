@@ -57,8 +57,11 @@ public static class AdolescenceEvents
             SocialEnergyChange = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.3)
+                new InfluenceFactor("IntelligenceScore", 3.0),
+                new InfluenceFactor("ParentsEducationLevel", 2.8),
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("IncomeLevel", 1.8),
+                new InfluenceFactor("ParentsWithAddiction", -2.0)
             ]
         },
         new PersonalEvent
@@ -162,8 +165,11 @@ public static class AdolescenceEvents
             SocialEnergyChange = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 1.2),
-                new InfluenceFactor("ParentsWithAddiction", 1.3)
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("ParentsWithAddiction", 3.0),
+                new InfluenceFactor("FamilyCloseness", -2.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("ParentsEducationLevel", -1.5)
             ]
         },
         new PersonalEvent
@@ -184,9 +190,12 @@ public static class AdolescenceEvents
             SocialEnergyChange = -15,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.6),
-                new InfluenceFactor("FamilyCloseness", -0.8),
-                new InfluenceFactor("ParentsWithAddiction", 1.4)
+                new InfluenceFactor("AnxietyLevel", 4.0),
+                new InfluenceFactor("FamilyCloseness", -3.5),
+                new InfluenceFactor("ParentsWithAddiction", 4.0),
+                new InfluenceFactor("ParentsRelationshipQuality", -3.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.5),
+                new InfluenceFactor("IncomeLevel", -2.0)
             ]
         },
         new PersonalEvent
@@ -230,8 +239,12 @@ public static class AdolescenceEvents
             Prerequisites = ["school_technology_access"],
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", -0.5),
-                new InfluenceFactor("AnxietyLevel", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", -2.5),
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("HasAutism", 2.5),
+                new InfluenceFactor("HasAdhd", 2.0),
+                new InfluenceFactor("FamilyCloseness", -2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.8)
             ]
         }
     ];
@@ -392,8 +405,10 @@ public static class AdolescenceEvents
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -1.6),
-                new InfluenceFactor("JobStatus", -1.3)
+                new InfluenceFactor("IncomeLevel", -4.0),
+                new InfluenceFactor("JobStatus", -3.5),
+                new InfluenceFactor("ParentsEducationLevel", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 3.0)
             ]
         },
         new GenericEvent

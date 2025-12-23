@@ -19,8 +19,7 @@ namespace SimulationFIN31.ViewModels;
 public partial class SimulationViewModel : ViewModelBase
 {
     private const double DEFAULT_SIMULATION_SPEED = 1.0;
-    private const double MIN_SIMULATION_SPEED = 0.25;
-    private const double MAX_SIMULATION_SPEED = 5.0;
+ 
 
     private readonly INavigationService _navigationService;
     private readonly ISimulationService _simulationService;

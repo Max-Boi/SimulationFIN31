@@ -36,8 +36,9 @@ public static  class ChildhoodEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.5),
-                new InfluenceFactor("ParentsRelationshipQuality", 1.3)
+                new InfluenceFactor("FamilyCloseness", 3.0),
+                new InfluenceFactor("ParentsRelationshipQuality", 2.5),
+                new InfluenceFactor("ParentsWithAddiction", -2.5)
             ]
         },
         new PersonalEvent
@@ -58,7 +59,8 @@ public static  class ChildhoodEvents
             SocialEnergyChange = 8,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.2)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.5),
+                new InfluenceFactor("FamilyCloseness", 1.8)
             ]
         },
         new PersonalEvent
@@ -79,8 +81,9 @@ public static  class ChildhoodEvents
             SocialEnergyChange = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.4),
-                new InfluenceFactor("ParentsEducationLevel", 1.1)
+                new InfluenceFactor("FamilyCloseness", 2.8),
+                new InfluenceFactor("ParentsEducationLevel", 2.0),
+                new InfluenceFactor("ParentsWithAddiction", -2.0)
             ]
         },
         new PersonalEvent
@@ -101,7 +104,8 @@ public static  class ChildhoodEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.3)
+                new InfluenceFactor("FamilyCloseness", 2.5),
+                new InfluenceFactor("ParentsRelationshipQuality", 2.0)
             ]
         },
         new PersonalEvent
@@ -122,7 +126,9 @@ public static  class ChildhoodEvents
             SocialEnergyChange = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.2)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
         new PersonalEvent
@@ -143,8 +149,10 @@ public static  class ChildhoodEvents
             SocialEnergyChange = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.4),
-                new InfluenceFactor("FamilyCloseness", -0.3)
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("FamilyCloseness", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.0),
+                new InfluenceFactor("ParentsRelationshipQuality", -1.8)
             ],
             Exclusions = ["childhood_secure_attachment"]
         },
@@ -166,8 +174,9 @@ public static  class ChildhoodEvents
             SocialEnergyChange = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsRelationshipQuality", -1.5),
-                new InfluenceFactor("ParentsWithAddiction", 1.3)
+                new InfluenceFactor("ParentsRelationshipQuality", -3.5),
+                new InfluenceFactor("ParentsWithAddiction", 3.0),
+                new InfluenceFactor("IncomeLevel", -1.5)
             ]
         },
         new PersonalEvent
@@ -188,7 +197,9 @@ public static  class ChildhoodEvents
             SocialEnergyChange = -8,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -0.8)
+                new InfluenceFactor("IncomeLevel", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.5)
             ]
         },
         new PersonalEvent
@@ -209,8 +220,10 @@ public static  class ChildhoodEvents
             SocialEnergyChange = 6,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
-                new InfluenceFactor("AnxietyLevel", -0.5)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.5),
+                new InfluenceFactor("AnxietyLevel", -2.0),
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.8)
             ]
         },
         new PersonalEvent
@@ -231,9 +244,11 @@ public static  class ChildhoodEvents
             SocialEnergyChange = -10,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsWithAddiction", 1.5),
-                new InfluenceFactor("FamilyCloseness", -1.5),
-                new InfluenceFactor("IncomeLevel", -0.5)
+                new InfluenceFactor("ParentsWithAddiction", 4.0),
+                new InfluenceFactor("FamilyCloseness", -4.0),
+                new InfluenceFactor("ParentsRelationshipQuality", -3.0),
+                new InfluenceFactor("IncomeLevel", -2.0),
+                new InfluenceFactor("ParentsEducationLevel", -1.5)
             ],
             Exclusions = ["childhood_secure_attachment"]
         }
@@ -264,8 +279,9 @@ public static  class ChildhoodEvents
             HealthImpact = 2,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.3),
-                new InfluenceFactor("FamilyCloseness", 1.2)
+                new InfluenceFactor("IncomeLevel", 3.0),
+                new InfluenceFactor("FamilyCloseness", 2.5),
+                new InfluenceFactor("ParentsRelationshipQuality", 2.0)
             ]
         },
         new GenericEvent
@@ -284,7 +300,8 @@ public static  class ChildhoodEvents
             HealthImpact = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.1)
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("FamilyCloseness", 2.0)
             ],
             TriggersFollowUpEvents = ["childhood_pet_loss"]
         },
@@ -304,7 +321,7 @@ public static  class ChildhoodEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.4)
+                new InfluenceFactor("FamilyCloseness", 2.8)
             ]
         },
         new GenericEvent
@@ -323,7 +340,8 @@ public static  class ChildhoodEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.2)
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("ParentsRelationshipQuality", 2.0)
             ]
         },
         new GenericEvent
@@ -378,8 +396,10 @@ public static  class ChildhoodEvents
             HealthImpact = -3,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -0.8),
-                new InfluenceFactor("ParentsEducationLevel", -0.5)
+                new InfluenceFactor("IncomeLevel", -3.0),
+                new InfluenceFactor("ParentsEducationLevel", -2.5),
+                new InfluenceFactor("JobStatus", -2.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
         new GenericEvent
@@ -398,7 +418,8 @@ public static  class ChildhoodEvents
             HealthImpact = 2,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.5),
+                new InfluenceFactor("IncomeLevel", 1.8)
             ]
         },
         new GenericEvent
@@ -417,7 +438,8 @@ public static  class ChildhoodEvents
             HealthImpact = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.1)
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("ParentsEducationLevel", 2.0)
             ]
         },
         new GenericEvent
@@ -436,8 +458,10 @@ public static  class ChildhoodEvents
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsRelationshipQuality", -1.8),
-                new InfluenceFactor("ParentsWithAddiction", 1.4)
+                new InfluenceFactor("ParentsRelationshipQuality", -4.0),
+                new InfluenceFactor("ParentsWithAddiction", 3.5),
+                new InfluenceFactor("IncomeLevel", -2.0),
+                new InfluenceFactor("FamilyCloseness", -2.5)
             ],
             TriggersFollowUpEvents = ["school_custody_adjustment"]
         }

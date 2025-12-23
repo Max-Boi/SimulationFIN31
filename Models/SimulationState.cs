@@ -33,7 +33,7 @@ public class SimulationState
     public GenderType Gender { get; set; }
     
     public List<string> EventHistory { get; set; } = new();
-    public LifePhase LifePhase { get; set; } = LifePhase.Childhood;
+    public LifePhase LifePhase { get; set; } = LifePhase.Childhood; 
   
     public Dictionary<string, double> CopingPreferences { get; set; } = new();
 }

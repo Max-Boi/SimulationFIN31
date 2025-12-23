@@ -20,9 +20,19 @@ namespace SimulationFIN31.Services;
 /// Psychology basis: This models the multi-pathway activation of coping responses,
 /// where stress, emotional distress, or social isolation can each independently
 /// trigger coping behaviors (Lazarus & Folkman, 1984).
+///
+/// Age constraint: Coping mechanisms only become available at age 14+, reflecting
+/// developmental psychology research showing that deliberate coping strategies
+/// emerge during adolescence (Compas et al., 2001).
 /// </summary>
 public sealed class CopingTriggerChecker : ICopingTriggerChecker
 {
+    /// <summary>
+    /// Minimum age at which coping mechanisms can be triggered.
+    /// Based on developmental psychology: deliberate coping strategies
+    /// typically emerge during adolescence.
+    /// </summary>
+    private const int MINIMUM_COPING_AGE = 14;
     /// <summary>
     /// Checks if the coping mechanism's trigger conditions are met.
     /// </summary>
@@ -66,10 +76,11 @@ public sealed class CopingTriggerChecker : ICopingTriggerChecker
     /// <summary>
     /// Filters a collection of coping mechanisms to only those whose triggers are satisfied.
     /// Also filters by age constraints using the CanOccur check.
+    /// Coping mechanisms are only available at age 14 or older.
     /// </summary>
     /// <param name="mechanisms">Collection of coping mechanisms to filter.</param>
     /// <param name="state">Current simulation state.</param>
-    /// <returns>List of coping mechanisms that can be triggered.</returns>
+    /// <returns>List of coping mechanisms that can be triggered, empty if age is below 14.</returns>
     /// <exception cref="ArgumentNullException">When mechanisms or state is null.</exception>
     public List<CopingMechanism> FilterTriggered(
         IEnumerable<CopingMechanism> mechanisms,
@@ -77,6 +88,11 @@ public sealed class CopingTriggerChecker : ICopingTriggerChecker
     {
         ArgumentNullException.ThrowIfNull(mechanisms);
         ArgumentNullException.ThrowIfNull(state);
+
+        if (state.CurrentAge < MINIMUM_COPING_AGE)
+        {
+            return [];
+        }
 
         var triggered = new List<CopingMechanism>();
 

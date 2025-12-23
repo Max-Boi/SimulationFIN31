@@ -28,7 +28,7 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
     /// Minimum weight to ensure all eligible events have at least some chance.
     /// Prevents events from being completely excluded due to rounding.
     /// </summary>
-    private const double MINIMUM_WHEIGHT = 0.001;
+    private const double MINIMUM_WHEIGHT = 0.01;
 
     /// <summary>
     /// Maximum weight to prevent single events from dominating selection.
