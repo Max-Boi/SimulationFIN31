@@ -9,17 +9,8 @@ public static class AdolescenceEvents
 {
     private const int ADOLESCENCE_MIN = 12;
     private const int ADOLESCENCE_MAX = 17;
-    
-    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
-    [
-        ..AdolescenceGenericEvents
-    ]);
-    
-    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
-    [
-        ..AdolescencePersonalEvents,
-    ]);
-     #region Adolescence Personal Events (Ages 12-18)
+
+    #region Adolescence Personal Events (Ages 12-18)
 
     /// <summary>
     /// Personal events specific to Adolescence phase (ages 12-18).
@@ -445,6 +436,26 @@ public static class AdolescenceEvents
             ]
         }
     ];
+
+    #endregion
+
+    #region Aggregated Event Collections
+
+    /// <summary>
+    /// All generic events for the Adolescence phase.
+    /// </summary>
+    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
+    [
+        ..AdolescenceGenericEvents
+    ]);
+
+    /// <summary>
+    /// All personal events for the Adolescence phase.
+    /// </summary>
+    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
+    [
+        ..AdolescencePersonalEvents
+    ]);
 
     #endregion
 }

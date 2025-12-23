@@ -5,20 +5,11 @@ using SimulationFIN31.Models.structs;
 
 namespace SimulationFIN31.Models.Data;
 
-public static  class ChildhoodEvents 
+public static  class ChildhoodEvents
 {
     private const int CHILDHOOD_MIN = 0;
     private const int CHILDHOOD_MAX = 5;
-    
-    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
-    [
-        ..ChildhoodGenericEvents
-    ]);
-    
-    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
-    [
-        ..ChildhoodPersonalEvents,
-    ]);
+
     #region Childhood Personal Events (Ages 0-6)
 
     /// <summary>
@@ -451,6 +442,26 @@ public static  class ChildhoodEvents
             TriggersFollowUpEvents = ["school_custody_adjustment"]
         }
     ];
+
+    #endregion
+
+    #region Aggregated Event Collections
+
+    /// <summary>
+    /// All generic events for the Childhood phase.
+    /// </summary>
+    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
+    [
+        ..ChildhoodGenericEvents
+    ]);
+
+    /// <summary>
+    /// All personal events for the Childhood phase.
+    /// </summary>
+    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
+    [
+        ..ChildhoodPersonalEvents
+    ]);
 
     #endregion
 }

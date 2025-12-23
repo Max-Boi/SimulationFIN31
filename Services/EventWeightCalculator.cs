@@ -28,17 +28,17 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
     /// Minimum weight to ensure all eligible events have at least some chance.
     /// Prevents events from being completely excluded due to rounding.
     /// </summary>
-    private const double MinimumWeight = 0.001;
+    private const double MINIMUM_WHEIGHT = 0.001;
 
     /// <summary>
     /// Maximum weight to prevent single events from dominating selection.
     /// </summary>
-    private const double MaximumWeight = 0.99;
+    private const double MAXIMUM_WHEIGHT = 0.99;
 
     /// <summary>
     /// Multiplier applied to habit-forming coping mechanisms based on preference score.
     /// </summary>
-    private const double HabitBoostFactor = 1.5;
+    private const double HABIT_BOOST_FACTOR = 1.5;
 
     /// <summary>
     /// Creates a new EventWeightCalculator with required dependencies.
@@ -80,7 +80,7 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
             weight *= CalculateHabitBoost(copingMechanism, state);
         }
 
-        return Math.Clamp(weight, MinimumWeight, MaximumWeight);
+        return Math.Clamp(weight, MINIMUM_WHEIGHT, MAXIMUM_WHEIGHT);
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
         if (state.CopingPreferences.TryGetValue(mechanism.Id, out var preference))
         {
             var normalizedPreference = Math.Clamp(preference / 100.0, 0.0, 1.0);
-            return 1.0 + (normalizedPreference * (HabitBoostFactor - 1.0));
+            return 1.0 + (normalizedPreference * (HABIT_BOOST_FACTOR - 1.0));
         }
 
         return 1.0;

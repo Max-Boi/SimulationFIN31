@@ -7,20 +7,10 @@ namespace SimulationFIN31.Models.Data;
 
 public static class AdulthoodEvents
 {
-    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
-    [
-        ..AdulthoodGenericEvents
-    ]);
-    
-    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
-    [
-        ..AdulthoodPersonalEvents,
-    ]);
-    
     private const int ADULTHOOD_MIN = 24;
     private const int ADULTHOOD_MAX = 30;
-    
-       #region Adulthood Personal Events (Ages 24-30)
+
+    #region Adulthood Personal Events (Ages 24-30)
 
     /// <summary>
     /// Personal events specific to Adulthood phase (ages 24-30).
@@ -445,6 +435,26 @@ public static class AdulthoodEvents
             ]
         }
     ];
+
+    #endregion
+
+    #region Aggregated Event Collections
+
+    /// <summary>
+    /// All generic events for the Adulthood phase.
+    /// </summary>
+    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
+    [
+        ..AdulthoodGenericEvents
+    ]);
+
+    /// <summary>
+    /// All personal events for the Adulthood phase.
+    /// </summary>
+    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
+    [
+        ..AdulthoodPersonalEvents
+    ]);
 
     #endregion
 }

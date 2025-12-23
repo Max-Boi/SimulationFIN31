@@ -13,11 +13,6 @@ namespace SimulationFIN31.Models.Data;
 /// </summary>
 public static class EventCatalog
 {
-    public static IReadOnlyList<CopingMechanism> AllcopingMechanisms { get; } = new ReadOnlyCollection<CopingMechanism>(
-    [
-        ..CopingMechanismsList
-    ]);
-
     #region Coping Mechanisms
 
     private static readonly List<CopingMechanism> CopingMechanismsList =
@@ -407,6 +402,18 @@ public static class EventCatalog
             ]
         }
     ];
+
+    #endregion
+
+    #region Aggregated Collections
+
+    /// <summary>
+    /// All coping mechanisms available in the simulation.
+    /// </summary>
+    public static IReadOnlyList<CopingMechanism> AllcopingMechanisms { get; } = new ReadOnlyCollection<CopingMechanism>(
+    [
+        ..CopingMechanismsList
+    ]);
 
     #endregion
 }

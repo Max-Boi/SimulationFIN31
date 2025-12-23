@@ -3,11 +3,313 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:SimulationFIN31.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
              x:Class="SimulationFIN31.Views.SimulationView"
              x:DataType="vm:SimulationViewModel">
-    <StackPanel>
-        <TextBlock
-            Text="Simulation gefunden!"/>
-    </StackPanel>
+
+    <UserControl.Styles>
+        <!-- Progress Bar Base Style -->
+        <Style Selector="ProgressBar">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+        </Style>
+
+        <!-- Stress Bar (Red gradient) -->
+        <Style Selector="ProgressBar.StressBar">
+            <Setter Property="Foreground" Value="#E74C3C"/>
+        </Style>
+
+        <!-- Mood Bar (Green/Yellow gradient based on value) -->
+        <Style Selector="ProgressBar.MoodBar">
+            <Setter Property="Foreground" Value="#3498DB"/>
+        </Style>
+
+        <!-- Social Bar (Blue) -->
+        <Style Selector="ProgressBar.SocialBar">
+            <Setter Property="Foreground" Value="#9B59B6"/>
+        </Style>
+
+        <!-- Section Header Style -->
+        <Style Selector="TextBlock.SectionHeader">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+
+        <!-- Label Style -->
+        <Style Selector="TextBlock.Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+
+        <!-- Value Style -->
+        <Style Selector="TextBlock.Value">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <!-- Glass Panel Style -->
+        <Style Selector="Border.GlassPanel">
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <!-- Event Log Item Style -->
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style Selector="ListBoxItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceHoverBrush}"/>
+        </Style>
+
+        <!-- Slider Style -->
+        <Style Selector="Slider">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentBrush}"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header with Back Button and Title -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="Zurück"
+                    Classes="Glass"
+                    Command="{Binding GoBackCommand}"
+                    Width="120"/>
+
+            <StackPanel Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="20">
+                <TextBlock Text="Alter:"
+                           Classes="Label"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentAge}"
+                           Classes="Value"
+                           FontSize="24"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="|"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           VerticalAlignment="Center"
+                           Margin="10,0"/>
+                <TextBlock Text="{Binding CurrentLifePhase}"
+                           Classes="Value"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Simulation Status Indicator -->
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        Spacing="8"
+                        VerticalAlignment="Center">
+                <Ellipse Width="12" Height="12"
+                         Fill="#2ECC71"
+                         IsVisible="{Binding IsRunning}"/>
+                <Ellipse Width="12" Height="12"
+                         Fill="#F39C12"
+                         IsVisible="{Binding IsPaused}"/>
+                <TextBlock Text="Laufend"
+                           IsVisible="{Binding IsRunning}"
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                <TextBlock Text="Pausiert"
+                           IsVisible="{Binding IsPaused}"
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel: Stats and Controls -->
+            <StackPanel Grid.Column="0" Spacing="20">
+
+                <!-- Mental Health Stats Panel -->
+                <Border Classes="GlassPanel">
+                    <StackPanel Spacing="16">
+                        <TextBlock Text="Psychische Gesundheit"
+                                   Classes="SectionHeader"/>
+
+                        <!-- Stress Level -->
+                        <StackPanel Spacing="4">
+                            <Grid>
+                                <TextBlock Text="Stress" Classes="Label"/>
+                                <TextBlock Text="{Binding StressLevel, StringFormat={}{0:F0}%}"
+                                           Classes="Value"/>
+                            </Grid>
+                            <ProgressBar Classes="StressBar"
+                                         Minimum="0"
+                                         Maximum="100"
+                                         Value="{Binding StressLevel}"/>
+                        </StackPanel>
+
+                        <!-- Mood Level -->
+                        <StackPanel Spacing="4">
+                            <Grid>
+                                <TextBlock Text="Stimmung" Classes="Label"/>
+                                <TextBlock Text="{Binding MoodLevel, StringFormat={}{0:F0}}"
+                                           Classes="Value"/>
+                            </Grid>
+                            <ProgressBar Classes="MoodBar"
+                                         Minimum="-100"
+                                         Maximum="100"
+                                         Value="{Binding MoodLevel}"/>
+                        </StackPanel>
+
+                        <!-- Social Level -->
+                        <StackPanel Spacing="4">
+                            <Grid>
+                                <TextBlock Text="Soziale Zugehoerigkeit" Classes="Label"/>
+                                <TextBlock Text="{Binding SocialLevel, StringFormat={}{0:F0}%}"
+                                           Classes="Value"/>
+                            </Grid>
+                            <ProgressBar Classes="SocialBar"
+                                         Minimum="0"
+                                         Maximum="100"
+                                         Value="{Binding SocialLevel}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Simulation Speed Panel -->
+                <Border Classes="GlassPanel">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Simulationsgeschwindigkeit"
+                                   Classes="SectionHeader"/>
+
+                        <Grid>
+                            <TextBlock Text="Geschwindigkeit" Classes="Label"/>
+                            <TextBlock Text="{Binding SimulationSpeed, StringFormat={}{0:F2}x}"
+                                       Classes="Value"/>
+                        </Grid>
+
+                        <Slider Minimum="0.25"
+                                Maximum="5"
+                                Value="{Binding SimulationSpeed}"
+                                TickFrequency="0.25"
+                                IsSnapToTickEnabled="True"/>
+
+                       
+                    </StackPanel>
+                </Border>
+
+                <!-- Control Buttons Panel -->
+                <Border Classes="GlassPanel">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Steuerung"
+                                   Classes="SectionHeader"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Column="0" Grid.Row="0"
+                                    Content="Start"
+                                    Classes="Accent"
+                                    Command="{Binding StartSimulationCommand}"
+                                    Margin="0,0,6,8"
+                                    Height="45"/>
+
+                            <Button Grid.Column="1" Grid.Row="0"
+                                    Content="Pause"
+                                    Classes="Glass"
+                                    Command="{Binding PauseSimulationCommand}"
+                                    Margin="6,0,0,8"
+                                    Height="45"/>
+
+                            <Button Grid.Column="0" Grid.Row="1"
+                                    Content="Stop"
+                                    Classes="Glass"
+                                    Command="{Binding StopSimulationCommand}"
+                                    Margin="0,0,6,0"
+                                    Height="45"/>
+
+                            <Button Grid.Column="1" Grid.Row="1"
+                                    Content="Reset"
+                                    Classes="Glass"
+                                    Command="{Binding ResetSimulationCommand}"
+                                    Margin="6,0,0,0"
+                                    Height="45"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Right Panel: Event Log -->
+            <Border Grid.Column="1"
+                    Classes="GlassPanel"
+                    Margin="20,0,0,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="Ereignisprotokoll"
+                               Classes="SectionHeader"/>
+
+                    <ListBox ItemsSource="{Binding EventLog}"
+                             Background="Transparent"
+                             BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="vm:EventLogEntry">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="{Binding DisplayText}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    <TextBlock Text="{Binding Description}"
+                                               TextWrapping="Wrap"
+                                               Foreground="{DynamicResource TextSecondaryBrush}"
+                                               FontSize="12"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- Footer -->
+        <Border Grid.Row="2"
+                Margin="0,20,0,0"
+                Padding="16,12"
+                Background="{DynamicResource GlassSurfaceBrush}"
+                CornerRadius="12">
+            <TextBlock Text="Lebenssimulation - Psychische Gesundheit im Lebensverlauf"
+                       HorizontalAlignment="Center"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       FontSize="12"/>
+        </Border>
+    </Grid>
 </UserControl>

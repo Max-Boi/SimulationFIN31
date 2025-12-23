@@ -9,16 +9,7 @@ public static class SchoolBeginningEvents
 {
     private const int SCHOOL_BEGINNING_MIN = 6;
     private const int SCHOOL_BEGINNING_MAX = 11;
-    
-    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
-    [
-        ..SchoolBeginningGenericEvents
-    ]);
-    
-    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
-    [
-        ..SchoolBeginningPersonalEvents,
-    ]);
+
     #region School Beginning Personal Events (Ages 6-12)
 
     /// <summary>
@@ -450,6 +441,26 @@ public static class SchoolBeginningEvents
             ]
         }
     ];
+
+    #endregion
+
+    #region Aggregated Event Collections
+
+    /// <summary>
+    /// All generic events for the School Beginning phase.
+    /// </summary>
+    public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
+    [
+        ..SchoolBeginningGenericEvents
+    ]);
+
+    /// <summary>
+    /// All personal events for the School Beginning phase.
+    /// </summary>
+    public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
+    [
+        ..SchoolBeginningPersonalEvents
+    ]);
 
     #endregion
 }
