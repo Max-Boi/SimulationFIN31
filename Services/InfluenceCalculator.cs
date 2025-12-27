@@ -56,7 +56,7 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
     {
         if (Math.Abs(exponent) < 0.001)
         {
-            return 1.0;
+            return 0.1;
         }
 
         var clampedValue = Math.Max(normalizedValue, MINIMUM_NORMALIZED_VALUE);
