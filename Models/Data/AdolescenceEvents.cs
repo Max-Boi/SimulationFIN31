@@ -36,7 +36,10 @@ public static class AdolescenceEvents
             SocialEnergyChange = 8,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.8),
+                new InfluenceFactor("AnxietyLevel", -1.5),
+                new InfluenceFactor("FamilyCloseness", 1.3)
             ]
         },
         new PersonalEvent
@@ -82,7 +85,10 @@ public static class AdolescenceEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.1)
+                new InfluenceFactor("IntelligenceScore", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
         new PersonalEvent
@@ -103,8 +109,11 @@ public static class AdolescenceEvents
             SocialEnergyChange = 10,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 1.4),
-                new InfluenceFactor("IntelligenceScore", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", 2.5),
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
         new PersonalEvent
@@ -125,7 +134,10 @@ public static class AdolescenceEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.2)
+                new InfluenceFactor("IntelligenceScore", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("ParentsEducationLevel", 1.5),
+                new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
         new PersonalEvent
@@ -137,15 +149,20 @@ public static class AdolescenceEvents
             MinAge = 14,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
-            StressImpact = 20,
-            MoodImpact = -20,
-            SocialBelongingImpact = -5,
-            ResilienceImpact = 8,
-            HealthImpact = -3,
-            AnxietyChange = 15,
-            SocialEnergyChange = -10,
+            StressImpact = 25,
+            MoodImpact = -28,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = 5,
+            HealthImpact = -5,
+            AnxietyChange = 28,
+            SocialEnergyChange = -20,
             Prerequisites = ["adolescence_first_romance"],
-            InfluenceFactors = []
+            InfluenceFactors =
+            [
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("FamilyCloseness", -2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.5)
+            ]
         },
         new PersonalEvent
         {
@@ -156,13 +173,13 @@ public static class AdolescenceEvents
             MinAge = 13,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
-            StressImpact = 18,
-            MoodImpact = -8,
-            SocialBelongingImpact = 5,
-            ResilienceImpact = -5,
-            HealthImpact = -5,
-            AnxietyChange = 12,
-            SocialEnergyChange = 3,
+            StressImpact = 22,
+            MoodImpact = -15,
+            SocialBelongingImpact = -8,
+            ResilienceImpact = -8,
+            HealthImpact = -8,
+            AnxietyChange = 18,
+            SocialEnergyChange = -5,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
@@ -177,17 +194,17 @@ public static class AdolescenceEvents
             Id = "adolescence_mental_health_struggle",
             Name = "Mental Health Difficulties",
             Description = "Teen experiences significant anxiety or depression symptoms.",
-            BaseProbability = 0.25,
+            BaseProbability = 0.3,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
-            StressImpact = 25,
-            MoodImpact = -25,
-            SocialBelongingImpact = -15,
-            ResilienceImpact = -10,
-            HealthImpact = -10,
-            AnxietyChange = 25,
-            SocialEnergyChange = -15,
+            StressImpact = 32,
+            MoodImpact = -38,
+            SocialBelongingImpact = -28,
+            ResilienceImpact = -15,
+            HealthImpact = -15,
+            AnxietyChange = 35,
+            SocialEnergyChange = -25,
             InfluenceFactors =
             [
                 new InfluenceFactor("AnxietyLevel", 4.0),
@@ -217,7 +234,10 @@ public static class AdolescenceEvents
             Prerequisites = ["school_sports_talent"],
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.8),
+                new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
         new PersonalEvent
@@ -225,17 +245,17 @@ public static class AdolescenceEvents
             Id = "adolescence_online_harassment",
             Name = "Online Harassment Experience",
             Description = "Teen experiences cyberbullying or online harassment.",
-            BaseProbability = 0.30,
+            BaseProbability = 0.35,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
-            StressImpact = 22,
-            MoodImpact = -18,
-            SocialBelongingImpact = -12,
-            ResilienceImpact = -5,
-            HealthImpact = -5,
-            AnxietyChange = 20,
-            SocialEnergyChange = -12,
+            StressImpact = 28,
+            MoodImpact = -28,
+            SocialBelongingImpact = -25,
+            ResilienceImpact = -10,
+            HealthImpact = -8,
+            AnxietyChange = 28,
+            SocialEnergyChange = -20,
             Prerequisites = ["school_technology_access"],
             InfluenceFactors =
             [
@@ -274,7 +294,10 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 0.8)
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("AnxietyLevel", -1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -293,7 +316,10 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -0.5)
+                new InfluenceFactor("IncomeLevel", -2.0),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -312,7 +338,9 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.2)
+                new InfluenceFactor("IncomeLevel", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -331,7 +359,10 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.1)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("ParentsWithAddiction", -2.0)
             ]
         },
         new GenericEvent
@@ -339,7 +370,7 @@ public static class AdolescenceEvents
             Id = "adolescence_family_illness",
             Name = "Family Member Serious Illness",
             Description = "Close family member experiences serious illness.",
-            BaseProbability = 0.18,
+            BaseProbability = 0.23,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
@@ -348,7 +379,12 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = -5,
-            InfluenceFactors = []
+            InfluenceFactors =
+            [
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("IncomeLevel", -1.5),
+                new InfluenceFactor("ParentsWithAddiction", 2.0)
+            ]
         },
         new GenericEvent
         {
@@ -366,8 +402,10 @@ public static class AdolescenceEvents
             HealthImpact = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
-                new InfluenceFactor("SocialEnergyLevel", 1.1)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
+                new InfluenceFactor("SocialEnergyLevel", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -386,7 +424,9 @@ public static class AdolescenceEvents
             HealthImpact = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.5)
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5)
             ]
         },
         new GenericEvent
@@ -427,7 +467,10 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -446,8 +489,10 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.4),
-                new InfluenceFactor("SocialEnergyLevel", 1.2)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("IntelligenceScore", 1.3)
             ]
         }
     ];

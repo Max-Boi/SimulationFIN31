@@ -36,8 +36,10 @@ public static class AdulthoodEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.3),
-                new InfluenceFactor("JobStatus", 1.2)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("JobStatus", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("SocialEnergyLevel", 1.5)
             ]
         },
         new PersonalEvent
@@ -59,7 +61,10 @@ public static class AdulthoodEvents
             Prerequisites = ["emerging_serious_relationship"],
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.2)
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
         new PersonalEvent
@@ -80,8 +85,10 @@ public static class AdulthoodEvents
             SocialEnergyChange = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.5),
-                new InfluenceFactor("JobStatus", 1.3)
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("JobStatus", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.5),
+                new InfluenceFactor("FamilyCloseness", 1.3)
             ]
         },
         new PersonalEvent
@@ -103,7 +110,10 @@ public static class AdulthoodEvents
             Prerequisites = ["adulthood_engagement"],
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.3)
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("IncomeLevel", 1.8),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
         new PersonalEvent
@@ -124,7 +134,10 @@ public static class AdulthoodEvents
             SocialEnergyChange = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.2)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.5),
+                new InfluenceFactor("AnxietyLevel", -1.3)
             ]
         },
         new PersonalEvent
@@ -136,13 +149,13 @@ public static class AdulthoodEvents
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
-            StressImpact = 28,
-            MoodImpact = -22,
-            SocialBelongingImpact = -10,
-            ResilienceImpact = -5,
-            HealthImpact = -8,
-            AnxietyChange = 25,
-            SocialEnergyChange = -10,
+            StressImpact = 32,
+            MoodImpact = -32,
+            SocialBelongingImpact = -22,
+            ResilienceImpact = -10,
+            HealthImpact = -12,
+            AnxietyChange = 30,
+            SocialEnergyChange = -18,
             InfluenceFactors =
             [
                 new InfluenceFactor("JobStatus", -3.5),
@@ -161,13 +174,13 @@ public static class AdulthoodEvents
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
-            StressImpact = 30,
-            MoodImpact = -25,
-            SocialBelongingImpact = -18,
-            ResilienceImpact = 5,
-            HealthImpact = -10,
-            AnxietyChange = 25,
-            SocialEnergyChange = -15,
+            StressImpact = 38,
+            MoodImpact = -38,
+            SocialBelongingImpact = -32,
+            ResilienceImpact = -5,
+            HealthImpact = -15,
+            AnxietyChange = 35,
+            SocialEnergyChange = -25,
             Prerequisites = ["adulthood_engagement"],
             InfluenceFactors =
             [
@@ -183,20 +196,22 @@ public static class AdulthoodEvents
             Id = "adulthood_parent_death",
             Name = "Death of Parent",
             Description = "Adult experiences death of a parent.",
-            BaseProbability = 0.15,
+            BaseProbability = 0.2,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
-            StressImpact = 28,
-            MoodImpact = -25,
-            SocialBelongingImpact = 5,
-            ResilienceImpact = 10,
-            HealthImpact = -8,
-            AnxietyChange = 20,
-            SocialEnergyChange = -12,
+            StressImpact = 35,
+            MoodImpact = -40,
+            SocialBelongingImpact = -15,
+            ResilienceImpact = 5,
+            HealthImpact = -12,
+            AnxietyChange = 30,
+            SocialEnergyChange = -20,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.4)
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("ParentsWithAddiction", 2.0),
+                new InfluenceFactor("IncomeLevel", -1.3)
             ]
         },
         new PersonalEvent
@@ -217,26 +232,27 @@ public static class AdulthoodEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.3),
-                new InfluenceFactor("IncomeLevel", 1.1)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("IncomeLevel", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("SocialEnergyLevel", 1.5)
             ]
         },
         new PersonalEvent
         {
             Id = "adulthood_mental_health_support",
             Name = "Sought Mental Health Support",
-            Description = "Adult proactively seeks therapy or mental health support.",
+            Description = "Adult gets a gift from person close to him",
             BaseProbability = 0.30,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
-            StressImpact = -15,
-            MoodImpact = 12,
-            SocialBelongingImpact = 5,
-            ResilienceImpact = 18,
-            HealthImpact = 8,
-            AnxietyChange = -15,
-            SocialEnergyChange = 5,
+            StressImpact = -10,
+            MoodImpact = 15,
+            SocialBelongingImpact = 10,
+            ResilienceImpact = 5,
+            HealthImpact = 0,
+            AnxietyChange = -5,
             InfluenceFactors =
             [
                 new InfluenceFactor("AnxietyLevel", 1.4),
@@ -271,7 +287,9 @@ public static class AdulthoodEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("JobStatus", 1.2)
+                new InfluenceFactor("JobStatus", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("IntelligenceScore", 1.5)
             ]
         },
         new GenericEvent
@@ -290,8 +308,10 @@ public static class AdulthoodEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 1.4),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -299,7 +319,7 @@ public static class AdulthoodEvents
             Id = "adulthood_health_milestone",
             Name = "Health Improvement Achievement",
             Description = "Adult achieves significant health or fitness milestone.",
-            BaseProbability = 0.30,
+            BaseProbability = 0.25,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -308,7 +328,12 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 12,
             HealthImpact = 15,
-            InfluenceFactors = []
+            InfluenceFactors =
+            [
+                new InfluenceFactor("IncomeLevel", 1.8),
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("AnxietyLevel", -1.5)
+            ]
         },
         new GenericEvent
         {
@@ -337,19 +362,20 @@ public static class AdulthoodEvents
             Id = "adulthood_reunion",
             Name = "Meaningful Reunion",
             Description = "Adult reconnects with old friends or family members.",
-            BaseProbability = 0.35,
+            BaseProbability = 0.30,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
-            StressImpact = -8,
-            MoodImpact = 15,
-            SocialBelongingImpact = 15,
+            StressImpact = -12,
+            MoodImpact = 25,
+            SocialBelongingImpact = 20,
             ResilienceImpact = 5,
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.3),
-                new InfluenceFactor("SocialEnergyLevel", 1.1)
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("SocialEnergyLevel", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5)
             ]
         },
         new GenericEvent
@@ -362,13 +388,14 @@ public static class AdulthoodEvents
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
             StressImpact = 8,
-            MoodImpact = 12,
+            MoodImpact = 15,
             SocialBelongingImpact = 5,
-            ResilienceImpact = 5,
+            ResilienceImpact = 8,
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.4)
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("JobStatus", 1.8)
             ]
         },
         new GenericEvent
@@ -381,14 +408,16 @@ public static class AdulthoodEvents
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
             StressImpact = -8,
-            MoodImpact = 18,
+            MoodImpact = 25,
             SocialBelongingImpact = 12,
             ResilienceImpact = 10,
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.3),
-                new InfluenceFactor("JobStatus", 1.2)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("JobStatus", 2.0),
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -403,9 +432,14 @@ public static class AdulthoodEvents
             StressImpact = 22,
             MoodImpact = -15,
             SocialBelongingImpact = 5,
-            ResilienceImpact = 8,
+            ResilienceImpact = -12,
             HealthImpact = -20,
-            InfluenceFactors = []
+            InfluenceFactors =
+            [
+                new InfluenceFactor("AnxietyLevel", 2.0),
+                new InfluenceFactor("ParentsWithAddiction", 2.0),
+                new InfluenceFactor("IncomeLevel", -1.5)
+            ]
         },
         new GenericEvent
         {
@@ -421,7 +455,12 @@ public static class AdulthoodEvents
             SocialBelongingImpact = -12,
             ResilienceImpact = 3,
             HealthImpact = 0,
-            InfluenceFactors = []
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnergyLevel", -1.8),
+                new InfluenceFactor("AnxietyLevel", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.3)
+            ]
         },
         new GenericEvent
         {
@@ -432,14 +471,15 @@ public static class AdulthoodEvents
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
-            StressImpact = 3,
-            MoodImpact = 10,
-            SocialBelongingImpact = 12,
+            StressImpact = 5,
+            MoodImpact = 15,
+            SocialBelongingImpact = 18,
             ResilienceImpact = 3,
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.3)
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5)
             ]
         }
     ];
