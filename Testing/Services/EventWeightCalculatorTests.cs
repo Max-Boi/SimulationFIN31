@@ -325,7 +325,7 @@ public sealed class EventWeightCalculatorTests
             JobStatus = JobStatus.MediumPrestige,
             SocialEnvironmentLevel = 50,
             FamilyCloseness = 60,
-            ParentsRelationshipQuality = 70,
+            ParentsRelationshipQuality = ParentsRelationshipQuality.Harmonious,
             ParentsWithAddiction = false,
             HasAdhd = false,
             HasAutism = false,
