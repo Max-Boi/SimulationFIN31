@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using SimulationFIN31.Models.Enums;
+using SimulationFIN31.Models.MentalDiseases;
 
 namespace SimulationFIN31.Models;
 
@@ -35,5 +37,6 @@ public class SimulationState
     public List<string> EventHistory { get; set; } = new();
     public LifePhase LifePhase { get; set; } = LifePhase.Childhood; 
   
+    public Dictionary<string,DiseaseConfig> CurrentIllnesses { get; set; } = new();
     public Dictionary<string, double> CopingPreferences { get; set; } = new();
 }
