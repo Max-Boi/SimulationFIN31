@@ -22,21 +22,7 @@ public class CopingMechanism : LifeEvent
     /// For example, high stress or low mood may activate certain coping behaviors.
     /// </summary>
     public CopingTrigger Trigger { get; init; }
-
-    /// <summary>
-    /// Short-term relief provided by this coping mechanism (0.0 to 1.0).
-    /// Higher values indicate more immediate stress relief.
-    /// </summary>
-    public double ShortTermRelief { get; init; }
-
-    /// <summary>
-    /// Long-term impact multiplier on mental health.
-    /// Values less than 1.0 indicate compounding negative effects over time.
-    /// Values greater than 1.0 indicate building resilience.
-    /// Neutral is 1.0.
-    /// </summary>
-    public double LongTermImpactMultiplier { get; init; } = 1.0;
-
+    
     /// <summary>
     /// Indicates whether using this coping mechanism increases
     /// the likelihood of using it again in the future (habit formation).
