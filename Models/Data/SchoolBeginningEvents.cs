@@ -83,7 +83,10 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = 8,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
         new PersonalEvent
@@ -104,8 +107,10 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = 8,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
-                new InfluenceFactor("SocialEnergyLevel", 1.1)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
+                new InfluenceFactor("SocialEnergyLevel", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
         new PersonalEvent
@@ -126,8 +131,11 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = 10,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.1),
-                new InfluenceFactor("SocialEnergyLevel", 1.3)
+                new InfluenceFactor("SocialEnergyLevel", 2.5),
+                new InfluenceFactor("IntelligenceScore", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
         new PersonalEvent
@@ -139,13 +147,13 @@ public static class SchoolBeginningEvents
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
-            StressImpact = 25,
-            MoodImpact = -20,
-            SocialBelongingImpact = -15,
-            ResilienceImpact = -8,
-            HealthImpact = -5,
-            AnxietyChange = 20,
-            SocialEnergyChange = -15,
+            StressImpact = 30,
+            MoodImpact = -30,
+            SocialBelongingImpact = -28,
+            ResilienceImpact = -12,
+            HealthImpact = -8,
+            AnxietyChange = 28,
+            SocialEnergyChange = -22,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", -2.5),
@@ -165,13 +173,13 @@ public static class SchoolBeginningEvents
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = 9,
             IsUnique = true,
-            StressImpact = 15,
-            MoodImpact = -10,
-            SocialBelongingImpact = -5,
-            ResilienceImpact = 5,
+            StressImpact = 20,
+            MoodImpact = -18,
+            SocialBelongingImpact = -15,
+            ResilienceImpact = 3,
             HealthImpact = 0,
-            AnxietyChange = 12,
-            SocialEnergyChange = -5,
+            AnxietyChange = 18,
+            SocialEnergyChange = -10,
             InfluenceFactors =
             [
                 new InfluenceFactor("HasAdhd", 4.0),
@@ -189,13 +197,13 @@ public static class SchoolBeginningEvents
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
-            StressImpact = 18,
-            MoodImpact = -15,
-            SocialBelongingImpact = -18,
-            ResilienceImpact = -5,
-            HealthImpact = 0,
-            AnxietyChange = 15,
-            SocialEnergyChange = -12,
+            StressImpact = 22,
+            MoodImpact = -22,
+            SocialBelongingImpact = -25,
+            ResilienceImpact = -8,
+            HealthImpact = -3,
+            AnxietyChange = 20,
+            SocialEnergyChange = -18,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", -2.5),
@@ -224,7 +232,10 @@ public static class SchoolBeginningEvents
             SocialEnergyChange = 3,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.1)
+                new InfluenceFactor("IntelligenceScore", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.5)
             ]
         },
         new PersonalEvent
@@ -236,17 +247,20 @@ public static class SchoolBeginningEvents
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = true,
-            StressImpact = 20,
-            MoodImpact = -12,
-            SocialBelongingImpact = -8,
-            ResilienceImpact = 5,
-            HealthImpact = -3,
-            AnxietyChange = 15,
-            SocialEnergyChange = -15,
+            StressImpact = 25,
+            MoodImpact = -22,
+            SocialBelongingImpact = -20,
+            ResilienceImpact = 3,
+            HealthImpact = -5,
+            AnxietyChange = 22,
+            SocialEnergyChange = -18,
             Prerequisites = ["childhood_parents_divorce"],
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.2)
+                new InfluenceFactor("FamilyCloseness", -2.5),
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         }
     ];
@@ -276,7 +290,9 @@ public static class SchoolBeginningEvents
             HealthImpact = 2,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.1)
+                new InfluenceFactor("IncomeLevel", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -295,7 +311,10 @@ public static class SchoolBeginningEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 0.8)
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("AnxietyLevel", -1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new GenericEvent
@@ -314,7 +333,10 @@ public static class SchoolBeginningEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.2)
+                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("AnxietyLevel", -1.3)
             ]
         },
         new GenericEvent
@@ -333,8 +355,10 @@ public static class SchoolBeginningEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.2),
-                new InfluenceFactor("IncomeLevel", 1.1)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("IncomeLevel", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5)
             ]
         },
         new GenericEvent
@@ -375,8 +399,10 @@ public static class SchoolBeginningEvents
             HealthImpact = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.3),
-                new InfluenceFactor("SocialEnergyLevel", 1.1)
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
         new GenericEvent
@@ -393,7 +419,11 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = -10,
-            InfluenceFactors = []
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("IncomeLevel", -1.8)
+            ]
         },
         new GenericEvent
         {
@@ -411,8 +441,8 @@ public static class SchoolBeginningEvents
             HealthImpact = -2,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.4),
-                new InfluenceFactor("ParentsEducationLevel", 1.2)
+                new InfluenceFactor("IncomeLevel", 2.5),
+                new InfluenceFactor("ParentsEducationLevel", 2.0)
             ]
         },
         new GenericEvent
@@ -431,7 +461,7 @@ public static class SchoolBeginningEvents
             HealthImpact = -3,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.3)
+                new InfluenceFactor("FamilyCloseness", 2.0)
             ]
         },
         new GenericEvent
@@ -450,8 +480,9 @@ public static class SchoolBeginningEvents
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.2),
-                new InfluenceFactor("IncomeLevel", 1.1)
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("IncomeLevel", 1.8),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5)
             ]
         }
     ];
