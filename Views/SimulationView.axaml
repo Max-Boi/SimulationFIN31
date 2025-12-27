@@ -81,7 +81,7 @@
         </Style>
     </UserControl.Styles>
 
-    <Grid Margin="30">
+    <Grid Background="{StaticResource Brush.BackdropGradient}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -144,7 +144,7 @@
         </Grid>
 
         <!-- Main Content Area -->
-        <Grid Grid.Row="1" Background="{StaticResource Brush.BackdropGradient}">
+        <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350"/>
                 <ColumnDefinition Width="*"/>
