@@ -12,7 +12,7 @@ namespace SimulationFIN31.ViewModels;
 
 public partial class SettingsViewModel : ViewModelBase
 {
-    public string SesToolTip { get;  } =
+    public string SesToolTip { get; } =
         "Ein niedriger Status in den Bereichen Bildung," +
         " Einkommen und Beruf erhöht nachweislich das Risiko, an Depressionen," +
         " Angststörungen oder Sucht zu erkranken, signifikant (Sozialer Gradient)." +
@@ -21,10 +21,22 @@ public partial class SettingsViewModel : ViewModelBase
         "\n\nUmgekehrt wirken ein sicheres Einkommen und ein hoher Berufsstatus als Schutzfaktoren," +
         " da sie dem Individuum mehr Kontrolle über das eigene Leben und besseren Zugang zu Hilfe ermöglichen.";
 
+    public string FamilyEnvironmentToolTip { get; } =
+        "Das familiäre und soziale Umfeld bildet die primäre Sozialisationsinstanz und prägt " +
+        "Bindungsmuster, emotionale Regulation sowie Stressbewältigungsstrategien nachhaltig." +
+        "\n\nKonflikte zwischen Eltern, Suchterkrankungen oder mangelnde emotionale Nähe erhöhen " +
+        "das Risiko für Angststörungen und Depression, während ein stabiles Umfeld als Schutzfaktor wirkt.";
+
+    public string PersonalResourcesToolTip { get; } =
+        "Individuelle Ressourcen wie kognitive Fähigkeiten, Temperament und neurologische Besonderheiten " +
+        "beeinflussen die Vulnerabilität für psychische Erkrankungen gemäß dem Diathese-Stress-Modell." +
+        "\n\nHöhere Intelligenz und Extraversion fördern adaptive Bewältigungsstrategien, während " +
+        "erhöhte Trait-Angst und introvertierte Tendenzen das Risiko für Angststörungen erhöhen können.";
+
     private const int DefaultIncomeLevel = 4;
     private const int DefaultParentsEducationLevel = 4;
     private const int DefaultJobStatus = 4;
-    private const int DefaultSocialEnvironmentLevel = 4;
+    private const int DefaultSocialEnvironmentLevel = 50;
     private const int DefaultIntelligenceScore = 50;
     private const int DefaultAnxietyLevel = 40;
     private const int DefaultFamilyCloseness = 50;

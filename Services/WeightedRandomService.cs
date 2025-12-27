@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using SimulationFIN31.Models;
 using SimulationFIN31.Models.EventTypes;
 using SimulationFIN31.Models.structs;
@@ -223,6 +224,7 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
 
         if (totalProbability <= 0.0)
         {
+            Thread.Sleep(2);
             return eligible[_random.Next(eligible.Count)];
         }
 

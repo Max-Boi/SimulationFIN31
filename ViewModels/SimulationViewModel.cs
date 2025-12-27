@@ -266,7 +266,7 @@ public partial class SimulationViewModel : ViewModelBase
         {
             EventLog.Insert(0, entry);
 
-            if (EventLog.Count > 100)
+            if (EventLog.Count > 150)
             {
                 EventLog.RemoveAt(EventLog.Count - 1);
             }

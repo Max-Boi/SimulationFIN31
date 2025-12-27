@@ -7,6 +7,7 @@ using SimulationFIN31.Models.Data;
 using SimulationFIN31.Models.Enums;
 using SimulationFIN31.Models.EventTypes;
 using SimulationFIN31.Services.Interfaces;
+using CopingMechanism = SimulationFIN31.Models.Data.CopingMechanism;
 
 namespace SimulationFIN31.Services;
 
@@ -48,7 +49,7 @@ public sealed class SimulationService : ISimulationService
         cancellationToken.ThrowIfCancellationRequested();
 
         var events = GetEventsForPhase(state.LifePhase);
-        var copingMechanisms = EventCatalog.AllcopingMechanisms;
+        var copingMechanisms = CopingMechanism.AllcopingMechanisms;
 
         await Task.Run(() =>
         {
@@ -102,7 +103,7 @@ public sealed class SimulationService : ISimulationService
     /// <summary>
     /// Processes coping mechanisms when triggers are met.
     /// </summary>
-    private void ProcessCopingMechanisms(IReadOnlyList<CopingMechanism> mechanisms, SimulationState state)
+    private void ProcessCopingMechanisms(IReadOnlyList<Models.EventTypes.CopingMechanism> mechanisms, SimulationState state)
     {
         var selectedMechanism = _weightedRandomService.SelectCopingMechanism(mechanisms, state);
         if (selectedMechanism != null)
@@ -134,7 +135,7 @@ public sealed class SimulationService : ISimulationService
     /// <summary>
     /// Updates coping preferences when a habit-forming mechanism is used.
     /// </summary>
-    private static void UpdateCopingPreferences(CopingMechanism mechanism, SimulationState state)
+    private static void UpdateCopingPreferences(Models.EventTypes.CopingMechanism mechanism, SimulationState state)
     {
         if (!mechanism.IsHabitForming)
         {
