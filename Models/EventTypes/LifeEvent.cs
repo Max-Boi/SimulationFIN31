@@ -28,6 +28,12 @@ public class LifeEvent
     public string Description { get; init; } = string.Empty;
 
     /// <summary>
+    /// Indicates if this event is traumatic and can trigger PTSD/trauma-related conditions.
+    /// Based on psychological severity criteria (death, abuse, violence, severe rejection, etc.).
+    /// </summary>
+    public bool IsTraumatic { get; init; }
+
+    /// <summary>
     /// Base probability of the event occurring (0.0 to 1.0).
     /// Modified by influence factors during probability calculation.
     /// </summary>
@@ -47,6 +53,12 @@ public class LifeEvent
     /// Category of the event (Generic, Personal, or Coping).
     /// </summary>
     public EventCategory Category { get; init; }
+
+    /// <summary>
+    /// Visual category for icon/image representation in the UI.
+    /// Determines which icon or illustration to display for this event.
+    /// </summary>
+    public VisualCategory VisualCategory { get; init; }
 
     /// <summary>
     /// Factors that influence the probability of this event based on state attributes.

@@ -7,159 +7,173 @@ public static class MentalIllnesses
     public static readonly Dictionary<string, DiseaseConfig> Illnesses = new()
     {
         // === DEPRESSIVE STÖRUNGEN ===
-        
+
         ["MildDepression"] = new DiseaseConfig
         {
             Name = "Depressive Episode",
-            StressDebuff = 1.1,      // Leicht erhöhte Stressreaktivität
-            MoodDebuff = 0.85,        // Leichte Stimmungseinbuße
-            SocialProximityDebuff = 0.90, // Geringe soziale Rückzugstendenz
-            TriggerCountdown = 4,
-            HealingTime = 2
+            StressDebuff = 1.05,
+            MoodDebuff = 0.92,
+            SocialProximityDebuff = 0.95,
+            TriggerChance = 4,
+            HealingTime = 2,
+            MinAge = 10               // Kann ab später Kindheit auftreten
         },
-        
+
         // === ANGSTSTÖRUNGEN ===
-        
+
         ["GeneralizedAnxiety"] = new DiseaseConfig
         {
             Name = "Generalized Anxiety Disorder",
-            StressDebuff = 1.3,       // Chronisch erhöhte Stressreaktivität
-            MoodDebuff = 0.75,        // Moderate Stimmungsbeeinträchtigung
-            SocialProximityDebuff = 0.85, // Leichte bis moderate soziale Beeinträchtigung
-            TriggerCountdown = 6,     // Entwickelt sich schleichend
-            HealingTime = 8           // Chronischer Verlauf, schwer zu behandeln
+            StressDebuff = 1.15,
+            MoodDebuff = 0.88,
+            SocialProximityDebuff = 0.92,
+            TriggerChance = 6,
+            HealingTime = 8,
+            MinAge = 8                // Kann bereits in Kindheit beginnen
         },
-        
+
         ["SocialPhobia"] = new DiseaseConfig
         {
             Name = "Social Anxiety Disorder",
-            StressDebuff = 1.2,      // Erhöhte Stressreaktivität in sozialen Situationen
-            MoodDebuff = 0.80,        // Moderate Stimmungseinbuße
-            SocialProximityDebuff = 0.50, // MASSIVER sozialer Rückzug (Hauptsymptom)
-            TriggerCountdown = 6,
-            HealingTime = 8          // Sehr persistent, schwer zu behandeln
+            StressDebuff = 1.10,
+            MoodDebuff = 0.90,
+            SocialProximityDebuff = 0.75,
+            TriggerChance = 6,
+            HealingTime = 8,
+            MinAge = 10               // Typischerweise ab Schulbeginn
         },
-        
+
         ["PanicDisorder"] = new DiseaseConfig
         {
             Name = "Panic Disorder",
-            StressDebuff = 1.45,      // Sehr hohe Stressreaktivität (Angst vor Angst)
-            MoodDebuff = 0.85,        
-            SocialProximityDebuff = 0.8, // Vermeidungsverhalten beeinträchtigt soziales Leben
-            TriggerCountdown = 4,     // Kann schnell entstehen
-            HealingTime = 7
+            StressDebuff = 1.22,
+            MoodDebuff = 0.92,
+            SocialProximityDebuff = 0.90,
+            TriggerChance = 4,
+            HealingTime = 7,
+            MinAge = 15               // Meist späte Adoleszenz
         },
-        
+
         // === TRAUMA-BEZOGENE STÖRUNGEN ===
-        
+
         ["PTSD"] = new DiseaseConfig
         {
             Name = "Post-Traumatic Stress Disorder",
-            StressDebuff = 1.5,       // Sehr hohe Stressreaktivität (Hyperarousal)
-            MoodDebuff = 0.7,        // Starke Stimmungseinbuße (Numbing, Depression)
-            SocialProximityDebuff = 0.7, // Deutlicher Rückzug, Vertrauensprobleme
-            TriggerCountdown = 3,     // Kann akut nach Trauma auftreten
-            HealingTime = 10          // Sehr langwierig, oft chronisch
+            StressDebuff = 1.25,
+            MoodDebuff = 0.85,
+            SocialProximityDebuff = 0.85,
+            TriggerChance = 3,
+            HealingTime = 10,
+            MinAge = 3                // Kann nach Trauma in jedem Alter auftreten
         },
-        
+
         // === SUCHTERKRANKUNGEN ===
-        
+
         ["Alcoholism"] = new DiseaseConfig
         {
             Name = "Alcohol Use Disorder",
-            StressDebuff = 1.1,      // Erhöhte Stressreaktivität (besonders bei Entzug)
-            MoodDebuff = 0.65,        // Depression durch Alkohol
-            SocialProximityDebuff = 0.60, // Beziehungsprobleme, Isolation
-            TriggerCountdown = 12,    // Entwickelt sich langsam über Jahre
-            HealingTime = 10          // Hohe Rückfallrate
+            StressDebuff = 1.05,
+            MoodDebuff = 0.82,
+            SocialProximityDebuff = 0.80,
+            TriggerChance = 12,
+            HealingTime = 10,
+            MinAge = 14               // Erfordert Zugang zu Alkohol
         },
-        
+
         ["SubstanceAbuse"] = new DiseaseConfig
         {
             Name = "Substance Use Disorder",
-            StressDebuff = 1.3,       
-            MoodDebuff = 0.60,        // Kann je nach Substanz variieren
-            SocialProximityDebuff = 0.55, // Oft stärkere soziale Isolation
-            TriggerCountdown = 10,
-            HealingTime = 12
+            StressDebuff = 1.15,
+            MoodDebuff = 0.80,
+            SocialProximityDebuff = 0.78,
+            TriggerChance = 10,
+            HealingTime = 12,
+            MinAge = 14               // Typischerweise ab Adoleszenz
         },
-        
+
         // === ESSSTÖRUNGEN ===
-        
+
         ["AnorexiaNervosa"] = new DiseaseConfig
         {
             Name = "Anorexia Nervosa",
-            StressDebuff = 1.4,       // Hohe Stressreaktivität (Perfektionismus, Kontrolle)
-            MoodDebuff = 0.6,        // Schwere depressive Symptome häufig
-            SocialProximityDebuff = 0.65, // Sozialer Rückzug (Scham, Verheimlichung)
-            TriggerCountdown = 8,
-            HealingTime = 10          // Höchste Mortalität unter psych. Störungen, sehr langwierig
+            StressDebuff = 1.20,
+            MoodDebuff = 0.80,
+            SocialProximityDebuff = 0.82,
+            TriggerChance = 8,
+            HealingTime = 10,
+            MinAge = 12               // Typischerweise ab Pubertät
         },
-        
+
         ["BulimiaNervosa"] = new DiseaseConfig
         {
             Name = "Bulimia Nervosa",
-            StressDebuff = 1.2,      
-            MoodDebuff = 0.8,        // Scham, Depression
-            SocialProximityDebuff = 0.70, // Oft besser kaschiert, weniger Rückzug
-            TriggerCountdown = 6,
-            HealingTime = 10
+            StressDebuff = 1.10,
+            MoodDebuff = 0.90,
+            SocialProximityDebuff = 0.85,
+            TriggerChance = 6,
+            HealingTime = 10,
+            MinAge = 14               // Meist späte Adoleszenz
         },
-        
+
         ["BingeEatingDisorder"] = new DiseaseConfig
         {
             Name = "Binge Eating Disorder",
-            StressDebuff = 1.25,      // Stress als Trigger
-            MoodDebuff = 0.75,        // Scham, aber oft weniger schwer als andere Essstörungen
-            SocialProximityDebuff = 0.80, // Geringere soziale Beeinträchtigung
-            TriggerCountdown = 5,
-            HealingTime = 8
+            StressDebuff = 1.12,
+            MoodDebuff = 0.88,
+            SocialProximityDebuff = 0.90,
+            TriggerChance = 5,
+            HealingTime = 8,
+            MinAge = 10               // Kann früher auftreten als andere Essstörungen
         },
-        
+
         // === ZWANGSSTÖRUNGEN ===
-        
+
         ["OCD"] = new DiseaseConfig
         {
             Name = "Obsessive-Compulsive Disorder",
-            StressDebuff = 1.45,      // Hohe chronische Anspannung
-            MoodDebuff = 0.70,        // Frustration, Erschöpfung
-            SocialProximityDebuff = 0.75, // Zeitverlust durch Zwänge beeinträchtigt Beziehungen
-            TriggerCountdown = 10,    // Oft schleichender Beginn
-            HealingTime = 12          // Chronischer Verlauf, aber behandelbar
+            StressDebuff = 1.22,
+            MoodDebuff = 0.85,
+            SocialProximityDebuff = 0.88,
+            TriggerChance = 10,
+            HealingTime = 12,
+            MinAge = 8                // Kann bereits in Kindheit beginnen
         },
-        
+
         // === PERSÖNLICHKEITSSTÖRUNGEN ===
-        
+
         ["BorderlinePersonality"] = new DiseaseConfig
         {
             Name = "Borderline Personality Disorder",
-            StressDebuff = 1.6,       // Sehr hohe emotionale Dysregulation
-            MoodDebuff = 0.50,        // Extreme Stimmungsschwankungen (Durchschnitt niedrig)
-            SocialProximityDebuff = 0.60, // Instabile Beziehungen (Nähe/Distanz-Problem)
-            TriggerCountdown = 15,    // Entwickelt sich über Adoleszenz
-            HealingTime = 20          // Sehr langwierige Therapie (DBT)
+            StressDebuff = 1.30,
+            MoodDebuff = 0.75,
+            SocialProximityDebuff = 0.80,
+            TriggerChance = 15,
+            HealingTime = 20,
+            MinAge = 16               // Diagnose erst ab später Adoleszenz
         },
-        
+
         ["AvoidantPersonality"] = new DiseaseConfig
         {
             Name = "Avoidant Personality Disorder",
-            StressDebuff = 1.3,       
-            MoodDebuff = 0.75,        
-            SocialProximityDebuff = 0.40, // MASSIVE soziale Vermeidung (Kernsymptom)
-            TriggerCountdown = 12,    
-            HealingTime = 15
+            StressDebuff = 1.15,
+            MoodDebuff = 0.88,
+            SocialProximityDebuff = 0.70,
+            TriggerChance = 12,
+            HealingTime = 15,
+            MinAge = 16               // Diagnose erst ab später Adoleszenz
         },
-        
+
         // === DISSOZIATIVE STÖRUNGEN ===
-        
+
         ["DissociativeDisorder"] = new DiseaseConfig
         {
             Name = "Dissociative Disorder",
-            StressDebuff = 1.5,       // Hohe Stressreaktivität
-            MoodDebuff = 0.60,        // Emotionale Taubheit, Depression
-            SocialProximityDebuff = 0.65, // Entfremdung von anderen
-            TriggerCountdown = 8,
-            HealingTime = 16          // Sehr komplex zu behandeln
+            StressDebuff = 1.25,
+            MoodDebuff = 0.80,
+            SocialProximityDebuff = 0.82,
+            TriggerChance = 8,
+            HealingTime = 16,
+            MinAge = 5                // Kann nach frühem Trauma auftreten
         }
     };
 }

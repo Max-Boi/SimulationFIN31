@@ -122,6 +122,7 @@ public partial class SimulationViewModel : ViewModelBase
 
         _simulationService.EventOccurred += OnEventOccurred;
         _simulationService.StateUpdated += OnStateUpdated;
+        _simulationService.IllnessChanged += OnIllnessChanged;
     }
 
     #region -- Simulation Control Commands --
@@ -280,6 +281,29 @@ public partial class SimulationViewModel : ViewModelBase
     private void OnStateUpdated(object? sender, SimulationState state)
     {
         Dispatcher.UIThread.Post(UpdateDisplayProperties);
+    }
+
+    /// <summary>
+    /// Handles illness state changes (onset or healing).
+    /// Logs German messages to the event log.
+    /// </summary>
+    private void OnIllnessChanged(object? sender, IllnessEventArgs e)
+    {
+        var entry = new EventLogEntry(
+            e.ChangeType == IllnessChangeType.Onset ? "Krankheitsbeginn" : "Genesung",
+            e.GermanMessage,
+            SimulationState.CurrentAge,
+            DateTime.UtcNow);
+
+        Dispatcher.UIThread.Post(() =>
+        {
+            EventLog.Insert(0, entry);
+
+            if (EventLog.Count > 150)
+            {
+                EventLog.RemoveAt(EventLog.Count - 1);
+            }
+        });
     }
 
     #endregion

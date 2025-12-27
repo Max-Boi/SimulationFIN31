@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using SimulationFIN31.Models.Enums;
 using SimulationFIN31.Models.EventTypes;
 using SimulationFIN31.Models.structs;
 
@@ -21,12 +22,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_secure_attachment",
-            Name = "Secure Attachment Formed",
-            Description = "Child develops secure attachment with primary caregiver through consistent, responsive care.",
+            Name = "Sichere Bindung entwickelt",
+            Description = "Kind entwickelt durch konsequente, einfühlsame Betreuung eine sichere Bindung zur primären Bezugsperson.",
             BaseProbability = 0.65,
             MinAge = CHILDHOOD_MIN,
             MaxAge = 3,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -10,
             MoodImpact = 15,
             SocialBelongingImpact = 20,
@@ -34,6 +36,7 @@ public static  class ChildhoodEvents
             HealthImpact = 5,
             AnxietyChange = -10,
             SocialEnergyChange = 5,
+            VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 3.0),
@@ -44,12 +47,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_first_friendship",
-            Name = "First True Friendship",
-            Description = "Child forms their first meaningful friendship with a peer, learning reciprocity and sharing.",
+            Name = "Erste wahre Freundschaft",
+            Description = "Kind schließt seine erste bedeutsame Freundschaft mit einem Gleichaltrigen und lernt Gegenseitigkeit und Teilen.",
             BaseProbability = 0.70,
             MinAge = 3,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 12,
             SocialBelongingImpact = 15,
@@ -57,6 +61,7 @@ public static  class ChildhoodEvents
             HealthImpact = 0,
             AnxietyChange = -5,
             SocialEnergyChange = 8,
+            VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 2.5),
@@ -66,12 +71,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_parental_praise",
-            Name = "Meaningful Parental Recognition",
-            Description = "Child receives genuine praise and recognition for effort, building self-esteem.",
+            Name = "Bedeutsame elterliche Anerkennung",
+            Description = "Kind erhält echtes Lob und Anerkennung für seine Bemühungen, was das Selbstwertgefühl stärkt.",
             BaseProbability = 0.60,
             MinAge = 2,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 15,
             SocialBelongingImpact = 10,
@@ -79,6 +85,7 @@ public static  class ChildhoodEvents
             HealthImpact = 0,
             AnxietyChange = -8,
             SocialEnergyChange = 3,
+            VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.8),
@@ -89,12 +96,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_sibling_bond",
-            Name = "Sibling Bond Strengthened",
-            Description = "Child develops a positive, supportive relationship with sibling(s).",
+            Name = "Geschwisterbindung gestärkt",
+            Description = "Kind entwickelt eine positive, unterstützende Beziehung zu seinen Geschwistern.",
             BaseProbability = 0.50,
             MinAge = 2,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 10,
             SocialBelongingImpact = 12,
@@ -102,6 +110,7 @@ public static  class ChildhoodEvents
             HealthImpact = 0,
             AnxietyChange = -3,
             SocialEnergyChange = 5,
+            VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.5),
@@ -111,12 +120,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_creative_talent",
-            Name = "Creative Talent Discovered",
-            Description = "Child shows natural aptitude for creative expression (art, music, storytelling).",
+            Name = "Kreatives Talent entdeckt",
+            Description = "Kind zeigt natürliche Begabung für kreative Ausdrucksformen wie Kunst, Musik oder Geschichtenerzählen.",
             BaseProbability = 0.30,
             MinAge = 3,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -3,
             MoodImpact = 12,
             SocialBelongingImpact = 5,
@@ -124,6 +134,7 @@ public static  class ChildhoodEvents
             HealthImpact = 0,
             AnxietyChange = -5,
             SocialEnergyChange = 0,
+            VisualCategory = VisualCategory.Creativity,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 2.0),
@@ -134,12 +145,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_separation_anxiety",
-            Name = "Separation Anxiety Episode",
-            Description = "Child experiences significant distress when separated from primary caregiver.",
+            Name = "Trennungsangst-Episode",
+            Description = "Kind erlebt erheblichen Kummer bei Trennung von der primären Bezugsperson.",
             BaseProbability = 0.40,
             MinAge = 1,
             MaxAge = 4,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 18,
             MoodImpact = -18,
             SocialBelongingImpact = -12,
@@ -147,6 +159,7 @@ public static  class ChildhoodEvents
             HealthImpact = -3,
             AnxietyChange = 18,
             SocialEnergyChange = -10,
+            VisualCategory = VisualCategory.MentalHealth,
             InfluenceFactors =
             [
                 new InfluenceFactor("AnxietyLevel", 2.5),
@@ -159,12 +172,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_witnessed_conflict",
-            Name = "Witnessed Parental Conflict",
-            Description = "Child witnesses significant conflict between parents or caregivers.",
+            Name = "Elterlichen Konflikt miterlebt",
+            Description = "Kind erlebt einen schwerwiegenden Konflikt zwischen den Eltern oder Betreuungspersonen mit.",
             BaseProbability = 0.35,
             MinAge = 2,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = true,
             StressImpact = 25,
             MoodImpact = -22,
             SocialBelongingImpact = -18,
@@ -172,6 +186,7 @@ public static  class ChildhoodEvents
             HealthImpact = -5,
             AnxietyChange = 20,
             SocialEnergyChange = -12,
+            VisualCategory = VisualCategory.Trauma,
             InfluenceFactors =
             [
                 new InfluenceFactor("ParentsRelationshipQuality", -3.5),
@@ -182,12 +197,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_early_illness",
-            Name = "Significant Childhood Illness",
-            Description = "Child experiences a notable illness requiring extended care or hospitalization.",
+            Name = "Schwere Kinderkrankheit",
+            Description = "Kind erlebt eine bedeutende Krankheit, die längere Pflege oder Krankenhausaufenthalt erfordert.",
             BaseProbability = 0.15,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 18,
             MoodImpact = -12,
             SocialBelongingImpact = -5,
@@ -195,6 +211,7 @@ public static  class ChildhoodEvents
             HealthImpact = -15,
             AnxietyChange = 10,
             SocialEnergyChange = -8,
+            VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -2.5),
@@ -205,12 +222,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_kindergarten_success",
-            Name = "Successful Kindergarten Transition",
-            Description = "Child adapts well to kindergarten, making friends and engaging with learning.",
+            Name = "Erfolgreicher Kindergarteneinstieg",
+            Description = "Kind gewöhnt sich gut an den Kindergarten, schließt Freundschaften und zeigt Freude am Lernen.",
             BaseProbability = 0.55,
             MinAge = 4,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 10,
             SocialBelongingImpact = 12,
@@ -218,6 +236,7 @@ public static  class ChildhoodEvents
             HealthImpact = 0,
             AnxietyChange = -8,
             SocialEnergyChange = 6,
+            VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 2.5),
@@ -229,12 +248,13 @@ public static  class ChildhoodEvents
         new PersonalEvent
         {
             Id = "childhood_neglect_experience",
-            Name = "Emotional Neglect Experience",
-            Description = "Child experiences period of emotional unavailability from caregivers.",
+            Name = "Emotionale Vernachlässigung",
+            Description = "Kind erlebt eine Phase emotionaler Unerreichbarkeit der Betreuungspersonen.",
             BaseProbability = 0.20,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = true,
             StressImpact = 30,
             MoodImpact = -35,
             SocialBelongingImpact = -30,
@@ -242,6 +262,7 @@ public static  class ChildhoodEvents
             HealthImpact = -8,
             AnxietyChange = 25,
             SocialEnergyChange = -18,
+            VisualCategory = VisualCategory.Trauma,
             InfluenceFactors =
             [
                 new InfluenceFactor("ParentsWithAddiction", 4.0),
@@ -266,17 +287,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_family_vacation",
-            Name = "Family Vacation",
-            Description = "Family takes a memorable vacation together, creating positive shared experiences.",
+            Name = "Familienurlaub",
+            Description = "Familie unternimmt gemeinsamen, unvergesslichen Urlaub und schafft positive gemeinsame Erlebnisse.",
             BaseProbability = 0.45,
             MinAge = 2,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -10,
             MoodImpact = 15,
             SocialBelongingImpact = 10,
             ResilienceImpact = 3,
             HealthImpact = 2,
+            VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 3.0),
@@ -287,17 +310,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_pet_acquired",
-            Name = "Family Pet Acquired",
-            Description = "Family welcomes a pet, teaching responsibility and providing companionship.",
+            Name = "Haustier angeschafft",
+            Description = "Familie bekommt ein Haustier, das Verantwortung lehrt und Gesellschaft bietet.",
             BaseProbability = 0.35,
             MinAge = 3,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 12,
             SocialBelongingImpact = 8,
             ResilienceImpact = 5,
             HealthImpact = 3,
+            VisualCategory = VisualCategory.Pet,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 2.5),
@@ -308,17 +333,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_grandparent_bond",
-            Name = "Grandparent Bonding Experience",
-            Description = "Child develops meaningful connection with grandparent through quality time.",
+            Name = "Bindung zu Großeltern",
+            Description = "Kind entwickelt durch gemeinsame Zeit eine bedeutsame Verbindung zu Großeltern.",
             BaseProbability = 0.50,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 10,
             SocialBelongingImpact = 12,
             ResilienceImpact = 5,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.8)
@@ -327,17 +354,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_new_sibling",
-            Name = "New Sibling Born",
-            Description = "A new sibling joins the family, changing family dynamics.",
+            Name = "Neues Geschwisterchen geboren",
+            Description = "Ein neues Geschwisterkind kommt zur Familie und verändert die Familiendynamik.",
             BaseProbability = 0.40,
             MinAge = 1,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 8,
             MoodImpact = 3,
             SocialBelongingImpact = 5,
             ResilienceImpact = 3,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.0),
@@ -347,17 +376,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_family_relocation",
-            Name = "Family Relocation",
-            Description = "Family moves to a new home or neighborhood.",
+            Name = "Familienumzug",
+            Description = "Familie zieht in ein neues Zuhause oder eine neue Nachbarschaft.",
             BaseProbability = 0.25,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 12,
             MoodImpact = -5,
             SocialBelongingImpact = -8,
             ResilienceImpact = 5,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Home,
             InfluenceFactors =
             [
                 new InfluenceFactor("JobStatus", 1.2)
@@ -366,34 +397,38 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_pet_loss",
-            Name = "Loss of Family Pet",
-            Description = "Family pet passes away, introducing the concept of loss.",
+            Name = "Verlust des Haustiers",
+            Description = "Familienhaustier stirbt und führt das Konzept von Verlust ein.",
             BaseProbability = 0.20,
             MinAge = 3,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 15,
             MoodImpact = -18,
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Pet,
             Prerequisites = ["childhood_pet_acquired"],
             InfluenceFactors = []
         },
         new GenericEvent
         {
             Id = "childhood_parent_job_loss",
-            Name = "Parent Job Loss",
-            Description = "A parent loses their job, affecting family financial stability.",
+            Name = "Elternteil verliert Arbeit",
+            Description = "Ein Elternteil verliert den Arbeitsplatz, was die finanzielle Stabilität der Familie beeinträchtigt.",
             BaseProbability = 0.18,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 15,
             MoodImpact = -8,
             SocialBelongingImpact = -5,
             ResilienceImpact = 0,
             HealthImpact = -3,
+            VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -3.0),
@@ -405,17 +440,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_community_event",
-            Name = "Positive Community Event",
-            Description = "Child participates in community celebration or gathering.",
+            Name = "Positives Gemeinschaftsereignis",
+            Description = "Kind nimmt an einer Gemeinschaftsfeier oder -versammlung teil.",
             BaseProbability = 0.40,
             MinAge = 2,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 10,
             SocialBelongingImpact = 12,
             ResilienceImpact = 3,
             HealthImpact = 2,
+            VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 2.5),
@@ -425,17 +462,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_health_checkup",
-            Name = "Routine Health Checkup",
-            Description = "Child attends regular medical checkup with vaccinations.",
+            Name = "Routineuntersuchung",
+            Description = "Kind nimmt an regulärer ärztlicher Untersuchung mit Impfungen teil.",
             BaseProbability = 0.70,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 5,
             MoodImpact = -3,
             SocialBelongingImpact = 0,
             ResilienceImpact = 2,
             HealthImpact = 5,
+            VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 2.5),
@@ -445,17 +484,19 @@ public static  class ChildhoodEvents
         new GenericEvent
         {
             Id = "childhood_parents_divorce",
-            Name = "Parents Separate or Divorce",
-            Description = "Parents decide to separate or divorce, fundamentally changing family structure.",
+            Name = "Elterntrennung oder Scheidung",
+            Description = "Eltern trennen sich oder lassen sich scheiden, was die Familienstruktur grundlegend verändert.",
             BaseProbability = 0.25,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
+            IsTraumatic = true,
             StressImpact = 30,
             MoodImpact = -30,
             SocialBelongingImpact = -25,
             ResilienceImpact = -10,
             HealthImpact = -8,
+            VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
                 new InfluenceFactor("ParentsRelationshipQuality", -4.0),

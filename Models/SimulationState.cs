@@ -39,4 +39,17 @@ public class SimulationState
   
     public Dictionary<string,DiseaseConfig> CurrentIllnesses { get; set; } = new();
     public Dictionary<string, double> CopingPreferences { get; set; } = new();
+    public Dictionary<string, IllnessProgressionState> IllnessProgressionStates { get; set; } = new();
+
+    /// <summary>
+    /// Tracks the number of steps since the last illness was triggered.
+    /// Used for cooldown between illness triggers.
+    /// </summary>
+    public int StepsSinceLastIllnessTrigger { get; set; } = 2;
+
+    /// <summary>
+    /// Tracks ages at which traumatic events occurred.
+    /// Used for PTSD and trauma-related illness triggers requiring recent trauma.
+    /// </summary>
+    public List<int> TraumaticEventAges { get; set; } = new();
 }

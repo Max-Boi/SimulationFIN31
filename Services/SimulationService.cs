@@ -22,6 +22,7 @@ public sealed class SimulationService : ISimulationService
     private const int MAX_STEP_DELAY_MS = 5000;
 
     private readonly IWeightedRandomService _weightedRandomService;
+    private readonly IIllnessManagerService _illnessManagerService;
     private readonly EventEngine _eventEngine;
 
     /// <inheritdoc />
@@ -31,14 +32,30 @@ public sealed class SimulationService : ISimulationService
     public event EventHandler<SimulationState>? StateUpdated;
 
     /// <summary>
+    /// Event raised when an illness state changes (onset or healing).
+    /// </summary>
+    public event EventHandler<IllnessEventArgs>? IllnessChanged;
+
+    /// <summary>
     /// Creates a new SimulationService with required dependencies.
     /// </summary>
     /// <param name="weightedRandomService">Service for weighted random event selection.</param>
-    /// <exception cref="ArgumentNullException">When weightedRandomService is null.</exception>
-    public SimulationService(IWeightedRandomService weightedRandomService)
+    /// <param name="illnessManagerService">Service for managing mental illness lifecycle.</param>
+    /// <exception cref="ArgumentNullException">When any required service is null.</exception>
+    public SimulationService(
+        IWeightedRandomService weightedRandomService,
+        IIllnessManagerService illnessManagerService)
     {
         _weightedRandomService = weightedRandomService ?? throw new ArgumentNullException(nameof(weightedRandomService));
+        _illnessManagerService = illnessManagerService ?? throw new ArgumentNullException(nameof(illnessManagerService));
         _eventEngine = new EventEngine();
+
+        _illnessManagerService.IllnessChanged += OnIllnessChanged;
+    }
+
+    private void OnIllnessChanged(object? sender, IllnessEventArgs e)
+    {
+        IllnessChanged?.Invoke(this, e);
     }
 
     /// <inheritdoc />
@@ -56,6 +73,9 @@ public sealed class SimulationService : ISimulationService
             ProcessGenericEvents(events.GenericEvents, state);
             ProcessPersonalEvents(events.PersonalEvents, state);
             ProcessCopingMechanisms(copingMechanisms, state);
+
+            // Process illness triggers and healing after all events
+            _illnessManagerService.ProcessIllnessStep(state);
 
             AdvanceAge(state);
         }, cancellationToken);
@@ -115,11 +135,21 @@ public sealed class SimulationService : ISimulationService
 
     /// <summary>
     /// Applies a life event's effects to the simulation state and raises the EventOccurred event.
+    /// Effects are modified by any active mental illness debuffs.
     /// </summary>
     private void ApplyEvent(LifeEvent lifeEvent, SimulationState state)
     {
-        _eventEngine.ApplyEffects(state, lifeEvent);
+        // Apply debuffs from active illnesses
+        var debuffedEffects = _illnessManagerService.ApplyDebuffs(state, lifeEvent);
+        _eventEngine.ApplyEffectsWithDebuffs(state, debuffedEffects);
+
         state.EventHistory.Add(lifeEvent.Id);
+
+        // Track traumatic events with current age for PTSD/trauma-related illness triggers
+        if (lifeEvent.IsTraumatic)
+        {
+            state.TraumaticEventAges.Add(state.CurrentAge);
+        }
 
         EventOccurred?.Invoke(this, new SimulationEventArgs(lifeEvent, state));
     }

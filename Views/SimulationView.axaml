@@ -144,7 +144,7 @@
         </Grid>
 
         <!-- Main Content Area -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="{StaticResource Brush.BackdropGradient}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350"/>
                 <ColumnDefinition Width="*"/>

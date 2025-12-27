@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimulationFIN31.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
-    <Grid Background="{StaticResource Brush.AppBackground}">
+    <Grid Background="{StaticResource Brush.BackdropGradient}">
         <Rectangle Fill="{StaticResource Brush.BackdropGradient}" />
 
         <Grid Margin="48">

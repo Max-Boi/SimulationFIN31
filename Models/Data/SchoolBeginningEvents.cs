@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using SimulationFIN31.Models.Enums;
 using SimulationFIN31.Models.EventTypes;
 using SimulationFIN31.Models.structs;
 
@@ -21,12 +22,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_best_friend",
-            Name = "Best Friend Bond Formed",
-            Description = "Child forms a close best friend relationship with mutual trust and support.",
+            Name = "Beste Freundschaft geknüpft",
+            Description = "Das Kind entwickelt eine enge Freundschaft mit gegenseitigem Vertrauen und Unterstützung.",
+            VisualCategory = VisualCategory.Social,
             BaseProbability = 0.60,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -10,
             MoodImpact = 15,
             SocialBelongingImpact = 18,
@@ -44,12 +47,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_academic_achievement",
-            Name = "Academic Achievement",
-            Description = "Child achieves notable academic success, building confidence in learning.",
+            Name = "Schulischer Erfolg",
+            Description = "Das Kind erzielt bemerkenswerte schulische Leistungen und gewinnt Selbstvertrauen beim Lernen.",
+            VisualCategory = VisualCategory.Achievement,
             BaseProbability = 0.45,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 12,
             SocialBelongingImpact = 5,
@@ -68,12 +73,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_sports_talent",
-            Name = "Athletic Talent Discovered",
-            Description = "Child shows natural athletic ability and enjoys physical activities.",
+            Name = "Sportliches Talent entdeckt",
+            Description = "Das Kind zeigt natürliche sportliche Fähigkeiten und findet Freude an körperlichen Aktivitäten.",
+            VisualCategory = VisualCategory.Sports,
             BaseProbability = 0.35,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 12,
             SocialBelongingImpact = 10,
@@ -92,12 +99,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_team_membership",
-            Name = "Team or Group Membership",
-            Description = "Child joins a team or group activity, learning cooperation and belonging.",
+            Name = "Team- oder Gruppenmitgliedschaft",
+            Description = "Das Kind tritt einem Team oder einer Gruppe bei und lernt Zusammenarbeit und Zugehörigkeit.",
+            VisualCategory = VisualCategory.Social,
             BaseProbability = 0.50,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -3,
             MoodImpact = 10,
             SocialBelongingImpact = 15,
@@ -116,12 +125,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_leadership_role",
-            Name = "Leadership Role Taken",
-            Description = "Child takes on a leadership role among peers (class representative, team captain).",
+            Name = "Führungsrolle übernommen",
+            Description = "Das Kind übernimmt eine Führungsrolle unter Gleichaltrigen (Klassensprecher, Mannschaftskapitän).",
+            VisualCategory = VisualCategory.Achievement,
             BaseProbability = 0.20,
             MinAge = 8,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 5,
             MoodImpact = 12,
             SocialBelongingImpact = 12,
@@ -141,12 +152,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_bullying_victim",
-            Name = "Bullying Experience",
-            Description = "Child experiences bullying from peers, causing emotional distress.",
+            Name = "Mobbing-Erfahrung",
+            Description = "Das Kind wird von Mitschülern gemobbt, was zu emotionaler Belastung führt.",
+            VisualCategory = VisualCategory.Trauma,
             BaseProbability = 0.30,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = true,
             StressImpact = 30,
             MoodImpact = -30,
             SocialBelongingImpact = -28,
@@ -167,12 +180,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_learning_difficulty",
-            Name = "Learning Difficulty Identified",
-            Description = "A learning difference is identified, requiring additional support.",
+            Name = "Lernschwierigkeit festgestellt",
+            Description = "Eine Lernbesonderheit wird identifiziert und erfordert zusätzliche Unterstützung.",
+            VisualCategory = VisualCategory.Education,
             BaseProbability = 0.15,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = 9,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 20,
             MoodImpact = -18,
             SocialBelongingImpact = -15,
@@ -191,12 +206,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_social_rejection",
-            Name = "Social Rejection Experience",
-            Description = "Child experiences exclusion or rejection from peer group.",
+            Name = "Soziale Ablehnung erlebt",
+            Description = "Das Kind erfährt Ausgrenzung oder Ablehnung durch die Gruppe der Gleichaltrigen.",
+            VisualCategory = VisualCategory.Social,
             BaseProbability = 0.35,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 22,
             MoodImpact = -22,
             SocialBelongingImpact = -25,
@@ -217,12 +234,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_hobby_discovery",
-            Name = "Meaningful Hobby Discovered",
-            Description = "Child discovers a hobby that provides joy and a sense of accomplishment.",
+            Name = "Sinnvolles Hobby entdeckt",
+            Description = "Das Kind entdeckt ein Hobby, das Freude und Erfolgserlebnisse vermittelt.",
+            VisualCategory = VisualCategory.Leisure,
             BaseProbability = 0.55,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 12,
             SocialBelongingImpact = 5,
@@ -241,12 +260,14 @@ public static class SchoolBeginningEvents
         new PersonalEvent
         {
             Id = "school_custody_adjustment",
-            Name = "Custody Arrangement Adjustment",
-            Description = "Child adjusts to living arrangements following parents' separation.",
+            Name = "Umgang mit Sorgerechtsregelung",
+            Description = "Das Kind passt sich nach der Trennung der Eltern an die neuen Lebensumstände an.",
+            VisualCategory = VisualCategory.Trauma,
             BaseProbability = 0.80,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = true,
+            IsTraumatic = true,
             StressImpact = 25,
             MoodImpact = -22,
             SocialBelongingImpact = -20,
@@ -277,12 +298,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_field_trip",
-            Name = "School Field Trip",
-            Description = "Class participates in an educational field trip.",
+            Name = "Schulausflug",
+            Description = "Die Klasse nimmt an einem lehrreichen Ausflug teil.",
             BaseProbability = 0.65,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 12,
             SocialBelongingImpact = 8,
@@ -298,12 +320,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_first_day",
-            Name = "First Day of Primary School",
-            Description = "Child experiences the milestone of starting primary school.",
+            Name = "Erster Schultag",
+            Description = "Das Kind erlebt den Meilenstein des ersten Grundschultags.",
             BaseProbability = 0.95,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = 7,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 12,
             MoodImpact = 5,
             SocialBelongingImpact = 5,
@@ -320,12 +343,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_teacher_positive",
-            Name = "Positive Teacher Relationship",
-            Description = "Child develops a positive relationship with an encouraging teacher.",
+            Name = "Positive Lehrerbeziehung",
+            Description = "Das Kind entwickelt eine positive Beziehung zu einer ermutigenden Lehrkraft.",
             BaseProbability = 0.50,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 12,
             SocialBelongingImpact = 10,
@@ -342,12 +366,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_extracurricular_success",
-            Name = "Extracurricular Achievement",
-            Description = "Child achieves recognition in music, art, or other extracurricular activity.",
+            Name = "Außerschulischer Erfolg",
+            Description = "Das Kind erhält Anerkennung in Musik, Kunst oder anderen außerschulischen Aktivitäten.",
             BaseProbability = 0.30,
             MinAge = 7,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 15,
             SocialBelongingImpact = 10,
@@ -364,12 +389,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_family_financial_stress",
-            Name = "Family Financial Stress",
-            Description = "Family experiences period of financial difficulty affecting daily life.",
+            Name = "Finanzielle Belastung Familie",
+            Description = "Die Familie durchlebt eine Phase finanzieller Schwierigkeiten, die den Alltag beeinträchtigen.",
             BaseProbability = 0.25,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 15,
             MoodImpact = -10,
             SocialBelongingImpact = -5,
@@ -386,12 +412,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_summer_camp",
-            Name = "Summer Camp Experience",
-            Description = "Child attends summer camp, developing independence and social skills.",
+            Name = "Ferienlager-Erlebnis",
+            Description = "Das Kind besucht ein Ferienlager und entwickelt Selbstständigkeit sowie soziale Kompetenzen.",
             BaseProbability = 0.35,
             MinAge = 7,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 3,
             MoodImpact = 12,
             SocialBelongingImpact = 12,
@@ -408,12 +435,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_natural_disaster",
-            Name = "Natural Disaster Impact",
-            Description = "Community experiences a natural disaster affecting daily life.",
+            Name = "Naturkatastrophe erlebt",
+            Description = "Die Gemeinschaft erlebt eine Naturkatastrophe, die den Alltag beeinträchtigt.",
             BaseProbability = 0.08,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = true,
             StressImpact = 25,
             MoodImpact = -15,
             SocialBelongingImpact = 5,
@@ -428,12 +456,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_technology_access",
-            Name = "Technology Access Gained",
-            Description = "Child gains access to personal technology (tablet, computer) for learning.",
+            Name = "Zugang zu Technologie",
+            Description = "Das Kind erhält Zugang zu persönlicher Technologie (Tablet, Computer) zum Lernen.",
             BaseProbability = 0.60,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -3,
             MoodImpact = 8,
             SocialBelongingImpact = 5,
@@ -448,12 +477,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_grandparent_loss",
-            Name = "Loss of Grandparent",
-            Description = "Child experiences the death of a grandparent, confronting mortality.",
+            Name = "Verlust eines Großelternteils",
+            Description = "Das Kind erlebt den Tod eines Großelternteils und wird mit Sterblichkeit konfrontiert.",
             BaseProbability = 0.20,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = true,
+            IsTraumatic = true,
             StressImpact = 20,
             MoodImpact = -18,
             SocialBelongingImpact = 5,
@@ -467,12 +497,13 @@ public static class SchoolBeginningEvents
         new GenericEvent
         {
             Id = "school_birthday_celebration",
-            Name = "Memorable Birthday Celebration",
-            Description = "Child has a particularly memorable and joyful birthday celebration.",
+            Name = "Unvergessliche Geburtstagsfeier",
+            Description = "Das Kind erlebt eine besonders schöne und freudige Geburtstagsfeier.",
             BaseProbability = 0.40,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 15,
             SocialBelongingImpact = 12,

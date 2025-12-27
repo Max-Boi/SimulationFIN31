@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using SimulationFIN31.Models.Enums;
 using SimulationFIN31.Models.EventTypes;
 using SimulationFIN31.Models.structs;
 
@@ -21,12 +22,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_first_romance",
-            Name = "First Romantic Relationship",
-            Description = "Teen experiences first romantic relationship, exploring emotional intimacy.",
+            Name = "Erste romantische Beziehung",
+            Description = "Teenager erlebt erste romantische Beziehung und erkundet emotionale Intimität.",
             BaseProbability = 0.65,
             MinAge = 13,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 5,
             MoodImpact = 15,
             SocialBelongingImpact = 12,
@@ -34,6 +36,7 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             AnxietyChange = 5,
             SocialEnergyChange = 8,
+            VisualCategory = VisualCategory.Romance,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
@@ -45,12 +48,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_strong_academics",
-            Name = "Strong Academic Performance",
-            Description = "Teen achieves consistently strong academic results, building future opportunities.",
+            Name = "Starke schulische Leistungen",
+            Description = "Teenager erzielt durchgehend starke schulische Ergebnisse und schafft Zukunftschancen.",
             BaseProbability = 0.35,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 12,
             SocialBelongingImpact = 5,
@@ -58,6 +62,7 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             AnxietyChange = -5,
             SocialEnergyChange = 0,
+            VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 3.0),
@@ -70,12 +75,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_identity_exploration",
-            Name = "Identity Exploration Phase",
-            Description = "Teen actively explores personal identity, values, and beliefs.",
+            Name = "Identitätsfindungsphase",
+            Description = "Teenager erforscht aktiv die eigene Identität, Werte und Überzeugungen.",
             BaseProbability = 0.75,
             MinAge = 13,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 8,
             MoodImpact = 5,
             SocialBelongingImpact = 5,
@@ -83,6 +89,7 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             AnxietyChange = 8,
             SocialEnergyChange = 5,
+            VisualCategory = VisualCategory.Identity,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 1.8),
@@ -94,12 +101,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_leadership_school",
-            Name = "School Leadership Position",
-            Description = "Teen elected or appointed to significant school leadership role.",
+            Name = "Führungsposition in der Schule",
+            Description = "Teenager wird in bedeutende schulische Führungsrolle gewählt oder ernannt.",
             BaseProbability = 0.15,
             MinAge = 14,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 8,
             MoodImpact = 15,
             SocialBelongingImpact = 15,
@@ -107,6 +115,7 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             AnxietyChange = 5,
             SocialEnergyChange = 10,
+            VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 2.5),
@@ -119,12 +128,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_creative_expression",
-            Name = "Creative Expression Flourishes",
-            Description = "Teen develops strong creative outlet (music, art, writing) for self-expression.",
+            Name = "Kreative Entfaltung",
+            Description = "Teenager entwickelt starkes kreatives Ventil (Musik, Kunst, Schreiben) zur Selbstentfaltung.",
             BaseProbability = 0.40,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -10,
             MoodImpact = 15,
             SocialBelongingImpact = 8,
@@ -132,6 +142,7 @@ public static class AdolescenceEvents
             HealthImpact = 0,
             AnxietyChange = -8,
             SocialEnergyChange = 5,
+            VisualCategory = VisualCategory.Creativity,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 1.8),
@@ -143,12 +154,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_heartbreak",
-            Name = "First Heartbreak",
-            Description = "Teen experiences end of romantic relationship, learning about loss.",
+            Name = "Erster Liebeskummer",
+            Description = "Teenager erlebt das Ende einer romantischen Beziehung und lernt mit Verlust umzugehen.",
             BaseProbability = 0.70,
             MinAge = 14,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = true,
             StressImpact = 25,
             MoodImpact = -28,
             SocialBelongingImpact = -18,
@@ -156,6 +168,7 @@ public static class AdolescenceEvents
             HealthImpact = -5,
             AnxietyChange = 28,
             SocialEnergyChange = -20,
+            VisualCategory = VisualCategory.Romance,
             Prerequisites = ["adolescence_first_romance"],
             InfluenceFactors =
             [
@@ -167,12 +180,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_peer_pressure",
-            Name = "Significant Peer Pressure Experience",
-            Description = "Teen faces intense peer pressure regarding risk behaviors.",
+            Name = "Starker Gruppenzwang",
+            Description = "Teenager erlebt intensiven Gruppenzwang bezüglich riskanter Verhaltensweisen.",
             BaseProbability = 0.55,
             MinAge = 13,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 22,
             MoodImpact = -15,
             SocialBelongingImpact = -8,
@@ -180,6 +194,7 @@ public static class AdolescenceEvents
             HealthImpact = -8,
             AnxietyChange = 18,
             SocialEnergyChange = -5,
+            VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
@@ -192,12 +207,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_mental_health_struggle",
-            Name = "Mental Health Difficulties",
-            Description = "Teen experiences significant anxiety or depression symptoms.",
+            Name = "Psychische Belastungen",
+            Description = "Teenager erlebt erhebliche Angst- oder Depressionssymptome.",
             BaseProbability = 0.3,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = true,
             StressImpact = 32,
             MoodImpact = -38,
             SocialBelongingImpact = -28,
@@ -205,6 +221,7 @@ public static class AdolescenceEvents
             HealthImpact = -15,
             AnxietyChange = 35,
             SocialEnergyChange = -25,
+            VisualCategory = VisualCategory.MentalHealth,
             InfluenceFactors =
             [
                 new InfluenceFactor("AnxietyLevel", 4.0),
@@ -218,12 +235,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_sports_achievement",
-            Name = "Significant Sports Achievement",
-            Description = "Teen achieves notable success in competitive sports.",
+            Name = "Bedeutender sportlicher Erfolg",
+            Description = "Teenager erzielt bemerkenswerte Erfolge im Wettkampfsport.",
             BaseProbability = 0.20,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 18,
             SocialBelongingImpact = 15,
@@ -231,6 +249,7 @@ public static class AdolescenceEvents
             HealthImpact = 10,
             AnxietyChange = -8,
             SocialEnergyChange = 10,
+            VisualCategory = VisualCategory.Sports,
             Prerequisites = ["school_sports_talent"],
             InfluenceFactors =
             [
@@ -243,12 +262,13 @@ public static class AdolescenceEvents
         new PersonalEvent
         {
             Id = "adolescence_online_harassment",
-            Name = "Online Harassment Experience",
-            Description = "Teen experiences cyberbullying or online harassment.",
+            Name = "Online-Belästigung",
+            Description = "Teenager erlebt Cybermobbing oder Online-Belästigung.",
             BaseProbability = 0.35,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = true,
             StressImpact = 28,
             MoodImpact = -28,
             SocialBelongingImpact = -25,
@@ -256,6 +276,7 @@ public static class AdolescenceEvents
             HealthImpact = -8,
             AnxietyChange = 28,
             SocialEnergyChange = -20,
+            VisualCategory = VisualCategory.Trauma,
             Prerequisites = ["school_technology_access"],
             InfluenceFactors =
             [
@@ -281,12 +302,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_high_school_start",
-            Name = "High School Transition",
-            Description = "Teen transitions to high school, navigating new social dynamics.",
+            Name = "Übergang zur weiterführenden Schule",
+            Description = "Teenager wechselt zur weiterführenden Schule und meistert neue soziale Dynamiken.",
             BaseProbability = 0.95,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = 14,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 15,
             MoodImpact = 5,
             SocialBelongingImpact = -5,
@@ -303,12 +325,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_first_job",
-            Name = "First Part-Time Job",
-            Description = "Teen gets first part-time job, learning responsibility and earning independence.",
+            Name = "Erster Nebenjob",
+            Description = "Teenager bekommt ersten Nebenjob und lernt Verantwortung sowie Unabhängigkeit.",
             BaseProbability = 0.45,
             MinAge = 15,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = 8,
             MoodImpact = 10,
             SocialBelongingImpact = 8,
@@ -325,12 +348,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_drivers_license",
-            Name = "Driver's License Obtained",
-            Description = "Teen earns driver's license, gaining significant independence.",
+            Name = "Führerschein erworben",
+            Description = "Teenager macht Führerschein und gewinnt erhebliche Unabhängigkeit.",
             BaseProbability = 0.60,
             MinAge = 16,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 15,
             SocialBelongingImpact = 10,
@@ -346,12 +370,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_graduation",
-            Name = "High School Graduation",
-            Description = "Teen graduates from high school, marking major life transition.",
+            Name = "Schulabschluss",
+            Description = "Teenager schließt die Schule ab und erreicht einen wichtigen Lebensübergang.",
             BaseProbability = 0.85,
             MinAge = 17,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -10,
             MoodImpact = 20,
             SocialBelongingImpact = 15,
@@ -368,12 +393,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_family_illness",
-            Name = "Family Member Serious Illness",
-            Description = "Close family member experiences serious illness.",
+            Name = "Schwere Erkrankung in Familie",
+            Description = "Nahes Familienmitglied erleidet schwere Erkrankung.",
             BaseProbability = 0.23,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 22,
             MoodImpact = -15,
             SocialBelongingImpact = 5,
@@ -389,12 +415,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_volunteer_work",
-            Name = "Volunteer Work Experience",
-            Description = "Teen participates in meaningful volunteer work.",
+            Name = "Freiwilligenarbeit",
+            Description = "Teenager engagiert sich in bedeutungsvoller Freiwilligenarbeit.",
             BaseProbability = 0.35,
             MinAge = 14,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -5,
             MoodImpact = 12,
             SocialBelongingImpact = 15,
@@ -411,12 +438,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_travel_opportunity",
-            Name = "Significant Travel Experience",
-            Description = "Teen has opportunity to travel, broadening perspective.",
+            Name = "Bedeutende Reiseerfahrung",
+            Description = "Teenager erhält Gelegenheit zu reisen und erweitert seinen Horizont.",
             BaseProbability = 0.30,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 15,
             SocialBelongingImpact = 8,
@@ -432,12 +460,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_economic_hardship",
-            Name = "Family Economic Hardship",
-            Description = "Family faces significant financial difficulties.",
+            Name = "Finanzielle Familienprobleme",
+            Description = "Familie kämpft mit erheblichen finanziellen Schwierigkeiten.",
             BaseProbability = 0.20,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = 20,
             MoodImpact = -12,
             SocialBelongingImpact = -8,
@@ -454,12 +483,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_mentorship",
-            Name = "Meaningful Mentorship",
-            Description = "Teen develops relationship with supportive mentor (teacher, coach, relative).",
+            Name = "Bedeutsame Mentorschaft",
+            Description = "Teenager entwickelt Beziehung zu unterstützendem Mentor (Lehrer, Trainer, Verwandter).",
             BaseProbability = 0.30,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
+            IsTraumatic = false,
             StressImpact = -10,
             MoodImpact = 15,
             SocialBelongingImpact = 12,
@@ -476,12 +506,13 @@ public static class AdolescenceEvents
         new GenericEvent
         {
             Id = "adolescence_community_recognition",
-            Name = "Community Recognition",
-            Description = "Teen receives recognition for contribution to community.",
+            Name = "Anerkennung durch Gemeinschaft",
+            Description = "Teenager erhält Anerkennung für Beitrag zur Gemeinschaft.",
             BaseProbability = 0.15,
             MinAge = 14,
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
+            IsTraumatic = false,
             StressImpact = -8,
             MoodImpact = 18,
             SocialBelongingImpact = 15,

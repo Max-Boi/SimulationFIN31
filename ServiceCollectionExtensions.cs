@@ -27,6 +27,7 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IWeightedRandomService, WeightedRandomService>();
 
         // Simulation Services
+        collection.AddSingleton<IIllnessManagerService, IllnessManagerService>();
         collection.AddSingleton<ISimulationService, SimulationService>();
 
         collection.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));

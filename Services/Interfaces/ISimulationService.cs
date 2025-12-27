@@ -24,6 +24,11 @@ public interface ISimulationService
     event EventHandler<SimulationState>? StateUpdated;
 
     /// <summary>
+    /// Event raised when an illness state changes (onset or healing).
+    /// </summary>
+    event EventHandler<IllnessEventArgs>? IllnessChanged;
+
+    /// <summary>
     /// Runs a single simulation step, potentially triggering one or more events.
     /// </summary>
     /// <param name="state">The current simulation state to process.</param>
