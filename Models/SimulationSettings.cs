@@ -14,4 +14,5 @@ public record SimulationSettings
     public string ParentsRelationshipQuality { get; init; } = string.Empty;
     public int FamilyCloseness { get; init; }
     public string SocialEnergyLevel { get; init; } = string.Empty;
+    public string Gender { get; init; } = string.Empty;
 }

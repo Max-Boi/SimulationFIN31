@@ -26,26 +26,26 @@ public class FactorNormalizer : IFactorNormalizer
         "JobStatus" => MapJobStatus(profile.JobStatus),
         "Gender" => MapGender(profile.Gender),
         "SocialEnergyLevel" => MapSocialEnergyLevel(profile.SocialEnergyLevel),
-        
+        "ParentsRelationshipQuality" => MapParentsRelationshipQuality(profile.ParentsRelationshipQuality),
+
         // Integer 0-100 Werte (können bleiben)
         "AnxietyLevel" => profile.AnxietyLevel,
         "FamilyCloseness" => profile.FamilyCloseness,
         "SocialEnvironmentLevel" => profile.SocialEnvironmentLevel,
-        "ParentsRelationshipQuality" => profile.ParentsRelationshipQuality,
         "IntelligenceScore" => profile.IntelligenceScore,
-        
+
         // Boolean
         "HasAdhd" => profile.HasAdhd ? 1.0 : 0.0,
         "HasAutism" => profile.HasAutism ? 1.0 : 0.0,
         "ParentsWithAddiction" => profile.ParentsWithAddiction ? 1.0 : 0.0,
-        
+
         // Dynamische Zustände
         "CurrentStress" => profile.CurrentStress,
         "CurrentMood" => profile.CurrentMood,
         "SocialBelonging" => profile.SocialBelonging,
         "ResilienceScore" => profile.ResilienceScore,
         "PhysicalHealth" => profile.PhysicalHealth,
-        
+
         _ => 0.5 // Default fallback
     };
     
@@ -107,25 +107,36 @@ public class FactorNormalizer : IFactorNormalizer
         SocialEnergyLevel.StrongExtravert => 1.0,
         _ => 0.5
     };
-    
+
+    /// <summary>
+    /// ParentsRelationshipQuality: Conflictual=0.0, Neutral=0.5, Harmonious=1.0
+    /// Higher values represent better relationship quality (protective factor).
+    /// </summary>
+    private double MapParentsRelationshipQuality(ParentsRelationshipQuality quality) => quality switch
+    {
+        ParentsRelationshipQuality.Conflictual => 0.0,
+        ParentsRelationshipQuality.Neutral => 0.5,
+        ParentsRelationshipQuality.Harmonious => 1.0,
+        _ => 0.5
+    };
+
     private double NormalizeByType(double value, string factorName) => factorName switch
     {
         // Enums sind SCHON normalisiert durch Mapping
-        "IncomeLevel" or "ParentsEducationLevel" or "JobStatus" 
-        or "Gender" or "SocialEnergyLevel" => value,  // Direkt zurückgeben
-        
+        "IncomeLevel" or "ParentsEducationLevel" or "JobStatus"
+        or "Gender" or "SocialEnergyLevel" or "ParentsRelationshipQuality" => value,  // Direkt zurückgeben
+
         // 0-100 Skalen
         "AnxietyLevel" or "FamilyCloseness" or "SocialEnvironmentLevel"
-        or "ParentsRelationshipQuality" or "CurrentStress" 
-        or "SocialBelonging" or "ResilienceScore" or "PhysicalHealth" 
+        or "CurrentStress" or "SocialBelonging" or "ResilienceScore" or "PhysicalHealth"
             => value / 100.0,
-        
+
         // IQ (70-145 → 0-1)
         "IntelligenceScore" => (value - 70) / 75.0,
-        
+
         // Mood (-100 bis +100 → 0-1)
         "CurrentMood" => (value + 100) / 200.0,
-        
+
         // Boolean (already 0 or 1)
         _ => value
     };

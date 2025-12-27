@@ -562,8 +562,6 @@ public sealed class WeightedRandomServiceTests
             MaxAge = 100,
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(stressThreshold),
-            ShortTermRelief = 0.5,
-            LongTermImpactMultiplier = 1.0,
             IsHabitForming = false,
             InfluenceFactors = []
         };
@@ -581,7 +579,7 @@ public sealed class WeightedRandomServiceTests
             JobStatus = JobStatus.MediumPrestige,
             SocialEnvironmentLevel = 50,
             FamilyCloseness = 60,
-            ParentsRelationshipQuality = 70,
+            ParentsRelationshipQuality = ParentsRelationshipQuality.Harmonious,
             ParentsWithAddiction = false,
             HasAdhd = false,
             HasAutism = false,

@@ -23,7 +23,8 @@ public enum JobStatus
 public enum GenderType
 {
     Male,
-    Female
+    Female,
+    NonBinary
 }
 
 public enum SocialEnergyLevel
@@ -33,4 +34,11 @@ public enum SocialEnergyLevel
     Ambivert,
     Extravert,
     StrongExtravert
+}
+
+public enum ParentsRelationshipQuality
+{
+    Harmonious,
+    Neutral,
+    Conflictual
 }

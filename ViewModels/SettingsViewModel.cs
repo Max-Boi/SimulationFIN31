@@ -33,13 +33,13 @@ public partial class SettingsViewModel : ViewModelBase
         "\n\nHöhere Intelligenz und Extraversion fördern adaptive Bewältigungsstrategien, während " +
         "erhöhte Trait-Angst und introvertierte Tendenzen das Risiko für Angststörungen erhöhen können.";
 
-    private const int DefaultIncomeLevel = 4;
-    private const int DefaultParentsEducationLevel = 4;
-    private const int DefaultJobStatus = 4;
-    private const int DefaultSocialEnvironmentLevel = 50;
-    private const int DefaultIntelligenceScore = 50;
-    private const int DefaultAnxietyLevel = 40;
-    private const int DefaultFamilyCloseness = 50;
+    private const int DEFAULT_INCOME_LEVEL = 4;
+    private const int DEFAULT_PARENTS_EDUCATION_LEVEL = 4;
+    private const int DEFAULT_JOB_STATUS = 4;
+    private const int DEFAULT_SOCIAL_ENVIRONMENT_LEVEL = 50;
+    private const int DEFAULT_INTELLIGENCE_SCORE = 50;
+    private const int DEFAULT_ANXIETY_LEVEL = 40;
+    private const int DEFAULT_FAMILY_CLOSENESS = 50;
 
     private readonly INavigationService _navigationService;
     private static readonly string SettingsFilePath = Path.Combine(AppContext.BaseDirectory, "settings.json");
@@ -49,6 +49,13 @@ public partial class SettingsViewModel : ViewModelBase
         "harmonisch",
         "neutral",
         "konfliktgeladen"
+    ];
+    
+    private readonly IReadOnlyList<string> _genderOptions =
+    [
+        "Männlich",
+        "Weiblich",
+        "Non-Binär"
     ];
 
     private readonly IReadOnlyList<string> _socialEnergyOptions =
@@ -62,18 +69,20 @@ public partial class SettingsViewModel : ViewModelBase
 
     public IReadOnlyList<string> ParentsRelationshipOptions => _parentsRelationshipOptions;
     public IReadOnlyList<string> SocialEnergyOptions => _socialEnergyOptions;
+    
+    public IReadOnlyList<string> GenderOptions => _genderOptions;
 
     [ObservableProperty]
-    private int _incomeLevel = DefaultIncomeLevel;
+    private int _incomeLevel = DEFAULT_INCOME_LEVEL;
 
     [ObservableProperty]
-    private int _parentsEducationLevel = DefaultParentsEducationLevel;
+    private int _parentsEducationLevel = DEFAULT_PARENTS_EDUCATION_LEVEL;
 
     [ObservableProperty]
-    private int _jobStatus = DefaultJobStatus;
+    private int _jobStatus = DEFAULT_JOB_STATUS;
 
     [ObservableProperty]
-    private int _socialEnvironmentLevel = DefaultSocialEnvironmentLevel;
+    private int _socialEnvironmentLevel = DEFAULT_SOCIAL_ENVIRONMENT_LEVEL;
 
     [ObservableProperty]
     private bool _hasAdhd;
@@ -85,16 +94,19 @@ public partial class SettingsViewModel : ViewModelBase
     private bool _parentsWithAddiction;
 
     [ObservableProperty]
-    private int _intelligenceScore = DefaultIntelligenceScore;
+    private int _intelligenceScore = DEFAULT_INTELLIGENCE_SCORE;
 
     [ObservableProperty]
-    private int _anxietyLevel = DefaultAnxietyLevel;
+    private int _anxietyLevel = DEFAULT_ANXIETY_LEVEL;
 
     [ObservableProperty]
     private string _parentsRelationshipQuality;
+    
+    [ObservableProperty]
+    private string _gender;
 
     [ObservableProperty]
-    private int _familyCloseness = DefaultFamilyCloseness;
+    private int _familyCloseness = DEFAULT_FAMILY_CLOSENESS;
 
     [ObservableProperty]
     private string _socialEnergyLevel;
@@ -124,7 +136,8 @@ public partial class SettingsViewModel : ViewModelBase
             AnxietyLevel = AnxietyLevel,
             ParentsRelationshipQuality = ParentsRelationshipQuality,
             FamilyCloseness = FamilyCloseness,
-            SocialEnergyLevel = SocialEnergyLevel
+            SocialEnergyLevel = SocialEnergyLevel,
+            Gender = Gender
         };
 
         var json = JsonSerializer.Serialize(settings, new JsonSerializerOptions
@@ -142,18 +155,19 @@ public partial class SettingsViewModel : ViewModelBase
     [RelayCommand]
     public void ResetSettings()
     {
-        IncomeLevel = DefaultIncomeLevel;
-        ParentsEducationLevel = DefaultParentsEducationLevel;
-        JobStatus = DefaultJobStatus;
-        SocialEnvironmentLevel = DefaultSocialEnvironmentLevel;
+        IncomeLevel = DEFAULT_INCOME_LEVEL;
+        ParentsEducationLevel = DEFAULT_PARENTS_EDUCATION_LEVEL;
+        JobStatus = DEFAULT_JOB_STATUS;
+        SocialEnvironmentLevel = DEFAULT_SOCIAL_ENVIRONMENT_LEVEL;
         HasAdhd = false;
         HasAutism = false;
         ParentsWithAddiction = false;
-        IntelligenceScore = DefaultIntelligenceScore;
-        AnxietyLevel = DefaultAnxietyLevel;
+        IntelligenceScore = DEFAULT_INTELLIGENCE_SCORE;
+        AnxietyLevel = DEFAULT_ANXIETY_LEVEL;
         ParentsRelationshipQuality = _parentsRelationshipOptions[1];
-        FamilyCloseness = DefaultFamilyCloseness;
+        FamilyCloseness = DEFAULT_FAMILY_CLOSENESS;
         SocialEnergyLevel = _socialEnergyOptions[2];
+        Gender= _genderOptions[0];
 
         ResetSettingsFile();
     }
@@ -163,6 +177,7 @@ public partial class SettingsViewModel : ViewModelBase
 
         _socialEnergyLevel = _socialEnergyOptions[2];
         _parentsRelationshipQuality = _parentsRelationshipOptions[1];
+        _gender = _genderOptions[0];
 
         RegisterCleanup();
     }

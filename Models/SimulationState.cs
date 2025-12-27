@@ -14,8 +14,8 @@ public class SimulationState
     public int SocialEnvironmentLevel { get; set; } 
         
     // Familiäres Milieu
-    public int FamilyCloseness { get; set; } 
-    public int ParentsRelationshipQuality { get; set; } 
+    public int FamilyCloseness { get; set; }
+    public ParentsRelationshipQuality ParentsRelationshipQuality { get; set; }
     public bool ParentsWithAddiction { get; set; }
         
     // Individuelle Neurobiologie

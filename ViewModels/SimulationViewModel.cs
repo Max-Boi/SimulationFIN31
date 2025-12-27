@@ -1,5 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -323,31 +325,97 @@ public partial class SimulationViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Creates the initial simulation state with balanced starting values.
+    /// Creates initial simulation state by loading user settings from settings.json.
+    /// Falls back to sensible defaults if settings file doesn't exist.
     /// </summary>
-    private static SimulationState CreateInitialState() => new()
+    private static SimulationState CreateInitialState()
     {
-        CurrentAge = 0,
-        LifePhase = LifePhase.Childhood,
-        CurrentStress = 20,
-        CurrentMood = 0,
-        SocialBelonging = 50,
-        ResilienceScore = 50,
-        PhysicalHealth = 100,
-        IncomeLevel = IncomeLevel.Medium,
-        ParentsEducationLevel = ParentsEducationLevel.Medium,
-        JobStatus = JobStatus.MediumPrestige,
-        SocialEnvironmentLevel = 50,
-        FamilyCloseness = 60,
-        ParentsRelationshipQuality = 60,
-        ParentsWithAddiction = false,
-        HasAdhd = false,
-        HasAutism = false,
-        IntelligenceScore = 100,
-        AnxietyLevel = 30,
-        SocialEnergyLevel = SocialEnergyLevel.Ambivert,
-        Gender = GenderType.Female
-    };
+        var settings = LoadSettings();
+
+        return new SimulationState
+        {
+            CurrentAge = 0,
+            LifePhase = LifePhase.Childhood,
+            CurrentStress = 20,
+            CurrentMood = 0,
+            SocialBelonging = 50,
+            ResilienceScore = 50,
+            PhysicalHealth = 100,
+
+            // Load from user settings
+            IncomeLevel = EnumConverter.MapIncomeLevel(settings.IncomeLevel),
+            ParentsEducationLevel = EnumConverter.MapParentsEducationLevel(settings.ParentsEducationLevel),
+            JobStatus = EnumConverter.MapJobStatus(settings.JobStatus),
+            SocialEnvironmentLevel = settings.SocialEnvironmentLevel,
+            FamilyCloseness = settings.FamilyCloseness,
+            ParentsRelationshipQuality = EnumConverter.ToParentsRelationshipQuality(settings.ParentsRelationshipQuality),
+            ParentsWithAddiction = settings.ParentsWithAddiction,
+            HasAdhd = settings.HasAdhd,
+            HasAutism = settings.HasAutism,
+            IntelligenceScore = settings.IntelligenceScore,
+            AnxietyLevel = settings.AnxietyLevel,
+            SocialEnergyLevel = EnumConverter.ToSocialEnergyLevel(settings.SocialEnergyLevel),
+            Gender = EnumConverter.ToGenderType(settings.Gender)
+        };
+    }
+
+    /// <summary>
+    /// Loads simulation settings from settings.json file.
+    /// Returns default settings if file doesn't exist.
+    /// </summary>
+    private static SimulationSettings LoadSettings()
+    {
+        var settingsPath = Path.Combine(AppContext.BaseDirectory, "settings.json");
+
+        if (!File.Exists(settingsPath))
+        {
+            // Return defaults matching SettingsViewModel defaults
+            return new SimulationSettings
+            {
+                IncomeLevel = 4,
+                ParentsEducationLevel = 4,
+                JobStatus = 4,
+                SocialEnvironmentLevel = 50,
+                FamilyCloseness = 50,
+                ParentsRelationshipQuality = "neutral",
+                HasAdhd = false,
+                HasAutism = false,
+                ParentsWithAddiction = false,
+                IntelligenceScore = 50,
+                AnxietyLevel = 40,
+                SocialEnergyLevel = "Ambivertiert",
+                Gender = "Männlich"
+            };
+        }
+
+        try
+        {
+            var json = File.ReadAllText(settingsPath);
+            return JsonSerializer.Deserialize<SimulationSettings>(json)
+                   ?? throw new InvalidOperationException("Settings deserialization returned null");
+        }
+        catch (Exception ex)
+        {
+            // Log error and return defaults (in production, use proper logging)
+            System.Diagnostics.Debug.WriteLine($"Failed to load settings: {ex.Message}");
+            return new SimulationSettings
+            {
+                IncomeLevel = 4,
+                ParentsEducationLevel = 4,
+                JobStatus = 4,
+                SocialEnvironmentLevel = 50,
+                FamilyCloseness = 50,
+                ParentsRelationshipQuality = "neutral",
+                HasAdhd = false,
+                HasAutism = false,
+                ParentsWithAddiction = false,
+                IntelligenceScore = 50,
+                AnxietyLevel = 40,
+                SocialEnergyLevel = "Ambivertiert",
+                Gender = "Männlich"
+            };
+        }
+    }
 
     /// <summary>
     /// Gets a human-readable display name for the life phase.

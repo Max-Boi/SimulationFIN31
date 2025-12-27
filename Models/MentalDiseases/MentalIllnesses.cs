@@ -14,7 +14,7 @@ public static class MentalIllnesses
             StressDebuff = 1.05,
             MoodDebuff = 0.92,
             SocialProximityDebuff = 0.95,
-            TriggerChance = 4,
+            TriggerChance = 6,
             HealingTime = 2,
             MinAge = 10               // Kann ab später Kindheit auftreten
         },
@@ -27,8 +27,8 @@ public static class MentalIllnesses
             StressDebuff = 1.15,
             MoodDebuff = 0.88,
             SocialProximityDebuff = 0.92,
-            TriggerChance = 6,
-            HealingTime = 8,
+            TriggerChance = 2,
+            HealingTime = 3,
             MinAge = 8                // Kann bereits in Kindheit beginnen
         },
 
@@ -38,7 +38,7 @@ public static class MentalIllnesses
             StressDebuff = 1.10,
             MoodDebuff = 0.90,
             SocialProximityDebuff = 0.75,
-            TriggerChance = 6,
+            TriggerChance = 10,
             HealingTime = 8,
             MinAge = 10               // Typischerweise ab Schulbeginn
         },
@@ -75,8 +75,8 @@ public static class MentalIllnesses
             StressDebuff = 1.05,
             MoodDebuff = 0.82,
             SocialProximityDebuff = 0.80,
-            TriggerChance = 12,
-            HealingTime = 10,
+            TriggerChance = 5,
+            HealingTime = 8,
             MinAge = 14               // Erfordert Zugang zu Alkohol
         },
 
@@ -87,7 +87,7 @@ public static class MentalIllnesses
             MoodDebuff = 0.80,
             SocialProximityDebuff = 0.78,
             TriggerChance = 10,
-            HealingTime = 12,
+            HealingTime = 9,
             MinAge = 14               // Typischerweise ab Adoleszenz
         },
 
@@ -121,7 +121,7 @@ public static class MentalIllnesses
             StressDebuff = 1.12,
             MoodDebuff = 0.88,
             SocialProximityDebuff = 0.90,
-            TriggerChance = 5,
+            TriggerChance = 6,
             HealingTime = 8,
             MinAge = 10               // Kann früher auftreten als andere Essstörungen
         },
@@ -171,7 +171,7 @@ public static class MentalIllnesses
             StressDebuff = 1.25,
             MoodDebuff = 0.80,
             SocialProximityDebuff = 0.82,
-            TriggerChance = 8,
+            TriggerChance = 16,
             HealingTime = 16,
             MinAge = 5                // Kann nach frühem Trauma auftreten
         }

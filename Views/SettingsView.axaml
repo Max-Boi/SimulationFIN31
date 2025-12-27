@@ -18,7 +18,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
@@ -30,6 +30,7 @@
                 <TextBlock Grid.Column="1"
                            Text="Einstellungen"
                            FontSize="26"
+                           Margin="9 0 9 0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontWeight="SemiBold"/>
@@ -46,10 +47,6 @@
                                 </StackPanel>
                             </Button.Content>
                         </Button>
-                        <TextBlock Text="Gespeichert!"
-                                   IsVisible="{Binding ShowSaveConfirmation}"
-                                   HorizontalAlignment="Center"
-                                   Foreground="{DynamicResource TextSecondaryBrush}"/>
                     </StackPanel>
                     <Button  Content="Einstellungen zurücksetzen"
                              Classes="Glass"
@@ -99,7 +96,7 @@
                     <Border Classes="SettingsCard">
                         <StackPanel Spacing="12">
                             <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                                <TextBlock Text="Familie und Umfeld" FontSize="18" FontWeight="SemiBold"/>
+                                <TextBlock Text="Soziales Umfeld, Elternhaus, und Genetik" FontSize="18" FontWeight="SemiBold"/>
 
                                 <Border Background="LightGray"
                                         CornerRadius="10"
@@ -113,29 +110,35 @@
                                 </Border>
                             </StackPanel>
                             <StackPanel Spacing="8">
-                                <TextBlock Text="Soziales Umfeld"/>
+                                <TextBlock Text="Nähe zum sozialen Umfeld"/>
                                 <Slider Minimum="0" Maximum="100" Value="{Binding SocialEnvironmentLevel}" TickFrequency="1" IsSnapToTickEnabled="True"/>
                                 <TextBlock Text="{Binding SocialEnvironmentLevel, StringFormat='Aktueller Wert: {0}'}"/>
-
-                                <TextBlock Text="Beziehungsqualität der Eltern" Margin="0,8,0,0"/>
-                                <ComboBox ItemsSource="{Binding ParentsRelationshipOptions}"
-                                          SelectedItem="{Binding ParentsRelationshipQuality}"
-                                          Classes="Glass"/>
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <TextBlock Text="Beziehungsqualität der Eltern" Margin="0,8,0,0"/>
+                                    <ComboBox ItemsSource="{Binding ParentsRelationshipOptions}"
+                                              SelectedItem="{Binding ParentsRelationshipQuality}"
+                                              Classes="Glass"/>
+                                    <TextBlock Text="Geschlecht" Margin="0,8,0,0"/>
+                                    <ComboBox ItemsSource="{Binding GenderOptions}"
+                                              SelectedItem="{Binding Gender}"
+                                              Classes="Glass"/>
+                                </StackPanel>
+                               
 
                                 <TextBlock Text="Familiäre Nähe" Margin="0,8,0,0"/>
                                 <Slider Minimum="1" Maximum="100" Value="{Binding FamilyCloseness}" TickFrequency="1" IsSnapToTickEnabled="True"/>
                                 <TextBlock Text="{Binding FamilyCloseness, StringFormat='Aktueller Wert: {0}'}"/>
 
                                 <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,8,0,0">
-                                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                    <StackPanel Spacing="6" VerticalAlignment="Center">
                                         <TextBlock Text="Eltern mit Sucht"/>
                                         <ToggleSwitch IsChecked="{Binding ParentsWithAddiction}"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                    <StackPanel VerticalAlignment="Center">
                                         <TextBlock Text="ADHS"/>
                                         <ToggleSwitch IsChecked="{Binding HasAdhd}"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                    <StackPanel VerticalAlignment="Center">
                                         <TextBlock Text="Autismus"/>
                                         <ToggleSwitch IsChecked="{Binding HasAutism}"/>
                                     </StackPanel>

@@ -252,10 +252,10 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
             "Alcoholism" => GetCopingPreference(state, "coping_substance_use") > 0.5,
 
-            "SubstanceAbuse" => GetCopingPreference(state, "coping_substance_use") > 0.6
+            "SubstanceAbuse" => GetCopingPreference(state, "coping_substance_use") > 0.3
                                 && state.ParentsWithAddiction,
 
-            "AnorexiaNervosa" => state.CurrentStress > 70 && state.CurrentMood < -30,
+            "AnorexiaNervosa" => state.CurrentStress > 70 && state.CurrentMood < -60,
 
             "BulimiaNervosa" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
                                && state.CurrentMood < -20,
