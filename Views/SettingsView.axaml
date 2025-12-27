@@ -98,10 +98,23 @@
 
                     <Border Classes="SettingsCard">
                         <StackPanel Spacing="12">
-                            <TextBlock Text="Familie and Umfeld" FontSize="18" FontWeight="SemiBold"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                <TextBlock Text="Familie und Umfeld" FontSize="18" FontWeight="SemiBold"/>
+
+                                <Border Background="LightGray"
+                                        CornerRadius="10"
+                                        Width="20" Height="20"
+                                        ToolTip.Tip="{Binding FamilyEnvironmentToolTip}">
+                                    <TextBlock Text="?"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               FontSize="12"/>
+                                </Border>
+                            </StackPanel>
                             <StackPanel Spacing="8">
                                 <TextBlock Text="Soziales Umfeld"/>
-                                <Slider Minimum="1" Maximum="7" Value="{Binding SocialEnvironmentLevel}" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                <Slider Minimum="0" Maximum="100" Value="{Binding SocialEnvironmentLevel}" TickFrequency="1" IsSnapToTickEnabled="True"/>
                                 <TextBlock Text="{Binding SocialEnvironmentLevel, StringFormat='Aktueller Wert: {0}'}"/>
 
                                 <TextBlock Text="Beziehungsqualität der Eltern" Margin="0,8,0,0"/>
@@ -133,7 +146,20 @@
 
                     <Border Classes="SettingsCard">
                         <StackPanel Spacing="12">
-                            <TextBlock Text="Persönliche Ressourcen" FontSize="18" FontWeight="SemiBold"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                <TextBlock Text="Persönliche Ressourcen" FontSize="18" FontWeight="SemiBold"/>
+
+                                <Border Background="LightGray"
+                                        CornerRadius="10"
+                                        Width="20" Height="20"
+                                        ToolTip.Tip="{Binding PersonalResourcesToolTip}">
+                                    <TextBlock Text="?"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               FontSize="12"/>
+                                </Border>
+                            </StackPanel>
                             <StackPanel Spacing="8">
                                 <TextBlock Text="Intelligenzscore"/>
                                 <Slider Minimum="1" Maximum="100" Value="{Binding IntelligenceScore}" TickFrequency="1" IsSnapToTickEnabled="True"/>
