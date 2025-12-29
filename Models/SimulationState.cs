@@ -34,12 +34,12 @@ public class SimulationState
     public int CurrentAge { get; set; }
     public GenderType Gender { get; set; }
     
-    public List<string> EventHistory { get; set; } = new();
+    public List<string> EventHistory { get; } = new();
     public LifePhase LifePhase { get; set; } = LifePhase.Childhood; 
   
-    public Dictionary<string,DiseaseConfig> CurrentIllnesses { get; set; } = new();
-    public Dictionary<string, double> CopingPreferences { get; set; } = new();
-    public Dictionary<string, IllnessProgressionState> IllnessProgressionStates { get; set; } = new();
+    public Dictionary<string,DiseaseConfig> CurrentIllnesses { get; } = new();
+    public Dictionary<string, double> CopingPreferences { get; } = new();
+    public Dictionary<string, IllnessProgressionState> IllnessProgressionStates { get; } = new();
 
     /// <summary>
     /// Tracks the number of steps since the last illness was triggered.
@@ -51,5 +51,5 @@ public class SimulationState
     /// Tracks ages at which traumatic events occurred.
     /// Used for PTSD and trauma-related illness triggers requiring recent trauma.
     /// </summary>
-    public List<int> TraumaticEventAges { get; set; } = new();
+    public List<int> TraumaticEventAges { get; } = new();
 }
