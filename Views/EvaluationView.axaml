@@ -2,7 +2,263 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="SimulationFIN31.Views.EvaluationView">
-    Welcome to Avalonia!
+             xmlns:vm="using:SimulationFIN31.ViewModels"
+             xmlns:history="using:SimulationFIN31.Models.History"
+             xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="900"
+             x:Class="SimulationFIN31.Views.EvaluationView"
+             x:DataType="vm:EvaluationViewModel">
+
+    <Grid Background="{StaticResource Brush.BackdropGradient}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="20,20,20,0">
+            <Button Content="Zurueck zur Startseite"
+                    Classes="Glass"
+                    Command="{Binding GoHomeCommand}"
+                    HorizontalAlignment="Left"/>
+            <TextBlock Text="Auswertung"
+                       Classes="SectionHeader"
+                       FontSize="28"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Main Content with ScrollViewer -->
+        <ScrollViewer Grid.Row="1" Margin="20" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="20">
+
+                <!-- Summary Statistics Panel -->
+                <Border Classes="GlassPanel">
+                    <StackPanel>
+                        <TextBlock Text="Zusammenfassung" Classes="SectionHeader"/>
+                        <Grid ColumnDefinitions="*,*,*,*" Margin="0,10,0,0">
+                            <!-- Final Stats Display -->
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                                <TextBlock Text="Endstress" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding FinalStress, StringFormat={}{0:F1}}"
+                                           Classes="Value" FontSize="24" HorizontalAlignment="Center"
+                                           Foreground="#E74C3C"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                                <TextBlock Text="Endstimmung" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding FinalMood, StringFormat={}{0:F1}}"
+                                           Classes="Value" FontSize="24" HorizontalAlignment="Center"
+                                           Foreground="#3498DB"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                                <TextBlock Text="Soziale Zugehoerigkeit" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding FinalSocial, StringFormat={}{0:F1}}"
+                                           Classes="Value" FontSize="24" HorizontalAlignment="Center"
+                                           Foreground="#9B59B6"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="3" HorizontalAlignment="Center">
+                                <TextBlock Text="Resilienz" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding FinalResilience, StringFormat={}{0:F1}}"
+                                           Classes="Value" FontSize="24" HorizontalAlignment="Center"
+                                           Foreground="#2ECC71"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Event/Illness/Coping Counts -->
+                        <Grid ColumnDefinitions="*,*,*,*" Margin="0,20,0,0">
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                                <TextBlock Text="Ereignisse" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalEventsCount}"
+                                           Classes="Value" FontSize="20" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                                <TextBlock Text="Krankheiten" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalIllnessesCount}"
+                                           Classes="Value" FontSize="20" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                                <TextBlock Text="Funktionale Bewaeltigung" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding FunctionalCopingCount}"
+                                           Classes="Value" FontSize="20" HorizontalAlignment="Center"
+                                           Foreground="#2ECC71"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="3" HorizontalAlignment="Center">
+                                <TextBlock Text="Dysfunktionale Bewaeltigung" Classes="Label" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding DysfunctionalCopingCount}"
+                                           Classes="Value" FontSize="20" HorizontalAlignment="Center"
+                                           Foreground="#E74C3C"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Line Chart Panel -->
+                <Border Classes="GlassPanel" Padding="20,20,20,30" ClipToBounds="False">
+                    <StackPanel>
+                        <TextBlock Text="Verlauf der psychischen Gesundheit" Classes="SectionHeader"/>
+                            <ScottPlot:AvaPlot x:Name="HealthChart"
+                                               Height="650"
+                                               Margin="20 20 20 75"
+                                               ClipToBounds="False"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Two Column Layout for Lists -->
+                <Grid ColumnDefinitions="*,*">
+
+                    <!-- Left Column -->
+                    <StackPanel Grid.Column="0" Spacing="20" Margin="0,0,10,0">
+
+                        <!-- Top Impactful Events -->
+                        <Border Classes="GlassPanel">
+                            <StackPanel>
+                                <TextBlock Text="Einflussreichste Ereignisse" Classes="SectionHeader"/>
+                                <ItemsControl ItemsSource="{Binding TopImpactfulEvents}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="history:EventRecord">
+                                            <Border Padding="12" Margin="0,4" CornerRadius="8"
+                                                    Background="{DynamicResource GlassSurfaceBrush}">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap"
+                                                               Foreground="{DynamicResource TextSecondaryBrush}"
+                                                               FontSize="12" Margin="0,4,0,0"/>
+                                                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                                        <TextBlock Text="Alter: " Classes="Label"/>
+                                                        <TextBlock Text="{Binding AgeOccurred}" Classes="Value"
+                                                                   HorizontalAlignment="Left"/>
+                                                        <TextBlock Text=" | Gesamtwirkung: " Classes="Label" Margin="10,0,0,0"/>
+                                                        <TextBlock Text="{Binding TotalAbsoluteImpact, StringFormat={}{0:F1}}"
+                                                                   Classes="Value" HorizontalAlignment="Left"
+                                                                   Foreground="{DynamicResource SystemAccentBrush}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBlock Text="Keine Ereignisse"
+                                           IsVisible="{Binding !TopImpactfulEvents.Count}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           FontStyle="Italic"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Illness Timeline -->
+                        <Border Classes="GlassPanel">
+                            <StackPanel>
+                                <TextBlock Text="Krankheitsverlauf" Classes="SectionHeader"/>
+                                <ItemsControl ItemsSource="{Binding IllnessTimeline}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="history:IllnessRecord">
+                                            <Border Padding="12" Margin="0,4" CornerRadius="8"
+                                                    Background="{DynamicResource GlassSurfaceBrush}">
+                                                <Grid ColumnDefinitions="*,Auto">
+                                                    <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold"
+                                                               Foreground="{DynamicResource TextPrimaryBrush}"
+                                                               VerticalAlignment="Center"/>
+                                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                        <TextBlock Text="Alter " Classes="Label" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="{Binding OnsetAge}" Classes="Value"
+                                                                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                                        <TextBlock Text=" - " Classes="Label" VerticalAlignment="Center"/>
+                                                        <TextBlock Classes="Value" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                            <TextBlock.Text>
+                                                                <Binding Path="HealedAge" TargetNullValue="andauernd"/>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBlock Text="Keine Krankheiten aufgetreten"
+                                           IsVisible="{Binding !IllnessTimeline.Count}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           FontStyle="Italic"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Right Column -->
+                    <StackPanel Grid.Column="1" Spacing="20" Margin="10,0,0,0">
+
+                        <!-- Traumatic Events -->
+                        <Border Classes="GlassPanel">
+                            <StackPanel>
+                                <TextBlock Text="Traumatische Ereignisse" Classes="SectionHeader"/>
+                                <ItemsControl ItemsSource="{Binding TraumaticEvents}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="history:EventRecord">
+                                            <Border Padding="12" Margin="0,4" CornerRadius="8"
+                                                    Background="#30E74C3C">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
+                                                               Foreground="#E74C3C"/>
+                                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap"
+                                                               Foreground="{DynamicResource TextSecondaryBrush}"
+                                                               FontSize="12" Margin="0,4,0,0"/>
+                                                    <TextBlock Text="{Binding AgeOccurred, StringFormat='Alter: {0}'}"
+                                                               Classes="Label" Margin="0,8,0,0"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBlock Text="Keine traumatischen Ereignisse"
+                                           IsVisible="{Binding !TraumaticEvents.Count}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           FontStyle="Italic"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Coping Usage -->
+                        <Border Classes="GlassPanel">
+                            <StackPanel>
+                                <TextBlock Text="Bewaeltigungsstrategien" Classes="SectionHeader"/>
+                                <ItemsControl ItemsSource="{Binding CopingUsageSummary}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:CopingUsageSummary">
+                                            <Border Padding="12" Margin="0,4" CornerRadius="8"
+                                                    Background="{DynamicResource GlassSurfaceBrush}">
+                                                <Grid ColumnDefinitions="*,Auto,Auto">
+                                                    <TextBlock Text="{Binding Name}"
+                                                               Foreground="{DynamicResource TextPrimaryBrush}"
+                                                               VerticalAlignment="Center"/>
+                                                    <Border Grid.Column="1" Padding="8,4" CornerRadius="4" Margin="8,0"
+                                                            VerticalAlignment="Center">
+                                                        <Border.Background>
+                                                            <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                                                                <Binding Path="Type" Converter="{x:Null}"/>
+                                                            </MultiBinding>
+                                                        </Border.Background>
+                                                        <TextBlock FontSize="11" FontWeight="Medium" VerticalAlignment="Center">
+                                                            <TextBlock.Text>
+                                                                <Binding Path="Type"/>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                    </Border>
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{Binding UsageCount, StringFormat='{}{0}x'}"
+                                                               Classes="Value" VerticalAlignment="Center"
+                                                               Foreground="{DynamicResource SystemAccentBrush}"
+                                                               FontWeight="Bold"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBlock Text="Keine Bewaeltigungsstrategien verwendet"
+                                           IsVisible="{Binding !CopingUsageSummary.Count}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           FontStyle="Italic"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

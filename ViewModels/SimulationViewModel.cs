@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SimulationFIN31.Models;
 using SimulationFIN31.Models.Enums;
+using SimulationFIN31.Models.History;
 using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.ViewModels;
@@ -21,10 +22,10 @@ namespace SimulationFIN31.ViewModels;
 public partial class SimulationViewModel : ViewModelBase
 {
     private const double DEFAULT_SIMULATION_SPEED = 1.0;
- 
 
     private readonly INavigationService _navigationService;
     private readonly ISimulationService _simulationService;
+    private readonly ISimulationHistoryService _historyService;
 
     private CancellationTokenSource? _simulationCts;
 
@@ -109,15 +110,19 @@ public partial class SimulationViewModel : ViewModelBase
     /// </summary>
     /// <param name="navigationService">Service for view navigation.</param>
     /// <param name="simulationService">Service for running the simulation.</param>
+    /// <param name="historyService">Service for logging simulation history.</param>
     /// <exception cref="ArgumentNullException">When any dependency is null.</exception>
     public SimulationViewModel(
         INavigationService navigationService,
-        ISimulationService simulationService)
+        ISimulationService simulationService,
+        ISimulationHistoryService historyService)
     {
         _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
         _simulationService = simulationService ?? throw new ArgumentNullException(nameof(simulationService));
+        _historyService = historyService ?? throw new ArgumentNullException(nameof(historyService));
 
         _simulationState = CreateInitialState();
+        _historyService.BeginNewSimulation();
         UpdateDisplayProperties();
 
         GoBackCommand = new RelayCommand(NavigateBack);
@@ -200,6 +205,7 @@ public partial class SimulationViewModel : ViewModelBase
         await StopSimulationAsync();
 
         SimulationState = CreateInitialState();
+        _historyService.BeginNewSimulation();
         UpdateDisplayProperties();
 
         await Dispatcher.UIThread.InvokeAsync(() =>
@@ -215,10 +221,13 @@ public partial class SimulationViewModel : ViewModelBase
     /// <summary>
     /// Main simulation loop running asynchronously.
     /// Respects pause state and simulation speed settings.
+    /// Auto-navigates to evaluation view when simulation completes.
     /// </summary>
     /// <param name="cancellationToken">Token to cancel the simulation.</param>
     private async Task RunSimulationLoopAsync(CancellationToken cancellationToken)
     {
+        var simulationCompleted = false;
+
         try
         {
             while (!cancellationToken.IsCancellationRequested && SimulationState.CurrentAge < 30)
@@ -234,6 +243,9 @@ public partial class SimulationViewModel : ViewModelBase
                 var delay = _simulationService.GetStepDelay(SimulationSpeed);
                 await Task.Delay(delay, cancellationToken);
             }
+
+            // Check if simulation completed naturally (reached age 30)
+            simulationCompleted = SimulationState.CurrentAge >= 30;
         }
         catch (OperationCanceledException)
         {
@@ -245,6 +257,17 @@ public partial class SimulationViewModel : ViewModelBase
             {
                 IsRunning = false;
                 IsPaused = false;
+            });
+        }
+
+        // Navigate to evaluation view if simulation completed naturally
+        if (simulationCompleted)
+        {
+            var history = _historyService.GetCompleteHistory(SimulationState);
+
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                _navigationService.NavigateTo<EvaluationViewModel>(vm => vm.Initialize(history));
             });
         }
     }
@@ -278,10 +301,13 @@ public partial class SimulationViewModel : ViewModelBase
 
     /// <summary>
     /// Handles simulation state updates.
-    /// Updates display properties on the UI thread.
+    /// Records turn snapshot and updates display properties on the UI thread.
     /// </summary>
     private void OnStateUpdated(object? sender, SimulationState state)
     {
+        // Record turn snapshot for evaluation charts
+        _historyService.RecordTurnSnapshot(state);
+
         Dispatcher.UIThread.Post(UpdateDisplayProperties);
     }
 

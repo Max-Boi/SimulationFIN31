@@ -29,6 +29,7 @@ public static class ServiceCollectionExtensions
 
         // Simulation Services
         collection.AddSingleton<IIllnessManagerService, IllnessManagerService>();
+        collection.AddSingleton<ISimulationHistoryService, SimulationHistoryService>();
         collection.AddSingleton<ISimulationService, SimulationService>();
 
         collection.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));

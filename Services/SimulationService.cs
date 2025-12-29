@@ -23,7 +23,11 @@ public sealed class SimulationService : ISimulationService
 
     private readonly IWeightedRandomService _weightedRandomService;
     private readonly IIllnessManagerService _illnessManagerService;
+    private readonly ISimulationHistoryService _historyService;
     private readonly EventEngine _eventEngine;
+
+    // Tracks current state for illness event handling
+    private SimulationState? _currentState;
 
     /// <inheritdoc />
     public event EventHandler<SimulationEventArgs>? EventOccurred;
@@ -41,13 +45,16 @@ public sealed class SimulationService : ISimulationService
     /// </summary>
     /// <param name="weightedRandomService">Service for weighted random event selection.</param>
     /// <param name="illnessManagerService">Service for managing mental illness lifecycle.</param>
+    /// <param name="historyService">Service for logging simulation history.</param>
     /// <exception cref="ArgumentNullException">When any required service is null.</exception>
     public SimulationService(
         IWeightedRandomService weightedRandomService,
-        IIllnessManagerService illnessManagerService)
+        IIllnessManagerService illnessManagerService,
+        ISimulationHistoryService historyService)
     {
         _weightedRandomService = weightedRandomService ?? throw new ArgumentNullException(nameof(weightedRandomService));
         _illnessManagerService = illnessManagerService ?? throw new ArgumentNullException(nameof(illnessManagerService));
+        _historyService = historyService ?? throw new ArgumentNullException(nameof(historyService));
         _eventEngine = new EventEngine();
 
         _illnessManagerService.IllnessChanged += OnIllnessChanged;
@@ -55,6 +62,19 @@ public sealed class SimulationService : ISimulationService
 
     private void OnIllnessChanged(object? sender, IllnessEventArgs e)
     {
+        // Record illness changes in history
+        if (_currentState != null)
+        {
+            if (e.ChangeType == IllnessChangeType.Onset)
+            {
+                _historyService.RecordIllnessOnset(e.IllnessKey, e.IllnessName, _currentState.CurrentAge);
+            }
+            else if (e.ChangeType == IllnessChangeType.Healed)
+            {
+                _historyService.RecordIllnessHealed(e.IllnessKey, _currentState.CurrentAge);
+            }
+        }
+
         IllnessChanged?.Invoke(this, e);
     }
 
@@ -64,6 +84,9 @@ public sealed class SimulationService : ISimulationService
         ArgumentNullException.ThrowIfNull(state);
 
         cancellationToken.ThrowIfCancellationRequested();
+
+        // Store current state for illness event handling
+        _currentState = state;
 
         var events = GetEventsForPhase(state.LifePhase);
         var copingMechanisms = CopingMechanism.AllcopingMechanisms;
@@ -130,6 +153,9 @@ public sealed class SimulationService : ISimulationService
         {
             ApplyEvent(selectedMechanism, state);
             UpdateCopingPreferences(selectedMechanism, state);
+
+            // Record coping mechanism usage to history
+            _historyService.RecordCopingUsage(selectedMechanism, state.CurrentAge);
         }
     }
 
@@ -149,6 +175,12 @@ public sealed class SimulationService : ISimulationService
         if (lifeEvent.IsTraumatic)
         {
             state.TraumaticEventAges.Add(state.CurrentAge);
+        }
+
+        // Record event to history (excluding coping mechanisms which are recorded separately)
+        if (lifeEvent.Category != EventCategory.Coping)
+        {
+            _historyService.RecordEvent(lifeEvent, state.CurrentAge);
         }
 
         EventOccurred?.Invoke(this, new SimulationEventArgs(lifeEvent, state));

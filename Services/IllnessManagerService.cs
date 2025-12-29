@@ -24,37 +24,35 @@ public sealed class IllnessManagerService : IIllnessManagerService
     private static readonly Dictionary<string, string> GermanOnsetMessages = new()
     {
         ["MildDepression"] = "Avatar befindet sich nun in einer depressiven Episode",
-        ["GeneralizedAnxiety"] = "Avatar leidet nun unter einer generalisierten Angststoerung",
-        ["SocialPhobia"] = "Avatar entwickelt eine Soziale Angststoerung",
+        ["generalisierte Angststörung"] = "Avatar leidet nun unter einer generalisierten Angststörung",
+        ["sozialePhobie"] = "Avatar entwickelt eine Soziale Angststörung",
         ["PanicDisorder"] = "Avatar entwickelt eine Panikstörung",
-        ["PTSD"] = "Avatar entwickelt eine Posttraumatische Belastungsstoerung",
+        ["PTSD"] = "Avatar entwickelt eine Posttraumatische Belastungsstörung",
         ["Alcoholism"] = "Avatar entwickelt eine Alkoholabhaengigkeit",
-        ["SubstanceAbuse"] = "Avatar entwickelt eine Substanzabhaengigkeit",
-        ["AnorexiaNervosa"] = "Avatar entwickelt Anorexia Nervosa",
-        ["BulimiaNervosa"] = "Avatar entwickelt Bulimia Nervosa",
-        ["BingeEatingDisorder"] = "Avatar entwickelt eine Binge-Eating-Stoerung",
-        ["OCD"] = "Avatar entwickelt eine Zwangsstoerung",
-        ["BorderlinePersonality"] = "Avatar entwickelt eine Borderline-Persoenlichkeitsstoerung",
-        ["AvoidantPersonality"] = "Avatar entwickelt eine aengstlich-vermeidende Persoenlichkeitsstoerung",
-        ["DissociativeDisorder"] = "Avatar entwickelt eine dissoziative Stoerung"
+        ["SubstanceAbuse"] = "Avatar entwickelt eine Substanzabhängigkeit",
+        ["Magersucht"] = "Avatar entwickelt Magersucht",
+        ["Bulimie"] = "Avatar entwickelt Bulimie",
+        ["BingeEatingStörung"] = "Avatar entwickelt eine Binge-Eating-störung",
+        ["OCD"] = "Avatar entwickelt eine Zwangsstörung",
+        ["BorderlinePersonality"] = "Avatar entwickelt eine Borderline-Persönlichkeitsstörung",
+        ["DissociativeDisorder"] = "Avatar entwickelt eine dissoziative störung"
     };
 
     private static readonly Dictionary<string, string> GermanHealingMessages = new()
     {
-        ["MildDepression"] = "Avatar hat die depressive Episode ueberwunden",
-        ["GeneralizedAnxiety"] = "Avatar hat die Angststoerung in den Griff bekommen",
-        ["SocialPhobia"] = "Avatar hat die soziale Angst ueberwunden",
-        ["PanicDisorder"] = "Avatar hat die Panikstörung ueberwunden",
-        ["PTSD"] = "Avatar hat die Posttraumatische Belastungsstoerung ueberwunden",
-        ["Alcoholism"] = "Avatar hat die Alkoholabhaengigkeit ueberwunden",
-        ["SubstanceAbuse"] = "Avatar hat die Substanzabhaengigkeit ueberwunden",
-        ["AnorexiaNervosa"] = "Avatar hat Anorexia Nervosa ueberwunden",
-        ["BulimiaNervosa"] = "Avatar hat Bulimia Nervosa ueberwunden",
-        ["BingeEatingDisorder"] = "Avatar hat die Binge-Eating-Stoerung ueberwunden",
-        ["OCD"] = "Avatar hat die Zwangsstoerung in den Griff bekommen",
-        ["BorderlinePersonality"] = "Avatar hat die Borderline-Persoenlichkeitsstoerung stabilisiert",
-        ["AvoidantPersonality"] = "Avatar hat die vermeidende Persoenlichkeitsstoerung ueberwunden",
-        ["DissociativeDisorder"] = "Avatar hat die dissoziative Stoerung ueberwunden"
+        ["MildDepression"] = "Avatar hat die depressive Episode überwunden",
+        ["generalisierte Angststörung"] = "Avatar hat die Angststörung in den Griff bekommen",
+        ["sozialePhobie"] = "Avatar hat die soziale Angst überwunden",
+        ["PanicDisorder"] = "Avatar hat die Panikstörung überwunden",
+        ["PTSD"] = "Avatar hat die Posttraumatische Belastungsstörung überwunden",
+        ["Alcoholism"] = "Avatar hat die Alkoholabhaengigkeit überwunden",
+        ["SubstanceAbuse"] = "Avatar hat die Substanzabhängigkeit überwunden",
+        ["Magersucht"] = "Avatar hat Magersucht überwunden",
+        ["Bulimie"] = "Avatar hat Bulimie überwunden",
+        ["BingeEatingStörung"] = "Avatar hat die Binge-Eating-störung überwunden",
+        ["OCD"] = "Avatar hat die Zwangsstörung in den Griff bekommen",
+        ["BorderlinePersonality"] = "Avatar hat die Borderline-Persönlichkeitsstörung stabilisiert",
+        ["DissociativeDisorder"] = "Avatar hat die dissoziative störung überwunden"
     };
 
     private readonly Random _random = new();
@@ -186,7 +184,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
             state.CurrentIllnesses.Remove(key);
             state.IllnessProgressionStates.Remove(key);
 
-            var message = GermanHealingMessages.GetValueOrDefault(key, $"Avatar hat {config.Name} ueberwunden");
+            var message = GermanHealingMessages.GetValueOrDefault(key, $"Avatar hat {config.Name} überwunden");
             RaiseIllnessChanged(key, config.Name, IllnessChangeType.Healed, message);
         }
     }
@@ -242,11 +240,11 @@ public sealed class IllnessManagerService : IIllnessManagerService
         {
             "MildDepression" => state.CurrentStress > state.ResilienceScore,
 
-            "GeneralizedAnxiety" => state.AnxietyLevel > 60 && state.CurrentStress > 50,
+            "generalisierteAngststörung" => state is { AnxietyLevel: > 60, CurrentStress: > 50 },
 
-            "SocialPhobia" => state.SocialBelonging < 40 && state.AnxietyLevel > 50,
+            "sozialePhobie" => state is { SocialBelonging: < 40, AnxietyLevel: > 50 },
 
-            "PanicDisorder" => state.AnxietyLevel > 70 && state.CurrentStress > 70,
+            "PanicDisorder" => state is { AnxietyLevel: > 70, CurrentStress: > 70 },
 
             "PTSD" => HasRecentTraumaticEvent(state, yearsBack: 2),
 
@@ -255,23 +253,17 @@ public sealed class IllnessManagerService : IIllnessManagerService
             "SubstanceAbuse" => GetCopingPreference(state, "coping_substance_use") > 0.3
                                 && state.ParentsWithAddiction,
 
-            "AnorexiaNervosa" => state.CurrentStress > 70 && state.CurrentMood < -60,
+            "Magersucht" => state is { CurrentStress: > 70, CurrentMood: < -60 },
 
-            "BulimiaNervosa" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
+            "Bulimie" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
                                && state.CurrentMood < -20,
 
-            "BingeEatingDisorder" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
+            "BingeEatingStörung" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
                                      && state.CurrentStress > 50,
 
-            "OCD" => state.AnxietyLevel > 60 && state.CurrentStress > 60,
+            "OCD" => state is { AnxietyLevel: > 60, CurrentStress: > 60 },
 
-            "BorderlinePersonality" => state.FamilyCloseness < 30
-                                       && state.CurrentMood < -40
-                                       && state.LifePhase >= LifePhase.Adolescence,
-
-            "AvoidantPersonality" => state.SocialBelonging < 30
-                                     && state.AnxietyLevel > 60
-                                     && GetCopingPreference(state, "coping_avoidance") > 0.4,
+            "BorderlinePersonality" => state is { FamilyCloseness: < 30, CurrentMood: < -40, LifePhase: >= LifePhase.Adolescence },
 
             "DissociativeDisorder" => HasLifetimeTrauma(state) && state.CurrentStress > 80,
 

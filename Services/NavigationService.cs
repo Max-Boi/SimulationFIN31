@@ -22,11 +22,26 @@ public partial class NavigationService : ObservableObject, INavigationService
         _viewModelFactory = viewModelFactory;
     }
 
+    /// <inheritdoc />
     public void NavigateTo<T>() where T : ViewModelBase
     {
         var viewModel = _viewModelFactory(typeof(T));
 
         // Sicherheitshalber immer auf den UI-Thread zwingen
+        Dispatcher.UIThread.Post(() =>
+        {
+            CurrentViewModel = viewModel;
+        });
+    }
+
+    /// <inheritdoc />
+    public void NavigateTo<T>(Action<T> initializer) where T : ViewModelBase
+    {
+        ArgumentNullException.ThrowIfNull(initializer);
+
+        var viewModel = (T)_viewModelFactory(typeof(T));
+        initializer(viewModel);
+
         Dispatcher.UIThread.Post(() =>
         {
             CurrentViewModel = viewModel;

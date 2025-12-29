@@ -14,27 +14,27 @@ public static class MentalIllnesses
             StressDebuff = 1.05,
             MoodDebuff = 0.92,
             SocialProximityDebuff = 0.95,
-            TriggerChance = 6,
+            TriggerChance = 8,
             HealingTime = 2,
             MinAge = 10               // Kann ab später Kindheit auftreten
         },
 
         // === ANGSTSTÖRUNGEN ===
 
-        ["GeneralizedAnxiety"] = new DiseaseConfig
+        ["generalisierteAngststörung"] = new DiseaseConfig
         {
-            Name = "Generalized Anxiety Disorder",
+            Name = "generalisierte Angststörung",
             StressDebuff = 1.15,
             MoodDebuff = 0.88,
             SocialProximityDebuff = 0.92,
-            TriggerChance = 2,
+            TriggerChance = 15,
             HealingTime = 3,
             MinAge = 8                // Kann bereits in Kindheit beginnen
         },
 
-        ["SocialPhobia"] = new DiseaseConfig
+        ["sozialePhobie"] = new DiseaseConfig
         {
-            Name = "Social Anxiety Disorder",
+            Name = "soziale Phobie",
             StressDebuff = 1.10,
             MoodDebuff = 0.90,
             SocialProximityDebuff = 0.75,
@@ -49,7 +49,7 @@ public static class MentalIllnesses
             StressDebuff = 1.22,
             MoodDebuff = 0.92,
             SocialProximityDebuff = 0.90,
-            TriggerChance = 4,
+            TriggerChance = 16,
             HealingTime = 7,
             MinAge = 15               // Meist späte Adoleszenz
         },
@@ -62,7 +62,7 @@ public static class MentalIllnesses
             StressDebuff = 1.25,
             MoodDebuff = 0.85,
             SocialProximityDebuff = 0.85,
-            TriggerChance = 3,
+            TriggerChance = 15,
             HealingTime = 10,
             MinAge = 3                // Kann nach Trauma in jedem Alter auftreten
         },
@@ -77,7 +77,7 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.80,
             TriggerChance = 5,
             HealingTime = 8,
-            MinAge = 14               // Erfordert Zugang zu Alkohol
+            MinAge = 16               // Erfordert Zugang zu Alkohol
         },
 
         ["SubstanceAbuse"] = new DiseaseConfig
@@ -88,14 +88,14 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.78,
             TriggerChance = 10,
             HealingTime = 9,
-            MinAge = 14               // Typischerweise ab Adoleszenz
+            MinAge = 16               // Typischerweise ab Adoleszenz
         },
 
         // === ESSSTÖRUNGEN ===
 
-        ["AnorexiaNervosa"] = new DiseaseConfig
+        ["Magersucht"] = new DiseaseConfig
         {
-            Name = "Anorexia Nervosa",
+            Name = "Magersucht",
             StressDebuff = 1.20,
             MoodDebuff = 0.80,
             SocialProximityDebuff = 0.82,
@@ -104,24 +104,24 @@ public static class MentalIllnesses
             MinAge = 12               // Typischerweise ab Pubertät
         },
 
-        ["BulimiaNervosa"] = new DiseaseConfig
+        ["Bulimie"] = new DiseaseConfig
         {
-            Name = "Bulimia Nervosa",
+            Name = "Bulimie",
             StressDebuff = 1.10,
             MoodDebuff = 0.90,
             SocialProximityDebuff = 0.85,
-            TriggerChance = 6,
+            TriggerChance = 12,
             HealingTime = 10,
             MinAge = 14               // Meist späte Adoleszenz
         },
 
-        ["BingeEatingDisorder"] = new DiseaseConfig
+        ["BingeEatingStörung"] = new DiseaseConfig
         {
-            Name = "Binge Eating Disorder",
+            Name = "Binge Eating Störung",
             StressDebuff = 1.12,
             MoodDebuff = 0.88,
             SocialProximityDebuff = 0.90,
-            TriggerChance = 6,
+            TriggerChance = 12,
             HealingTime = 8,
             MinAge = 10               // Kann früher auftreten als andere Essstörungen
         },
@@ -149,17 +149,6 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.80,
             TriggerChance = 15,
             HealingTime = 20,
-            MinAge = 16               // Diagnose erst ab später Adoleszenz
-        },
-
-        ["AvoidantPersonality"] = new DiseaseConfig
-        {
-            Name = "Avoidant Personality Disorder",
-            StressDebuff = 1.15,
-            MoodDebuff = 0.88,
-            SocialProximityDebuff = 0.70,
-            TriggerChance = 12,
-            HealingTime = 15,
             MinAge = 16               // Diagnose erst ab später Adoleszenz
         },
 
