@@ -1,0 +1,76 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+        <!-- Progress Bar Base Style -->
+        <Style Selector="ProgressBar">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+        </Style>
+
+        <!-- Stress Bar (Red gradient) -->
+        <Style Selector="ProgressBar.StressBar">
+            <Setter Property="Foreground" Value="#E74C3C"/>
+        </Style>
+
+        <!-- Mood Bar (Green/Yellow gradient based on value) -->
+        <Style Selector="ProgressBar.MoodBar">
+            <Setter Property="Foreground" Value="#3498DB"/>
+        </Style>
+
+        <!-- Social Bar (Blue) -->
+        <Style Selector="ProgressBar.SocialBar">
+            <Setter Property="Foreground" Value="#9B59B6"/>
+        </Style>
+
+        <!-- Section Header Style -->
+        <Style Selector="TextBlock.SectionHeader">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+
+        <!-- Label Style -->
+        <Style Selector="TextBlock.Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+
+        <!-- Value Style -->
+        <Style Selector="TextBlock.Value">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <!-- Glass Panel Style -->
+        <Style Selector="Border.GlassPanel">
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <!-- Event Log Item Style -->
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style Selector="ListBoxItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceHoverBrush}"/>
+        </Style>
+
+        <!-- Slider Style -->
+        <Style Selector="Slider">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentBrush}"/>
+        </Style>
+    
+</Styles>

@@ -19,6 +19,6 @@
             
              
     <Application.Styles>
-        <FluentTheme /> <StyleInclude Source="/Views/Styles/ButtonStyles.axaml"/> <StyleInclude Source="/Views/Styles/SettingsStyles.axaml"/>
+        <FluentTheme /> <StyleInclude Source="/Views/Styles/ButtonStyles.axaml"/> <StyleInclude Source="/Views/Styles/SettingsStyles.axaml"/> <StyleInclude Source="/Views/Styles/SimulationStyles.axaml"/>
     </Application.Styles>
 </Application>
