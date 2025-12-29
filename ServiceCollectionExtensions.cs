@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         collection.AddTransient<MainWindowViewModel>();
         collection.AddTransient<SimulationViewModel>();
         collection.AddTransient<HomeViewModel>();
+        collection.AddTransient<EvaluationViewModel>();
 
         // Navigation
         collection.AddSingleton<INavigationService, NavigationService>();

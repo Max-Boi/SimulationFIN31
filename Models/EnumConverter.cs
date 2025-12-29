@@ -120,9 +120,14 @@ public static class EnumConverter
     /// </summary>
     public static IncomeLevel MapIncomeLevel(int value) => value switch
     {
-        <= 3 => IncomeLevel.Low,
-        <= 6 => IncomeLevel.Medium,
-        _ => IncomeLevel.High
+        1 => IncomeLevel.ReallyLow,
+        2 => IncomeLevel.Low,
+        3 => IncomeLevel.LowHigh,
+        4 => IncomeLevel.MediumLow,
+        5 => IncomeLevel.Medium,
+        6 => IncomeLevel.MediumHigh,
+        7 => IncomeLevel.High,
+        _ => IncomeLevel.Medium
     };
 
     /// <summary>
@@ -130,9 +135,14 @@ public static class EnumConverter
     /// </summary>
     public static ParentsEducationLevel MapParentsEducationLevel(int value) => value switch
     {
-        <= 3 => ParentsEducationLevel.Low,
-        <= 6 => ParentsEducationLevel.Medium,
-        _ => ParentsEducationLevel.High
+        1 => ParentsEducationLevel.ReallyLow,
+        2 => ParentsEducationLevel.Low,
+        3 => ParentsEducationLevel.LowHigh,
+        4 => ParentsEducationLevel.MediumLow,
+        5 => ParentsEducationLevel.Medium,
+        6 => ParentsEducationLevel.MediumHigh,
+        7 => ParentsEducationLevel.High
+        
     };
 
     /// <summary>
@@ -140,8 +150,13 @@ public static class EnumConverter
     /// </summary>
     public static JobStatus MapJobStatus(int value) => value switch
     {
-        <= 3 => JobStatus.LowPrestige,
-        <= 6 => JobStatus.MediumPrestige,
-        _ => JobStatus.HighPrestige
+        1 => JobStatus.LowPrestige1,
+        2 => JobStatus.LowPrestige2,
+        3 => JobStatus.LowPrestige3,
+        4 => JobStatus.MediumPrestige1,
+        5 => JobStatus.MediumPrestige2,
+        6 => JobStatus.MediumPrestige3,
+        7 => JobStatus.HighPrestige,
+        _ => JobStatus.MediumPrestige2
     };
 }

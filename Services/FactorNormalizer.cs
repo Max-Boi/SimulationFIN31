@@ -56,8 +56,12 @@ public class FactorNormalizer : IFactorNormalizer
     /// </summary>
     private double MapIncomeLevel(IncomeLevel level) => level switch
     {
-        IncomeLevel.Low => 0.0,
-        IncomeLevel.Medium => 0.5,
+        IncomeLevel.ReallyLow => 0.0,
+        IncomeLevel.Low => 0.15,
+        IncomeLevel.LowHigh => 0.3,
+        IncomeLevel.MediumLow => 0.45,
+        IncomeLevel.Medium => 0.6,
+        IncomeLevel.MediumHigh => 0.75,
         IncomeLevel.High => 1.0,
         _ => 0.5
     };
@@ -67,8 +71,12 @@ public class FactorNormalizer : IFactorNormalizer
     /// </summary>
     private double MapEducationLevel(ParentsEducationLevel level) => level switch
     {
-        ParentsEducationLevel.Low => 0.0,
-        ParentsEducationLevel.Medium => 0.5,
+        ParentsEducationLevel.ReallyLow => 0.0,
+        ParentsEducationLevel.Low => 0.15,
+        ParentsEducationLevel.LowHigh => 0.3,
+        ParentsEducationLevel.MediumLow => 0.45,
+        ParentsEducationLevel.Medium => 0.6,
+        ParentsEducationLevel.MediumHigh => 0.75,
         ParentsEducationLevel.High => 1.0,
         _ => 0.5
     };
@@ -78,8 +86,12 @@ public class FactorNormalizer : IFactorNormalizer
     /// </summary>
     private double MapJobStatus(JobStatus status) => status switch
     {
-        JobStatus.LowPrestige => 0.0,
-        JobStatus.MediumPrestige => 0.5,
+        JobStatus.LowPrestige1 => 0.0,
+        JobStatus.LowPrestige2 => 0.15,
+        JobStatus.LowPrestige3 => 0.3,
+        JobStatus.MediumPrestige1 => 0.45,
+        JobStatus.MediumPrestige2 => 0.6,
+        JobStatus.MediumPrestige3 => 0.75,
         JobStatus.HighPrestige => 1.0,
         _ => 0.5
     };
