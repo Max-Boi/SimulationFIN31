@@ -75,8 +75,9 @@ public enum VisualCategory
     Pet,
 
     /// <summary>Coping mechanisms and strategies (for CopingMechanism events).</summary>
-    Coping,
-
+    CopingNeutral,
+    CopingFunctional,
+    CopingDysfunctional,
     /// <summary>Natural disasters, environmental events.</summary>
     Nature
 }

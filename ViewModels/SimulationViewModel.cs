@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia.Media;
+using Avalonia.Platform;
+using Avalonia.Svg.Skia;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -85,9 +89,50 @@ public partial class SimulationViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isPaused;
 
+    /// <summary>
+    /// Current tree SVG path based on life phase and illness count.
+    /// </summary>
+    [ObservableProperty]
+    private string _currentTreePath = "avares://SimulationFIN31/Assets/TreeVectors/Sapling.svg";
+
+    /// <summary>
+    /// Key that changes when tree should transition (triggers CrossFade animation).
+    /// </summary>
+    [ObservableProperty]
+    private string _currentLifePhaseKey = "Childhood_0";
+
+    /// <summary>
+    /// Current tree image for display, loaded from SVG.
+    /// </summary>
+    [ObservableProperty]
+    private IImage? _currentTreeImage;
+
+    /// <summary>
+    /// Most recent generic event for icon display.
+    /// </summary>
+    [ObservableProperty]
+    private EventLogEntry? _latestGenericEvent;
+
+    /// <summary>
+    /// Most recent personal event for icon display.
+    /// </summary>
+    [ObservableProperty]
+    private EventLogEntry? _latestPersonalEvent;
+
+    /// <summary>
+    /// Most recent coping event for icon display.
+    /// </summary>
+    [ObservableProperty]
+    private EventLogEntry? _latestCopingEvent;
+
     #endregion
 
     #region -- Collections --
+
+    /// <summary>
+    /// Names of currently active mental illnesses.
+    /// </summary>
+    public ObservableCollection<string> ActiveIllnessNames { get; } = new();
 
     /// <summary>
     /// Log of events that have occurred during the simulation.
@@ -211,6 +256,9 @@ public partial class SimulationViewModel : ViewModelBase
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
             EventLog.Clear();
+            LatestGenericEvent = null;
+            LatestPersonalEvent = null;
+            LatestCopingEvent = null;
         });
     }
 
@@ -278,7 +326,7 @@ public partial class SimulationViewModel : ViewModelBase
 
     /// <summary>
     /// Handles life events occurring during simulation.
-    /// Updates the event log on the UI thread.
+    /// Updates the event log and latest event icons on the UI thread.
     /// </summary>
     private void OnEventOccurred(object? sender, SimulationEventArgs e)
     {
@@ -286,7 +334,9 @@ public partial class SimulationViewModel : ViewModelBase
             e.Event.Name,
             e.Event.Description,
             e.State.CurrentAge,
-            e.OccurredAt);
+            e.OccurredAt,
+            e.Event.Category,
+            e.Event.VisualCategory);
 
         Dispatcher.UIThread.Post(() =>
         {
@@ -295,6 +345,20 @@ public partial class SimulationViewModel : ViewModelBase
             if (EventLog.Count > 150)
             {
                 EventLog.RemoveAt(EventLog.Count - 1);
+            }
+
+            // Update latest event per category for icon display
+            switch (entry.Category)
+            {
+                case EventCategory.Generic:
+                    LatestGenericEvent = entry;
+                    break;
+                case EventCategory.Personal:
+                    LatestPersonalEvent = entry;
+                    break;
+                case EventCategory.Coping:
+                    LatestCopingEvent = entry;
+                    break;
             }
         });
     }
@@ -313,7 +377,7 @@ public partial class SimulationViewModel : ViewModelBase
 
     /// <summary>
     /// Handles illness state changes (onset or healing).
-    /// Logs German messages to the event log.
+    /// Logs German messages to the event log and updates illness names display.
     /// </summary>
     private void OnIllnessChanged(object? sender, IllnessEventArgs e)
     {
@@ -321,7 +385,9 @@ public partial class SimulationViewModel : ViewModelBase
             e.ChangeType == IllnessChangeType.Onset ? "Krankheitsbeginn" : "Genesung",
             e.GermanMessage,
             SimulationState.CurrentAge,
-            DateTime.UtcNow);
+            DateTime.UtcNow,
+            EventCategory.Personal,
+            VisualCategory.MentalHealth);
 
         Dispatcher.UIThread.Post(() =>
         {
@@ -331,6 +397,12 @@ public partial class SimulationViewModel : ViewModelBase
             {
                 EventLog.RemoveAt(EventLog.Count - 1);
             }
+
+            // Update active illness names display
+            UpdateActiveIllnessNames();
+
+            // Update tree display (may switch to BadAdultTree if 3 illnesses)
+            UpdateTreeDisplay();
         });
     }
 
@@ -348,7 +420,71 @@ public partial class SimulationViewModel : ViewModelBase
         SocialLevel = SimulationState.SocialBelonging;
         CurrentAge = SimulationState.CurrentAge;
         CurrentLifePhase = GetLifePhaseDisplayName(SimulationState.LifePhase);
+        UpdateTreeDisplay();
+        UpdateActiveIllnessNames();
     }
+
+    /// <summary>
+    /// Updates the tree display based on current life phase and illness count.
+    /// </summary>
+    private void UpdateTreeDisplay()
+    {
+        var illnessCount = SimulationState.CurrentIllnesses.Count;
+        var newPath = GetTreePath(SimulationState.LifePhase, illnessCount);
+        var newKey = $"{SimulationState.LifePhase}_{illnessCount}";
+
+        // Always load if image is null (initial load) or path changed
+        if (CurrentTreeImage == null || CurrentTreePath != newPath)
+        {
+            CurrentTreePath = newPath;
+            CurrentLifePhaseKey = newKey;
+            LoadTreeImage(newPath);
+        }
+    }
+
+    /// <summary>
+    /// Loads an SVG image from the specified resource path.
+    /// </summary>
+    private void LoadTreeImage(string path)
+    {
+        try
+        {
+            var source = SvgSource.Load(path, baseUri: null);
+            CurrentTreeImage = new SvgImage { Source = source };
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Failed to load SVG: {ex.Message}");
+            CurrentTreeImage = null;
+        }
+    }
+
+    /// <summary>
+    /// Updates the active illness names collection from current state.
+    /// </summary>
+    private void UpdateActiveIllnessNames()
+    {
+        ActiveIllnessNames.Clear();
+        foreach (var illness in SimulationState.CurrentIllnesses.Values)
+        {
+            ActiveIllnessNames.Add(illness.Name);
+        }
+    }
+
+    /// <summary>
+    /// Gets the appropriate tree SVG path based on life phase and illness count.
+    /// </summary>
+    private static string GetTreePath(LifePhase phase, int illnessCount) => phase switch
+    {
+        LifePhase.Childhood => "avares://SimulationFIN31/Assets/TreeVectors/Sapling.svg",
+        LifePhase.SchoolBeginning => "avares://SimulationFIN31/Assets/TreeVectors/YoungTree.svg",
+        LifePhase.Adolescence => "avares://SimulationFIN31/Assets/TreeVectors/TeenageTree.svg",
+        LifePhase.EmergingAdulthood => "avares://SimulationFIN31/Assets/TreeVectors/EmergingTree.svg",
+        LifePhase.Adulthood => illnessCount >= 3
+            ? "avares://SimulationFIN31/Assets/TreeVectors/BadAdultTree.svg"
+            : "avares://SimulationFIN31/Assets/TreeVectors/AdultTree.svg",
+        _ => "avares://SimulationFIN31/Assets/TreeVectors/Sapling.svg"
+    };
 
     /// <summary>
     /// Creates initial simulation state by loading user settings from settings.json.
@@ -475,14 +611,81 @@ public partial class SimulationViewModel : ViewModelBase
 /// <param name="Description">Description of what happened.</param>
 /// <param name="Age">Age at which the event occurred.</param>
 /// <param name="Timestamp">When the event was logged.</param>
+/// <param name="Category">The event category (Generic, Personal, or Coping).</param>
+/// <param name="VisualCategory">The visual category for icon display.</param>
 public sealed record EventLogEntry(
     string EventName,
     string Description,
     int Age,
-    DateTime Timestamp)
+    DateTime Timestamp,
+    EventCategory Category,
+    VisualCategory VisualCategory)
 {
+    private static readonly Dictionary<string, Avalonia.Media.Imaging.Bitmap> IconCache = new();
+
     /// <summary>
     /// Formatted display text for the event log.
     /// </summary>
     public string DisplayText => $"[Alter {Age}] {EventName}";
+
+    /// <summary>
+    /// Tooltip text for event icon hover display.
+    /// </summary>
+    public string TooltipText => $"{EventName}\n{Description}";
+
+    /// <summary>
+    /// Gets the icon image for this event based on its visual category.
+    /// </summary>
+    public Avalonia.Media.Imaging.Bitmap? Icon => LoadIcon(VisualCategory);
+
+    /// <summary>
+    /// Loads and caches the icon bitmap for the given visual category.
+    /// </summary>
+    private static Avalonia.Media.Imaging.Bitmap? LoadIcon(VisualCategory category)
+    {
+        var path = GetIconPathForVisualCategory(category);
+
+        if (IconCache.TryGetValue(path, out var cached))
+        {
+            return cached;
+        }
+
+        try
+        {
+            var bitmap = new Avalonia.Media.Imaging.Bitmap(AssetLoader.Open(new Uri(path)));
+            IconCache[path] = bitmap;
+            return bitmap;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Maps a visual category to its corresponding icon asset path.
+    /// </summary>
+    private static string GetIconPathForVisualCategory(VisualCategory category) => category switch
+    {
+        VisualCategory.Family => "avares://SimulationFIN31/Assets/eventIcons/FamilyEvent.png",
+        VisualCategory.Career => "avares://SimulationFIN31/Assets/eventIcons/CareerEvent.jpg",
+        VisualCategory.Education => "avares://SimulationFIN31/Assets/eventIcons/EducationEvent.png",
+        VisualCategory.Death => "avares://SimulationFIN31/Assets/eventIcons/DeathEvent.png",
+        VisualCategory.Health => "avares://SimulationFIN31/Assets/eventIcons/HealthEvent.png",
+        VisualCategory.Social => "avares://SimulationFIN31/Assets/eventIcons/SocialEvent.jpg",
+        VisualCategory.Romance => "avares://SimulationFIN31/Assets/eventIcons/RomanceEvent.jpg",
+        VisualCategory.Creativity => "avares://SimulationFIN31/Assets/eventIcons/CreativeEvents.png",
+        VisualCategory.Sports => "avares://SimulationFIN31/Assets/eventIcons/SportsEvent.png",
+        VisualCategory.Financial => "avares://SimulationFIN31/Assets/eventIcons/FinancialEvent.png",
+        VisualCategory.MentalHealth => "avares://SimulationFIN31/Assets/eventIcons/MentalHealthEvent.png",
+        VisualCategory.Leisure => "avares://SimulationFIN31/Assets/eventIcons/LeisureEvent.jpg",
+        VisualCategory.Home => "avares://SimulationFIN31/Assets/eventIcons/HomeEvent.png",
+        VisualCategory.Identity => "avares://SimulationFIN31/Assets/eventIcons/IdentityEvent.png",
+        VisualCategory.Pet => "avares://SimulationFIN31/Assets/eventIcons/PetEvent.png",
+        VisualCategory.Nature => "avares://SimulationFIN31/Assets/eventIcons/NatureEvent.png",
+        VisualCategory.CopingFunctional => "avares://SimulationFIN31/Assets/CopingIcons/FunctionalCoping.png",
+        VisualCategory.CopingDysfunctional => "avares://SimulationFIN31/Assets/CopingIcons/Dyfsfunctional.png",
+        VisualCategory.CopingNeutral => "avares://SimulationFIN31/Assets/CopingIcons/NeutralCoping.png",
+        _ => "avares://SimulationFIN31/Assets/eventIcons/MentalHealthEvent.png"
+    };
 }

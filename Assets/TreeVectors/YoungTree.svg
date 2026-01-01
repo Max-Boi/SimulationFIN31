@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    <g id="human_32_child">
+        <path fill="#26324f" d="M12 24h3v8h-3z M17 24h3v8h-3z"/>
+        <path fill="#c62d2d" d="M12 16h8v8h-8z"/>
+        <path fill="#ffcd94" d="M13 10h6v6h-6z"/>
+        <path fill="#5e3f13" d="M13 8h6v2h-6z M12 9h1v3h-1z M19 9h1v3h-1z"/>
+        <path fill="#000000" d="M14 12h1v1h-1z M17 12h1v1h-1z"/>
+        <path fill="#f4b41b" d="M10 17h2v6h-2z M20 17h2v6h-2z"/>
+    </g>
+</svg>

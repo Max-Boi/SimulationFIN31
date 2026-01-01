@@ -314,6 +314,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = 10,
             ResilienceImpact = 5,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
                 new InfluenceFactor("ParentsEducationLevel", 2.0),
@@ -336,6 +337,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = -12,
             ResilienceImpact = 12,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Home,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
@@ -359,6 +361,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = 15,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
@@ -382,6 +385,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = -5,
             ResilienceImpact = 8,
             HealthImpact = -5,
+            VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -3.5),
@@ -404,6 +408,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = 22,
             ResilienceImpact = 10,
             HealthImpact = 5,
+            VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 1.3),
@@ -425,6 +430,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = -15,
+            VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
                 new InfluenceFactor("AnxietyLevel", 2.0),
@@ -447,6 +453,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = 8,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.0),
@@ -469,6 +476,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = 8,
             ResilienceImpact = 12,
             HealthImpact = 5,
+            VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 1.5),
@@ -490,6 +498,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = -5,
             ResilienceImpact = 5,
             HealthImpact = -5,
+            VisualCategory = VisualCategory.Home,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -3.5),
@@ -512,6 +521,7 @@ public static class EmergingAdulthoodEvents
             SocialBelongingImpact = 0,
             ResilienceImpact = 8,
             HealthImpact = -3,
+            VisualCategory = VisualCategory.Financial,
             Prerequisites = ["emerging_university_acceptance"],
             InfluenceFactors =
             [

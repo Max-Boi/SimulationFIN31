@@ -314,6 +314,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = -5,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 1.8),
@@ -337,6 +338,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 8,
             ResilienceImpact = 12,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -2.0),
@@ -360,6 +362,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 10,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 2.0),
@@ -382,6 +385,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 15,
             ResilienceImpact = 15,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 2.0),
@@ -405,6 +409,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = -5,
+            VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 1.8),
@@ -427,6 +432,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 15,
             ResilienceImpact = 10,
             HealthImpact = 3,
+            VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 2.0),
@@ -450,6 +456,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 8,
             ResilienceImpact = 10,
             HealthImpact = 5,
+            VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 2.5),
@@ -472,6 +479,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = -8,
             ResilienceImpact = 8,
             HealthImpact = -5,
+            VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -4.0),
@@ -495,6 +503,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 12,
             ResilienceImpact = 15,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 2.0),
@@ -518,6 +527,7 @@ public static class AdolescenceEvents
             SocialBelongingImpact = 15,
             ResilienceImpact = 10,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 2.0),

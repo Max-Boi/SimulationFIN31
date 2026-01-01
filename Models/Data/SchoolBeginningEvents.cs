@@ -310,6 +310,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 8,
             ResilienceImpact = 2,
             HealthImpact = 2,
+            VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 1.8),
@@ -332,6 +333,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 1.8),
@@ -355,6 +357,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 10,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 2.0),
@@ -378,6 +381,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 10,
             ResilienceImpact = 10,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 2.0),
@@ -401,6 +405,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = -5,
             ResilienceImpact = 5,
             HealthImpact = -5,
+            VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -4.0),
@@ -424,6 +429,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 12,
             ResilienceImpact = 10,
             HealthImpact = 5,
+            VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 2.5),
@@ -447,6 +453,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = -10,
+            VisualCategory = VisualCategory.Nature,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", -2.0),
@@ -468,6 +475,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 0,
             HealthImpact = -2,
+            VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 2.5),
@@ -489,6 +497,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = -3,
+            VisualCategory = VisualCategory.Death,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.0)
@@ -509,6 +518,7 @@ public static class SchoolBeginningEvents
             SocialBelongingImpact = 12,
             ResilienceImpact = 3,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.0),

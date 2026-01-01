@@ -225,13 +225,40 @@ public sealed class IllnessManagerService : IIllnessManagerService
                 continue;
             }
 
-            // Probability-based onset: 1 / TriggerChance chance each step
-            var probability = 1.0 / config.TriggerChance;
+            // Probability-based onset with gender-adjusted chance
+            var probability = CalculateGenderAdjustedProbability(config, state);
             if (_random.NextDouble() < probability)
             {
                 TriggerIllness(key, config, state);
             }
         }
+    }
+
+    /// <summary>
+    /// Calculates the gender-adjusted probability for illness onset.
+    /// Formula: (1 / TriggerChance) * GenderModifier
+    ///
+    /// Example:
+    /// - Depression with TriggerChance=8, Female (1.8x modifier)
+    ///   Base: 1/8 = 0.125 (12.5%)
+    ///   Adjusted: 0.125 * 1.8 = 0.225 (22.5%)
+    /// </summary>
+    /// <param name="config">The illness configuration containing trigger chance and gender modifiers.</param>
+    /// <param name="state">Current simulation state containing gender information.</param>
+    /// <returns>Probability value between 0.0 and 1.0.</returns>
+    private static double CalculateGenderAdjustedProbability(DiseaseConfig config, SimulationState state)
+    {
+        // Base probability: higher TriggerChance = lower probability per step
+        var baseProbability = 1.0 / config.TriggerChance;
+
+        // Apply gender modifier (defaults to 1.0 if not specified)
+        var genderModifier = config.GetGenderModifier(state.Gender);
+
+        // Final adjusted probability
+        var adjustedProbability = baseProbability * genderModifier;
+
+        // Cap at 100% probability (safety check)
+        return Math.Min(adjustedProbability, 1.0);
     }
 
     private bool CheckTriggerCondition(string illnessKey, SimulationState state)

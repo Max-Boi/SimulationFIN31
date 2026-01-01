@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    <g id="human_32_worker_burnout">
+        <path fill="#424242" d="M12 22h3v10h-3z M17 22h3v10h-3z"/>
+        <path fill="#424242" d="M10 12h12v10h-12z"/>
+        <path fill="#8a3a3a" d="M15 15h2v4h-2z"/>
+
+        <path fill="#e3bca0" d="M13 7h6v6h-6z"/>
+        <path fill="#4a3d2e" d="M13 5h6v2h-6z M12 6h1v3h-1z M19 6h1v3h-1z"/>
+
+        <path fill="#cfaa8e" d="M14 8h1v1h-1z M17 8h1v1h-1z"/>
+        <path fill="#000000" d="M14 9h1v1h-1z M17 9h1v1h-1z"/>
+        <path fill="#000000" d="M15 11h2v1h-2z"/>
+
+        <path fill="#5e3f13" d="M22 18h3v5h-3z"/>
+    </g>
+</svg>

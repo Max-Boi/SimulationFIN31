@@ -1,0 +1,12 @@
+<svg width="512" height="512" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    <g id="human_32_worker_healthy">
+        <path fill="#4a4a4a" d="M12 20h3v12h-3z M17 20h3v12h-3z"/>
+        <path fill="#4a4a4a" d="M10 10h12v10h-12z"/>
+        <path fill="#ffffff" d="M15 10h2v3h-2z"/>
+        <path fill="#c62d2d" d="M15 13h2v4h-2z"/>
+        <path fill="#ffcd94" d="M13 4h6v6h-6z"/>
+        <path fill="#5e3f13" d="M13 2h6v2h-6z M12 3h1v3h-1z M19 3h1v3h-1z"/>
+        <path fill="#000000" d="M14 6h1v1h-1z M17 6h1v1h-1z"/>
+        <path fill="#8c6d36" d="M22 16h3v5h-3z"/>
+    </g>
+</svg>

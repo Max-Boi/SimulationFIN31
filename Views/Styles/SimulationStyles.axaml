@@ -72,5 +72,58 @@
         <Style Selector="Slider">
             <Setter Property="Foreground" Value="{DynamicResource SystemAccentBrush}"/>
         </Style>
-    
+
+        <!-- Event Icon Box Style -->
+        <Style Selector="Border.EventIconBox">
+            <Setter Property="Width" Value="144"/>
+            <Setter Property="Height" Value="144"/>
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="8"/>
+        </Style>
+
+        <Style Selector="Border.EventIconBox:pointerover">
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceHoverBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}"/>
+        </Style>
+
+        <!-- Illness Name Style -->
+        <Style Selector="TextBlock.IllnessName">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="#E74C3C"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Background" Value="#20E74C3C"/>
+        </Style>
+
+        <!-- Illness Panel Style -->
+        <Style Selector="Border.IllnessPanel">
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+
+        <!-- Event Icons Panel Style -->
+      
+
+        <!-- Tree Container Style -->
+        <Style Selector="Border.TreeContainer">
+            <Setter Property="Background" Value="#10000000"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <!-- Compact Header Style -->
+        <Style Selector="Border.CompactHeader">
+            <Setter Property="Background" Value="{DynamicResource GlassSurfaceBrush}"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+
 </Styles>

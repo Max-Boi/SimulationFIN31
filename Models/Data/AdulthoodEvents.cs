@@ -210,6 +210,7 @@ public static class AdulthoodEvents
             Id = "adulthood_parent_death",
             Name = "Tod eines Elternteils",
             Description = "Der Erwachsene erlebt den Tod eines Elternteils.",
+            VisualCategory = VisualCategory.Death,
             BaseProbability = 0.2,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
@@ -303,6 +304,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 8,
             ResilienceImpact = 5,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
                 new InfluenceFactor("JobStatus", 2.0),
@@ -325,6 +327,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 18,
             ResilienceImpact = 10,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
@@ -348,6 +351,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 12,
             HealthImpact = 15,
+            VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 1.8),
@@ -370,6 +374,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = -5,
             ResilienceImpact = 8,
             HealthImpact = -5,
+            VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", -4.0),
@@ -393,6 +398,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 20,
             ResilienceImpact = 5,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.0),
@@ -415,6 +421,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = 8,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
                 new InfluenceFactor("IncomeLevel", 2.5),
@@ -436,6 +443,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 12,
             ResilienceImpact = 10,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 2.0),
@@ -459,6 +467,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 5,
             ResilienceImpact = -12,
             HealthImpact = -20,
+            VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
                 new InfluenceFactor("AnxietyLevel", 2.0),
@@ -481,6 +490,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = -12,
             ResilienceImpact = 3,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", -1.8),
@@ -503,6 +513,7 @@ public static class AdulthoodEvents
             SocialBelongingImpact = 18,
             ResilienceImpact = 3,
             HealthImpact = 0,
+            VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
                 new InfluenceFactor("FamilyCloseness", 2.0),

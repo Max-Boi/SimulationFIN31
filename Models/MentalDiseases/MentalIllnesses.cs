@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SimulationFIN31.Models.Enums;
 
 namespace SimulationFIN31.Models.MentalDiseases;
 
@@ -16,7 +17,13 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.95,
             TriggerChance = 8,
             HealingTime = 2,
-            MinAge = 10               // Kann ab später Kindheit auftreten
+            MinAge = 10,              // Kann ab später Kindheit auftreten
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Female, 1.8 },    // Women have ~1.8x higher risk of depression
+                { GenderType.Male, 1.0 },
+                { GenderType.NonBinary, 1.4 }
+            }
         },
 
         // === ANGSTSTÖRUNGEN ===
@@ -29,7 +36,13 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.92,
             TriggerChance = 15,
             HealingTime = 3,
-            MinAge = 8                // Kann bereits in Kindheit beginnen
+            MinAge = 8,               // Kann bereits in Kindheit beginnen
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Female, 2.0 },    // Women have ~2x higher risk for generalized anxiety
+                { GenderType.Male, 1.0 },
+                { GenderType.NonBinary, 1.5 }
+            }
         },
 
         ["sozialePhobie"] = new DiseaseConfig
@@ -38,9 +51,15 @@ public static class MentalIllnesses
             StressDebuff = 1.10,
             MoodDebuff = 0.90,
             SocialProximityDebuff = 0.75,
-            TriggerChance = 10,
+            TriggerChance = 15,
             HealingTime = 8,
-            MinAge = 10               // Typischerweise ab Schulbeginn
+            MinAge = 10,              // Typischerweise ab Schulbeginn
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Female, 1.5 },    // Women have higher risk for social phobia
+                { GenderType.Male, 1.0 },
+                { GenderType.NonBinary, 1.25 }
+            }
         },
 
         ["PanicDisorder"] = new DiseaseConfig
@@ -51,7 +70,13 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.90,
             TriggerChance = 16,
             HealingTime = 7,
-            MinAge = 15               // Meist späte Adoleszenz
+            MinAge = 15,              // Meist späte Adoleszenz
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Female, 2.0 },    // Women have ~2x higher risk for panic disorder
+                { GenderType.Male, 1.0 },
+                { GenderType.NonBinary, 1.5 }
+            }
         },
 
         // === TRAUMA-BEZOGENE STÖRUNGEN ===
@@ -77,7 +102,13 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.80,
             TriggerChance = 5,
             HealingTime = 8,
-            MinAge = 16               // Erfordert Zugang zu Alkohol
+            MinAge = 16,              // Erfordert Zugang zu Alkohol
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Male, 2.5 },      // Men have ~2.5x higher risk for alcohol use disorder
+                { GenderType.Female, 1.0 },
+                { GenderType.NonBinary, 1.75 }
+            }
         },
 
         ["SubstanceAbuse"] = new DiseaseConfig
@@ -88,7 +119,13 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.78,
             TriggerChance = 10,
             HealingTime = 9,
-            MinAge = 16               // Typischerweise ab Adoleszenz
+            MinAge = 16,              // Typischerweise ab Adoleszenz
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Male, 2.0 },      // Men have ~2x higher risk for substance abuse
+                { GenderType.Female, 1.0 },
+                { GenderType.NonBinary, 1.5 }
+            }
         },
 
         // === ESSSTÖRUNGEN ===
@@ -99,9 +136,15 @@ public static class MentalIllnesses
             StressDebuff = 1.20,
             MoodDebuff = 0.80,
             SocialProximityDebuff = 0.82,
-            TriggerChance = 8,
+            TriggerChance = 25,
             HealingTime = 10,
-            MinAge = 12               // Typischerweise ab Pubertät
+            MinAge = 12,              // Typischerweise ab Pubertät
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Female, 3.0 },    // Women have ~3x higher risk for anorexia
+                { GenderType.Male, 1.0 },
+                { GenderType.NonBinary, 2.0 }
+            }
         },
 
         ["Bulimie"] = new DiseaseConfig
@@ -110,9 +153,15 @@ public static class MentalIllnesses
             StressDebuff = 1.10,
             MoodDebuff = 0.90,
             SocialProximityDebuff = 0.85,
-            TriggerChance = 12,
+            TriggerChance = 20,
             HealingTime = 10,
-            MinAge = 14               // Meist späte Adoleszenz
+            MinAge = 14,              // Meist späte Adoleszenz
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Female, 2.5 },    // Women have ~2.5x higher risk for bulimia
+                { GenderType.Male, 1.0 },
+                { GenderType.NonBinary, 1.75 }
+            }
         },
 
         ["BingeEatingStörung"] = new DiseaseConfig
@@ -123,7 +172,13 @@ public static class MentalIllnesses
             SocialProximityDebuff = 0.90,
             TriggerChance = 12,
             HealingTime = 8,
-            MinAge = 10               // Kann früher auftreten als andere Essstörungen
+            MinAge = 10,              // Kann früher auftreten als andere Essstörungen
+            GenderModifiers = new Dictionary<GenderType, double>
+            {
+                { GenderType.Female, 1.75 },   // Women have higher risk for binge eating disorder
+                { GenderType.Male, 1.0 },
+                { GenderType.NonBinary, 1.4 }
+            }
         },
 
         // === ZWANGSSTÖRUNGEN ===
