@@ -26,12 +26,16 @@ namespace SimulationFIN31.ViewModels;
 public partial class SimulationViewModel : ViewModelBase
 {
     private const double DEFAULT_SIMULATION_SPEED = 1.0;
+    private const double BASE_ANIMATION_INTERVAL_MS = 400.0;
+    private const double MIN_ANIMATION_INTERVAL_MS = 80.0;
 
     private readonly INavigationService _navigationService;
     private readonly ISimulationService _simulationService;
     private readonly ISimulationHistoryService _historyService;
 
     private CancellationTokenSource? _simulationCts;
+    private DispatcherTimer? _animationTimer;
+    private int _animationFrame;
 
     #region -- Observable Properties --
 
@@ -90,10 +94,10 @@ public partial class SimulationViewModel : ViewModelBase
     private bool _isPaused;
 
     /// <summary>
-    /// Current tree SVG path based on life phase and illness count.
+    /// Current character SVG path based on life phase, illness count, and animation frame.
     /// </summary>
     [ObservableProperty]
-    private string _currentTreePath = "avares://SimulationFIN31/Assets/TreeVectors/Sapling.svg";
+    private string _currentTreePath = "avares://SimulationFIN31/Assets/TreeVectors/Baby.svg";
 
     /// <summary>
     /// Key that changes when tree should transition (triggers CrossFade animation).
@@ -175,6 +179,102 @@ public partial class SimulationViewModel : ViewModelBase
         _simulationService.EventOccurred += OnEventOccurred;
         _simulationService.StateUpdated += OnStateUpdated;
         _simulationService.IllnessChanged += OnIllnessChanged;
+
+        InitializeAnimationTimer();
+    }
+
+    /// <summary>
+    /// Initializes the animation timer for character sprite cycling.
+    /// </summary>
+    private void InitializeAnimationTimer()
+    {
+        _animationTimer = new DispatcherTimer
+        {
+            Interval = CalculateAnimationInterval(SimulationSpeed)
+        };
+        _animationTimer.Tick += OnAnimationTick;
+    }
+
+    /// <summary>
+    /// Calculates the animation frame interval based on simulation speed.
+    /// Higher speed = faster animation.
+    /// </summary>
+    /// <param name="speed">The current simulation speed multiplier.</param>
+    /// <returns>TimeSpan for the animation interval.</returns>
+    private static TimeSpan CalculateAnimationInterval(double speed)
+    {
+        var adjustedMs = BASE_ANIMATION_INTERVAL_MS / speed;
+        return TimeSpan.FromMilliseconds(Math.Max(adjustedMs, MIN_ANIMATION_INTERVAL_MS));
+    }
+
+    /// <summary>
+    /// Handles animation timer tick - toggles between animation frames.
+    /// </summary>
+    private void OnAnimationTick(object? sender, EventArgs e)
+    {
+        _animationFrame = _animationFrame == 1 ? 2 : 1;
+        UpdateAnimatedSprite();
+    }
+
+    /// <summary>
+    /// Updates only the sprite image without triggering phase transition effects.
+    /// </summary>
+    private void UpdateAnimatedSprite()
+    {
+        var illnessCount = SimulationState.CurrentIllnesses.Count;
+        var newPath = GetTreePath(SimulationState.LifePhase, illnessCount, _animationFrame);
+
+        if (CurrentTreePath != newPath)
+        {
+            CurrentTreePath = newPath;
+            LoadTreeImage(newPath);
+        }
+    }
+
+    /// <summary>
+    /// Starts or stops the animation based on simulation running state.
+    /// </summary>
+    private void UpdateAnimationState()
+    {
+        if (IsRunning && !IsPaused)
+        {
+            _animationFrame = 1;
+            _animationTimer?.Start();
+        }
+        else
+        {
+            _animationTimer?.Stop();
+            _animationFrame = 0;
+            UpdateAnimatedSprite();
+        }
+    }
+
+    /// <summary>
+    /// Called when SimulationSpeed property changes.
+    /// Updates the animation timer interval accordingly.
+    /// </summary>
+    partial void OnSimulationSpeedChanged(double value)
+    {
+        if (_animationTimer != null)
+        {
+            _animationTimer.Interval = CalculateAnimationInterval(value);
+        }
+    }
+
+    /// <summary>
+    /// Called when IsRunning property changes.
+    /// </summary>
+    partial void OnIsRunningChanged(bool value)
+    {
+        UpdateAnimationState();
+    }
+
+    /// <summary>
+    /// Called when IsPaused property changes.
+    /// </summary>
+    partial void OnIsPausedChanged(bool value)
+    {
+        UpdateAnimationState();
     }
 
     #region -- Simulation Control Commands --
@@ -426,18 +526,24 @@ public partial class SimulationViewModel : ViewModelBase
 
     /// <summary>
     /// Updates the tree display based on current life phase and illness count.
+    /// Only updates the phase key when the life phase actually changes (triggers CrossFade).
     /// </summary>
     private void UpdateTreeDisplay()
     {
         var illnessCount = SimulationState.CurrentIllnesses.Count;
-        var newPath = GetTreePath(SimulationState.LifePhase, illnessCount);
+        var newPath = GetTreePath(SimulationState.LifePhase, illnessCount, _animationFrame);
         var newKey = $"{SimulationState.LifePhase}_{illnessCount}";
+
+        // Update key only on phase changes to trigger CrossFade transition
+        if (CurrentLifePhaseKey != newKey)
+        {
+            CurrentLifePhaseKey = newKey;
+        }
 
         // Always load if image is null (initial load) or path changed
         if (CurrentTreeImage == null || CurrentTreePath != newPath)
         {
             CurrentTreePath = newPath;
-            CurrentLifePhaseKey = newKey;
             LoadTreeImage(newPath);
         }
     }
@@ -472,18 +578,38 @@ public partial class SimulationViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Gets the appropriate tree SVG path based on life phase and illness count.
+    /// Gets the appropriate character SVG path based on life phase, illness count, and animation frame.
     /// </summary>
-    private static string GetTreePath(LifePhase phase, int illnessCount) => phase switch
+    /// <param name="phase">Current life phase.</param>
+    /// <param name="illnessCount">Number of active illnesses.</param>
+    /// <param name="animationFrame">Animation frame (0 = static, 1 = movement1, 2 = movement2).</param>
+    /// <returns>The resource path to the SVG file.</returns>
+    private static string GetTreePath(LifePhase phase, int illnessCount, int animationFrame)
     {
-        LifePhase.Childhood => "avares://SimulationFIN31/Assets/TreeVectors/Sapling.svg",
-        LifePhase.SchoolBeginning => "avares://SimulationFIN31/Assets/TreeVectors/YoungTree.svg",
-        LifePhase.Adolescence => "avares://SimulationFIN31/Assets/TreeVectors/TeenageTree.svg",
-        LifePhase.EmergingAdulthood => "avares://SimulationFIN31/Assets/TreeVectors/EmergingTree.svg",
-        LifePhase.Adulthood => illnessCount >= 3
-            ? "avares://SimulationFIN31/Assets/TreeVectors/BadAdultTree.svg"
-            : "avares://SimulationFIN31/Assets/TreeVectors/AdultTree.svg",
-        _ => "avares://SimulationFIN31/Assets/TreeVectors/Sapling.svg"
+        var baseName = GetSpriteBaseName(phase, illnessCount);
+        var frameSuffix = animationFrame switch
+        {
+            1 => "movement1",
+            2 => "movement2",
+            _ => string.Empty
+        };
+
+        return string.IsNullOrEmpty(frameSuffix)
+            ? $"avares://SimulationFIN31/Assets/TreeVectors/{baseName}.svg"
+            : $"avares://SimulationFIN31/Assets/TreeVectors/{baseName}{frameSuffix}.svg";
+    }
+
+    /// <summary>
+    /// Gets the base sprite name for the given life phase.
+    /// </summary>
+    private static string GetSpriteBaseName(LifePhase phase, int illnessCount) => phase switch
+    {
+        LifePhase.Childhood => "Baby",
+        LifePhase.SchoolBeginning => "Child",
+        LifePhase.Adolescence => "Teenager",
+        LifePhase.EmergingAdulthood => "EmergingAdulthood",
+        LifePhase.Adulthood => illnessCount >= 3 ? "BadAdult" : "Adult",
+        _ => "Baby"
     };
 
     /// <summary>
