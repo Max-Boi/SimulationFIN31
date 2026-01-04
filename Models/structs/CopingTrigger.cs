@@ -5,7 +5,7 @@ public readonly struct CopingTrigger
     public double? StressThreshold { get; }
     public double? MoodThreshold { get; }
     public double? BelongingThreshold { get; }
-        
+
     public CopingTrigger(
         double? stressThreshold = null,
         double? moodThreshold = null,
@@ -15,9 +15,11 @@ public readonly struct CopingTrigger
         MoodThreshold = moodThreshold;
         BelongingThreshold = belongingThreshold;
     }
-        
-    public bool HasAnyTrigger() => 
-        StressThreshold.HasValue || 
-        MoodThreshold.HasValue || 
-        BelongingThreshold.HasValue;
+
+    public bool HasAnyTrigger()
+    {
+        return StressThreshold.HasValue ||
+               MoodThreshold.HasValue ||
+               BelongingThreshold.HasValue;
+    }
 }

@@ -20,7 +20,6 @@ public enum ParentsEducationLevel
     Medium,
     MediumHigh,
     High
-   
 }
 
 public enum JobStatus

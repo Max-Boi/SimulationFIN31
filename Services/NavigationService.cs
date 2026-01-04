@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
-using ReactiveUI;
 using SimulationFIN31.Services.Interfaces;
 using SimulationFIN31.ViewModels;
 
@@ -14,8 +13,7 @@ public partial class NavigationService : ObservableObject, INavigationService
     // Das [ObservableProperty] Attribut generiert automatisch:
     // public ViewModelBase CurrentViewModel { get; set; }
     // und kümmert sich um PropertyChanged Events.
-    [ObservableProperty]
-    private ViewModelBase _currentViewModel;
+    [ObservableProperty] private ViewModelBase _currentViewModel;
 
     public NavigationService(Func<Type, ViewModelBase> viewModelFactory)
     {
@@ -28,10 +26,7 @@ public partial class NavigationService : ObservableObject, INavigationService
         var viewModel = _viewModelFactory(typeof(T));
 
         // Sicherheitshalber immer auf den UI-Thread zwingen
-        Dispatcher.UIThread.Post(() =>
-        {
-            CurrentViewModel = viewModel;
-        });
+        Dispatcher.UIThread.Post(() => { CurrentViewModel = viewModel; });
     }
 
     /// <inheritdoc />
@@ -42,9 +37,6 @@ public partial class NavigationService : ObservableObject, INavigationService
         var viewModel = (T)_viewModelFactory(typeof(T));
         initializer(viewModel);
 
-        Dispatcher.UIThread.Post(() =>
-        {
-            CurrentViewModel = viewModel;
-        });
+        Dispatcher.UIThread.Post(() => { CurrentViewModel = viewModel; });
     }
 }

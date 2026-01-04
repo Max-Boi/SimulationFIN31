@@ -1,15 +1,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using SimulationFIN31.Models.Enums;
-using SimulationFIN31.Models.EventTypes;
 using SimulationFIN31.Models.structs;
 
 namespace SimulationFIN31.Models.Data;
 
 /// <summary>
-/// Static catalog containing all predefined life events, organized by life phase.
-/// Events are based on developmental psychology research including Attachment Theory (Bowlby),
-/// Life-Span Development (Erikson), and the Stress-Diathesis Model.
+///     Static catalog containing all predefined life events, organized by life phase.
+///     Events are based on developmental psychology research including Attachment Theory (Bowlby),
+///     Life-Span Development (Erikson), and the Stress-Diathesis Model.
 /// </summary>
 public static class CopingMechanism
 {
@@ -18,11 +17,12 @@ public static class CopingMechanism
     private static readonly List<EventTypes.CopingMechanism> CopingMechanismsList =
     [
         // Functional Coping Mechanisms
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_exercise",
             Name = "Körperliche Bewegung",
-            Description = "Regelmäßige körperliche Aktivität zur Stressbewältigung. Sport fördert die Ausschüttung von Endorphinen und verbessert das allgemeine Wohlbefinden.",
+            Description =
+                "Regelmäßige körperliche Aktivität zur Stressbewältigung. Sport fördert die Ausschüttung von Endorphinen und verbessert das allgemeine Wohlbefinden.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
             BaseProbability = 0.40,
@@ -30,7 +30,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Functional,
-            Trigger = new CopingTrigger(stressThreshold: 50),
+            Trigger = new CopingTrigger(50),
             IsHabitForming = true,
             StressImpact = -25,
             MoodImpact = 15,
@@ -43,11 +43,12 @@ public static class CopingMechanism
                 new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_social_support",
             Name = "Soziale Unterstützung suchen",
-            Description = "Sich an Freunde oder Familie wenden, um emotionale Unterstützung zu erhalten. Der Austausch mit nahestehenden Personen kann Stress reduzieren und das Wohlbefinden steigern.",
+            Description =
+                "Sich an Freunde oder Familie wenden, um emotionale Unterstützung zu erhalten. Der Austausch mit nahestehenden Personen kann Stress reduzieren und das Wohlbefinden steigern.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
             BaseProbability = 0.45,
@@ -68,11 +69,12 @@ public static class CopingMechanism
                 new InfluenceFactor("FamilyCloseness", 2.5)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_mindfulness",
             Name = "Achtsamkeitspraxis",
-            Description = "Meditation oder Achtsamkeitstechniken praktizieren, um innere Ruhe zu finden. Diese Methoden fördern die emotionale Regulation und reduzieren Stressreaktionen.",
+            Description =
+                "Meditation oder Achtsamkeitstechniken praktizieren, um innere Ruhe zu finden. Diese Methoden fördern die emotionale Regulation und reduzieren Stressreaktionen.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
             BaseProbability = 0.25,
@@ -80,7 +82,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Functional,
-            Trigger = new CopingTrigger(stressThreshold: 60),
+            Trigger = new CopingTrigger(60),
             IsHabitForming = true,
             StressImpact = -18,
             MoodImpact = 15,
@@ -93,11 +95,12 @@ public static class CopingMechanism
                 new InfluenceFactor("ParentsEducationLevel", 2.5)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_creative_expression",
             Name = "Kreativer Ausdruck",
-            Description = "Kunst, Musik oder Schreiben nutzen, um Emotionen zu verarbeiten. Kreativität bietet einen gesunden Kanal für emotionale Ausdrucksformen.",
+            Description =
+                "Kunst, Musik oder Schreiben nutzen, um Emotionen zu verarbeiten. Kreativität bietet einen gesunden Kanal für emotionale Ausdrucksformen.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
             BaseProbability = 0.2,
@@ -118,11 +121,12 @@ public static class CopingMechanism
                 new InfluenceFactor("ParentsEducationLevel", 2.5)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_problem_solving",
             Name = "Aktive Problemlösung",
-            Description = "Die Stressquelle systematisch angehen und lösen. Diese proaktive Strategie stärkt das Gefühl von Kontrolle und Selbstwirksamkeit.",
+            Description =
+                "Die Stressquelle systematisch angehen und lösen. Diese proaktive Strategie stärkt das Gefühl von Kontrolle und Selbstwirksamkeit.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
             BaseProbability = 0.40,
@@ -130,7 +134,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Functional,
-            Trigger = new CopingTrigger(stressThreshold: 45),
+            Trigger = new CopingTrigger(45),
             IsHabitForming = true,
             StressImpact = -25,
             MoodImpact = 15,
@@ -145,11 +149,12 @@ public static class CopingMechanism
         },
 
         // Dysfunctional Coping Mechanisms
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_avoidance",
             Name = "Vermeidung und Rückzug",
-            Description = "Stressauslöser meiden und sich aus sozialen Situationen zurückziehen. Dies bringt kurzfristige Erleichterung, verstärkt jedoch langfristig Ängste und Isolation.",
+            Description =
+                "Stressauslöser meiden und sich aus sozialen Situationen zurückziehen. Dies bringt kurzfristige Erleichterung, verstärkt jedoch langfristig Ängste und Isolation.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
             BaseProbability = 0.45,
@@ -157,7 +162,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Dysfunctional,
-            Trigger = new CopingTrigger(stressThreshold: 55),
+            Trigger = new CopingTrigger(55),
             IsHabitForming = true,
             StressImpact = -8,
             MoodImpact = -5,
@@ -170,11 +175,12 @@ public static class CopingMechanism
                 new InfluenceFactor("SocialEnergyLevel", -2.5)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_substance_use",
             Name = "Substanzkonsum",
-            Description = "Alkohol oder andere Substanzen zur Stressbewältigung nutzen. Dies führt zu kurzfristiger Betäubung, birgt jedoch erhebliche Risiken für Abhängigkeit und Gesundheit.",
+            Description =
+                "Alkohol oder andere Substanzen zur Stressbewältigung nutzen. Dies führt zu kurzfristiger Betäubung, birgt jedoch erhebliche Risiken für Abhängigkeit und Gesundheit.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
             BaseProbability = 0.4,
@@ -182,7 +188,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Dysfunctional,
-            Trigger = new CopingTrigger(stressThreshold: 70, moodThreshold: -40),
+            Trigger = new CopingTrigger(70, -40),
             IsHabitForming = true,
             StressImpact = -20,
             MoodImpact = 8,
@@ -196,11 +202,12 @@ public static class CopingMechanism
                 new InfluenceFactor("FamilyCloseness", -1.8)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_rumination",
             Name = "Grübeln",
-            Description = "Wiederkehrendes negatives Denken über Probleme und Gefühle. Diese Gedankenschleifen verstärken negative Emotionen und beeinträchtigen die Problemlösefähigkeit.",
+            Description =
+                "Wiederkehrendes negatives Denken über Probleme und Gefühle. Diese Gedankenschleifen verstärken negative Emotionen und beeinträchtigen die Problemlösefähigkeit.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
             BaseProbability = 0.50,
@@ -221,11 +228,12 @@ public static class CopingMechanism
                 new InfluenceFactor("IntelligenceScore", 1.1)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_emotional_eating",
             Name = "Emotionales Essen",
-            Description = "Nahrung zur Bewältigung negativer Emotionen nutzen. Diese Strategie bietet kurzfristige Beruhigung, kann jedoch zu Essstörungen und gesundheitlichen Problemen führen.",
+            Description =
+                "Nahrung zur Bewältigung negativer Emotionen nutzen. Diese Strategie bietet kurzfristige Beruhigung, kann jedoch zu Essstörungen und gesundheitlichen Problemen führen.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
             BaseProbability = 0.40,
@@ -233,7 +241,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Dysfunctional,
-            Trigger = new CopingTrigger(stressThreshold: 50, moodThreshold: -20),
+            Trigger = new CopingTrigger(50, -20),
             IsHabitForming = true,
             StressImpact = -10,
             MoodImpact = 5,
@@ -245,11 +253,12 @@ public static class CopingMechanism
                 new InfluenceFactor("AnxietyLevel", 1.2)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_aggression",
             Name = "Aggressives Verhalten",
-            Description = "Frustration durch verbale oder körperliche Aggression ausdrücken. Dies schädigt zwischenmenschliche Beziehungen und verschlimmert langfristig das emotionale Befinden.",
+            Description =
+                "Frustration durch verbale oder körperliche Aggression ausdrücken. Dies schädigt zwischenmenschliche Beziehungen und verschlimmert langfristig das emotionale Befinden.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
             BaseProbability = 0.30,
@@ -257,7 +266,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Dysfunctional,
-            Trigger = new CopingTrigger(stressThreshold: 75),
+            Trigger = new CopingTrigger(75),
             IsHabitForming = true,
             StressImpact = -12,
             MoodImpact = -8,
@@ -272,11 +281,12 @@ public static class CopingMechanism
         },
 
         // Neutral Coping Mechanisms
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_distraction",
             Name = "Ablenkungsaktivitäten",
-            Description = "Unterhaltung oder Aktivitäten nutzen, um sich vom Stress abzulenken. Diese Strategie bietet zeitweilige Entlastung ohne langfristige positive oder negative Effekte.",
+            Description =
+                "Unterhaltung oder Aktivitäten nutzen, um sich vom Stress abzulenken. Diese Strategie bietet zeitweilige Entlastung ohne langfristige positive oder negative Effekte.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingNeutral,
             BaseProbability = 0.60,
@@ -284,7 +294,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Neutral,
-            Trigger = new CopingTrigger(stressThreshold: 40),
+            Trigger = new CopingTrigger(40),
             IsHabitForming = false,
             StressImpact = -10,
             MoodImpact = 8,
@@ -293,11 +303,12 @@ public static class CopingMechanism
             HealthImpact = -2,
             InfluenceFactors = []
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_sleep",
             Name = "Ruhe und Schlaf",
-            Description = "Schlaf als Flucht oder zur Erholung von Stress nutzen. Ausreichender Schlaf unterstützt die Regeneration, exzessiver Schlaf kann jedoch zur Vermeidung werden.",
+            Description =
+                "Schlaf als Flucht oder zur Erholung von Stress nutzen. Ausreichender Schlaf unterstützt die Regeneration, exzessiver Schlaf kann jedoch zur Vermeidung werden.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingNeutral,
             BaseProbability = 0.55,
@@ -305,7 +316,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Neutral,
-            Trigger = new CopingTrigger(stressThreshold: 55),
+            Trigger = new CopingTrigger(55),
             IsHabitForming = false,
             StressImpact = -12,
             MoodImpact = 5,
@@ -317,11 +328,12 @@ public static class CopingMechanism
                 new InfluenceFactor("SocialEnergyLevel", -0.5)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_humor",
             Name = "Humor und Lachen",
-            Description = "Humor nutzen, um die Stimmung und Perspektive aufzuhellen. Lachen kann Spannungen lösen und das soziale Miteinander stärken.",
+            Description =
+                "Humor nutzen, um die Stimmung und Perspektive aufzuhellen. Lachen kann Spannungen lösen und das soziale Miteinander stärken.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingNeutral,
             BaseProbability = 0.45,
@@ -341,11 +353,12 @@ public static class CopingMechanism
                 new InfluenceFactor("SocialEnergyLevel", 1.2)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_nature",
             Name = "Natur und Draußensein",
-            Description = "Zeit in der Natur verbringen, um sich zu entspannen. Naturerlebnisse fördern das psychische Wohlbefinden und reduzieren Stresshormone.",
+            Description =
+                "Zeit in der Natur verbringen, um sich zu entspannen. Naturerlebnisse fördern das psychische Wohlbefinden und reduzieren Stresshormone.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
             BaseProbability = 0.35,
@@ -353,7 +366,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Functional,
-            Trigger = new CopingTrigger(stressThreshold: 45),
+            Trigger = new CopingTrigger(45),
             IsHabitForming = true,
             StressImpact = -12,
             MoodImpact = 10,
@@ -365,11 +378,12 @@ public static class CopingMechanism
                 new InfluenceFactor("SocialEnvironmentLevel", 1.1)
             ]
         },
-        new EventTypes.CopingMechanism
+        new()
         {
             Id = "coping_journaling",
             Name = "Tagebuch schreiben",
-            Description = "Gedanken und Gefühle niederschreiben, um Emotionen zu verarbeiten. Journaling fördert Selbstreflexion und hilft, Gedankenmuster zu erkennen.",
+            Description =
+                "Gedanken und Gefühle niederschreiben, um Emotionen zu verarbeiten. Journaling fördert Selbstreflexion und hilft, Gedankenmuster zu erkennen.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
             BaseProbability = 0.30,
@@ -396,12 +410,13 @@ public static class CopingMechanism
     #region Aggregated Collections
 
     /// <summary>
-    /// All coping mechanisms available in the simulation.
+    ///     All coping mechanisms available in the simulation.
     /// </summary>
-    public static IReadOnlyList<EventTypes.CopingMechanism> AllcopingMechanisms { get; } = new ReadOnlyCollection<EventTypes.CopingMechanism>(
-    [
-        ..CopingMechanismsList
-    ]);
+    public static IReadOnlyList<EventTypes.CopingMechanism> AllcopingMechanisms { get; } =
+        new ReadOnlyCollection<EventTypes.CopingMechanism>(
+        [
+            ..CopingMechanismsList
+        ]);
 
     #endregion
 }

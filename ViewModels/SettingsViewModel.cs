@@ -12,6 +12,57 @@ namespace SimulationFIN31.ViewModels;
 
 public partial class SettingsViewModel : ViewModelBase
 {
+    private const int DEFAULT_INCOME_LEVEL = 4;
+    private const int DEFAULT_PARENTS_EDUCATION_LEVEL = 4;
+    private const int DEFAULT_JOB_STATUS = 4;
+    private const int DEFAULT_SOCIAL_ENVIRONMENT_LEVEL = 50;
+    private const int DEFAULT_INTELLIGENCE_SCORE = 50;
+    private const int DEFAULT_ANXIETY_LEVEL = 40;
+    private const int DEFAULT_FAMILY_CLOSENESS = 50;
+    private static readonly string SettingsFilePath = Path.Combine(AppContext.BaseDirectory, "settings.json");
+    private static bool _cleanupRegistered;
+
+    private readonly INavigationService _navigationService;
+
+    [ObservableProperty] private int _anxietyLevel = DEFAULT_ANXIETY_LEVEL;
+
+    [ObservableProperty] private int _familyCloseness = DEFAULT_FAMILY_CLOSENESS;
+
+    [ObservableProperty] private string _gender;
+
+    [ObservableProperty] private bool _hasAdhd;
+
+    [ObservableProperty] private bool _hasAutism;
+
+    [ObservableProperty] private int _incomeLevel = DEFAULT_INCOME_LEVEL;
+
+    [ObservableProperty] private int _intelligenceScore = DEFAULT_INTELLIGENCE_SCORE;
+
+    [ObservableProperty] private int _jobStatus = DEFAULT_JOB_STATUS;
+
+    [ObservableProperty] private int _parentsEducationLevel = DEFAULT_PARENTS_EDUCATION_LEVEL;
+
+    [ObservableProperty] private string _parentsRelationshipQuality;
+
+    [ObservableProperty] private bool _parentsWithAddiction;
+
+    [ObservableProperty] private bool _showSaveConfirmation;
+
+    [ObservableProperty] private string _socialEnergyLevel;
+
+    [ObservableProperty] private int _socialEnvironmentLevel = DEFAULT_SOCIAL_ENVIRONMENT_LEVEL;
+
+    public SettingsViewModel(INavigationService navigationService)
+    {
+        _navigationService = navigationService;
+
+        _socialEnergyLevel = SocialEnergyOptions[2];
+        _parentsRelationshipQuality = ParentsRelationshipOptions[1];
+        _gender = GenderOptions[0];
+
+        RegisterCleanup();
+    }
+
     public string SesToolTip { get; } =
         "Ein niedriger Status in den Bereichen Bildung," +
         " Einkommen und Beruf erhöht nachweislich das Risiko, an Depressionen," +
@@ -33,32 +84,14 @@ public partial class SettingsViewModel : ViewModelBase
         "\n\nHöhere Intelligenz und Extraversion fördern adaptive Bewältigungsstrategien, während " +
         "erhöhte Trait-Angst und introvertierte Tendenzen das Risiko für Angststörungen erhöhen können.";
 
-    private const int DEFAULT_INCOME_LEVEL = 4;
-    private const int DEFAULT_PARENTS_EDUCATION_LEVEL = 4;
-    private const int DEFAULT_JOB_STATUS = 4;
-    private const int DEFAULT_SOCIAL_ENVIRONMENT_LEVEL = 50;
-    private const int DEFAULT_INTELLIGENCE_SCORE = 50;
-    private const int DEFAULT_ANXIETY_LEVEL = 40;
-    private const int DEFAULT_FAMILY_CLOSENESS = 50;
-
-    private readonly INavigationService _navigationService;
-    private static readonly string SettingsFilePath = Path.Combine(AppContext.BaseDirectory, "settings.json");
-    private static bool _cleanupRegistered;
-    private readonly IReadOnlyList<string> _parentsRelationshipOptions =
+    public IReadOnlyList<string> ParentsRelationshipOptions { get; } =
     [
         "harmonisch",
         "neutral",
         "konfliktgeladen"
     ];
-    
-    private readonly IReadOnlyList<string> _genderOptions =
-    [
-        "Männlich",
-        "Weiblich",
-        "Non-Binär"
-    ];
 
-    private readonly IReadOnlyList<string> _socialEnergyOptions =
+    public IReadOnlyList<string> SocialEnergyOptions { get; } =
     [
         "Stark introvertiert",
         "Eher introvertiert",
@@ -67,55 +100,15 @@ public partial class SettingsViewModel : ViewModelBase
         "Stark extrovertiert"
     ];
 
-    public IReadOnlyList<string> ParentsRelationshipOptions => _parentsRelationshipOptions;
-    public IReadOnlyList<string> SocialEnergyOptions => _socialEnergyOptions;
-    
-    public IReadOnlyList<string> GenderOptions => _genderOptions;
-
-    [ObservableProperty]
-    private int _incomeLevel = DEFAULT_INCOME_LEVEL;
-
-    [ObservableProperty]
-    private int _parentsEducationLevel = DEFAULT_PARENTS_EDUCATION_LEVEL;
-
-    [ObservableProperty]
-    private int _jobStatus = DEFAULT_JOB_STATUS;
-
-    [ObservableProperty]
-    private int _socialEnvironmentLevel = DEFAULT_SOCIAL_ENVIRONMENT_LEVEL;
-
-    [ObservableProperty]
-    private bool _hasAdhd;
-
-    [ObservableProperty]
-    private bool _hasAutism;
-
-    [ObservableProperty]
-    private bool _parentsWithAddiction;
-
-    [ObservableProperty]
-    private int _intelligenceScore = DEFAULT_INTELLIGENCE_SCORE;
-
-    [ObservableProperty]
-    private int _anxietyLevel = DEFAULT_ANXIETY_LEVEL;
-
-    [ObservableProperty]
-    private string _parentsRelationshipQuality;
-    
-    [ObservableProperty]
-    private string _gender;
-
-    [ObservableProperty]
-    private int _familyCloseness = DEFAULT_FAMILY_CLOSENESS;
-
-    [ObservableProperty]
-    private string _socialEnergyLevel;
-
-    [ObservableProperty]
-    private bool _showSaveConfirmation;
+    public IReadOnlyList<string> GenderOptions { get; } =
+    [
+        "Männlich",
+        "Weiblich",
+        "Non-Binär"
+    ];
 
     [RelayCommand]
-    public void  NavigateStart()
+    public void NavigateStart()
     {
         _navigationService.NavigateTo<HomeViewModel>();
     }
@@ -164,30 +157,17 @@ public partial class SettingsViewModel : ViewModelBase
         ParentsWithAddiction = false;
         IntelligenceScore = DEFAULT_INTELLIGENCE_SCORE;
         AnxietyLevel = DEFAULT_ANXIETY_LEVEL;
-        ParentsRelationshipQuality = _parentsRelationshipOptions[1];
+        ParentsRelationshipQuality = ParentsRelationshipOptions[1];
         FamilyCloseness = DEFAULT_FAMILY_CLOSENESS;
-        SocialEnergyLevel = _socialEnergyOptions[2];
-        Gender= _genderOptions[0];
+        SocialEnergyLevel = SocialEnergyOptions[2];
+        Gender = GenderOptions[0];
 
         ResetSettingsFile();
-    }
-    public SettingsViewModel(INavigationService navigationService)
-    {
-        _navigationService = navigationService;
-
-        _socialEnergyLevel = _socialEnergyOptions[2];
-        _parentsRelationshipQuality = _parentsRelationshipOptions[1];
-        _gender = _genderOptions[0];
-
-        RegisterCleanup();
     }
 
     private static void RegisterCleanup()
     {
-        if (_cleanupRegistered)
-        {
-            return;
-        }
+        if (_cleanupRegistered) return;
 
         AppDomain.CurrentDomain.ProcessExit += (_, _) => ResetSettingsFile();
         AppDomain.CurrentDomain.DomainUnload += (_, _) => ResetSettingsFile();
@@ -196,10 +176,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     private static void ResetSettingsFile()
     {
-        if (!File.Exists(SettingsFilePath))
-        {
-            return;
-        }
+        if (!File.Exists(SettingsFilePath)) return;
 
         File.Delete(SettingsFilePath);
     }

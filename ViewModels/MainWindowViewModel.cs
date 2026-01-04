@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.ViewModels;
@@ -8,8 +9,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
 
     // Wir spiegeln das ViewModel des Services in die View
-    [ObservableProperty]
-    private ViewModelBase _currentViewModel;
+    [ObservableProperty] private ViewModelBase _currentViewModel;
 
     public MainWindowViewModel(INavigationService navigationService)
     {
@@ -23,11 +23,9 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     // Event Handler: Wenn sich im Service was ändert, übernehmen wir es
-    private void OnServicePropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    private void OnServicePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(INavigationService.CurrentViewModel))
-        {
             CurrentViewModel = _navigationService.CurrentViewModel;
-        }
     }
 }

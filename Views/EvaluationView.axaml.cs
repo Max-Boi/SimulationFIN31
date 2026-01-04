@@ -8,13 +8,13 @@ using SimulationFIN31.ViewModels;
 namespace SimulationFIN31.Views;
 
 /// <summary>
-/// Code-behind for the EvaluationView.
-/// Handles ScottPlot chart configuration which requires imperative code.
+///     Code-behind for the EvaluationView.
+///     Handles ScottPlot chart configuration which requires imperative code.
 /// </summary>
 public partial class EvaluationView : UserControl
 {
     private Crosshair? _crosshair;
-    private ScottPlot.Plottables.Text? _tooltipText;
+    private Text? _tooltipText;
     private EvaluationViewModel? _viewModel;
 
     public EvaluationView()
@@ -24,7 +24,7 @@ public partial class EvaluationView : UserControl
     }
 
     /// <summary>
-    /// Configures the ScottPlot chart when DataContext is set.
+    ///     Configures the ScottPlot chart when DataContext is set.
     /// </summary>
     private void OnDataContextChanged(object? sender, EventArgs e)
     {
@@ -37,7 +37,7 @@ public partial class EvaluationView : UserControl
     }
 
     /// <summary>
-    /// Sets up mouse interaction for showing data point values.
+    ///     Sets up mouse interaction for showing data point values.
     /// </summary>
     private void SetupInteractivity()
     {
@@ -46,7 +46,7 @@ public partial class EvaluationView : UserControl
     }
 
     /// <summary>
-    /// Handles mouse movement to update crosshair position and show values.
+    ///     Handles mouse movement to update crosshair position and show values.
     /// </summary>
     private void OnPointerMoved(object? sender, PointerEventArgs e)
     {
@@ -96,11 +96,11 @@ public partial class EvaluationView : UserControl
             var yRange = yMax - yMin;
 
             // Horizontal positioning: Place on right side unless cursor is in right 40%
-            var xOffset = coordinates.X > (xMin + xRange * 0.6) ? -3.5 : 1.5;
+            var xOffset = coordinates.X > xMin + xRange * 0.6 ? -3.5 : 1.5;
 
             // Vertical positioning: Place above cursor unless cursor is in top 50%
             // Estimate that tooltip takes about 25% of vertical space
-            var yOffset = coordinates.Y > (yMin + yRange * 0.5) ? 10 : -25;
+            var yOffset = coordinates.Y > yMin + yRange * 0.5 ? 10 : -25;
 
             // Position the tooltip
             _tooltipText.Location = new Coordinates(
@@ -110,13 +110,9 @@ public partial class EvaluationView : UserControl
 
             // Adjust alignment based on position
             if (xOffset < 0)
-            {
                 _tooltipText.LabelAlignment = Alignment.UpperRight;
-            }
             else
-            {
                 _tooltipText.LabelAlignment = Alignment.UpperLeft;
-            }
         }
         else
         {
@@ -128,26 +124,20 @@ public partial class EvaluationView : UserControl
     }
 
     /// <summary>
-    /// Hides crosshair when mouse leaves the chart.
+    ///     Hides crosshair when mouse leaves the chart.
     /// </summary>
     private void OnPointerExited(object? sender, PointerEventArgs e)
     {
-        if (_crosshair != null)
-        {
-            _crosshair.IsVisible = false;
-        }
+        if (_crosshair != null) _crosshair.IsVisible = false;
 
-        if (_tooltipText != null)
-        {
-            _tooltipText.IsVisible = false;
-        }
+        if (_tooltipText != null) _tooltipText.IsVisible = false;
 
         HealthChart.Refresh();
     }
 
     /// <summary>
-    /// Configures the health metrics chart with data from the ViewModel.
-    /// Sets up line plots for Stress, Mood, Social Belonging, and Resilience.
+    ///     Configures the health metrics chart with data from the ViewModel.
+    ///     Sets up line plots for Stress, Mood, Social Belonging, and Resilience.
     /// </summary>
     private void ConfigureChart(EvaluationViewModel vm)
     {

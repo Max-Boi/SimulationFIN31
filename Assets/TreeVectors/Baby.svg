@@ -1,12 +1,15 @@
-<svg width="512" height="512" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"> 
-  <g id="human_64_baby_detailed"> <path fill="#ffcd94" d="M22 18h20v24h-20z M20 22h2v16h-2z M42 22h2v16h-2z"/>
-    <path fill="#5e3f13" d="M30 16h4v2h-4z"/> <path fill="#000000" d="M26 26h4v4h-4z M34 26h4v4h-4z"/> 
-    <path fill="#ffadad" d="M22 30h4v4h-4z M38 30h4v4h-4z"/> <path fill="#00a8ff" d="M28 34h8v6h-8z"/>
-    <path fill="#ffffff" d="M30 36h4v2h-4z"/> 
-    <path fill="#0078d7" d="M26 36h2v2h-2z M36 36h2v2h-2z M30 34h4v2h-4z"/> 
-  <path fill="#ffffff" d="M24 42h16v12h-16z"/> 
-    <path fill="#ffcd94" d="M18 42h4v8h-4z M42 42h4v8h-4z"/>
-    <path fill="#ffcd94" d="M26 54h4v8h-4z M34 54h4v8h-4z"/> 
-    <path fill="#ffcd94" d="M18 26h2v6h-2z M44 26h2v6h-2z"/> 
-  </g>
+<svg width="512" height="512" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    <g id="human_64_baby_detailed">
+        <path fill="#ffcd94" d="M22 18h20v24h-20z M20 22h2v16h-2z M42 22h2v16h-2z"/>
+        <path fill="#5e3f13" d="M30 16h4v2h-4z"/>
+        <path fill="#000000" d="M26 26h4v4h-4z M34 26h4v4h-4z"/>
+        <path fill="#ffadad" d="M22 30h4v4h-4z M38 30h4v4h-4z"/>
+        <path fill="#00a8ff" d="M28 34h8v6h-8z"/>
+        <path fill="#ffffff" d="M30 36h4v2h-4z"/>
+        <path fill="#0078d7" d="M26 36h2v2h-2z M36 36h2v2h-2z M30 34h4v2h-4z"/>
+        <path fill="#ffffff" d="M24 42h16v12h-16z"/>
+        <path fill="#ffcd94" d="M18 42h4v8h-4z M42 42h4v8h-4z"/>
+        <path fill="#ffcd94" d="M26 54h4v8h-4z M34 54h4v8h-4z"/>
+        <path fill="#ffcd94" d="M18 26h2v6h-2z M44 26h2v6h-2z"/>
+    </g>
 </svg>

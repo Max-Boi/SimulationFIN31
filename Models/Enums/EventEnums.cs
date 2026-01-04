@@ -15,8 +15,8 @@ public enum CopingType
 }
 
 /// <summary>
-/// Visual categories for events, used to determine icon/image representation.
-/// Each category corresponds to a specific visual theme for UI display.
+///     Visual categories for events, used to determine icon/image representation.
+///     Each category corresponds to a specific visual theme for UI display.
 /// </summary>
 public enum VisualCategory
 {
@@ -78,13 +78,14 @@ public enum VisualCategory
     CopingNeutral,
     CopingFunctional,
     CopingDysfunctional,
+
     /// <summary>Natural disasters, environmental events.</summary>
     Nature
 }
 
 /// <summary>
-/// Represents the major life phases in human development.
-/// Age ranges are based on developmental psychology research.
+///     Represents the major life phases in human development.
+///     Age ranges are based on developmental psychology research.
 /// </summary>
 public enum LifePhase
 {
@@ -97,9 +98,12 @@ public enum LifePhase
     /// <summary>Ages 12-18: puberty, identity and personality development.</summary>
     Adolescence,
 
-    /// <summary>Ages 18-24: University or apprenticeships, romantic interests and relationships stabilize, independence from parents, first jobs</summary>
+    /// <summary>
+    ///     Ages 18-24: University or apprenticeships, romantic interests and relationships stabilize, independence from
+    ///     parents, first jobs
+    /// </summary>
     EmergingAdulthood,
 
     /// <summary>Ages 24-30: stable job, relationship and love life, family interactions and possible loss, job focus</summary>
-    Adulthood,
+    Adulthood
 }

@@ -13,13 +13,9 @@ public static class AdolescenceEvents
 
     #region Adolescence Personal Events (Ages 12-18)
 
-    /// <summary>
-    /// Personal events specific to Adolescence phase (ages 12-18).
-    /// Focus on identity formation, puberty, and peer relationships.
-    /// </summary>
     public static IReadOnlyList<PersonalEvent> AdolescencePersonalEvents { get; } =
     [
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_first_romance",
             Name = "Erste romantische Beziehung",
@@ -45,7 +41,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("FamilyCloseness", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_strong_academics",
             Name = "Starke schulische Leistungen",
@@ -72,7 +68,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsWithAddiction", -2.0)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_identity_exploration",
             Name = "Identitätsfindungsphase",
@@ -98,7 +94,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_leadership_school",
             Name = "Führungsposition in der Schule",
@@ -125,11 +121,12 @@ public static class AdolescenceEvents
                 new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_creative_expression",
             Name = "Kreative Entfaltung",
-            Description = "Teenager entwickelt starkes kreatives Ventil (Musik, Kunst, Schreiben) zur Selbstentfaltung.",
+            Description =
+                "Teenager entwickelt starkes kreatives Ventil (Musik, Kunst, Schreiben) zur Selbstentfaltung.",
             BaseProbability = 0.40,
             MinAge = ADOLESCENCE_MIN,
             MaxAge = ADOLESCENCE_MAX,
@@ -151,7 +148,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_heartbreak",
             Name = "Erster Liebeskummer",
@@ -174,10 +171,11 @@ public static class AdolescenceEvents
             [
                 new InfluenceFactor("AnxietyLevel", 2.5),
                 new InfluenceFactor("FamilyCloseness", -2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.5)
+                new InfluenceFactor("SocialEnvironmentLevel", -1.5),
+                new InfluenceFactor("GenderFemale", 1.4)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_peer_pressure",
             Name = "Starker Gruppenzwang",
@@ -201,10 +199,11 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsWithAddiction", 3.0),
                 new InfluenceFactor("FamilyCloseness", -2.5),
                 new InfluenceFactor("SocialEnvironmentLevel", -2.0),
-                new InfluenceFactor("ParentsEducationLevel", -1.5)
+                new InfluenceFactor("ParentsEducationLevel", -1.5),
+                new InfluenceFactor("GenderMale", 1.4)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_mental_health_struggle",
             Name = "Psychische Belastungen",
@@ -229,10 +228,11 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsWithAddiction", 4.0),
                 new InfluenceFactor("ParentsRelationshipQuality", -3.0),
                 new InfluenceFactor("SocialEnvironmentLevel", -2.5),
-                new InfluenceFactor("IncomeLevel", -2.0)
+                new InfluenceFactor("IncomeLevel", -2.0),
+                new InfluenceFactor("GenderFemale", 1.8)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_sports_achievement",
             Name = "Bedeutender sportlicher Erfolg",
@@ -256,10 +256,11 @@ public static class AdolescenceEvents
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
                 new InfluenceFactor("FamilyCloseness", 1.8),
                 new InfluenceFactor("SocialEnvironmentLevel", 1.8),
-                new InfluenceFactor("IncomeLevel", 1.5)
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("GenderMale", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adolescence_online_harassment",
             Name = "Online-Belästigung",
@@ -285,7 +286,267 @@ public static class AdolescenceEvents
                 new InfluenceFactor("HasAutism", 2.5),
                 new InfluenceFactor("HasAdhd", 2.0),
                 new InfluenceFactor("FamilyCloseness", -2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.8)
+                new InfluenceFactor("SocialEnvironmentLevel", -1.8),
+                new InfluenceFactor("GenderFemale", 1.5)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_menarche",
+            Name = "Erste Menstruation",
+            Description = "Teenager erlebt die Menarche und den Übergang in die körperliche Reife.",
+            BaseProbability = 0.95,
+            MinAge = 10,
+            MaxAge = 15,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = 12,
+            MoodImpact = -5,
+            SocialBelongingImpact = 0,
+            ResilienceImpact = 5,
+            HealthImpact = -3,
+            AnxietyChange = 10,
+            SocialEnergyChange = -5,
+            VisualCategory = VisualCategory.Health,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("GenderFemale", 10.0)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_voice_change",
+            Name = "Stimmbruch",
+            Description = "Teenager durchlebt den Stimmbruch als Teil der pubertären Entwicklung.",
+            BaseProbability = 0.95,
+            MinAge = 11,
+            MaxAge = 15,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = 8,
+            MoodImpact = -3,
+            SocialBelongingImpact = -5,
+            ResilienceImpact = 3,
+            HealthImpact = 0,
+            AnxietyChange = 8,
+            SocialEnergyChange = -5,
+            VisualCategory = VisualCategory.Health,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
+                new InfluenceFactor("GenderMale", 10.0)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_body_image_concerns",
+            Name = "Körperbildprobleme",
+            Description = "Teenager entwickelt negative Einstellung zum eigenen Körper und Aussehen.",
+            BaseProbability = 0.45,
+            MinAge = ADOLESCENCE_MIN,
+            MaxAge = ADOLESCENCE_MAX,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 22,
+            MoodImpact = -25,
+            SocialBelongingImpact = -15,
+            ResilienceImpact = -10,
+            HealthImpact = -8,
+            AnxietyChange = 25,
+            SocialEnergyChange = -15,
+            VisualCategory = VisualCategory.MentalHealth,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("AnxietyLevel", 3.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("FamilyCloseness", -2.0),
+                new InfluenceFactor("GenderFemale", 2.0)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_eating_disorder_onset",
+            Name = "Essstörung entwickelt",
+            Description = "Teenager entwickelt Symptome einer Essstörung als Reaktion auf Körperbildprobleme.",
+            BaseProbability = 0.08,
+            MinAge = ADOLESCENCE_MIN,
+            MaxAge = ADOLESCENCE_MAX,
+            IsUnique = true,
+            IsTraumatic = true,
+            StressImpact = 35,
+            MoodImpact = -40,
+            SocialBelongingImpact = -25,
+            ResilienceImpact = -20,
+            HealthImpact = -30,
+            AnxietyChange = 35,
+            SocialEnergyChange = -25,
+            VisualCategory = VisualCategory.MentalHealth,
+            Prerequisites = ["adolescence_body_image_concerns"],
+            InfluenceFactors =
+            [
+                new InfluenceFactor("AnxietyLevel", 4.0),
+                new InfluenceFactor("FamilyCloseness", -3.5),
+                new InfluenceFactor("ParentsWithAddiction", 3.0),
+                new InfluenceFactor("GenderFemale", 2.5)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_sexual_harassment",
+            Name = "Sexuelle Belästigung erlebt",
+            Description = "Teenager erlebt ungewollte sexuelle Aufmerksamkeit, Kommentare oder Berührungen.",
+            BaseProbability = 0.25,
+            MinAge = ADOLESCENCE_MIN,
+            MaxAge = ADOLESCENCE_MAX,
+            IsUnique = false,
+            IsTraumatic = true,
+            StressImpact = 35,
+            MoodImpact = -35,
+            SocialBelongingImpact = -25,
+            ResilienceImpact = -15,
+            HealthImpact = -10,
+            AnxietyChange = 35,
+            SocialEnergyChange = -25,
+            VisualCategory = VisualCategory.Trauma,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", -2.5),
+                new InfluenceFactor("FamilyCloseness", -2.0),
+                new InfluenceFactor("GenderFemale", 2.2)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_risky_behavior",
+            Name = "Riskantes Verhalten",
+            Description =
+                "Teenager engagiert sich in riskantem Verhalten wie gefährliche Mutproben oder illegale Aktivitäten.",
+            BaseProbability = 0.30,
+            MinAge = 13,
+            MaxAge = ADOLESCENCE_MAX,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 15,
+            MoodImpact = 5,
+            SocialBelongingImpact = 10,
+            ResilienceImpact = -5,
+            HealthImpact = -15,
+            AnxietyChange = -5,
+            SocialEnergyChange = 8,
+            VisualCategory = VisualCategory.Social,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("ParentsWithAddiction", 3.0),
+                new InfluenceFactor("FamilyCloseness", -2.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("GenderMale", 1.8)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_early_puberty_distress",
+            Name = "Frühe Pubertät belastend",
+            Description = "Teenager erlebt sehr frühe körperliche Entwicklung und fühlt sich dadurch unwohl.",
+            BaseProbability = 0.20,
+            MinAge = 10,
+            MaxAge = 13,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = 22,
+            MoodImpact = -20,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = -8,
+            HealthImpact = -5,
+            AnxietyChange = 22,
+            SocialEnergyChange = -15,
+            VisualCategory = VisualCategory.Health,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("FamilyCloseness", -1.8),
+                new InfluenceFactor("GenderFemale", 1.8)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_gender_identity_exploration",
+            Name = "Geschlechtsidentität hinterfragen",
+            Description = "Teenager erkundet und hinterfragt die eigene Geschlechtsidentität.",
+            BaseProbability = 0.15,
+            MinAge = ADOLESCENCE_MIN,
+            MaxAge = ADOLESCENCE_MAX,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = 18,
+            MoodImpact = -10,
+            SocialBelongingImpact = -12,
+            ResilienceImpact = 8,
+            HealthImpact = 0,
+            AnxietyChange = 18,
+            SocialEnergyChange = -8,
+            VisualCategory = VisualCategory.Identity,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("IntelligenceScore", 1.5),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
+                new InfluenceFactor("GenderNonBinary", 3.0)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_gender_discrimination",
+            Name = "Geschlechterdiskriminierung erlebt",
+            Description = "Teenager erlebt Benachteiligung oder Einschränkungen aufgrund des Geschlechts.",
+            BaseProbability = 0.35,
+            MinAge = ADOLESCENCE_MIN,
+            MaxAge = ADOLESCENCE_MAX,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 18,
+            MoodImpact = -18,
+            SocialBelongingImpact = -12,
+            ResilienceImpact = -5,
+            HealthImpact = -3,
+            AnxietyChange = 15,
+            SocialEnergyChange = -8,
+            VisualCategory = VisualCategory.Social,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", -2.5),
+                new InfluenceFactor("ParentsEducationLevel", -1.5),
+                new InfluenceFactor("GenderFemale", 1.5),
+                new InfluenceFactor("GenderNonBinary", 2.0)
+            ]
+        },
+        new()
+        {
+            Id = "adolescence_male_emotional_support",
+            Name = "Emotionale Unterstützung erhalten",
+            Description =
+                "Männlicher Teenager erfährt ungewöhnlich gute emotionale Unterstützung und kann Gefühle zeigen.",
+            BaseProbability = 0.25,
+            MinAge = ADOLESCENCE_MIN,
+            MaxAge = ADOLESCENCE_MAX,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = -15,
+            MoodImpact = 18,
+            SocialBelongingImpact = 15,
+            ResilienceImpact = 15,
+            HealthImpact = 5,
+            AnxietyChange = -15,
+            SocialEnergyChange = 10,
+            VisualCategory = VisualCategory.MentalHealth,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("FamilyCloseness", 3.0),
+                new InfluenceFactor("ParentsEducationLevel", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.8),
+                new InfluenceFactor("GenderMale", 1.5)
             ]
         }
     ];
@@ -295,11 +556,11 @@ public static class AdolescenceEvents
     #region Adolescence Generic Events (Ages 12-18)
 
     /// <summary>
-    /// Generic events that can occur during Adolescence phase (ages 12-18).
+    ///     Generic events that can occur during Adolescence phase (ages 12-18).
     /// </summary>
     public static IReadOnlyList<GenericEvent> AdolescenceGenericEvents { get; } =
     [
-        new GenericEvent
+        new()
         {
             Id = "adolescence_high_school_start",
             Name = "Übergang zur weiterführenden Schule",
@@ -323,7 +584,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_first_job",
             Name = "Erster Nebenjob",
@@ -347,7 +608,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_drivers_license",
             Name = "Führerschein erworben",
@@ -370,7 +631,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_graduation",
             Name = "Schulabschluss",
@@ -394,7 +655,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsWithAddiction", -2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_family_illness",
             Name = "Schwere Erkrankung in Familie",
@@ -417,7 +678,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_volunteer_work",
             Name = "Freiwilligenarbeit",
@@ -441,7 +702,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_travel_opportunity",
             Name = "Bedeutende Reiseerfahrung",
@@ -464,7 +725,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("FamilyCloseness", 1.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_economic_hardship",
             Name = "Finanzielle Familienprobleme",
@@ -488,7 +749,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsWithAddiction", 3.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_mentorship",
             Name = "Bedeutsame Mentorschaft",
@@ -512,7 +773,7 @@ public static class AdolescenceEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adolescence_community_recognition",
             Name = "Anerkennung durch Gemeinschaft",
@@ -543,7 +804,7 @@ public static class AdolescenceEvents
     #region Aggregated Event Collections
 
     /// <summary>
-    /// All generic events for the Adolescence phase.
+    ///     All generic events for the Adolescence phase.
     /// </summary>
     public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
     [
@@ -551,7 +812,7 @@ public static class AdolescenceEvents
     ]);
 
     /// <summary>
-    /// All personal events for the Adolescence phase.
+    ///     All personal events for the Adolescence phase.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
     [

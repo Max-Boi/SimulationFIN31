@@ -7,7 +7,7 @@ public readonly struct EventEffects
     public double SocialBelongingImpact { get; }
     public double ResilienceImpact { get; }
     public double HealthImpact { get; }
-        
+
     public EventEffects(
         double stressImpact = 0,
         double moodImpact = 0,

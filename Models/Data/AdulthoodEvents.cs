@@ -14,12 +14,12 @@ public static class AdulthoodEvents
     #region Adulthood Personal Events (Ages 24-30)
 
     /// <summary>
-    /// Personal events specific to Adulthood phase (ages 24-30).
-    /// Focus on career establishment, family formation, and life stability.
+    ///     Personal events specific to Adulthood phase (ages 24-30).
+    ///     Focus on career establishment, family formation, and life stability.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> AdulthoodPersonalEvents { get; } =
     [
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_career_promotion",
             Name = "Bedeutende Karrierebeförderung",
@@ -45,7 +45,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("SocialEnergyLevel", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_engagement",
             Name = "Verlobung oder Heirat",
@@ -72,7 +72,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_home_purchase",
             Name = "Erster Eigenheimkauf",
@@ -98,7 +98,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("FamilyCloseness", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_child_born",
             Name = "Geburt eines Kindes",
@@ -125,7 +125,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("SocialEnvironmentLevel", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_career_pivot",
             Name = "Beruflicher Neustart",
@@ -151,7 +151,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("AnxietyLevel", -1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_job_loss",
             Name = "Jobverlust",
@@ -178,7 +178,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("HasAdhd", 2.0)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_divorce",
             Name = "Scheidung oder Trennung",
@@ -205,7 +205,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("AnxietyLevel", 2.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_parent_death",
             Name = "Tod eines Elternteils",
@@ -230,7 +230,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IncomeLevel", -1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_entrepreneurship",
             Name = "Gründung eines Unternehmens",
@@ -255,7 +255,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("SocialEnergyLevel", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "adulthood_mental_health_support",
             Name = "Psychologische Unterstützung gesucht",
@@ -285,11 +285,11 @@ public static class AdulthoodEvents
     #region Adulthood Generic Events (Ages 24-30)
 
     /// <summary>
-    /// Generic events that can occur during Adulthood phase (ages 24-30).
+    ///     Generic events that can occur during Adulthood phase (ages 24-30).
     /// </summary>
     public static IReadOnlyList<GenericEvent> AdulthoodGenericEvents { get; } =
     [
-        new GenericEvent
+        new()
         {
             Id = "adulthood_industry_growth",
             Name = "Branchenwachstum",
@@ -312,7 +312,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IntelligenceScore", 1.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_community_involvement",
             Name = "Führungsrolle in der Gemeinschaft",
@@ -336,7 +336,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_health_milestone",
             Name = "Gesundheitlicher Meilenstein",
@@ -359,11 +359,12 @@ public static class AdulthoodEvents
                 new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_economic_downturn",
             Name = "Wirtschaftlicher Abschwung",
-            Description = "Ein wirtschaftlicher Abschwung beeinträchtigt finanzielle Sicherheit und Karriereaussichten.",
+            Description =
+                "Ein wirtschaftlicher Abschwung beeinträchtigt finanzielle Sicherheit und Karriereaussichten.",
             BaseProbability = 0.18,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
@@ -383,7 +384,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_reunion",
             Name = "Bedeutsames Wiedersehen",
@@ -406,7 +407,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("SocialEnvironmentLevel", 1.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_major_purchase",
             Name = "Große Anschaffung",
@@ -428,7 +429,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("JobStatus", 1.8)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_professional_recognition",
             Name = "Berufliche Anerkennung",
@@ -452,7 +453,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_chronic_health",
             Name = "Chronische Erkrankung diagnostiziert",
@@ -475,7 +476,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IncomeLevel", -1.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_friend_loss",
             Name = "Entfremdung von Freund",
@@ -498,7 +499,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("SocialEnvironmentLevel", -1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "adulthood_sibling_milestone",
             Name = "Meilenstein im Leben des Geschwisters",
@@ -527,7 +528,7 @@ public static class AdulthoodEvents
     #region Aggregated Event Collections
 
     /// <summary>
-    /// All generic events for the Adulthood phase.
+    ///     All generic events for the Adulthood phase.
     /// </summary>
     public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
     [
@@ -535,7 +536,7 @@ public static class AdulthoodEvents
     ]);
 
     /// <summary>
-    /// All personal events for the Adulthood phase.
+    ///     All personal events for the Adulthood phase.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
     [

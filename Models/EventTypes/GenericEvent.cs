@@ -9,6 +9,6 @@ public class GenericEvent : LifeEvent
     {
         Category = EventCategory.Generic;
     }
-    
+
     public List<string> TriggersFollowUpEvents { get; set; } = new();
 }

@@ -8,10 +8,8 @@ public class PersonalEvent : LifeEvent
     {
         Category = EventCategory.Personal;
     }
-        
+
     // Persönliche Events können die Persönlichkeit leicht verändern
     public double AnxietyChange { get; set; }
     public double SocialEnergyChange { get; set; }
-
-
 }

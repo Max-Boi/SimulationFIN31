@@ -6,7 +6,7 @@ using SimulationFIN31.Models.structs;
 
 namespace SimulationFIN31.Models.Data;
 
-public static  class ChildhoodEvents
+public static class ChildhoodEvents
 {
     private const int CHILDHOOD_MIN = 0;
     private const int CHILDHOOD_MAX = 5;
@@ -14,16 +14,17 @@ public static  class ChildhoodEvents
     #region Childhood Personal Events (Ages 0-6)
 
     /// <summary>
-    /// Personal events specific to the Childhood phase (ages 0-6).
-    /// Based on Attachment Theory and early developmental milestones.
+    ///     Personal events specific to the Childhood phase (ages 0-6).
+    ///     Based on Attachment Theory and early developmental milestones.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> ChildhoodPersonalEvents { get; } =
     [
-        new PersonalEvent
+        new()
         {
             Id = "childhood_secure_attachment",
             Name = "Sichere Bindung entwickelt",
-            Description = "Kind entwickelt durch konsequente, einfühlsame Betreuung eine sichere Bindung zur primären Bezugsperson.",
+            Description =
+                "Kind entwickelt durch konsequente, einfühlsame Betreuung eine sichere Bindung zur primären Bezugsperson.",
             BaseProbability = 0.65,
             MinAge = CHILDHOOD_MIN,
             MaxAge = 3,
@@ -44,11 +45,12 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsWithAddiction", -2.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_first_friendship",
             Name = "Erste wahre Freundschaft",
-            Description = "Kind schließt seine erste bedeutsame Freundschaft mit einem Gleichaltrigen und lernt Gegenseitigkeit und Teilen.",
+            Description =
+                "Kind schließt seine erste bedeutsame Freundschaft mit einem Gleichaltrigen und lernt Gegenseitigkeit und Teilen.",
             BaseProbability = 0.70,
             MinAge = 3,
             MaxAge = CHILDHOOD_MAX,
@@ -68,11 +70,12 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("FamilyCloseness", 1.8)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_parental_praise",
             Name = "Bedeutsame elterliche Anerkennung",
-            Description = "Kind erhält echtes Lob und Anerkennung für seine Bemühungen, was das Selbstwertgefühl stärkt.",
+            Description =
+                "Kind erhält echtes Lob und Anerkennung für seine Bemühungen, was das Selbstwertgefühl stärkt.",
             BaseProbability = 0.60,
             MinAge = 2,
             MaxAge = CHILDHOOD_MAX,
@@ -93,7 +96,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsWithAddiction", -2.0)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_sibling_bond",
             Name = "Geschwisterbindung gestärkt",
@@ -117,11 +120,12 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsRelationshipQuality", 2.0)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_creative_talent",
             Name = "Kreatives Talent entdeckt",
-            Description = "Kind zeigt natürliche Begabung für kreative Ausdrucksformen wie Kunst, Musik oder Geschichtenerzählen.",
+            Description =
+                "Kind zeigt natürliche Begabung für kreative Ausdrucksformen wie Kunst, Musik oder Geschichtenerzählen.",
             BaseProbability = 0.30,
             MinAge = 3,
             MaxAge = CHILDHOOD_MAX,
@@ -142,7 +146,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_separation_anxiety",
             Name = "Trennungsangst-Episode",
@@ -165,11 +169,12 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("AnxietyLevel", 2.5),
                 new InfluenceFactor("FamilyCloseness", -2.5),
                 new InfluenceFactor("ParentsWithAddiction", 2.0),
-                new InfluenceFactor("ParentsRelationshipQuality", -1.8)
+                new InfluenceFactor("ParentsRelationshipQuality", -1.8),
+                new InfluenceFactor("GenderFemale", 1.3)
             ],
             Exclusions = ["childhood_secure_attachment"]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_witnessed_conflict",
             Name = "Elterlichen Konflikt miterlebt",
@@ -194,11 +199,12 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("IncomeLevel", -1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_early_illness",
             Name = "Schwere Kinderkrankheit",
-            Description = "Kind erlebt eine bedeutende Krankheit, die längere Pflege oder Krankenhausaufenthalt erfordert.",
+            Description =
+                "Kind erlebt eine bedeutende Krankheit, die längere Pflege oder Krankenhausaufenthalt erfordert.",
             BaseProbability = 0.15,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
@@ -219,11 +225,12 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("SocialEnvironmentLevel", -1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_kindergarten_success",
             Name = "Erfolgreicher Kindergarteneinstieg",
-            Description = "Kind gewöhnt sich gut an den Kindergarten, schließt Freundschaften und zeigt Freude am Lernen.",
+            Description =
+                "Kind gewöhnt sich gut an den Kindergarten, schließt Freundschaften und zeigt Freude am Lernen.",
             BaseProbability = 0.55,
             MinAge = 4,
             MaxAge = CHILDHOOD_MAX,
@@ -245,7 +252,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.8)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "childhood_neglect_experience",
             Name = "Emotionale Vernachlässigung",
@@ -269,9 +276,113 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("FamilyCloseness", -4.0),
                 new InfluenceFactor("ParentsRelationshipQuality", -3.0),
                 new InfluenceFactor("IncomeLevel", -2.0),
-                new InfluenceFactor("ParentsEducationLevel", -1.5)
+                new InfluenceFactor("ParentsEducationLevel", -1.5),
+                new InfluenceFactor("GenderMale", 1.2)
             ],
             Exclusions = ["childhood_secure_attachment"]
+        },
+        new()
+        {
+            Id = "childhood_early_language_development",
+            Name = "Frühe Sprachentwicklung",
+            Description =
+                "Kind zeigt überdurchschnittlich frühe Sprachentwicklung und verbale Kommunikationsfähigkeiten.",
+            BaseProbability = 0.30,
+            MinAge = 1,
+            MaxAge = 3,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = -5,
+            MoodImpact = 10,
+            SocialBelongingImpact = 8,
+            ResilienceImpact = 5,
+            HealthImpact = 0,
+            AnxietyChange = -3,
+            SocialEnergyChange = 5,
+            VisualCategory = VisualCategory.Education,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("IntelligenceScore", 2.5),
+                new InfluenceFactor("FamilyCloseness", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("GenderFemale", 1.4)
+            ]
+        },
+        new()
+        {
+            Id = "childhood_rough_play_injury",
+            Name = "Verletzung beim Toben",
+            Description = "Kind verletzt sich bei wildem körperlichem Spiel, lernt aber auch Grenzen kennen.",
+            BaseProbability = 0.35,
+            MinAge = 2,
+            MaxAge = CHILDHOOD_MAX,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 10,
+            MoodImpact = -5,
+            SocialBelongingImpact = 0,
+            ResilienceImpact = 5,
+            HealthImpact = -8,
+            AnxietyChange = 5,
+            SocialEnergyChange = 0,
+            VisualCategory = VisualCategory.Health,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("GenderMale", 1.6)
+            ]
+        },
+        new()
+        {
+            Id = "childhood_emotional_intelligence",
+            Name = "Emotionale Sensibilität entwickelt",
+            Description = "Kind zeigt frühe Fähigkeit, Emotionen bei sich und anderen zu erkennen und zu benennen.",
+            BaseProbability = 0.35,
+            MinAge = 2,
+            MaxAge = CHILDHOOD_MAX,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = -5,
+            MoodImpact = 10,
+            SocialBelongingImpact = 12,
+            ResilienceImpact = 8,
+            HealthImpact = 0,
+            AnxietyChange = -5,
+            SocialEnergyChange = 5,
+            VisualCategory = VisualCategory.Social,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("FamilyCloseness", 2.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.8),
+                new InfluenceFactor("IntelligenceScore", 1.5),
+                new InfluenceFactor("GenderFemale", 1.5)
+            ]
+        },
+        new()
+        {
+            Id = "childhood_gender_stereotyping",
+            Name = "Geschlechterstereotype erlebt",
+            Description = "Kind erlebt einschränkende Geschlechtererwartungen von Erwachsenen oder Gleichaltrigen.",
+            BaseProbability = 0.40,
+            MinAge = 3,
+            MaxAge = CHILDHOOD_MAX,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 8,
+            MoodImpact = -8,
+            SocialBelongingImpact = -5,
+            ResilienceImpact = -3,
+            HealthImpact = 0,
+            AnxietyChange = 5,
+            SocialEnergyChange = -3,
+            VisualCategory = VisualCategory.Social,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("ParentsEducationLevel", -1.5),
+                new InfluenceFactor("GenderNonBinary", 2.0)
+            ]
         }
     ];
 
@@ -280,15 +391,16 @@ public static  class ChildhoodEvents
     #region Childhood Generic Events (Ages 0-6)
 
     /// <summary>
-    /// Generic events that can occur during Childhood phase (ages 0-6).
+    ///     Generic events that can occur during Childhood phase (ages 0-6).
     /// </summary>
     public static IReadOnlyList<GenericEvent> ChildhoodGenericEvents { get; } =
     [
-        new GenericEvent
+        new()
         {
             Id = "childhood_family_vacation",
             Name = "Familienurlaub",
-            Description = "Familie unternimmt gemeinsamen, unvergesslichen Urlaub und schafft positive gemeinsame Erlebnisse.",
+            Description =
+                "Familie unternimmt gemeinsamen, unvergesslichen Urlaub und schafft positive gemeinsame Erlebnisse.",
             BaseProbability = 0.45,
             MinAge = 2,
             MaxAge = CHILDHOOD_MAX,
@@ -307,7 +419,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsRelationshipQuality", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_pet_acquired",
             Name = "Haustier angeschafft",
@@ -330,7 +442,7 @@ public static  class ChildhoodEvents
             ],
             TriggersFollowUpEvents = ["childhood_pet_loss"]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_grandparent_bond",
             Name = "Bindung zu Großeltern",
@@ -351,7 +463,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("FamilyCloseness", 2.8)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_new_sibling",
             Name = "Neues Geschwisterchen geboren",
@@ -373,7 +485,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsRelationshipQuality", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_family_relocation",
             Name = "Familienumzug",
@@ -394,7 +506,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("JobStatus", 1.2)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_pet_loss",
             Name = "Verlust des Haustiers",
@@ -413,11 +525,12 @@ public static  class ChildhoodEvents
             Prerequisites = ["childhood_pet_acquired"],
             InfluenceFactors = []
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_parent_job_loss",
             Name = "Elternteil verliert Arbeit",
-            Description = "Ein Elternteil verliert den Arbeitsplatz, was die finanzielle Stabilität der Familie beeinträchtigt.",
+            Description =
+                "Ein Elternteil verliert den Arbeitsplatz, was die finanzielle Stabilität der Familie beeinträchtigt.",
             BaseProbability = 0.18,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
@@ -437,7 +550,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_community_event",
             Name = "Positives Gemeinschaftsereignis",
@@ -459,7 +572,7 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("IncomeLevel", 1.8)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_health_checkup",
             Name = "Routineuntersuchung",
@@ -481,11 +594,12 @@ public static  class ChildhoodEvents
                 new InfluenceFactor("ParentsEducationLevel", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "childhood_parents_divorce",
             Name = "Elterntrennung oder Scheidung",
-            Description = "Eltern trennen sich oder lassen sich scheiden, was die Familienstruktur grundlegend verändert.",
+            Description =
+                "Eltern trennen sich oder lassen sich scheiden, was die Familienstruktur grundlegend verändert.",
             BaseProbability = 0.25,
             MinAge = CHILDHOOD_MIN,
             MaxAge = CHILDHOOD_MAX,
@@ -513,7 +627,7 @@ public static  class ChildhoodEvents
     #region Aggregated Event Collections
 
     /// <summary>
-    /// All generic events for the Childhood phase.
+    ///     All generic events for the Childhood phase.
     /// </summary>
     public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
     [
@@ -521,7 +635,7 @@ public static  class ChildhoodEvents
     ]);
 
     /// <summary>
-    /// All personal events for the Childhood phase.
+    ///     All personal events for the Childhood phase.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
     [

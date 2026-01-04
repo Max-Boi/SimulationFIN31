@@ -32,6 +32,7 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<ISimulationHistoryService, SimulationHistoryService>();
         collection.AddSingleton<ISimulationService, SimulationService>();
 
-        collection.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
+        collection.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider =>
+            viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
     }
 }

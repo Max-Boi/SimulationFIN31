@@ -3,22 +3,24 @@
              x:Class="SimulationFIN31.App"
              xmlns:local="using:SimulationFIN31"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
-           <Application.Resources>
-                <ResourceDictionary>
-               <ResourceDictionary.MergedDictionaries>
-                   <ResourceInclude Source="/Views/Styles/Colors.axaml"/>
-                   
-               </ResourceDictionary.MergedDictionaries>
-           </ResourceDictionary>
-           </Application.Resources>
-            
-             
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Views/Styles/Colors.axaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+
     <Application.Styles>
-        <FluentTheme /> <StyleInclude Source="/Views/Styles/ButtonStyles.axaml"/> <StyleInclude Source="/Views/Styles/SettingsStyles.axaml"/> <StyleInclude Source="/Views/Styles/SimulationStyles.axaml"/>
+        <FluentTheme /> <StyleInclude Source="/Views/Styles/ButtonStyles.axaml" />
+        <StyleInclude Source="/Views/Styles/SettingsStyles.axaml" />
+        <StyleInclude Source="/Views/Styles/SimulationStyles.axaml" />
     </Application.Styles>
 </Application>

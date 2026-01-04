@@ -10,17 +10,17 @@
 
     <Grid Background="{StaticResource Brush.BackdropGradient}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Compact Header -->
         <Border Grid.Row="0" Classes="CompactHeader" Margin="0,0,0,12">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0"
@@ -28,7 +28,7 @@
                         Classes="Glass"
                         Command="{Binding GoBackCommand}"
                         Width="100"
-                        Height="36"/>
+                        Height="36" />
 
                 <StackPanel Grid.Column="1"
                             HorizontalAlignment="Center"
@@ -37,18 +37,18 @@
                     <TextBlock Text="Alter:"
                                Classes="Label"
                                VerticalAlignment="Center"
-                               Margin="0"/>
+                               Margin="0" />
                     <TextBlock Text="{Binding CurrentAge}"
                                Classes="Value"
                                FontSize="20"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                     <TextBlock Text="|"
                                Foreground="{DynamicResource TextSecondaryBrush}"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                     <TextBlock Text="{Binding CurrentLifePhase}"
                                Classes="Value"
                                FontSize="16"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                 </StackPanel>
 
                 <!-- Simulation Status Indicator -->
@@ -58,18 +58,18 @@
                             VerticalAlignment="Center">
                     <Ellipse Width="10" Height="10"
                              Fill="#2ECC71"
-                             IsVisible="{Binding IsRunning}"/>
+                             IsVisible="{Binding IsRunning}" />
                     <Ellipse Width="10" Height="10"
                              Fill="#F39C12"
-                             IsVisible="{Binding IsPaused}"/>
+                             IsVisible="{Binding IsPaused}" />
                     <TextBlock Text="Laufend"
                                IsVisible="{Binding IsRunning}"
                                FontSize="12"
-                               Foreground="{DynamicResource TextSecondaryBrush}"/>
+                               Foreground="{DynamicResource TextSecondaryBrush}" />
                     <TextBlock Text="Pausiert"
                                IsVisible="{Binding IsPaused}"
                                FontSize="12"
-                               Foreground="{DynamicResource TextSecondaryBrush}"/>
+                               Foreground="{DynamicResource TextSecondaryBrush}" />
                 </StackPanel>
             </Grid>
         </Border>
@@ -77,9 +77,9 @@
         <!-- Main Content Area - 3 Column Layout -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="280" />
             </Grid.ColumnDefinitions>
 
             <!-- LEFT PANEL: Stats and Controls -->
@@ -90,45 +90,45 @@
                     <StackPanel Spacing="14">
                         <TextBlock Text="Psychische Gesundheit"
                                    Classes="SectionHeader"
-                                   Margin="0,0,0,4"/>
+                                   Margin="0,0,0,4" />
 
                         <!-- Stress Level -->
                         <StackPanel Spacing="4">
                             <Grid>
-                                <TextBlock Text="Stress" Classes="Label" Margin="0"/>
+                                <TextBlock Text="Stress" Classes="Label" Margin="0" />
                                 <TextBlock Text="{Binding StressLevel, StringFormat={}{0:F0}%}"
-                                           Classes="Value"/>
+                                           Classes="Value" />
                             </Grid>
                             <ProgressBar Classes="StressBar"
                                          Minimum="0"
                                          Maximum="100"
-                                         Value="{Binding StressLevel}"/>
+                                         Value="{Binding StressLevel}" />
                         </StackPanel>
 
                         <!-- Mood Level -->
                         <StackPanel Spacing="4">
                             <Grid>
-                                <TextBlock Text="Stimmung" Classes="Label" Margin="0"/>
+                                <TextBlock Text="Stimmung" Classes="Label" Margin="0" />
                                 <TextBlock Text="{Binding MoodLevel, StringFormat={}{0:F0}}"
-                                           Classes="Value"/>
+                                           Classes="Value" />
                             </Grid>
                             <ProgressBar Classes="MoodBar"
                                          Minimum="-100"
                                          Maximum="100"
-                                         Value="{Binding MoodLevel}"/>
+                                         Value="{Binding MoodLevel}" />
                         </StackPanel>
 
                         <!-- Social Level -->
                         <StackPanel Spacing="4">
                             <Grid>
-                                <TextBlock Text="Soziale Zugehörigkeit" Classes="Label" Margin="0"/>
+                                <TextBlock Text="Soziale Zugehörigkeit" Classes="Label" Margin="0" />
                                 <TextBlock Text="{Binding SocialLevel, StringFormat={}{0:F0}%}"
-                                           Classes="Value"/>
+                                           Classes="Value" />
                             </Grid>
                             <ProgressBar Classes="SocialBar"
                                          Minimum="0"
                                          Maximum="100"
-                                         Value="{Binding SocialLevel}"/>
+                                         Value="{Binding SocialLevel}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -137,16 +137,16 @@
                 <Border Classes="GlassPanel">
                     <StackPanel Spacing="10">
                         <Grid>
-                            <TextBlock Text="Geschwindigkeit" Classes="Label" Margin="0"/>
+                            <TextBlock Text="Geschwindigkeit" Classes="Label" Margin="0" />
                             <TextBlock Text="{Binding SimulationSpeed, StringFormat={}{0:F2}x}"
-                                       Classes="Value"/>
+                                       Classes="Value" />
                         </Grid>
 
                         <Slider Minimum="0.25"
                                 Maximum="5"
                                 Value="{Binding SimulationSpeed}"
                                 TickFrequency="0.25"
-                                IsSnapToTickEnabled="True"/>
+                                IsSnapToTickEnabled="True" />
                     </StackPanel>
                 </Border>
 
@@ -155,16 +155,16 @@
                     <StackPanel Spacing="10">
                         <TextBlock Text="Steuerung"
                                    Classes="SectionHeader"
-                                   Margin="0,0,0,4"/>
+                                   Margin="0,0,0,4" />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <Button Grid.Column="0" Grid.Row="0"
@@ -172,28 +172,28 @@
                                     Classes="Accent"
                                     Command="{Binding StartSimulationCommand}"
                                     Margin="0,0,4,6"
-                                    Height="40"/>
+                                    Height="40" />
 
                             <Button Grid.Column="1" Grid.Row="0"
                                     Content="Pause"
                                     Classes="Glass"
                                     Command="{Binding PauseSimulationCommand}"
                                     Margin="4,0,0,6"
-                                    Height="40"/>
+                                    Height="40" />
 
                             <Button Grid.Column="0" Grid.Row="1"
                                     Content="Stop"
                                     Classes="Glass"
                                     Command="{Binding StopSimulationCommand}"
                                     Margin="0,0,4,0"
-                                    Height="40"/>
+                                    Height="40" />
 
                             <Button Grid.Column="1" Grid.Row="1"
                                     Content="Reset"
                                     Classes="Glass"
                                     Command="{Binding ResetSimulationCommand}"
                                     Margin="4,0,0,0"
-                                    Height="40"/>
+                                    Height="40" />
                         </Grid>
                     </StackPanel>
                 </Border>
@@ -202,8 +202,8 @@
             <!-- CENTER PANEL: Illnesses, Events, Tree -->
             <Grid Grid.Column="1" Margin="16,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!-- Top Row: Illnesses Panel -->
@@ -212,11 +212,11 @@
                         <TextBlock Text="Erkrankungen:"
                                    FontSize="13"
                                    Foreground="{DynamicResource TextSecondaryBrush}"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
                         <ItemsControl ItemsSource="{Binding ActiveIllnessNames}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="8"/>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
@@ -225,7 +225,7 @@
                                             CornerRadius="6"
                                             Padding="8,4">
                                         <TextBlock Text="{Binding}"
-                                                   Classes="IllnessName"/>
+                                                   Classes="IllnessName" />
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -235,7 +235,7 @@
                                    FontStyle="Italic"
                                    Foreground="{DynamicResource TextSecondaryBrush}"
                                    VerticalAlignment="Center"
-                                   IsVisible="{Binding !ActiveIllnessNames.Count}"/>
+                                   IsVisible="{Binding !ActiveIllnessNames.Count}" />
                     </StackPanel>
                 </Border>
 
@@ -243,13 +243,13 @@
                 <Border Grid.Row="1" Classes="TreeContainer">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
                         <!-- Coping Event - Top Center (above tree) -->
@@ -261,7 +261,7 @@
                                     ToolTip.Tip="{Binding LatestCopingEvent.TooltipText}"
                                     IsVisible="{Binding LatestCopingEvent, Converter={x:Static ObjectConverters.IsNotNull}}">
                                 <Image Source="{Binding LatestCopingEvent.Icon}"
-                                       Stretch="Uniform"/>
+                                       Stretch="Uniform" />
                             </Border>
                             <Border Classes="EventIconBox"
                                     IsVisible="{Binding LatestCopingEvent, Converter={x:Static ObjectConverters.IsNull}}"
@@ -271,7 +271,7 @@
                                            VerticalAlignment="Center"
                                            FontSize="40"
                                            FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                           Foreground="{DynamicResource TextSecondaryBrush}" />
                             </Border>
                         </StackPanel>
 
@@ -284,7 +284,7 @@
                                     ToolTip.Tip="{Binding LatestPersonalEvent.TooltipText}"
                                     IsVisible="{Binding LatestPersonalEvent, Converter={x:Static ObjectConverters.IsNotNull}}">
                                 <Image Source="{Binding LatestPersonalEvent.Icon}"
-                                       Stretch="Uniform"/>
+                                       Stretch="Uniform" />
                             </Border>
                             <Border Classes="EventIconBox"
                                     IsVisible="{Binding LatestPersonalEvent, Converter={x:Static ObjectConverters.IsNull}}"
@@ -294,25 +294,26 @@
                                            VerticalAlignment="Center"
                                            FontSize="40"
                                            FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                           Foreground="{DynamicResource TextSecondaryBrush}" />
                             </Border>
                         </StackPanel>
 
                         <!-- Tree Animation - Center -->
                         <TransitioningContentControl Grid.Column="1" Grid.Row="1"
-                                                      Content="{Binding CurrentLifePhaseKey}"
-                                                      VerticalAlignment="Bottom"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalContentAlignment="Bottom"
-                                                      HorizontalContentAlignment="Center">
+                                                     Content="{Binding CurrentLifePhaseKey}"
+                                                     VerticalAlignment="Bottom"
+                                                     HorizontalAlignment="Center"
+                                                     VerticalContentAlignment="Bottom"
+                                                     HorizontalContentAlignment="Center">
                             <TransitioningContentControl.PageTransition>
-                                <CrossFade Duration="0:0:0.9"/>
+                                <CrossFade Duration="0:0:0.9" />
                             </TransitioningContentControl.PageTransition>
                             <TransitioningContentControl.ContentTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding #TreeHost.((vm:SimulationViewModel)DataContext).CurrentTreeImage}"
-                                           MaxHeight="450"
-                                           Stretch="Uniform"/>
+                                    <Image
+                                        Source="{Binding #TreeHost.((vm:SimulationViewModel)DataContext).CurrentTreeImage}"
+                                        MaxHeight="450"
+                                        Stretch="Uniform" />
                                 </DataTemplate>
                             </TransitioningContentControl.ContentTemplate>
                         </TransitioningContentControl>
@@ -326,7 +327,7 @@
                                     ToolTip.Tip="{Binding LatestGenericEvent.TooltipText}"
                                     IsVisible="{Binding LatestGenericEvent, Converter={x:Static ObjectConverters.IsNotNull}}">
                                 <Image Source="{Binding LatestGenericEvent.Icon}"
-                                       Stretch="Uniform"/>
+                                       Stretch="Uniform" />
                             </Border>
                             <Border Classes="EventIconBox"
                                     IsVisible="{Binding LatestGenericEvent, Converter={x:Static ObjectConverters.IsNull}}"
@@ -336,7 +337,7 @@
                                            VerticalAlignment="Center"
                                            FontSize="40"
                                            FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                           Foreground="{DynamicResource TextSecondaryBrush}" />
                             </Border>
                         </StackPanel>
                     </Grid>
@@ -349,7 +350,7 @@
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top"
                                Text="Ereignisprotokoll"
-                               Classes="SectionHeader"/>
+                               Classes="SectionHeader" />
 
                     <ListBox ItemsSource="{Binding EventLog}"
                              Background="Transparent"
@@ -360,11 +361,11 @@
                                     <TextBlock Text="{Binding DisplayText}"
                                                FontWeight="SemiBold"
                                                FontSize="13"
-                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                               Foreground="{DynamicResource TextPrimaryBrush}" />
                                     <TextBlock Text="{Binding Description}"
                                                TextWrapping="Wrap"
                                                Foreground="{DynamicResource TextSecondaryBrush}"
-                                               FontSize="11"/>
+                                               FontSize="11" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

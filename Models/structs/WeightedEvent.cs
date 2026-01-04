@@ -7,7 +7,7 @@ public readonly struct WeightedEvent
     public LifeEvent Event { get; }
     public double Weight { get; }
     public double NormalizedProbability { get; }
-        
+
     public WeightedEvent(LifeEvent lifeEvent, double weight, double normalizedProbability)
     {
         Event = lifeEvent;

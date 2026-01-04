@@ -14,17 +14,17 @@ public static class EmergingAdulthoodEvents
     #region Emerging Adulthood Personal Events (Ages 18-24)
 
     /// <summary>
-    /// Personal events specific to Emerging Adulthood phase (ages 18-24).
-    /// Focus on independence, higher education, and early career.
+    ///     Personal events specific to Emerging Adulthood phase (ages 18-24).
+    ///     Focus on independence, higher education, and early career.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> EmergingAdulthoodPersonalEvents { get; } =
     [
-
-        new PersonalEvent
+        new()
         {
             Id = "emerging_university_acceptance",
             Name = "Universitätszulassung",
-            Description = "Der junge Erwachsene erhält die Zulassung zur gewünschten Universität oder Ausbildungsprogramm.",
+            Description =
+                "Der junge Erwachsene erhält die Zulassung zur gewünschten Universität oder Ausbildungsprogramm.",
             BaseProbability = 0.55,
             MinAge = EMERGING_ADULTHOOD_MIN,
             MaxAge = 20,
@@ -47,7 +47,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("ParentsWithAddiction", -2.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_serious_relationship",
             Name = "Feste romantische Beziehung",
@@ -73,7 +73,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_first_apartment",
             Name = "Erste eigene Wohnung",
@@ -99,7 +99,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("FamilyCloseness", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_career_start",
             Name = "Erste Karriereposition",
@@ -125,7 +125,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_degree_completion",
             Name = "Abschluss erworben",
@@ -152,7 +152,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("ParentsWithAddiction", -2.0)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_relationship_ended",
             Name = "Beziehungstrennung",
@@ -179,11 +179,12 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("SocialEnvironmentLevel", -1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_academic_failure",
             Name = "Akademischer Rückschlag",
-            Description = "Der junge Erwachsene erlebt ein signifikantes akademisches Versagen oder einen Studienabbruch.",
+            Description =
+                "Der junge Erwachsene erlebt ein signifikantes akademisches Versagen oder einen Studienabbruch.",
             BaseProbability = 0.20,
             MinAge = EMERGING_ADULTHOOD_MIN,
             MaxAge = EMERGING_ADULTHOOD_MAX,
@@ -209,7 +210,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("IncomeLevel", -2.0)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_financial_independence",
             Name = "Finanzielle Unabhängigkeit",
@@ -235,7 +236,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_identity_crisis",
             Name = "Quarterlife-Crisis",
@@ -262,11 +263,12 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("ParentsRelationshipQuality", -2.0)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "emerging_skill_mastery",
             Name = "Beherrschung beruflicher Fähigkeiten",
-            Description = "Der junge Erwachsene erreicht bemerkenswerte Expertise in einer beruflichen oder kreativen Fähigkeit.",
+            Description =
+                "Der junge Erwachsene erreicht bemerkenswerte Expertise in einer beruflichen oder kreativen Fähigkeit.",
             BaseProbability = 0.30,
             MinAge = 21,
             MaxAge = EMERGING_ADULTHOOD_MAX,
@@ -295,11 +297,11 @@ public static class EmergingAdulthoodEvents
     #region Emerging Adulthood Generic Events (Ages 18-24)
 
     /// <summary>
-    /// Generic events that can occur during Emerging Adulthood phase (ages 18-24).
+    ///     Generic events that can occur during Emerging Adulthood phase (ages 18-24).
     /// </summary>
     public static IReadOnlyList<GenericEvent> EmergingAdulthoodGenericEvents { get; } =
     [
-        new GenericEvent
+        new()
         {
             Id = "emerging_first_vote",
             Name = "Erste Wahlteilnahme",
@@ -322,7 +324,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("IntelligenceScore", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_city_move",
             Name = "Umzug in neue Stadt",
@@ -346,7 +348,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("AnxietyLevel", -1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_networking_success",
             Name = "Berufliche Netzwerkerfolge",
@@ -370,7 +372,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("IntelligenceScore", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_economic_recession",
             Name = "Wirtschaftskrise",
@@ -393,7 +395,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("ParentsEducationLevel", -2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_friend_group_formed",
             Name = "Enger Freundeskreis gebildet",
@@ -415,11 +417,12 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("SocialEnvironmentLevel", 1.2)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_health_scare",
             Name = "Gesundheitsschock",
-            Description = "Der junge Erwachsene erlebt ein besorgniserregendes Gesundheitsproblem, das Aufmerksamkeit erfordert.",
+            Description =
+                "Der junge Erwachsene erlebt ein besorgniserregendes Gesundheitsproblem, das Aufmerksamkeit erfordert.",
             BaseProbability = 0.15,
             MinAge = EMERGING_ADULTHOOD_MIN,
             MaxAge = EMERGING_ADULTHOOD_MAX,
@@ -438,7 +441,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_parent_aging",
             Name = "Alterung der Eltern bemerkt",
@@ -461,7 +464,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("IncomeLevel", -1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_travel_abroad",
             Name = "Internationale Reiseerfahrung",
@@ -483,7 +486,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.2)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_housing_crisis",
             Name = "Wohnungskrise",
@@ -506,7 +509,7 @@ public static class EmergingAdulthoodEvents
                 new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "emerging_debt_management",
             Name = "Studienschuldenmanagement",
@@ -535,7 +538,7 @@ public static class EmergingAdulthoodEvents
     #region Aggregated Event Collections
 
     /// <summary>
-    /// All generic events for the Emerging Adulthood phase.
+    ///     All generic events for the Emerging Adulthood phase.
     /// </summary>
     public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
     [
@@ -543,7 +546,7 @@ public static class EmergingAdulthoodEvents
     ]);
 
     /// <summary>
-    /// All personal events for the Emerging Adulthood phase.
+    ///     All personal events for the Emerging Adulthood phase.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
     [

@@ -10,8 +10,8 @@ using SimulationFIN31.Services.Interfaces;
 namespace SimulationFIN31.Services;
 
 /// <summary>
-/// Service that manages mental illness lifecycle including trigger checking,
-/// probability-based onset, time-based healing, and debuff application.
+///     Service that manages mental illness lifecycle including trigger checking,
+///     probability-based onset, time-based healing, and debuff application.
 /// </summary>
 public sealed class IllnessManagerService : IIllnessManagerService
 {
@@ -71,29 +71,13 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ProcessHealing(state);
 
         // Apply bounce-back bonus during cooldown period
-        if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN)
-        {
-            ApplyBounceBackBonus(state);
-        }
+        if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN) ApplyBounceBackBonus(state);
 
         ProcessTriggers(state);
         IncrementActiveIllnessSteps(state);
 
         // Increment cooldown counter each step
         state.StepsSinceLastIllnessTrigger++;
-    }
-
-    /// <summary>
-    /// Applies a flat positive bonus to state metrics during illness trigger cooldown,
-    /// signaling a bounce-back recovery period.
-    /// </summary>
-    private static void ApplyBounceBackBonus(SimulationState state)
-    {
-        const double bounceBackBonus = 10.0;
-
-        state.CurrentMood = Math.Clamp(state.CurrentMood + bounceBackBonus, -100, 100);
-        state.ResilienceScore = Math.Clamp(state.ResilienceScore + bounceBackBonus, 0, 100);
-        state.CurrentStress = Math.Clamp(state.CurrentStress - bounceBackBonus, 0, 100);
     }
 
     /// <inheritdoc />
@@ -103,7 +87,6 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ArgumentNullException.ThrowIfNull(lifeEvent);
 
         if (state.CurrentIllnesses.Count == 0)
-        {
             return new DebuffedEffects(
                 lifeEvent.StressImpact,
                 lifeEvent.MoodImpact,
@@ -111,7 +94,6 @@ public sealed class IllnessManagerService : IIllnessManagerService
                 lifeEvent.ResilienceImpact,
                 lifeEvent.HealthImpact
             );
-        }
 
         var (stressDebuff, moodDebuff, socialDebuff) = CalculateCombinedDebuffs(state);
 
@@ -120,30 +102,17 @@ public sealed class IllnessManagerService : IIllnessManagerService
         var socialImpact = lifeEvent.SocialBelongingImpact;
 
         // StressDebuff: amplify stress from stressful events
-        if (stressImpact > 0)
-        {
-            stressImpact *= stressDebuff;
-        }
+        if (stressImpact > 0) stressImpact *= stressDebuff;
 
         // MoodDebuff: reduce mood gains, amplify mood losses
         if (moodImpact > 0)
-        {
             moodImpact *= moodDebuff;
-        }
-        else if (moodImpact < 0)
-        {
-            moodImpact /= moodDebuff;
-        }
+        else if (moodImpact < 0) moodImpact /= moodDebuff;
 
         // SocialProximityDebuff: reduce social gains, amplify social losses
         if (socialImpact > 0)
-        {
             socialImpact *= socialDebuff;
-        }
-        else if (socialImpact < 0)
-        {
-            socialImpact /= socialDebuff;
-        }
+        else if (socialImpact < 0) socialImpact /= socialDebuff;
 
         return new DebuffedEffects(
             stressImpact,
@@ -161,21 +130,28 @@ public sealed class IllnessManagerService : IIllnessManagerService
         return state.IllnessProgressionStates;
     }
 
+    /// <summary>
+    ///     Applies a flat positive bonus to state metrics during illness trigger cooldown,
+    ///     signaling a bounce-back recovery period.
+    /// </summary>
+    private static void ApplyBounceBackBonus(SimulationState state)
+    {
+        const double bounceBackBonus = 10.0;
+
+        state.CurrentMood = Math.Clamp(state.CurrentMood + bounceBackBonus, -100, 100);
+        state.ResilienceScore = Math.Clamp(state.ResilienceScore + bounceBackBonus, 0, 95);
+        state.CurrentStress = Math.Clamp(state.CurrentStress - bounceBackBonus, 0, 100);
+    }
+
     private void ProcessHealing(SimulationState state)
     {
         var healedIllnesses = new List<string>();
 
         foreach (var (key, progressionState) in state.IllnessProgressionStates)
         {
-            if (!state.CurrentIllnesses.TryGetValue(key, out var config))
-            {
-                continue;
-            }
+            if (!state.CurrentIllnesses.TryGetValue(key, out var config)) continue;
 
-            if (progressionState.StepsActive >= config.HealingTime)
-            {
-                healedIllnesses.Add(key);
-            }
+            if (progressionState.StepsActive >= config.HealingTime) healedIllnesses.Add(key);
         }
 
         foreach (var key in healedIllnesses)
@@ -192,56 +168,34 @@ public sealed class IllnessManagerService : IIllnessManagerService
     private void ProcessTriggers(SimulationState state)
     {
         // Check cooldown - must wait at least 2 steps between illness triggers
-        if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN)
-        {
-            return;
-        }
+        if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN) return;
 
-        if (state.CurrentIllnesses.Count >= MAX_ACTIVE_ILLNESSES)
-        {
-            return;
-        }
+        if (state.CurrentIllnesses.Count >= MAX_ACTIVE_ILLNESSES) return;
 
         foreach (var (key, config) in MentalIllnesses.Illnesses)
         {
-            if (state.CurrentIllnesses.ContainsKey(key))
-            {
-                continue;
-            }
+            if (state.CurrentIllnesses.ContainsKey(key)) continue;
 
-            if (state.CurrentIllnesses.Count >= MAX_ACTIVE_ILLNESSES)
-            {
-                break;
-            }
+            if (state.CurrentIllnesses.Count >= MAX_ACTIVE_ILLNESSES) break;
 
             // Check minimum age requirement
-            if (state.CurrentAge < config.MinAge)
-            {
-                continue;
-            }
+            if (state.CurrentAge < config.MinAge) continue;
 
-            if (!CheckTriggerCondition(key, state))
-            {
-                continue;
-            }
+            if (!CheckTriggerCondition(key, state)) continue;
 
             // Probability-based onset with gender-adjusted chance
             var probability = CalculateGenderAdjustedProbability(config, state);
-            if (_random.NextDouble() < probability)
-            {
-                TriggerIllness(key, config, state);
-            }
+            if (_random.NextDouble() < probability) TriggerIllness(key, config, state);
         }
     }
 
     /// <summary>
-    /// Calculates the gender-adjusted probability for illness onset.
-    /// Formula: (1 / TriggerChance) * GenderModifier
-    ///
-    /// Example:
-    /// - Depression with TriggerChance=8, Female (1.8x modifier)
-    ///   Base: 1/8 = 0.125 (12.5%)
-    ///   Adjusted: 0.125 * 1.8 = 0.225 (22.5%)
+    ///     Calculates the gender-adjusted probability for illness onset.
+    ///     Formula: (1 / TriggerChance) * GenderModifier
+    ///     Example:
+    ///     - Depression with TriggerChance=8, Female (1.8x modifier)
+    ///     Base: 1/8 = 0.125 (12.5%)
+    ///     Adjusted: 0.125 * 1.8 = 0.225 (22.5%)
     /// </summary>
     /// <param name="config">The illness configuration containing trigger chance and gender modifiers.</param>
     /// <param name="state">Current simulation state containing gender information.</param>
@@ -273,7 +227,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
             "PanicDisorder" => state is { AnxietyLevel: > 70, CurrentStress: > 70 },
 
-            "PTSD" => HasRecentTraumaticEvent(state, yearsBack: 2),
+            "PTSD" => HasRecentTraumaticEvent(state, 2),
 
             "Alcoholism" => GetCopingPreference(state, "coping_substance_use") > 0.5,
 
@@ -283,14 +237,15 @@ public sealed class IllnessManagerService : IIllnessManagerService
             "Magersucht" => state is { CurrentStress: > 70, CurrentMood: < -60 },
 
             "Bulimie" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
-                               && state.CurrentMood < -20,
+                         && state.CurrentMood < -20,
 
             "BingeEatingStörung" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
-                                     && state.CurrentStress > 50,
+                                    && state.CurrentStress > 50,
 
             "OCD" => state is { AnxietyLevel: > 60, CurrentStress: > 60 },
 
-            "BorderlinePersonality" => state is { FamilyCloseness: < 30, CurrentMood: < -40, LifePhase: >= LifePhase.Adolescence },
+            "BorderlinePersonality" => state is
+                { FamilyCloseness: < 30, CurrentMood: < -40, LifePhase: >= LifePhase.Adolescence },
 
             "DissociativeDisorder" => HasLifetimeTrauma(state) && state.CurrentStress > 80,
 
@@ -317,13 +272,11 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
     private void IncrementActiveIllnessSteps(SimulationState state)
     {
-        foreach (var progressionState in state.IllnessProgressionStates.Values)
-        {
-            progressionState.StepsActive++;
-        }
+        foreach (var progressionState in state.IllnessProgressionStates.Values) progressionState.StepsActive++;
     }
 
-    private (double stressDebuff, double moodDebuff, double socialDebuff) CalculateCombinedDebuffs(SimulationState state)
+    private (double stressDebuff, double moodDebuff, double socialDebuff) CalculateCombinedDebuffs(
+        SimulationState state)
     {
         var stressDebuff = 1.0;
         var moodDebuff = 1.0;
@@ -345,8 +298,8 @@ public sealed class IllnessManagerService : IIllnessManagerService
     }
 
     /// <summary>
-    /// Checks if a traumatic event occurred within the last N years.
-    /// Used for PTSD trigger which requires recent trauma exposure.
+    ///     Checks if a traumatic event occurred within the last N years.
+    ///     Used for PTSD trigger which requires recent trauma exposure.
     /// </summary>
     /// <param name="state">Current simulation state.</param>
     /// <param name="yearsBack">Number of years to look back (default 2).</param>
@@ -361,8 +314,8 @@ public sealed class IllnessManagerService : IIllnessManagerService
     }
 
     /// <summary>
-    /// Checks if any traumatic event occurred in the person's lifetime.
-    /// Used for disorders that can develop from childhood trauma regardless of recency.
+    ///     Checks if any traumatic event occurred in the person's lifetime.
+    ///     Used for disorders that can develop from childhood trauma regardless of recency.
     /// </summary>
     /// <param name="state">Current simulation state.</param>
     /// <returns>True if at least one traumatic event occurred.</returns>

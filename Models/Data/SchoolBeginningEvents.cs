@@ -14,12 +14,12 @@ public static class SchoolBeginningEvents
     #region School Beginning Personal Events (Ages 6-12)
 
     /// <summary>
-    /// Personal events specific to School Beginning phase (ages 6-12).
-    /// Focus on peer relationships, academic development, and social skills.
+    ///     Personal events specific to School Beginning phase (ages 6-12).
+    ///     Focus on peer relationships, academic development, and social skills.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> SchoolBeginningPersonalEvents { get; } =
     [
-        new PersonalEvent
+        new()
         {
             Id = "school_best_friend",
             Name = "Beste Freundschaft geknüpft",
@@ -44,11 +44,12 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("FamilyCloseness", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_academic_achievement",
             Name = "Schulischer Erfolg",
-            Description = "Das Kind erzielt bemerkenswerte schulische Leistungen und gewinnt Selbstvertrauen beim Lernen.",
+            Description =
+                "Das Kind erzielt bemerkenswerte schulische Leistungen und gewinnt Selbstvertrauen beim Lernen.",
             VisualCategory = VisualCategory.Achievement,
             BaseProbability = 0.45,
             MinAge = SCHOOL_BEGINNING_MIN,
@@ -70,11 +71,12 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("IncomeLevel", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_sports_talent",
             Name = "Sportliches Talent entdeckt",
-            Description = "Das Kind zeigt natürliche sportliche Fähigkeiten und findet Freude an körperlichen Aktivitäten.",
+            Description =
+                "Das Kind zeigt natürliche sportliche Fähigkeiten und findet Freude an körperlichen Aktivitäten.",
             VisualCategory = VisualCategory.Sports,
             BaseProbability = 0.35,
             MinAge = SCHOOL_BEGINNING_MIN,
@@ -96,7 +98,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_team_membership",
             Name = "Team- oder Gruppenmitgliedschaft",
@@ -122,11 +124,12 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_leadership_role",
             Name = "Führungsrolle übernommen",
-            Description = "Das Kind übernimmt eine Führungsrolle unter Gleichaltrigen (Klassensprecher, Mannschaftskapitän).",
+            Description =
+                "Das Kind übernimmt eine Führungsrolle unter Gleichaltrigen (Klassensprecher, Mannschaftskapitän).",
             VisualCategory = VisualCategory.Achievement,
             BaseProbability = 0.20,
             MinAge = 8,
@@ -149,7 +152,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_bullying_victim",
             Name = "Mobbing-Erfahrung",
@@ -174,10 +177,11 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("HasAdhd", 2.5),
                 new InfluenceFactor("FamilyCloseness", -2.0),
                 new InfluenceFactor("IncomeLevel", -2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -2.0)
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("GenderMale", 1.4)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_learning_difficulty",
             Name = "Lernschwierigkeit festgestellt",
@@ -200,10 +204,11 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("HasAdhd", 4.0),
                 new InfluenceFactor("HasAutism", 3.5),
                 new InfluenceFactor("IntelligenceScore", -2.0),
-                new InfluenceFactor("ParentsEducationLevel", -1.5)
+                new InfluenceFactor("ParentsEducationLevel", -1.5),
+                new InfluenceFactor("GenderMale", 1.6)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_social_rejection",
             Name = "Soziale Ablehnung erlebt",
@@ -228,10 +233,11 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("HasAutism", 2.5),
                 new InfluenceFactor("HasAdhd", 2.0),
                 new InfluenceFactor("IncomeLevel", -1.8),
-                new InfluenceFactor("FamilyCloseness", -1.5)
+                new InfluenceFactor("FamilyCloseness", -1.5),
+                new InfluenceFactor("GenderFemale", 1.4)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_hobby_discovery",
             Name = "Sinnvolles Hobby entdeckt",
@@ -257,7 +263,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.5)
             ]
         },
-        new PersonalEvent
+        new()
         {
             Id = "school_custody_adjustment",
             Name = "Umgang mit Sorgerechtsregelung",
@@ -283,6 +289,163 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("SocialEnvironmentLevel", -2.0),
                 new InfluenceFactor("ParentsWithAddiction", 2.0)
             ]
+        },
+        new()
+        {
+            Id = "school_relational_aggression",
+            Name = "Beziehungsaggression erlebt",
+            Description = "Kind erlebt subtile soziale Ausgrenzung, Gerüchte oder Manipulation durch Gleichaltrige.",
+            VisualCategory = VisualCategory.Social,
+            BaseProbability = 0.30,
+            MinAge = 7,
+            MaxAge = SCHOOL_BEGINNING_MAX,
+            IsUnique = false,
+            IsTraumatic = true,
+            StressImpact = 25,
+            MoodImpact = -25,
+            SocialBelongingImpact = -28,
+            ResilienceImpact = -8,
+            HealthImpact = -5,
+            AnxietyChange = 22,
+            SocialEnergyChange = -18,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("AnxietyLevel", 2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("FamilyCloseness", -1.8),
+                new InfluenceFactor("GenderFemale", 1.8)
+            ]
+        },
+        new()
+        {
+            Id = "school_emotional_suppression",
+            Name = "Druck zur emotionalen Unterdrückung",
+            Description = "Kind lernt, Emotionen zu unterdrücken aufgrund sozialer Erwartungen an sein Geschlecht.",
+            VisualCategory = VisualCategory.MentalHealth,
+            BaseProbability = 0.35,
+            MinAge = SCHOOL_BEGINNING_MIN,
+            MaxAge = SCHOOL_BEGINNING_MAX,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = 15,
+            MoodImpact = -12,
+            SocialBelongingImpact = -8,
+            ResilienceImpact = -10,
+            HealthImpact = -5,
+            AnxietyChange = 15,
+            SocialEnergyChange = -10,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("ParentsEducationLevel", -1.5),
+                new InfluenceFactor("FamilyCloseness", -1.5),
+                new InfluenceFactor("GenderMale", 1.8)
+            ]
+        },
+        new()
+        {
+            Id = "school_reading_excellence",
+            Name = "Herausragende Lesekompetenz",
+            Description = "Kind zeigt überdurchschnittliche Lesefähigkeiten und Freude an Literatur.",
+            VisualCategory = VisualCategory.Education,
+            BaseProbability = 0.25,
+            MinAge = SCHOOL_BEGINNING_MIN,
+            MaxAge = 9,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = -5,
+            MoodImpact = 12,
+            SocialBelongingImpact = 5,
+            ResilienceImpact = 8,
+            HealthImpact = 0,
+            AnxietyChange = -5,
+            SocialEnergyChange = 0,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("IntelligenceScore", 2.5),
+                new InfluenceFactor("ParentsEducationLevel", 2.2),
+                new InfluenceFactor("FamilyCloseness", 1.8),
+                new InfluenceFactor("GenderFemale", 1.4)
+            ]
+        },
+        new()
+        {
+            Id = "school_stem_encouragement",
+            Name = "MINT-Förderung erhalten",
+            Description =
+                "Kind erhält besondere Ermutigung in Mathematik, Informatik, Naturwissenschaften oder Technik.",
+            VisualCategory = VisualCategory.Education,
+            BaseProbability = 0.30,
+            MinAge = 7,
+            MaxAge = SCHOOL_BEGINNING_MAX,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = -3,
+            MoodImpact = 10,
+            SocialBelongingImpact = 5,
+            ResilienceImpact = 8,
+            HealthImpact = 0,
+            AnxietyChange = -3,
+            SocialEnergyChange = 3,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("ParentsEducationLevel", 2.0),
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("GenderMale", 1.3)
+            ]
+        },
+        new()
+        {
+            Id = "school_gender_nonconformity_challenge",
+            Name = "Geschlechtsuntypische Interessen",
+            Description =
+                "Kind zeigt Interessen oder Verhaltensweisen, die nicht den Geschlechternormen entsprechen, und erfährt gemischte Reaktionen.",
+            VisualCategory = VisualCategory.Identity,
+            BaseProbability = 0.25,
+            MinAge = SCHOOL_BEGINNING_MIN,
+            MaxAge = SCHOOL_BEGINNING_MAX,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = 15,
+            MoodImpact = -5,
+            SocialBelongingImpact = -10,
+            ResilienceImpact = 8,
+            HealthImpact = 0,
+            AnxietyChange = 10,
+            SocialEnergyChange = -5,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("GenderNonBinary", 2.5)
+            ]
+        },
+        new()
+        {
+            Id = "school_sports_exclusion",
+            Name = "Sportliche Ausgrenzung",
+            Description =
+                "Kind wird von sportlichen Aktivitäten ausgeschlossen oder entmutigt aufgrund von Geschlechtererwartungen.",
+            VisualCategory = VisualCategory.Sports,
+            BaseProbability = 0.20,
+            MinAge = SCHOOL_BEGINNING_MIN,
+            MaxAge = SCHOOL_BEGINNING_MAX,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 12,
+            MoodImpact = -15,
+            SocialBelongingImpact = -12,
+            ResilienceImpact = -5,
+            HealthImpact = -5,
+            AnxietyChange = 10,
+            SocialEnergyChange = -8,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
+                new InfluenceFactor("SocialEnergyLevel", -1.5),
+                new InfluenceFactor("GenderFemale", 1.5)
+            ]
         }
     ];
 
@@ -291,11 +454,11 @@ public static class SchoolBeginningEvents
     #region School Beginning Generic Events (Ages 6-12)
 
     /// <summary>
-    /// Generic events that can occur during School Beginning phase (ages 6-12).
+    ///     Generic events that can occur during School Beginning phase (ages 6-12).
     /// </summary>
     public static IReadOnlyList<GenericEvent> SchoolBeginningGenericEvents { get; } =
     [
-        new GenericEvent
+        new()
         {
             Id = "school_field_trip",
             Name = "Schulausflug",
@@ -318,7 +481,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_first_day",
             Name = "Erster Schultag",
@@ -342,7 +505,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_teacher_positive",
             Name = "Positive Lehrerbeziehung",
@@ -366,7 +529,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("AnxietyLevel", -1.3)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_extracurricular_success",
             Name = "Außerschulischer Erfolg",
@@ -390,11 +553,12 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("FamilyCloseness", 1.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_family_financial_stress",
             Name = "Finanzielle Belastung Familie",
-            Description = "Die Familie durchlebt eine Phase finanzieller Schwierigkeiten, die den Alltag beeinträchtigen.",
+            Description =
+                "Die Familie durchlebt eine Phase finanzieller Schwierigkeiten, die den Alltag beeinträchtigen.",
             BaseProbability = 0.25,
             MinAge = SCHOOL_BEGINNING_MIN,
             MaxAge = SCHOOL_BEGINNING_MAX,
@@ -414,11 +578,12 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("ParentsWithAddiction", 2.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_summer_camp",
             Name = "Ferienlager-Erlebnis",
-            Description = "Das Kind besucht ein Ferienlager und entwickelt Selbstständigkeit sowie soziale Kompetenzen.",
+            Description =
+                "Das Kind besucht ein Ferienlager und entwickelt Selbstständigkeit sowie soziale Kompetenzen.",
             BaseProbability = 0.35,
             MinAge = 7,
             MaxAge = SCHOOL_BEGINNING_MAX,
@@ -438,7 +603,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("AnxietyLevel", -1.5)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_natural_disaster",
             Name = "Naturkatastrophe erlebt",
@@ -460,7 +625,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("IncomeLevel", -1.8)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_technology_access",
             Name = "Zugang zu Technologie",
@@ -482,7 +647,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("ParentsEducationLevel", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_grandparent_loss",
             Name = "Verlust eines Großelternteils",
@@ -503,7 +668,7 @@ public static class SchoolBeginningEvents
                 new InfluenceFactor("FamilyCloseness", 2.0)
             ]
         },
-        new GenericEvent
+        new()
         {
             Id = "school_birthday_celebration",
             Name = "Unvergessliche Geburtstagsfeier",
@@ -533,7 +698,7 @@ public static class SchoolBeginningEvents
     #region Aggregated Event Collections
 
     /// <summary>
-    /// All generic events for the School Beginning phase.
+    ///     All generic events for the School Beginning phase.
     /// </summary>
     public static IReadOnlyList<GenericEvent> AllGenericEvents { get; } = new ReadOnlyCollection<GenericEvent>(
     [
@@ -541,7 +706,7 @@ public static class SchoolBeginningEvents
     ]);
 
     /// <summary>
-    /// All personal events for the School Beginning phase.
+    ///     All personal events for the School Beginning phase.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> AllPersonalEvents { get; } = new ReadOnlyCollection<PersonalEvent>(
     [
