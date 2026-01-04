@@ -115,7 +115,7 @@ public partial class SimulationViewModel : ViewModelBase
     private void UpdateAnimatedSprite()
     {
         var illnessCount = SimulationState.CurrentIllnesses.Count;
-        var newPath = GetTreePath(SimulationState.LifePhase, illnessCount, _animationFrame);
+        var newPath = GetAvatarPath(SimulationState.LifePhase, illnessCount, _animationFrame);
 
         if (CurrentTreePath != newPath)
         {
@@ -275,7 +275,7 @@ public partial class SimulationViewModel : ViewModelBase
     /// <summary>
     ///     Current character SVG path based on life phase, illness count, and animation frame.
     /// </summary>
-    [ObservableProperty] private string _currentTreePath = "avares://SimulationFIN31/Assets/TreeVectors/Baby.svg";
+    [ObservableProperty] private string _currentTreePath = "avares://SimulationFIN31/Assets/Avatar/Baby.svg";
 
     /// <summary>
     ///     Key that changes when tree should transition (triggers CrossFade animation).
@@ -499,7 +499,7 @@ public partial class SimulationViewModel : ViewModelBase
     private void UpdateTreeDisplay()
     {
         var illnessCount = SimulationState.CurrentIllnesses.Count;
-        var newPath = GetTreePath(SimulationState.LifePhase, illnessCount, _animationFrame);
+        var newPath = GetAvatarPath(SimulationState.LifePhase, illnessCount, _animationFrame);
         var newKey = $"{SimulationState.LifePhase}_{illnessCount}";
 
         // Update key only on phase changes to trigger CrossFade transition
@@ -546,7 +546,7 @@ public partial class SimulationViewModel : ViewModelBase
     /// <param name="illnessCount">Number of active illnesses.</param>
     /// <param name="animationFrame">Animation frame (0 = static, 1 = movement1, 2 = movement2).</param>
     /// <returns>The resource path to the SVG file.</returns>
-    private static string GetTreePath(LifePhase phase, int illnessCount, int animationFrame)
+    private static string GetAvatarPath(LifePhase phase, int illnessCount, int animationFrame)
     {
         var baseName = GetSpriteBaseName(phase, illnessCount);
         var frameSuffix = animationFrame switch
@@ -557,8 +557,8 @@ public partial class SimulationViewModel : ViewModelBase
         };
 
         return string.IsNullOrEmpty(frameSuffix)
-            ? $"avares://SimulationFIN31/Assets/TreeVectors/{baseName}.svg"
-            : $"avares://SimulationFIN31/Assets/TreeVectors/{baseName}{frameSuffix}.svg";
+            ? $"avares://SimulationFIN31/Assets/Avatar/{baseName}.svg"
+            : $"avares://SimulationFIN31/Assets/Avatar/{baseName}{frameSuffix}.svg";
     }
 
     /// <summary>
@@ -572,7 +572,7 @@ public partial class SimulationViewModel : ViewModelBase
             LifePhase.SchoolBeginning => "Child",
             LifePhase.Adolescence => "Teenager",
             LifePhase.EmergingAdulthood => "EmergingAdulthood",
-            LifePhase.Adulthood => illnessCount >= 3 ? "BadAdult" : "Adult",
+            LifePhase.Adulthood => "Adult",
             _ => "Baby"
         };
     }
