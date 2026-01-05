@@ -24,10 +24,10 @@
         <Grid Margin="60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2.75*" />
             </Grid.ColumnDefinitions>
             <Border Background="#6614181F" CornerRadius="32" Padding="45" VerticalAlignment="Center">
-                <StackPanel>
+                <StackPanel VerticalAlignment="Stretch">
                     <Button Content="Zu den Einstellungen"
                             Classes="Glass"
                             Height="150"

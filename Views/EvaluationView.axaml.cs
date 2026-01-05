@@ -7,10 +7,7 @@ using SimulationFIN31.ViewModels;
 
 namespace SimulationFIN31.Views;
 
-/// <summary>
-///     Code-behind for the EvaluationView.
-///     Handles ScottPlot chart configuration which requires imperative code.
-/// </summary>
+
 public partial class EvaluationView : UserControl
 {
     private Crosshair? _crosshair;
@@ -22,10 +19,7 @@ public partial class EvaluationView : UserControl
         InitializeComponent();
         DataContextChanged += OnDataContextChanged;
     }
-
-    /// <summary>
-    ///     Configures the ScottPlot chart when DataContext is set.
-    /// </summary>
+    
     private void OnDataContextChanged(object? sender, EventArgs e)
     {
         if (DataContext is EvaluationViewModel vm)
@@ -90,25 +84,19 @@ public partial class EvaluationView : UserControl
             var xMax = limits.Right;
             var yMin = limits.Bottom;
             var yMax = limits.Top;
-
-            // Calculate positioning with smart boundary detection
+            
             var xRange = xMax - xMin;
             var yRange = yMax - yMin;
-
-            // Horizontal positioning: Place on right side unless cursor is in right 40%
+            
             var xOffset = coordinates.X > xMin + xRange * 0.6 ? -3.5 : 1.5;
-
-            // Vertical positioning: Place above cursor unless cursor is in top 50%
-            // Estimate that tooltip takes about 25% of vertical space
+            
             var yOffset = coordinates.Y > yMin + yRange * 0.5 ? 10 : -25;
-
-            // Position the tooltip
+            
             _tooltipText.Location = new Coordinates(
                 _viewModel.Ages[index] + xOffset,
                 coordinates.Y + yOffset
             );
-
-            // Adjust alignment based on position
+            
             if (xOffset < 0)
                 _tooltipText.LabelAlignment = Alignment.UpperRight;
             else
@@ -122,10 +110,7 @@ public partial class EvaluationView : UserControl
 
         HealthChart.Refresh();
     }
-
-    /// <summary>
-    ///     Hides crosshair when mouse leaves the chart.
-    /// </summary>
+    
     private void OnPointerExited(object? sender, PointerEventArgs e)
     {
         if (_crosshair != null) _crosshair.IsVisible = false;
@@ -135,19 +120,15 @@ public partial class EvaluationView : UserControl
         HealthChart.Refresh();
     }
 
-    /// <summary>
-    ///     Configures the health metrics chart with data from the ViewModel.
-    ///     Sets up line plots for Stress, Mood, Social Belonging, and Resilience.
-    /// </summary>
+  
     private void ConfigureChart(EvaluationViewModel vm)
     {
         var plot = HealthChart.Plot;
         plot.Clear();
-
-        // Only add data if we have values
+        
         if (vm.Ages.Length > 0)
         {
-            // Add Stress line (Red)
+         
             var stressPlot = plot.Add.Scatter(vm.Ages, vm.StressValues);
             stressPlot.LegendText = "Stress";
             stressPlot.Color = new Color(231, 76, 60); // #E74C3C

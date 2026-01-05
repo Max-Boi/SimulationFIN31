@@ -17,7 +17,7 @@
 
         <!-- Header -->
         <Grid Grid.Row="0" Margin="20,20,20,0">
-            <Button Content="Zurueck zur Startseite"
+            <Button Content="Zurück zur Startseite"
                     Classes="Glass"
                     Command="{Binding GoHomeCommand}"
                     HorizontalAlignment="Left" />
@@ -51,7 +51,7 @@
                                            Foreground="#3498DB" />
                             </StackPanel>
                             <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                                <TextBlock Text="Soziale Zugehoerigkeit" Classes="Label" HorizontalAlignment="Center" />
+                                <TextBlock Text="Soziale Zugehörigkeit" Classes="Label" HorizontalAlignment="Center" />
                                 <TextBlock Text="{Binding FinalSocial, StringFormat={}{0:F1}}"
                                            Classes="Value" FontSize="24" HorizontalAlignment="Center"
                                            Foreground="#9B59B6" />
@@ -77,13 +77,13 @@
                                            Classes="Value" FontSize="20" HorizontalAlignment="Center" />
                             </StackPanel>
                             <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                                <TextBlock Text="Funktionale Bewaeltigung" Classes="Label" HorizontalAlignment="Center" />
+                                <TextBlock Text="Funktionale Bewältigung" Classes="Label" HorizontalAlignment="Center" />
                                 <TextBlock Text="{Binding FunctionalCopingCount}"
                                            Classes="Value" FontSize="20" HorizontalAlignment="Center"
                                            Foreground="#2ECC71" />
                             </StackPanel>
                             <StackPanel Grid.Column="3" HorizontalAlignment="Center">
-                                <TextBlock Text="Dysfunktionale Bewaeltigung" Classes="Label"
+                                <TextBlock Text="Dysfunktionale Bewältigung" Classes="Label"
                                            HorizontalAlignment="Center" />
                                 <TextBlock Text="{Binding DysfunctionalCopingCount}"
                                            Classes="Value" FontSize="20" HorizontalAlignment="Center"
@@ -100,7 +100,7 @@
                         <ScottPlot:AvaPlot x:Name="HealthChart"
                                            Height="650"
                                            Margin="20 20 20 75"
-                                           ClipToBounds="False" />
+                                           ClipToBounds="True" />
                     </StackPanel>
                 </Border>
 
@@ -224,7 +224,7 @@
                         <!-- Coping Usage -->
                         <Border Classes="GlassPanel">
                             <StackPanel>
-                                <TextBlock Text="Bewaeltigungsstrategien" Classes="SectionHeader" />
+                                <TextBlock Text="Bewältigungsstrategien" Classes="SectionHeader" />
                                 <ItemsControl ItemsSource="{Binding CopingUsageSummary}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate x:DataType="vm:CopingUsageSummary">

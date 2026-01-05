@@ -27,14 +27,6 @@
                     Content="Zurück"
                     Classes="Glass" />
 
-                <TextBlock Grid.Column="1"
-                           Text="Einstellungen"
-                           FontSize="26"
-                           Margin="9 0 9 0"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontWeight="SemiBold" />
-
                 <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12">
                     <StackPanel>
                         <Button Classes="Accent Glass" Command="{Binding SaveSettingsCommand}">
@@ -56,7 +48,7 @@
 
             <ScrollViewer Grid.Row="1"
 
-                          Margin="0,32,15,0"
+                          Margin="0,32,0,0"
                           VerticalScrollBarVisibility="Auto">
                 <StackPanel
                     Orientation="Vertical"
@@ -64,7 +56,7 @@
                     <Border Classes="SettingsCard">
                         <StackPanel Spacing="12">
                             <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                                <TextBlock Text="sozioökonomischer Status" FontSize="18" FontWeight="SemiBold" />
+                                <TextBlock Text="sozioökonomischer Status" FontSize="18" FontWeight="SemiBold" Foreground="AliceBlue" />
 
                                 <Border Background="LightGray"
                                         CornerRadius="10"
@@ -78,20 +70,20 @@
                                 </Border>
                             </StackPanel>
                             <StackPanel Spacing="8">
-                                <TextBlock Text="Einkommenslevel" />
+                                <TextBlock Text="Einkommenslevel" Foreground="AliceBlue"/>
                                 <Slider Minimum="1" Maximum="7" Value="{Binding IncomeLevel}" TickFrequency="1"
                                         IsSnapToTickEnabled="True" />
-                                <TextBlock Text="{Binding IncomeLevel, StringFormat='Aktueller Wert: {0}'}" />
+                                <TextBlock Text="{Binding IncomeLevel, StringFormat='Aktueller Wert: {0}'}" Foreground="AliceBlue"/>
 
-                                <TextBlock Text="Bildungsniveau der Eltern" Margin="0,8,0,0" />
+                                <TextBlock Text="Bildungsniveau der Eltern" Margin="0,8,0,0"  Foreground="AliceBlue" />
                                 <Slider Minimum="1" Maximum="7" Value="{Binding ParentsEducationLevel}"
                                         TickFrequency="1" IsSnapToTickEnabled="True" />
-                                <TextBlock Text="{Binding ParentsEducationLevel, StringFormat='Aktueller Wert: {0}'}" />
+                                <TextBlock Text="{Binding ParentsEducationLevel, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue"/>
 
-                                <TextBlock Text="Beruflicher Status" Margin="0,8,0,0" />
+                                <TextBlock Text="Beruflicher Status" Margin="0,8,0,0"  Foreground="AliceBlue"/>
                                 <Slider Minimum="1" Maximum="7" Value="{Binding JobStatus}" TickFrequency="1"
                                         IsSnapToTickEnabled="True" />
-                                <TextBlock Text="{Binding JobStatus, StringFormat='Aktueller Wert: {0}'}" />
+                                <TextBlock Text="{Binding JobStatus, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -100,7 +92,7 @@
                         <StackPanel Spacing="12">
                             <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
                                 <TextBlock Text="Soziales Umfeld, Elternhaus, und Genetik" FontSize="18"
-                                           FontWeight="SemiBold" />
+                                           FontWeight="SemiBold" Foreground="AliceBlue" />
 
                                 <Border Background="LightGray"
                                         CornerRadius="10"
@@ -114,39 +106,41 @@
                                 </Border>
                             </StackPanel>
                             <StackPanel Spacing="8">
-                                <TextBlock Text="Nähe zum sozialen Umfeld" />
+                                <TextBlock Text="Nähe zum sozialen Umfeld"  Foreground="AliceBlue"/>
                                 <Slider Minimum="0" Maximum="100" Value="{Binding SocialEnvironmentLevel}"
                                         TickFrequency="1" IsSnapToTickEnabled="True" />
-                                <TextBlock Text="{Binding SocialEnvironmentLevel, StringFormat='Aktueller Wert: {0}'}" />
+                                <TextBlock Text="{Binding SocialEnvironmentLevel, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue" />
                                 <StackPanel Orientation="Horizontal" Spacing="12">
-                                    <TextBlock Text="Beziehungsqualität der Eltern" Margin="0,8,0,0" />
+                                    <TextBlock Text="Beziehungsqualität der Eltern" Margin="0,8,0,0"  Foreground="AliceBlue"/>
                                     <ComboBox ItemsSource="{Binding ParentsRelationshipOptions}"
                                               SelectedItem="{Binding ParentsRelationshipQuality}"
-                                              Classes="Glass" />
-                                    <TextBlock Text="Geschlecht" Margin="0,8,0,0" />
+                                              Classes="Glass"
+                                              Foreground="AliceBlue"/>
+                                    <TextBlock Text="Geschlecht" Margin="0,8,0,0"  Foreground="AliceBlue"/>
                                     <ComboBox ItemsSource="{Binding GenderOptions}"
                                               SelectedItem="{Binding Gender}"
-                                              Classes="Glass" />
+                                              Classes="Glass"
+                                              Foreground="AliceBlue"/>
                                 </StackPanel>
 
 
-                                <TextBlock Text="Familiäre Nähe" Margin="0,8,0,0" />
+                                <TextBlock Text="Familiäre Nähe" Margin="0,8,0,0"  Foreground="AliceBlue"/>
                                 <Slider Minimum="1" Maximum="100" Value="{Binding FamilyCloseness}" TickFrequency="1"
                                         IsSnapToTickEnabled="True" />
-                                <TextBlock Text="{Binding FamilyCloseness, StringFormat='Aktueller Wert: {0}'}" />
+                                <TextBlock Text="{Binding FamilyCloseness, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue" />
 
                                 <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,8,0,0">
                                     <StackPanel Spacing="6" VerticalAlignment="Center">
-                                        <TextBlock Text="Eltern mit Sucht" />
-                                        <ToggleSwitch IsChecked="{Binding ParentsWithAddiction}" />
+                                        <TextBlock Text="Eltern mit Sucht"  Foreground="AliceBlue"/>
+                                        <ToggleSwitch IsChecked="{Binding ParentsWithAddiction}"  Foreground="AliceBlue"/>
                                     </StackPanel>
                                     <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="ADHS" />
-                                        <ToggleSwitch IsChecked="{Binding HasAdhd}" />
+                                        <TextBlock Text="ADHS"  Foreground="AliceBlue"/>
+                                        <ToggleSwitch IsChecked="{Binding HasAdhd}"  Foreground="AliceBlue"/>
                                     </StackPanel>
                                     <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="Autismus" />
-                                        <ToggleSwitch IsChecked="{Binding HasAutism}" />
+                                        <TextBlock Text="Autismus"  Foreground="AliceBlue"/>
+                                        <ToggleSwitch IsChecked="{Binding HasAutism}" Foreground="AliceBlue" />
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
@@ -156,7 +150,7 @@
                     <Border Classes="SettingsCard">
                         <StackPanel Spacing="12">
                             <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                                <TextBlock Text="Persönliche Ressourcen" FontSize="18" FontWeight="SemiBold" />
+                                <TextBlock Text="Persönliche Ressourcen" FontSize="18" FontWeight="SemiBold" Foreground="AliceBlue" />
 
                                 <Border Background="LightGray"
                                         CornerRadius="10"
@@ -170,20 +164,21 @@
                                 </Border>
                             </StackPanel>
                             <StackPanel Spacing="8">
-                                <TextBlock Text="Intelligenzscore" />
+                                <TextBlock Text="Intelligenzscore"  Foreground="AliceBlue"/>
                                 <Slider Minimum="1" Maximum="100" Value="{Binding IntelligenceScore}" TickFrequency="1"
                                         IsSnapToTickEnabled="True" />
-                                <TextBlock Text="{Binding IntelligenceScore, StringFormat='Aktueller Wert: {0}'}" />
+                                <TextBlock Text="{Binding IntelligenceScore, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue"/>
 
-                                <TextBlock Text="Angstniveau" Margin="0,8,0,0" />
+                                <TextBlock Text="Angstniveau" Margin="0,8,0,0"  Foreground="AliceBlue"/>
                                 <Slider Minimum="1" Maximum="100" Value="{Binding AnxietyLevel}" TickFrequency="1"
                                         IsSnapToTickEnabled="True" />
-                                <TextBlock Text="{Binding AnxietyLevel, StringFormat='Aktueller Wert: {0}'}" />
+                                <TextBlock Text="{Binding AnxietyLevel, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue" />
 
-                                <TextBlock Text="Soziale Energie" Margin="0,8,0,0" />
+                                <TextBlock Text="Soziale Energie" Margin="0,8,0,0"  Foreground="AliceBlue"/>
                                 <ComboBox ItemsSource="{Binding SocialEnergyOptions}"
                                           SelectedItem="{Binding SocialEnergyLevel}"
-                                          Classes="Glass" />
+                                          Classes="Glass"
+                                          Foreground="AliceBlue"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

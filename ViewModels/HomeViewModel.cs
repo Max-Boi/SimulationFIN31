@@ -24,8 +24,7 @@ public partial class HomeViewModel : ViewModelBase
     public Bitmap? CherryBlossomPic { get; }
     public Bitmap? SunsetPic { get; }
 
-    // Aus einer Methode wird automatisch ein Command generiert:
-    // Name im XAML wird: "NavigateSettingsCommand" (Das "Async" oder Methoden-Suffix wird Command)
+  
     [RelayCommand]
     private void NavigateSettings()
     {

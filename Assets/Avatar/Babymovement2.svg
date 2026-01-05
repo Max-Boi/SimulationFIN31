@@ -18,8 +18,8 @@
         <path fill="#ffffff" d="M24 42h16v12h-16z"/>
         <!-- Arms -->
         <path fill="#ffcd94" d="M18 42h4v8h-4z M42 42h4v8h-4z"/>
-        <!-- Legs - kicking slightly -->
-        <path fill="#ffcd94" d="M26 54h4v8h-4z M36 54h4v8h-4z"/>
+        <!-- Legs -->
+        <path fill="#ffcd94" d="M26 54h4v8h-4z M34 54h4v8h-4z"/>
         <!-- Little hands -->
         <path fill="#ffcd94" d="M18 26h2v6h-2z M44 26h2v6h-2z"/>
     </g>
