@@ -634,7 +634,7 @@ public partial class SimulationViewModel : ViewModelBase
                 HasAdhd = false,
                 HasAutism = false,
                 ParentsWithAddiction = false,
-                IntelligenceScore = 50,
+                IntelligenceScore = 100,
                 AnxietyLevel = 40,
                 SocialEnergyLevel = "Ambivertiert",
                 Gender = "Männlich"

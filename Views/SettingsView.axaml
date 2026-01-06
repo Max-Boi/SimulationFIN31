@@ -106,7 +106,7 @@
                                 </Border>
                             </StackPanel>
                             <StackPanel Spacing="8">
-                                <TextBlock Text="Nähe zum sozialen Umfeld"  Foreground="AliceBlue"/>
+                                <TextBlock Text="Subjektiv empfundende soziale Eingebundenheit"  Foreground="AliceBlue"/>
                                 <Slider Minimum="0" Maximum="100" Value="{Binding SocialEnvironmentLevel}"
                                         TickFrequency="1" IsSnapToTickEnabled="True" />
                                 <TextBlock Text="{Binding SocialEnvironmentLevel, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue" />
@@ -164,8 +164,8 @@
                                 </Border>
                             </StackPanel>
                             <StackPanel Spacing="8">
-                                <TextBlock Text="Intelligenzscore"  Foreground="AliceBlue"/>
-                                <Slider Minimum="1" Maximum="100" Value="{Binding IntelligenceScore}" TickFrequency="1"
+                                <TextBlock Text="Intelligenzscore (IQ)"  Foreground="AliceBlue"/>
+                                <Slider Minimum="75" Maximum="140" Value="{Binding IntelligenceScore}" TickFrequency="1"
                                         IsSnapToTickEnabled="True" />
                                 <TextBlock Text="{Binding IntelligenceScore, StringFormat='Aktueller Wert: {0}'}"  Foreground="AliceBlue"/>
 

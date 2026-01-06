@@ -203,8 +203,11 @@ public class FactorNormalizer : IFactorNormalizer
                 or "CurrentStress" or "SocialBelonging" or "ResilienceScore" or "PhysicalHealth"
                 => value / 100.0,
 
-            // IQ (70-145 → 0-1)
-            "IntelligenceScore" => (value - 70) / 75.0,
+            // IQ (75-140)
+            // 100 corresponds to 0.5 (Neutral)
+            "IntelligenceScore" => value <= 100
+                ? (value - 75) / 25.0 * 0.5
+                : 0.5 + (value - 100) / 40.0 * 0.5,
 
             // Mood (-100 bis +100 → 0-1)
             "CurrentMood" => (value + 100) / 200.0,

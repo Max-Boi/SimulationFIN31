@@ -16,7 +16,7 @@ public partial class SettingsViewModel : ViewModelBase
     private const int DEFAULT_PARENTS_EDUCATION_LEVEL = 4;
     private const int DEFAULT_JOB_STATUS = 4;
     private const int DEFAULT_SOCIAL_ENVIRONMENT_LEVEL = 50;
-    private const int DEFAULT_INTELLIGENCE_SCORE = 50;
+    private const int DEFAULT_INTELLIGENCE_SCORE = 100;
     private const int DEFAULT_ANXIETY_LEVEL = 40;
     private const int DEFAULT_FAMILY_CLOSENESS = 50;
     private static readonly string SettingsFilePath = Path.Combine(AppContext.BaseDirectory, "settings.json");
