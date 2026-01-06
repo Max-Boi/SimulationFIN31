@@ -42,7 +42,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IntelligenceScore", 2.0),
                 new InfluenceFactor("JobStatus", 2.0),
                 new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("SocialEnergyLevel", 1.5)
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("GenderMale", 1.1)
             ]
         },
         new()
@@ -69,7 +70,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("FamilyCloseness", 2.0),
                 new InfluenceFactor("ParentsRelationshipQuality", 1.8),
                 new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("IncomeLevel", 1.3)
+                new InfluenceFactor("IncomeLevel", 1.3),
+                
             ]
         },
         new()
@@ -82,7 +84,7 @@ public static class AdulthoodEvents
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
             IsTraumatic = false,
-            StressImpact = 12,
+            StressImpact = 25,
             MoodImpact = 18,
             SocialBelongingImpact = 12,
             ResilienceImpact = 10,
@@ -108,7 +110,7 @@ public static class AdulthoodEvents
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
             IsTraumatic = false,
-            StressImpact = 20,
+            StressImpact = 28,
             MoodImpact = 22,
             SocialBelongingImpact = 18,
             ResilienceImpact = 12,
@@ -122,7 +124,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("FamilyCloseness", 2.0),
                 new InfluenceFactor("IncomeLevel", 1.8),
                 new InfluenceFactor("ParentsRelationshipQuality", 1.5),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3)
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
+                
             ]
         },
         new()
@@ -148,7 +151,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IntelligenceScore", 2.0),
                 new InfluenceFactor("IncomeLevel", 1.5),
                 new InfluenceFactor("ParentsEducationLevel", 1.5),
-                new InfluenceFactor("AnxietyLevel", -1.3)
+                new InfluenceFactor("AnxietyLevel", -1.3),
+                new InfluenceFactor("HasAdhd", 1.5)
             ]
         },
         new()
@@ -202,7 +206,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("FamilyCloseness", -3.0),
                 new InfluenceFactor("ParentsWithAddiction", 3.5),
                 new InfluenceFactor("IncomeLevel", -2.0),
-                new InfluenceFactor("AnxietyLevel", 2.5)
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("GenderFemale", 1.2)
             ]
         },
         new()
@@ -252,7 +257,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IntelligenceScore", 2.0),
                 new InfluenceFactor("IncomeLevel", 2.0),
                 new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("SocialEnergyLevel", 1.5)
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("GenderMale", 1.2)
             ]
         },
         new()
@@ -307,9 +313,7 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
-                new InfluenceFactor("JobStatus", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("IntelligenceScore", 1.5)
+              
             ]
         },
         new()
@@ -333,7 +337,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("SocialEnergyLevel", 2.0),
                 new InfluenceFactor("SocialEnvironmentLevel", 2.0),
                 new InfluenceFactor("FamilyCloseness", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.3)
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("GenderFemale", 1.1)
             ]
         },
         new()
@@ -365,7 +370,7 @@ public static class AdulthoodEvents
             Name = "Wirtschaftlicher Abschwung",
             Description =
                 "Ein wirtschaftlicher Abschwung beeinträchtigt finanzielle Sicherheit und Karriereaussichten.",
-            BaseProbability = 0.18,
+            BaseProbability = 0.25,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -378,10 +383,7 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -4.0),
-                new InfluenceFactor("JobStatus", -3.5),
-                new InfluenceFactor("ParentsEducationLevel", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.0)
+                
             ]
         },
         new()
@@ -450,7 +452,8 @@ public static class AdulthoodEvents
                 new InfluenceFactor("IntelligenceScore", 2.0),
                 new InfluenceFactor("JobStatus", 2.0),
                 new InfluenceFactor("SocialEnergyLevel", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.3)
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("GenderMale", 1.2)
             ]
         },
         new()
@@ -471,9 +474,8 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.0),
-                new InfluenceFactor("ParentsWithAddiction", 2.0),
-                new InfluenceFactor("IncomeLevel", -1.5)
+                new InfluenceFactor("IncomeLevel", -1.5),
+                new InfluenceFactor("GenderFemale", 1.3)
             ]
         },
         new()

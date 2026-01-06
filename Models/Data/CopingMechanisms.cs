@@ -39,8 +39,10 @@ public static class CopingMechanism
             HealthImpact = 30,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.5),
-                new InfluenceFactor("IncomeLevel", 1.5)
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("PhysicalHealth", 1.2),
+                new InfluenceFactor("HasAdhd", 1.0)
             ]
         },
         new()
@@ -66,7 +68,11 @@ public static class CopingMechanism
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 3.0),
-                new InfluenceFactor("FamilyCloseness", 2.5)
+                new InfluenceFactor("FamilyCloseness", 2.5),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.0),
+                new InfluenceFactor("HasAutism", -1.5),
+                new InfluenceFactor("GenderFemale", 1.5)
             ]
         },
         new()
@@ -91,8 +97,11 @@ public static class CopingMechanism
             HealthImpact = 15,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 2.5)
+                new InfluenceFactor("IntelligenceScore", 1.0),
+                new InfluenceFactor("ParentsEducationLevel", 2.0),
+                new InfluenceFactor("AnxietyLevel", 1.2),
+                new InfluenceFactor("SocialEnergyLevel", -0.5),
+                new InfluenceFactor("GenderFemale", 1.2)
             ]
         },
         new()
@@ -117,8 +126,11 @@ public static class CopingMechanism
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.1),
-                new InfluenceFactor("ParentsEducationLevel", 2.5)
+                new InfluenceFactor("IntelligenceScore", 1.2),
+                new InfluenceFactor("ParentsEducationLevel", 1.5),
+                new InfluenceFactor("HasAdhd", 1.5),
+                new InfluenceFactor("HasAutism", 1.0),
+                new InfluenceFactor("SocialEnergyLevel", -1.0)
             ]
         },
         new()
@@ -143,8 +155,11 @@ public static class CopingMechanism
             HealthImpact = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.8),
-                new InfluenceFactor("IncomeLevel", 2.0)
+                new InfluenceFactor("IntelligenceScore", 2.0),
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("ResilienceScore", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.2),
+                new InfluenceFactor("GenderMale", 1.2)
             ]
         },
 
@@ -171,8 +186,10 @@ public static class CopingMechanism
             HealthImpact = -3,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.4),
-                new InfluenceFactor("SocialEnergyLevel", -2.5)
+                new InfluenceFactor("AnxietyLevel", 2.0),
+                new InfluenceFactor("SocialEnergyLevel", -2.5),
+                new InfluenceFactor("ResilienceScore", -1.5),
+                new InfluenceFactor("HasAutism", 1.0)
             ]
         },
         new()
@@ -197,9 +214,13 @@ public static class CopingMechanism
             HealthImpact = -15,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsWithAddiction", 3.5),
+                new InfluenceFactor("ParentsWithAddiction", 3.0),
                 new InfluenceFactor("AnxietyLevel", 1.7),
-                new InfluenceFactor("FamilyCloseness", -1.8)
+                new InfluenceFactor("FamilyCloseness", -2.0),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.5),
+                new InfluenceFactor("HasAdhd", 1.2),
+                new InfluenceFactor("ResilienceScore", -1.5),
+                new InfluenceFactor("GenderMale", 1.5)
             ]
         },
         new()
@@ -224,8 +245,11 @@ public static class CopingMechanism
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.5),
-                new InfluenceFactor("IntelligenceScore", 1.1)
+                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("IntelligenceScore", 1.1),
+                new InfluenceFactor("ResilienceScore", -1.2),
+                new InfluenceFactor("CurrentStress", 1.5),
+                new InfluenceFactor("GenderFemale", 1.5)
             ]
         },
         new()
@@ -250,7 +274,11 @@ public static class CopingMechanism
             HealthImpact = -10,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.2)
+                new InfluenceFactor("AnxietyLevel", 1.5),
+                new InfluenceFactor("PhysicalHealth", -1.0),
+                new InfluenceFactor("ResilienceScore", -1.0),
+                new InfluenceFactor("CurrentStress", 1.2),
+                new InfluenceFactor("GenderFemale", 1.5)
             ]
         },
         new()
@@ -276,7 +304,11 @@ public static class CopingMechanism
             InfluenceFactors =
             [
                 new InfluenceFactor("ParentsWithAddiction", 1.3),
-                new InfluenceFactor("FamilyCloseness", -0.8)
+                new InfluenceFactor("FamilyCloseness", -1.2),
+                new InfluenceFactor("ParentsRelationshipQuality", -1.5),
+                new InfluenceFactor("HasAdhd", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.2),
+                new InfluenceFactor("GenderMale", 1.5)
             ]
         },
 
@@ -301,7 +333,12 @@ public static class CopingMechanism
             SocialBelongingImpact = 0,
             ResilienceImpact = 0,
             HealthImpact = -2,
-            InfluenceFactors = []
+            InfluenceFactors =
+            [
+                new InfluenceFactor("HasAdhd", 1.5),
+                new InfluenceFactor("CurrentStress", 1.0),
+                new InfluenceFactor("SocialEnergyLevel", -0.5)
+            ]
         },
         new()
         {
@@ -325,7 +362,9 @@ public static class CopingMechanism
             HealthImpact = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", -0.5)
+                new InfluenceFactor("SocialEnergyLevel", -1.0),
+                new InfluenceFactor("CurrentMood", -1.5),
+                new InfluenceFactor("PhysicalHealth", -1.2)
             ]
         },
         new()
@@ -350,7 +389,10 @@ public static class CopingMechanism
             HealthImpact = 2,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("IntelligenceScore", 1.2),
+                new InfluenceFactor("ResilienceScore", 1.0),
+                new InfluenceFactor("CurrentStress", 0.5)
             ]
         },
         new()
@@ -375,7 +417,9 @@ public static class CopingMechanism
             HealthImpact = 8,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 1.1)
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("SocialEnergyLevel", -1.0),
+                new InfluenceFactor("IncomeLevel", 0.8)
             ]
         },
         new()
@@ -400,7 +444,10 @@ public static class CopingMechanism
             HealthImpact = 0,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.2)
+                new InfluenceFactor("IntelligenceScore", 1.5),
+                new InfluenceFactor("SocialEnergyLevel", -1.2),
+                new InfluenceFactor("AnxietyLevel", 1.0),
+                new InfluenceFactor("GenderFemale", 1.3)
             ]
         }
     ];
