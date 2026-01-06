@@ -83,50 +83,6 @@ public static class EnumConverter
     }
 
     /// <summary>
-    ///     Converts ParentsRelationshipQuality enum to German display string.
-    /// </summary>
-    public static string ToGermanString(this ParentsRelationshipQuality value)
-    {
-        return value switch
-        {
-            ParentsRelationshipQuality.Harmonious => "harmonisch",
-            ParentsRelationshipQuality.Neutral => "neutral",
-            ParentsRelationshipQuality.Conflictual => "konfliktgeladen",
-            _ => "neutral"
-        };
-    }
-
-    /// <summary>
-    ///     Converts SocialEnergyLevel enum to German display string.
-    /// </summary>
-    public static string ToGermanString(this SocialEnergyLevel value)
-    {
-        return value switch
-        {
-            SocialEnergyLevel.StrongIntrovert => "Stark introvertiert",
-            SocialEnergyLevel.Introvert => "Eher introvertiert",
-            SocialEnergyLevel.Ambivert => "Ambivertiert",
-            SocialEnergyLevel.Extravert => "Eher extrovertiert",
-            SocialEnergyLevel.StrongExtravert => "Stark extrovertiert",
-            _ => "Ambivertiert"
-        };
-    }
-
-    /// <summary>
-    ///     Converts GenderType enum to German display string.
-    /// </summary>
-    public static string ToGermanString(this GenderType value)
-    {
-        return value switch
-        {
-            GenderType.Male => "Männlich",
-            GenderType.Female => "Weiblich",
-            GenderType.NonBinary => "Non-Binär",
-            _ => "Weiblich"
-        };
-    }
-
-    /// <summary>
     ///     Maps slider value (1-7) to IncomeLevel enum.
     /// </summary>
     public static IncomeLevel MapIncomeLevel(int value)
