@@ -23,8 +23,8 @@
 
         <Grid Margin="60">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="2.75*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border Background="#6614181F" CornerRadius="32" Padding="45" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Stretch">
