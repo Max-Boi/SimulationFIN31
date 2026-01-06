@@ -219,6 +219,9 @@ public partial class EvaluationView : UserControl
             plot.Axes.SetLimitsX(0, 32); // Age 0-30 with padding
             plot.Axes.SetLimitsY(-110, 110); // Values with padding
         }
+        
+        // Disable standard user interactions (pan, zoom) so it doesn't conflict with scrolling
+        HealthChart.UserInputProcessor.Disable();
 
         HealthChart.Refresh();
     }
