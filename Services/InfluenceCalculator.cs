@@ -37,8 +37,11 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
     /// <summary>
     ///     Calculates the influence multiplier for an event based on a normalized state value and exponent.
     ///     The calculation handles three cases:
-    ///     1. Positive exponent: normalizedValue^exponent (high values amplified)
-    ///     2. Negative exponent: (1 - normalizedValue)^|exponent| (inverse relationship)
+    ///     1. Positive exponent: (normalizedValue * 2)^exponent
+    ///        - Values > 0.5 create boost (> 1.0)
+    ///        - Values < 0.5 create penalty (< 1.0)
+    ///     2. Negative exponent: ((1 - normalizedValue) * 2)^|exponent|
+    ///        - Low values create boost (inverse relationship)
     ///     3. Zero exponent: Returns 1.0 (no influence)
     /// </summary>
     /// <param name="normalizedValue">State value normalized to [0.01, 0.99] range.</param>
@@ -59,13 +62,19 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
 
         if (exponent > 0)
         {
-            influence = Math.Pow(clampedValue, exponent);
+            // Shift the center so 0.5 is neutral (1.0)
+            // 0.5 * 2.0 = 1.0
+            // > 0.5 results in > 1.0 (Boost)
+            // < 0.5 results in < 1.0 (Penalty)
+            influence = Math.Pow(clampedValue * 2.0, exponent);
         }
         else
         {
             var invertedValue = 1.0 - clampedValue;
             invertedValue = Math.Max(invertedValue, MINIMUM_NORMALIZED_VALUE);
-            influence = Math.Pow(invertedValue, Math.Abs(exponent));
+            
+            // Apply same logic to inverted value
+            influence = Math.Pow(invertedValue * 2.0, Math.Abs(exponent));
         }
 
         return Math.Clamp(influence, MIN_MULTIPLIER, MAX_MULTIPLIER);

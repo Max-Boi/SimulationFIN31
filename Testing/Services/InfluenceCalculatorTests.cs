@@ -31,8 +31,8 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.True(result > 0.8, "High normalized value with positive exponent should yield high influence");
-        Assert.True(result < normalizedValue, "Exponent > 1 should reduce values < 1");
+        // New Logic: 0.9 * 2 = 1.8. 1.8^1.5 approx 2.41
+        Assert.True(result > 1.0, "High normalized value with positive exponent should yield boost (> 1.0)");
     }
 
     [Fact]
@@ -46,7 +46,8 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.True(result < normalizedValue, "Low value with exponent > 1 should be further reduced");
+        // New Logic: 0.2 * 2 = 0.4. 0.4^1.5 approx 0.25
+        Assert.True(result < 1.0, "Low value with exponent > 0 should assume penalty (< 1.0)");
         Assert.True(result >= 0.02, "Result should not go below minimum multiplier");
     }
 
@@ -61,7 +62,8 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.Equal(normalizedValue, result, precision: 5);
+        // New Logic: 0.5 * 2 = 1.0. 1.0^1.0 = 1.0
+        Assert.Equal(1.0, result, precision: 5);
     }
 
     #endregion
@@ -79,7 +81,8 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.True(result < 0.2, "High value with negative exponent should yield low influence (inverse relationship)");
+        // New Logic: 0.9 -> inv 0.1 -> 0.2. 0.2^1.5 approx 0.089
+        Assert.True(result < 1.0, "High value with negative exponent should yield penalty (< 1.0)");
     }
 
     [Fact]
@@ -93,7 +96,8 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        Assert.True(result > 0.8, "Low value with negative exponent should yield high influence (inverse relationship)");
+        // New Logic: 0.1 -> inv 0.9 -> 1.8. 1.8^1.5 approx 2.41
+        Assert.True(result > 1.0, "Low value with negative exponent should yield boost (> 1.0)");
     }
 
     #endregion
