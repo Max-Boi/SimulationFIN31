@@ -297,16 +297,6 @@
                                            FontWeight="SemiBold"
                                            Foreground="{DynamicResource TextSecondaryBrush}" />
                             </Border>
-                            <Border Classes="EventIconBox"
-                                    IsVisible="{Binding SecondPersonalEvent, Converter={x:Static ObjectConverters.IsNull}}"
-                                    Opacity="0.3">
-                                <TextBlock Text="P2"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="32"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextSecondaryBrush}" />
-                            </Border>
                         </StackPanel>
 
                         <!-- Avatar Animation - Center -->
@@ -328,14 +318,12 @@
                                 </DataTemplate>
                             </TransitioningContentControl.ContentTemplate>
                         </TransitioningContentControl>
-
-                        <!-- Generic Events - Right Side (Stack) -->
                         <StackPanel Grid.Column="2" Grid.Row="1"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Margin="0,0,8,0"
                                     Spacing="12">
-                            <!-- First Generic Event -->
+                            
                             <Border Classes="EventIconBox"
                                     ToolTip.Tip="{Binding LatestGenericEvent.TooltipText}"
                                     IsVisible="{Binding LatestGenericEvent, Converter={x:Static ObjectConverters.IsNotNull}}">
@@ -346,16 +334,6 @@
                                     IsVisible="{Binding LatestGenericEvent, Converter={x:Static ObjectConverters.IsNull}}"
                                     Opacity="0.3">
                                 <TextBlock Text="G1"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="32"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextSecondaryBrush}" />
-                            </Border>
-                            <Border Classes="EventIconBox"
-                                    IsVisible="{Binding SecondGenericEvent, Converter={x:Static ObjectConverters.IsNull}}"
-                                    Opacity="0.3">
-                                <TextBlock Text="G2"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            FontSize="32"

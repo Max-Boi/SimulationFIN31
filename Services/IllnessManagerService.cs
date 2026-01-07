@@ -38,7 +38,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ["DissociativeDisorder"] = "Avatar entwickelt eine dissoziative störung"
     };
 
-    private static readonly Dictionary<string, string> GermanHealingMessages = new()
+    private static readonly Dictionary<string, string> HealingMessages = new()
     {
         ["MildDepression"] = "Avatar hat die depressive Episode überwunden",
         ["generalisierte Angststörung"] = "Avatar hat die Angststörung in den Griff bekommen",
@@ -160,7 +160,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
             state.CurrentIllnesses.Remove(key);
             state.IllnessProgressionStates.Remove(key);
 
-            var message = GermanHealingMessages.GetValueOrDefault(key, $"Avatar hat {config.Name} überwunden");
+            var message = HealingMessages.GetValueOrDefault(key, $"Avatar hat {config.Name} überwunden");
             RaiseIllnessChanged(key, config.Name, IllnessChangeType.Healed, message);
         }
     }
@@ -185,7 +185,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
             // Probability-based onset with gender-adjusted chance
             var probability = CalculateGenderAdjustedProbability(config, state);
-            if (_random.NextDouble() < probability) TriggerIllness(key, config, state);
+            if (_random.NextInt64(0,20) < probability) TriggerIllness(key, config, state);
         }
     }
 
