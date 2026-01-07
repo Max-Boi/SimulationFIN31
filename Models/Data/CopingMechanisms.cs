@@ -32,11 +32,11 @@ public static class CopingMechanism
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(50),
             IsHabitForming = true,
-            StressImpact = -25,
-            MoodImpact = 15,
-            SocialBelongingImpact = 12,
-            ResilienceImpact = 15,
-            HealthImpact = 30,
+            StressImpact = -20,
+            MoodImpact = 10,
+            SocialBelongingImpact = 8,
+            ResilienceImpact = 10,
+            HealthImpact = 20,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 1.5),
@@ -60,11 +60,11 @@ public static class CopingMechanism
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(moodThreshold: -20, belongingThreshold: 40),
             IsHabitForming = true,
-            StressImpact = -30,
-            MoodImpact = 25,
-            SocialBelongingImpact = 25,
-            ResilienceImpact = 15,
-            HealthImpact = 3,
+            StressImpact = -20,
+            MoodImpact = 15,
+            SocialBelongingImpact = 15,
+            ResilienceImpact = 10,
+            HealthImpact = 2,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnergyLevel", 3.0),
@@ -90,11 +90,11 @@ public static class CopingMechanism
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(60),
             IsHabitForming = true,
-            StressImpact = -18,
-            MoodImpact = 15,
+            StressImpact = -14,
+            MoodImpact = 10,
             SocialBelongingImpact = 0,
-            ResilienceImpact = 25,
-            HealthImpact = 15,
+            ResilienceImpact = 15,
+            HealthImpact = 10,
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 1.0),
@@ -119,10 +119,10 @@ public static class CopingMechanism
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(moodThreshold: -30),
             IsHabitForming = true,
-            StressImpact = -15,
-            MoodImpact = 20,
-            SocialBelongingImpact = 5,
-            ResilienceImpact = 10,
+            StressImpact = -12,
+            MoodImpact = 14,
+            SocialBelongingImpact = 3,
+            ResilienceImpact = 7,
             HealthImpact = 0,
             InfluenceFactors =
             [
@@ -148,10 +148,10 @@ public static class CopingMechanism
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(45),
             IsHabitForming = true,
-            StressImpact = -25,
-            MoodImpact = 15,
-            SocialBelongingImpact = 3,
-            ResilienceImpact = 8,
+            StressImpact = -20,
+            MoodImpact = 10,
+            SocialBelongingImpact = 2,
+            ResilienceImpact = 5,
             HealthImpact = 5,
             InfluenceFactors =
             [
@@ -410,11 +410,11 @@ public static class CopingMechanism
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(45),
             IsHabitForming = true,
-            StressImpact = -12,
-            MoodImpact = 10,
-            SocialBelongingImpact = 3,
-            ResilienceImpact = 8,
-            HealthImpact = 8,
+            StressImpact = -10,
+            MoodImpact = 8,
+            SocialBelongingImpact = 2,
+            ResilienceImpact = 5,
+            HealthImpact = 5,
             InfluenceFactors =
             [
                 new InfluenceFactor("SocialEnvironmentLevel", 1.5),
@@ -437,11 +437,12 @@ public static class CopingMechanism
             Type = CopingType.Functional,
             Trigger = new CopingTrigger(moodThreshold: -25, stressThreshold: 50),
             IsHabitForming = true,
-            StressImpact = -10,
-            MoodImpact = 8,
+            StressImpact = -8,
+            MoodImpact = 6,
             SocialBelongingImpact = 0,
-            ResilienceImpact = 12,
+            ResilienceImpact = 8,
             HealthImpact = 0,
+
             InfluenceFactors =
             [
                 new InfluenceFactor("IntelligenceScore", 1.5),
