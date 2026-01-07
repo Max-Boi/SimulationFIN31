@@ -125,6 +125,14 @@ public partial class EvaluationView : UserControl
     {
         var plot = HealthChart.Plot;
         plot.Clear();
+
+        // Define axis color early for consistency
+        var axisColor = new Color(200, 200, 200); // Light gray for visibility
+
+        // Draw a horizontal line at Y=0 to act as the visual X-axis
+        var zeroLine = plot.Add.HorizontalLine(0);
+        zeroLine.Color = axisColor;
+        zeroLine.LineWidth = 1;
         
         if (vm.Ages.Length > 0)
         {
@@ -195,7 +203,6 @@ public partial class EvaluationView : UserControl
         plot.DataBackground.Color = new Color(30, 30, 30); // Slightly darker
 
         // Axis styling
-        var axisColor = new Color(200, 200, 200); // Light gray for visibility
         plot.Axes.Bottom.Label.ForeColor = axisColor;
         plot.Axes.Left.Label.ForeColor = axisColor;
         plot.Axes.Bottom.TickLabelStyle.ForeColor = axisColor;

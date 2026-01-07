@@ -6,18 +6,18 @@ namespace SimulationFIN31.Models;
 
 public class SimulationState
 {
-    // Sozioökonomische Faktoren
+    
     public IncomeLevel IncomeLevel { get; set; }
     public ParentsEducationLevel ParentsEducationLevel { get; set; }
     public JobStatus JobStatus { get; set; }
     public int SocialEnvironmentLevel { get; set; }
 
-    // Familiäres Milieu
+  
     public int FamilyCloseness { get; set; }
     public ParentsRelationshipQuality ParentsRelationshipQuality { get; set; }
     public bool ParentsWithAddiction { get; set; }
 
-    // Individuelle Neurobiologie
+   
     public bool HasAdhd { get; set; }
     public bool HasAutism { get; set; }
     public int IntelligenceScore { get; set; }

@@ -20,10 +20,6 @@ using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.ViewModels;
 
-/// <summary>
-///     ViewModel for the simulation view, managing simulation state display,
-///     event logging, and simulation control (start/pause/stop).
-/// </summary>
 public partial class SimulationViewModel : ViewModelBase
 {
     private const double DEFAULT_SIMULATION_SPEED = 1.0;
@@ -38,13 +34,6 @@ public partial class SimulationViewModel : ViewModelBase
 
     private CancellationTokenSource? _simulationCts;
 
-    /// <summary>
-    ///     Creates a new SimulationViewModel with required dependencies.
-    /// </summary>
-    /// <param name="navigationService">Service for view navigation.</param>
-    /// <param name="simulationService">Service for running the simulation.</param>
-    /// <param name="historyService">Service for logging simulation history.</param>
-    /// <exception cref="ArgumentNullException">When any dependency is null.</exception>
     public SimulationViewModel(
         INavigationService navigationService,
         ISimulationService simulationService,
@@ -67,18 +56,8 @@ public partial class SimulationViewModel : ViewModelBase
         InitializeAnimationTimer();
     }
 
-    #region -- Commands --
-
-    /// <summary>
-    ///     Command to navigate back to the home view.
-    /// </summary>
     public ICommand GoBackCommand { get; }
 
-    #endregion
-
-    /// <summary>
-    ///     Initializes the animation timer for character sprite cycling.
-    /// </summary>
     private void InitializeAnimationTimer()
     {
         _animationTimer = new DispatcherTimer
@@ -88,30 +67,18 @@ public partial class SimulationViewModel : ViewModelBase
         _animationTimer.Tick += OnAnimationTick;
     }
 
-    /// <summary>
-    ///     Calculates the animation frame interval based on simulation speed.
-    ///     Higher speed = faster animation.
-    /// </summary>
-    /// <param name="speed">The current simulation speed multiplier.</param>
-    /// <returns>TimeSpan for the animation interval.</returns>
     private static TimeSpan CalculateAnimationInterval(double speed)
     {
         var adjustedMs = BASE_ANIMATION_INTERVAL_MS / speed;
         return TimeSpan.FromMilliseconds(Math.Max(adjustedMs, MIN_ANIMATION_INTERVAL_MS));
     }
 
-    /// <summary>
-    ///     Handles animation timer tick - toggles between animation frames.
-    /// </summary>
     private void OnAnimationTick(object? sender, EventArgs e)
     {
         _animationFrame = _animationFrame == 1 ? 2 : 1;
         UpdateAnimatedSprite();
     }
 
-    /// <summary>
-    ///     Updates only the sprite image without triggering phase transition effects.
-    /// </summary>
     private void UpdateAnimatedSprite()
     {
         var illnessCount = SimulationState.CurrentIllnesses.Count;
@@ -124,9 +91,6 @@ public partial class SimulationViewModel : ViewModelBase
         }
     }
 
-    /// <summary>
-    ///     Starts or stops the animation based on simulation running state.
-    /// </summary>
     private void UpdateAnimationState()
     {
         if (IsRunning && !IsPaused)
@@ -142,39 +106,21 @@ public partial class SimulationViewModel : ViewModelBase
         }
     }
 
-    /// <summary>
-    ///     Called when SimulationSpeed property changes.
-    ///     Updates the animation timer interval accordingly.
-    /// </summary>
     partial void OnSimulationSpeedChanged(double value)
     {
         if (_animationTimer != null) _animationTimer.Interval = CalculateAnimationInterval(value);
     }
 
-    /// <summary>
-    ///     Called when IsRunning property changes.
-    /// </summary>
     partial void OnIsRunningChanged(bool value)
     {
         UpdateAnimationState();
     }
 
-    /// <summary>
-    ///     Called when IsPaused property changes.
-    /// </summary>
     partial void OnIsPausedChanged(bool value)
     {
         UpdateAnimationState();
     }
 
-    #region -- Simulation Loop --
-
-    /// <summary>
-    ///     Main simulation loop running asynchronously.
-    ///     Respects pause state and simulation speed settings.
-    ///     Auto-navigates to evaluation view when simulation completes.
-    /// </summary>
-    /// <param name="cancellationToken">Token to cancel the simulation.</param>
     private async Task RunSimulationLoopAsync(CancellationToken cancellationToken)
     {
         var simulationCompleted = false;
@@ -195,12 +141,10 @@ public partial class SimulationViewModel : ViewModelBase
                 await Task.Delay(delay, cancellationToken);
             }
 
-            // Check if simulation completed naturally (reached age 30)
             simulationCompleted = SimulationState.CurrentAge >= 30;
         }
         catch (OperationCanceledException)
         {
-            // Expected when simulation is stopped
         }
         finally
         {
@@ -211,7 +155,6 @@ public partial class SimulationViewModel : ViewModelBase
             });
         }
 
-        // Navigate to evaluation view if simulation completed naturally
         if (simulationCompleted)
         {
             var history = _historyService.GetCompleteHistory(SimulationState);
@@ -223,106 +166,40 @@ public partial class SimulationViewModel : ViewModelBase
         }
     }
 
-    #endregion
-
-    #region -- Observable Properties --
-
-    /// <summary>
-    ///     The current simulation state being displayed.
-    /// </summary>
     [ObservableProperty] private SimulationState _simulationState;
 
-    /// <summary>
-    ///     Current stress level (0-100).
-    /// </summary>
     [ObservableProperty] private double _stressLevel;
 
-    /// <summary>
-    ///     Current mood level (-100 to 100).
-    /// </summary>
     [ObservableProperty] private double _moodLevel;
 
-    /// <summary>
-    ///     Current social belonging level (0-100).
-    /// </summary>
     [ObservableProperty] private double _socialLevel;
 
-    /// <summary>
-    ///     Current age in the simulation.
-    /// </summary>
     [ObservableProperty] private int _currentAge;
 
-    /// <summary>
-    ///     Current life phase display name.
-    /// </summary>
     [ObservableProperty] private string _currentLifePhase = string.Empty;
 
-    /// <summary>
-    ///     Simulation speed multiplier (0.25 to 5.0).
-    /// </summary>
     [ObservableProperty] private double _simulationSpeed = DEFAULT_SIMULATION_SPEED;
 
-    /// <summary>
-    ///     Indicates whether the simulation is currently running.
-    /// </summary>
     [ObservableProperty] private bool _isRunning;
 
-    /// <summary>
-    ///     Indicates whether the simulation is paused.
-    /// </summary>
     [ObservableProperty] private bool _isPaused;
 
-    /// <summary>
-    ///     Current character SVG path based on life phase, illness count, and animation frame.
-    /// </summary>
     [ObservableProperty] private string _currentTreePath = "avares://SimulationFIN31/Assets/Avatar/Baby.svg";
 
-    /// <summary>
-    ///     Key that changes when tree should transition (triggers CrossFade animation).
-    /// </summary>
     [ObservableProperty] private string _currentLifePhaseKey = "Childhood_0";
 
-    /// <summary>
-    ///     Current tree image for display, loaded from SVG.
-    /// </summary>
     [ObservableProperty] private IImage? _currentTreeImage;
 
-    /// <summary>
-    ///     Most recent generic event for icon display.
-    /// </summary>
     [ObservableProperty] private EventLogEntry? _latestGenericEvent;
 
-    /// <summary>
-    ///     Most recent personal event for icon display.
-    /// </summary>
     [ObservableProperty] private EventLogEntry? _latestPersonalEvent;
 
-    /// <summary>
-    ///     Most recent coping event for icon display.
-    /// </summary>
     [ObservableProperty] private EventLogEntry? _latestCopingEvent;
 
-    #endregion
-
-    #region -- Collections --
-
-    /// <summary>
-    ///     Names of currently active mental illnesses.
-    /// </summary>
     public ObservableCollection<string> ActiveIllnessNames { get; } = new();
 
-    /// <summary>
-    ///     Log of events that have occurred during the simulation.
-    /// </summary>
     public ObservableCollection<EventLogEntry> EventLog { get; } = new();
 
-    #endregion
-
-    #region -- Simulation Control Commands --
-
-    /// <summary>
-    ///     Starts or resumes the simulation.
-    /// </summary>
     [RelayCommand]
     private async Task StartSimulationAsync()
     {
@@ -343,9 +220,6 @@ public partial class SimulationViewModel : ViewModelBase
         await RunSimulationLoopAsync(_simulationCts.Token);
     }
 
-    /// <summary>
-    ///     Pauses the currently running simulation.
-    /// </summary>
     [RelayCommand]
     private void PauseSimulation()
     {
@@ -354,9 +228,6 @@ public partial class SimulationViewModel : ViewModelBase
         IsPaused = true;
     }
 
-    /// <summary>
-    ///     Stops the simulation completely.
-    /// </summary>
     [RelayCommand]
     private async Task StopSimulationAsync()
     {
@@ -373,9 +244,6 @@ public partial class SimulationViewModel : ViewModelBase
         _simulationCts = null;
     }
 
-    /// <summary>
-    ///     Resets the simulation to initial state.
-    /// </summary>
     [RelayCommand]
     private async Task ResetSimulationAsync()
     {
@@ -394,14 +262,6 @@ public partial class SimulationViewModel : ViewModelBase
         });
     }
 
-    #endregion
-
-    #region -- Event Handlers --
-
-    /// <summary>
-    ///     Handles life events occurring during simulation.
-    ///     Updates the event log and latest event icons on the UI thread.
-    /// </summary>
     private void OnEventOccurred(object? sender, SimulationEventArgs e)
     {
         var entry = new EventLogEntry(
@@ -418,7 +278,6 @@ public partial class SimulationViewModel : ViewModelBase
 
             if (EventLog.Count > 150) EventLog.RemoveAt(EventLog.Count - 1);
 
-            // Update latest event per category for icon display
             switch (entry.Category)
             {
                 case EventCategory.Generic:
@@ -434,22 +293,13 @@ public partial class SimulationViewModel : ViewModelBase
         });
     }
 
-    /// <summary>
-    ///     Handles simulation state updates.
-    ///     Records turn snapshot and updates display properties on the UI thread.
-    /// </summary>
     private void OnStateUpdated(object? sender, SimulationState state)
     {
-        // Record turn snapshot for evaluation charts
         _historyService.RecordTurnSnapshot(state);
 
         Dispatcher.UIThread.Post(UpdateDisplayProperties);
     }
 
-    /// <summary>
-    ///     Handles illness state changes (onset or healing).
-    ///     Logs German messages to the event log and updates illness names display.
-    /// </summary>
     private void OnIllnessChanged(object? sender, IllnessEventArgs e)
     {
         var entry = new EventLogEntry(
@@ -466,21 +316,12 @@ public partial class SimulationViewModel : ViewModelBase
 
             if (EventLog.Count > 150) EventLog.RemoveAt(EventLog.Count - 1);
 
-            // Update active illness names display
             UpdateActiveIllnessNames();
 
-            // Update tree display (may switch to BadAdultTree if 3 illnesses)
             UpdateTreeDisplay();
         });
     }
 
-    #endregion
-
-    #region -- Private Methods --
-
-    /// <summary>
-    ///     Updates all display properties from the current simulation state.
-    /// </summary>
     private void UpdateDisplayProperties()
     {
         StressLevel = SimulationState.CurrentStress;
@@ -492,20 +333,14 @@ public partial class SimulationViewModel : ViewModelBase
         UpdateActiveIllnessNames();
     }
 
-    /// <summary>
-    ///     Updates the tree display based on current life phase and illness count.
-    ///     Only updates the phase key when the life phase actually changes (triggers CrossFade).
-    /// </summary>
     private void UpdateTreeDisplay()
     {
         var illnessCount = SimulationState.CurrentIllnesses.Count;
         var newPath = GetAvatarPath(SimulationState.LifePhase, illnessCount, _animationFrame);
         var newKey = $"{SimulationState.LifePhase}_{illnessCount}";
 
-        // Update key only on phase changes to trigger CrossFade transition
         if (CurrentLifePhaseKey != newKey) CurrentLifePhaseKey = newKey;
 
-        // Always load if image is null (initial load) or path changed
         if (CurrentTreeImage == null || CurrentTreePath != newPath)
         {
             CurrentTreePath = newPath;
@@ -513,9 +348,6 @@ public partial class SimulationViewModel : ViewModelBase
         }
     }
 
-    /// <summary>
-    ///     Loads an SVG image from the specified resource path.
-    /// </summary>
     private void LoadTreeImage(string path)
     {
         try
@@ -530,22 +362,12 @@ public partial class SimulationViewModel : ViewModelBase
         }
     }
 
-    /// <summary>
-    ///     Updates the active illness names collection from current state.
-    /// </summary>
     private void UpdateActiveIllnessNames()
     {
         ActiveIllnessNames.Clear();
         foreach (var illness in SimulationState.CurrentIllnesses.Values) ActiveIllnessNames.Add(illness.Name);
     }
 
-    /// <summary>
-    ///     Gets the appropriate character SVG path based on life phase, illness count, and animation frame.
-    /// </summary>
-    /// <param name="phase">Current life phase.</param>
-    /// <param name="illnessCount">Number of active illnesses.</param>
-    /// <param name="animationFrame">Animation frame (0 = static, 1 = movement1, 2 = movement2).</param>
-    /// <returns>The resource path to the SVG file.</returns>
     private static string GetAvatarPath(LifePhase phase, int illnessCount, int animationFrame)
     {
         var baseName = GetSpriteBaseName(phase, illnessCount);
@@ -561,9 +383,6 @@ public partial class SimulationViewModel : ViewModelBase
             : $"avares://SimulationFIN31/Assets/Avatar/{baseName}{frameSuffix}.svg";
     }
 
-    /// <summary>
-    ///     Gets the base sprite name for the given life phase.
-    /// </summary>
     private static string GetSpriteBaseName(LifePhase phase, int illnessCount)
     {
         return phase switch
@@ -577,10 +396,6 @@ public partial class SimulationViewModel : ViewModelBase
         };
     }
 
-    /// <summary>
-    ///     Creates initial simulation state by loading user settings from settings.json.
-    ///     Falls back to sensible defaults if settings file doesn't exist.
-    /// </summary>
     private static SimulationState CreateInitialState()
     {
         var settings = LoadSettings();
@@ -595,7 +410,6 @@ public partial class SimulationViewModel : ViewModelBase
             ResilienceScore = 85,
             PhysicalHealth = 100,
 
-            // Load from user settings
             IncomeLevel = EnumConverter.MapIncomeLevel(settings.IncomeLevel),
             ParentsEducationLevel = EnumConverter.MapParentsEducationLevel(settings.ParentsEducationLevel),
             JobStatus = EnumConverter.MapJobStatus(settings.JobStatus),
@@ -613,16 +427,11 @@ public partial class SimulationViewModel : ViewModelBase
         };
     }
 
-    /// <summary>
-    ///     Loads simulation settings from settings.json file.
-    ///     Returns default settings if file doesn't exist.
-    /// </summary>
     private static SimulationSettings LoadSettings()
     {
         var settingsPath = Path.Combine(AppContext.BaseDirectory, "settings.json");
 
         if (!File.Exists(settingsPath))
-            // Return defaults matching SettingsViewModel defaults
             return new SimulationSettings
             {
                 IncomeLevel = 4,
@@ -648,7 +457,6 @@ public partial class SimulationViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            // Log error and return defaults (in production, use proper logging)
             Debug.WriteLine($"Failed to load settings: {ex.Message}");
             return new SimulationSettings
             {
@@ -669,9 +477,6 @@ public partial class SimulationViewModel : ViewModelBase
         }
     }
 
-    /// <summary>
-    ///     Gets a human-readable display name for the life phase.
-    /// </summary>
     private static string GetLifePhaseDisplayName(LifePhase phase)
     {
         return phase switch
@@ -685,27 +490,13 @@ public partial class SimulationViewModel : ViewModelBase
         };
     }
 
-    /// <summary>
-    ///     Navigates back to the home view.
-    /// </summary>
     private void NavigateBack()
     {
         StopSimulationAsync().ConfigureAwait(false);
         _navigationService.NavigateTo<HomeViewModel>();
     }
-
-    #endregion
 }
 
-/// <summary>
-///     Represents a single entry in the simulation event log.
-/// </summary>
-/// <param name="EventName">Name of the event that occurred.</param>
-/// <param name="Description">Description of what happened.</param>
-/// <param name="Age">Age at which the event occurred.</param>
-/// <param name="Timestamp">When the event was logged.</param>
-/// <param name="Category">The event category (Generic, Personal, or Coping).</param>
-/// <param name="VisualCategory">The visual category for icon display.</param>
 public sealed record EventLogEntry(
     string EventName,
     string Description,
@@ -716,24 +507,12 @@ public sealed record EventLogEntry(
 {
     private static readonly Dictionary<string, Bitmap> IconCache = new();
 
-    /// <summary>
-    ///     Formatted display text for the event log.
-    /// </summary>
     public string DisplayText => $"[Alter {Age}] {EventName}";
 
-    /// <summary>
-    ///     Tooltip text for event icon hover display.
-    /// </summary>
     public string TooltipText => $"{EventName}\n{Description}";
 
-    /// <summary>
-    ///     Gets the icon image for this event based on its visual category.
-    /// </summary>
     public Bitmap? Icon => LoadIcon(VisualCategory);
 
-    /// <summary>
-    ///     Loads and caches the icon bitmap for the given visual category.
-    /// </summary>
     private static Bitmap? LoadIcon(VisualCategory category)
     {
         var path = GetIconPathForVisualCategory(category);
@@ -752,9 +531,6 @@ public sealed record EventLogEntry(
         }
     }
 
-    /// <summary>
-    ///     Maps a visual category to its corresponding icon asset path.
-    /// </summary>
     private static string GetIconPathForVisualCategory(VisualCategory category)
     {
         return category switch
