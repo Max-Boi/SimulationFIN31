@@ -63,7 +63,7 @@ public sealed class SimulationService : ISimulationService
     public event EventHandler<IllnessEventArgs>? IllnessChanged;
 
     /// <inheritdoc />
-    public async Task RunStepAsync(SimulationState state, CancellationToken cancellationToken = default)
+    public async Task RunStepAsync(SimulationState state, CancellationToken cancellationToken = default, double speedMultiplier = 1.0, bool useDoubleEvents = true)
     {
         ArgumentNullException.ThrowIfNull(state);
 
@@ -75,17 +75,25 @@ public sealed class SimulationService : ISimulationService
         var events = GetEventsForPhase(state.LifePhase);
         var copingMechanisms = CopingMechanism.AllcopingMechanisms;
 
-        await Task.Run(() =>
-        {
-            ProcessGenericEvents(events.GenericEvents, state);
-            ProcessPersonalEvents(events.PersonalEvents, state);
-            ProcessCopingMechanisms(copingMechanisms, state);
+        // Calculate delay between events based on speed
+        var eventDelay = GetEventDelay(speedMultiplier);
+        
+        // Determine number of events to select per category
+        var eventCount = useDoubleEvents ? 2 : 1;
 
-            // Process illness triggers and healing after all events
-            _illnessManagerService.ProcessIllnessStep(state);
+        // Process generic events (1 or 2 events with delay)
+        await ProcessGenericEventsAsync(events.GenericEvents, state, eventDelay, cancellationToken, eventCount);
 
-            AdvanceAge(state);
-        }, cancellationToken);
+        // Process personal events (1 or 2 events with delay)
+        await ProcessPersonalEventsAsync(events.PersonalEvents, state, eventDelay, cancellationToken, eventCount);
+
+        // Process coping mechanisms (still single selection)
+        ProcessCopingMechanisms(copingMechanisms, state);
+
+        // Process illness triggers and healing after all events
+        _illnessManagerService.ProcessIllnessStep(state);
+
+        AdvanceAge(state);
 
         StateUpdated?.Invoke(this, state);
     }
@@ -97,6 +105,21 @@ public sealed class SimulationService : ISimulationService
 
         var delay = (int)(BASE_STEP_DELAY_MS / speedMultiplier);
         return Math.Clamp(delay, MIN_STEP_DELAY_MS, MAX_STEP_DELAY_MS);
+    }
+
+    /// <summary>
+    ///     Gets the delay between individual events within a step, based on simulation speed.
+    /// </summary>
+    private int GetEventDelay(double speedMultiplier)
+    {
+        const int baseEventDelayMs = 800;
+        const int minEventDelayMs = 50;
+        const int maxEventDelayMs = 2000;
+
+        if (speedMultiplier <= 0) return baseEventDelayMs;
+
+        var delay = (int)(baseEventDelayMs / speedMultiplier);
+        return Math.Clamp(delay, minEventDelayMs, maxEventDelayMs);
     }
 
     private void OnIllnessChanged(object? sender, IllnessEventArgs e)
@@ -114,24 +137,46 @@ public sealed class SimulationService : ISimulationService
     }
 
     /// <summary>
-    ///     Processes generic events for the current step.
+    ///     Processes generic events for the current step using SUS algorithm with configurable event count.
     /// </summary>
-    private void ProcessGenericEvents(IReadOnlyList<GenericEvent> genericEvents, SimulationState state)
+    private async Task ProcessGenericEventsAsync(IReadOnlyList<GenericEvent> genericEvents, SimulationState state, int eventDelay, CancellationToken cancellationToken, int eventCount)
     {
-        var selectedEvent = _weightedRandomService.SelectGenericEvent(genericEvents, state);
-        if (selectedEvent != null) ApplyEvent(selectedEvent, state);
+        var selectedEvents = _weightedRandomService.SelectGenericEvents(genericEvents, state, eventCount);
+        
+        for (int i = 0; i < selectedEvents.Count; i++)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            ApplyEvent(selectedEvents[i], state);
+            
+            // Add delay between events (but not after the last one)
+            if (i < selectedEvents.Count - 1)
+            {
+                await Task.Delay(eventDelay, cancellationToken);
+            }
+        }
     }
 
     /// <summary>
-    ///     Processes personal events for the current step.
+    ///     Processes personal events for the current step using SUS algorithm with configurable event count.
     /// </summary>
-    private void ProcessPersonalEvents(IReadOnlyList<PersonalEvent> personalEvents, SimulationState state)
+    private async Task ProcessPersonalEventsAsync(IReadOnlyList<PersonalEvent> personalEvents, SimulationState state, int eventDelay, CancellationToken cancellationToken, int eventCount)
     {
-        var selectedEvent = _weightedRandomService.SelectPersonalEvent(personalEvents, state);
-        if (selectedEvent != null)
+        var selectedEvents = _weightedRandomService.SelectPersonalEvents(personalEvents, state, eventCount);
+        
+        for (int i = 0; i < selectedEvents.Count; i++)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            var selectedEvent = selectedEvents[i];
             ApplyEvent(selectedEvent, state);
             ApplyPersonalEventEffects(selectedEvent, state);
+            
+            // Add delay between events (but not after the last one)
+            if (i < selectedEvents.Count - 1)
+            {
+                await Task.Delay(eventDelay, cancellationToken);
+            }
         }
     }
 

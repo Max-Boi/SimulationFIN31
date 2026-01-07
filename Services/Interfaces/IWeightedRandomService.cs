@@ -73,4 +73,22 @@ public interface IWeightedRandomService
     IReadOnlyList<WeightedEvent> GetWeightedEvents<TEvent>(
         IReadOnlyList<TEvent> events,
         SimulationState state) where TEvent : LifeEvent;
+
+    /// <summary>
+    ///     Selects multiple generic events using Stochastic Universal Sampling.
+    /// </summary>
+    /// <param name="events">Pool of generic events to select from.</param>
+    /// <param name="state">Current simulation state used for weight calculation.</param>
+    /// <param name="count">Number of events to select.</param>
+    /// <returns>List of selected generic events.</returns>
+    IReadOnlyList<GenericEvent> SelectGenericEvents(IReadOnlyList<GenericEvent> events, SimulationState state, int count);
+
+    /// <summary>
+    ///     Selects multiple personal events using Stochastic Universal Sampling.
+    /// </summary>
+    /// <param name="events">Pool of personal events to select from.</param>
+    /// <param name="state">Current simulation state used for weight calculation.</param>
+    /// <param name="count">Number of events to select.</param>
+    /// <returns>List of selected personal events.</returns>
+    IReadOnlyList<PersonalEvent> SelectPersonalEvents(IReadOnlyList<PersonalEvent> events, SimulationState state, int count);
 }

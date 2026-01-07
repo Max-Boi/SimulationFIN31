@@ -182,6 +182,44 @@
                             </StackPanel>
                         </StackPanel>
                     </Border>
+
+                    <!-- Simulation Settings Card -->
+                    <Border Classes="SettingsCard">
+                        <StackPanel Spacing="12">
+                            <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                <TextBlock Text="Simulationseinstellungen" FontSize="18" FontWeight="SemiBold" Foreground="AliceBlue" />
+
+                                <Border Background="LightGray"
+                                        CornerRadius="10"
+                                        Width="20" Height="20"
+                                        ToolTip.Tip="Konfigurieren Sie die Laufzeit und Ereignisdichte der Simulation.">
+                                    <TextBlock Text="?"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               FontSize="12" />
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Maximales Alter der Simulation" Foreground="AliceBlue"/>
+                                <Slider Minimum="30" Maximum="80" Value="{Binding MaxAge}" TickFrequency="5"
+                                        IsSnapToTickEnabled="True" />
+                                <TextBlock Text="{Binding MaxAge, StringFormat='Simulation läuft bis Alter: {0} Jahre'}" Foreground="AliceBlue"/>
+
+                                <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,12,0,0">
+                                    <StackPanel Spacing="6" VerticalAlignment="Center">
+                                        <TextBlock Text="Zwei Ereignisse pro Alter" Foreground="AliceBlue"/>
+                                        <ToggleSwitch IsChecked="{Binding UseDoubleEvents}" Foreground="AliceBlue"/>
+                                        <TextBlock Text="Wenn aktiviert, werden zwei Ereignisse pro Lebensalter ausgewählt"
+                                                   FontSize="11"
+                                                   Foreground="{DynamicResource TextSecondaryBrush}"
+                                                   TextWrapping="Wrap"
+                                                   MaxWidth="300"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

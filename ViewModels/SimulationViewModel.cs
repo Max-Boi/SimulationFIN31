@@ -127,7 +127,7 @@ public partial class SimulationViewModel : ViewModelBase
 
         try
         {
-            while (!cancellationToken.IsCancellationRequested && SimulationState.CurrentAge < 30)
+            while (!cancellationToken.IsCancellationRequested && SimulationState.CurrentAge < MaxAge)
             {
                 if (IsPaused)
                 {
@@ -135,13 +135,13 @@ public partial class SimulationViewModel : ViewModelBase
                     continue;
                 }
 
-                await _simulationService.RunStepAsync(SimulationState, cancellationToken);
+                await _simulationService.RunStepAsync(SimulationState, cancellationToken, SimulationSpeed, UseDoubleEvents);
 
                 var delay = _simulationService.GetStepDelay(SimulationSpeed);
                 await Task.Delay(delay, cancellationToken);
             }
 
-            simulationCompleted = SimulationState.CurrentAge >= 30;
+            simulationCompleted = SimulationState.CurrentAge >= MaxAge;
         }
         catch (OperationCanceledException)
         {
@@ -195,6 +195,14 @@ public partial class SimulationViewModel : ViewModelBase
     [ObservableProperty] private EventLogEntry? _latestPersonalEvent;
 
     [ObservableProperty] private EventLogEntry? _latestCopingEvent;
+
+    [ObservableProperty] private EventLogEntry? _secondGenericEvent;
+
+    [ObservableProperty] private EventLogEntry? _secondPersonalEvent;
+
+    [ObservableProperty] private int _maxAge = 30;
+
+    [ObservableProperty] private bool _useDoubleEvents = true;
 
     public ObservableCollection<string> ActiveIllnessNames { get; } = new();
 
@@ -259,6 +267,8 @@ public partial class SimulationViewModel : ViewModelBase
             LatestGenericEvent = null;
             LatestPersonalEvent = null;
             LatestCopingEvent = null;
+            SecondGenericEvent = null;
+            SecondPersonalEvent = null;
         });
     }
 
@@ -281,9 +291,15 @@ public partial class SimulationViewModel : ViewModelBase
             switch (entry.Category)
             {
                 case EventCategory.Generic:
+                    // Verschiebe das erste Generic Event zum zweiten Slot
+                    if (LatestGenericEvent != null)
+                        SecondGenericEvent = LatestGenericEvent;
                     LatestGenericEvent = entry;
                     break;
                 case EventCategory.Personal:
+                    // Verschiebe das erste Personal Event zum zweiten Slot
+                    if (LatestPersonalEvent != null)
+                        SecondPersonalEvent = LatestPersonalEvent;
                     LatestPersonalEvent = entry;
                     break;
                 case EventCategory.Coping:
@@ -396,9 +412,13 @@ public partial class SimulationViewModel : ViewModelBase
         };
     }
 
-    private static SimulationState CreateInitialState()
+    private SimulationState CreateInitialState()
     {
         var settings = LoadSettings();
+        
+        // Load simulation settings
+        MaxAge = settings.MaxAge > 0 ? settings.MaxAge : 30;
+        UseDoubleEvents = settings.UseDoubleEvents;
 
         return new SimulationState
         {
@@ -446,7 +466,9 @@ public partial class SimulationViewModel : ViewModelBase
                 IntelligenceScore = 100,
                 AnxietyLevel = 40,
                 SocialEnergyLevel = "Ambivertiert",
-                Gender = "Männlich"
+                Gender = "Männlich",
+                MaxAge = 30,
+                UseDoubleEvents = true
             };
 
         try
@@ -472,7 +494,9 @@ public partial class SimulationViewModel : ViewModelBase
                 IntelligenceScore = 50,
                 AnxietyLevel = 40,
                 SocialEnergyLevel = "Ambivertiert",
-                Gender = "Männlich"
+                Gender = "Männlich",
+                MaxAge = 30,
+                UseDoubleEvents = true
             };
         }
     }

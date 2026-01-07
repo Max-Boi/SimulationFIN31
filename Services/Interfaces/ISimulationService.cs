@@ -33,8 +33,10 @@ public interface ISimulationService
     /// </summary>
     /// <param name="state">The current simulation state to process.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <param name="speedMultiplier">Speed multiplier for delays between multiple events (default 1.0).</param>
+    /// <param name="useDoubleEvents">Whether to select two events per category instead of one.</param>
     /// <returns>Task representing the async operation.</returns>
-    Task RunStepAsync(SimulationState state, CancellationToken cancellationToken = default);
+    Task RunStepAsync(SimulationState state, CancellationToken cancellationToken = default, double speedMultiplier = 1.0, bool useDoubleEvents = true);
 
     /// <summary>
     ///     Gets the delay in milliseconds between simulation steps based on speed multiplier.

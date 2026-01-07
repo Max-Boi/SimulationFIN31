@@ -161,7 +161,7 @@ public static class EmergingAdulthoodEvents
             Id = "emerging_relationship_ended",
             Name = "Beziehungstrennung",
             Description = "Der junge Erwachsene erlebt das Ende einer ernsthaften romantischen Beziehung.",
-            BaseProbability = 0.40,
+            BaseProbability = 0.20,
             MinAge = EMERGING_ADULTHOOD_MIN,
             MaxAge = EMERGING_ADULTHOOD_MAX,
             IsUnique = false,

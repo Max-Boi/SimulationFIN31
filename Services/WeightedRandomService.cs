@@ -200,19 +200,22 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
     }
 
     /// <summary>
-    ///     Selects multiple events using Stochastic Universal Sampling.
+    ///     Selects multiple unique events using Stochastic Universal Sampling without replacement.
     ///     Algorithm:
     ///     1. Build cumulative probability distribution
     ///     2. Calculate pointer spacing = total / count
     ///     3. Generate random start point in [0, spacing)
     ///     4. Place evenly-spaced pointers starting from start point
-    ///     5. Select event at each pointer position
+    ///     5. Select event at each pointer position, skipping duplicates
+    ///     6. If duplicates occur, re-sample from remaining events
+    ///     Note: Standard SUS can select duplicates when an event's probability segment
+    ///     is larger than the pointer spacing. This implementation ensures unique selections.
     /// </summary>
     /// <typeparam name="TEvent">Type of life event.</typeparam>
     /// <param name="eligible">Eligible events to select from.</param>
     /// <param name="state">Current simulation state.</param>
     /// <param name="count">Number of events to select.</param>
-    /// <returns>List of selected events.</returns>
+    /// <returns>List of unique selected events.</returns>
     private List<TEvent> SelectMultipleUsingSus<TEvent>(List<TEvent> eligible, SimulationState state, int count)
         where TEvent : LifeEvent
     {
@@ -226,6 +229,7 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
         var startPointer = _random.NextDouble() * pointerSpacing;
 
         var selected = new List<TEvent>(count);
+        var selectedIndices = new HashSet<int>();
 
         for (var i = 0; i < count; i++)
         {
@@ -233,9 +237,51 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
 
             if (pointer >= totalProbability) pointer -= totalProbability;
 
-            var selectedEvent = SelectAtPointer(weightedEvents, cumulativeProbabilities, pointer);
+            var selectedIndex = SelectIndexAtPointer(cumulativeProbabilities, pointer);
+            
+            // Skip if already selected (prevents duplicates)
+            if (selectedIndices.Contains(selectedIndex))
+                continue;
+                
+            selectedIndices.Add(selectedIndex);
+            var selectedEvent = weightedEvents[selectedIndex].Event;
 
             if (selectedEvent is TEvent typedEvent) selected.Add(typedEvent);
+        }
+        
+        // If we couldn't get enough unique events due to weight concentration,
+        // fill remaining slots from unselected events using weighted random
+        if (selected.Count < count)
+        {
+            var remaining = new List<WeightedEvent>();
+            for (var i = 0; i < weightedEvents.Count; i++)
+            {
+                if (!selectedIndices.Contains(i))
+                    remaining.Add(weightedEvents[i]);
+            }
+            
+            while (selected.Count < count && remaining.Count > 0)
+            {
+                var cumulativeRemaining = BuildCumulativeProbabilities(remaining);
+                var totalRemaining = cumulativeRemaining[^1];
+                
+                int nextIndex;
+                if (totalRemaining <= 0.0)
+                {
+                    // All remaining have zero weight, pick randomly
+                    nextIndex = _random.Next(remaining.Count);
+                }
+                else
+                {
+                    var pointer = _random.NextDouble() * totalRemaining;
+                    nextIndex = SelectIndexAtPointer(cumulativeRemaining, pointer);
+                }
+                
+                if (remaining[nextIndex].Event is TEvent typedEvent)
+                    selected.Add(typedEvent);
+                    
+                remaining.RemoveAt(nextIndex);
+            }
         }
 
         return selected;
@@ -289,6 +335,30 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
     }
 
     /// <summary>
+    ///     Binary searches for the index at a specific pointer position in the cumulative distribution.
+    /// </summary>
+    /// <param name="cumulativeProbabilities">Cumulative probability distribution.</param>
+    /// <param name="pointer">Pointer position [0, total probability).</param>
+    /// <returns>Index at the pointer position.</returns>
+    private static int SelectIndexAtPointer(double[] cumulativeProbabilities, double pointer)
+    {
+        var left = 0;
+        var right = cumulativeProbabilities.Length - 1;
+
+        while (left < right)
+        {
+            var mid = left + (right - left) / 2;
+
+            if (cumulativeProbabilities[mid] < pointer)
+                left = mid + 1;
+            else
+                right = mid;
+        }
+
+        return left;
+    }
+
+    /// <summary>
     ///     Fallback selection when all probabilities are zero.
     ///     Selects a random subset without replacement.
     /// </summary>
@@ -307,5 +377,31 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
         }
 
         return shuffled.GetRange(0, Math.Min(count, shuffled.Count));
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<GenericEvent> SelectGenericEvents(IReadOnlyList<GenericEvent> events, SimulationState state, int count)
+    {
+        ArgumentNullException.ThrowIfNull(events);
+        ArgumentNullException.ThrowIfNull(state);
+
+        var eligible = FilterEligible(events, state);
+        if (eligible.Count == 0) return Array.Empty<GenericEvent>();
+
+        var actualCount = Math.Min(count, eligible.Count);
+        return SelectMultipleUsingSus(eligible, state, actualCount);
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<PersonalEvent> SelectPersonalEvents(IReadOnlyList<PersonalEvent> events, SimulationState state, int count)
+    {
+        ArgumentNullException.ThrowIfNull(events);
+        ArgumentNullException.ThrowIfNull(state);
+
+        var eligible = FilterEligible(events, state);
+        if (eligible.Count == 0) return Array.Empty<PersonalEvent>();
+
+        var actualCount = Math.Min(count, eligible.Count);
+        return SelectMultipleUsingSus(eligible, state, actualCount);
     }
 }

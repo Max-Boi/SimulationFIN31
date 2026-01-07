@@ -9,9 +9,9 @@ namespace SimulationFIN31.Models.Data;
 public static class AdulthoodEvents
 {
     private const int ADULTHOOD_MIN = 24;
-    private const int ADULTHOOD_MAX = 30;
+    private const int ADULTHOOD_MAX = 100;
 
-    #region Adulthood Personal Events (Ages 24-30)
+    #region Adulthood Personal Events (Ages 24-100)
 
     /// <summary>
     ///     Personal events specific to Adulthood phase (ages 24-30).
@@ -105,7 +105,7 @@ public static class AdulthoodEvents
             Id = "adulthood_child_born",
             Name = "Geburt eines Kindes",
             Description = "Der Erwachsene wird mit der Geburt eines Kindes Elternteil.",
-            BaseProbability = 0.35,
+            BaseProbability = 0.2,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -121,10 +121,10 @@ public static class AdulthoodEvents
             Prerequisites = ["adulthood_engagement"],
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("IncomeLevel", 1.8),
-                new InfluenceFactor("ParentsRelationshipQuality", 1.5),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
+                new InfluenceFactor("FamilyCloseness", 1.0),
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.2),
+                new InfluenceFactor("SocialEnvironmentLevel", 0.5),
                 
             ]
         },

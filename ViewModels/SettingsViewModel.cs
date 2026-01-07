@@ -19,6 +19,8 @@ public partial class SettingsViewModel : ViewModelBase
     private const int DEFAULT_INTELLIGENCE_SCORE = 100;
     private const int DEFAULT_ANXIETY_LEVEL = 40;
     private const int DEFAULT_FAMILY_CLOSENESS = 50;
+    private const int DEFAULT_MAX_AGE = 30;
+    private const bool DEFAULT_USE_DOUBLE_EVENTS = true;
     private static readonly string SettingsFilePath = Path.Combine(AppContext.BaseDirectory, "settings.json");
     private static bool _cleanupRegistered;
 
@@ -51,6 +53,10 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty] private string _socialEnergyLevel;
 
     [ObservableProperty] private int _socialEnvironmentLevel = DEFAULT_SOCIAL_ENVIRONMENT_LEVEL;
+
+    [ObservableProperty] private int _maxAge = DEFAULT_MAX_AGE;
+
+    [ObservableProperty] private bool _useDoubleEvents = DEFAULT_USE_DOUBLE_EVENTS;
 
     public SettingsViewModel(INavigationService navigationService)
     {
@@ -130,7 +136,9 @@ public partial class SettingsViewModel : ViewModelBase
             ParentsRelationshipQuality = ParentsRelationshipQuality,
             FamilyCloseness = FamilyCloseness,
             SocialEnergyLevel = SocialEnergyLevel,
-            Gender = Gender
+            Gender = Gender,
+            MaxAge = MaxAge,
+            UseDoubleEvents = UseDoubleEvents
         };
 
         var json = JsonSerializer.Serialize(settings, new JsonSerializerOptions
@@ -161,6 +169,8 @@ public partial class SettingsViewModel : ViewModelBase
         FamilyCloseness = DEFAULT_FAMILY_CLOSENESS;
         SocialEnergyLevel = SocialEnergyOptions[2];
         Gender = GenderOptions[0];
+        MaxAge = DEFAULT_MAX_AGE;
+        UseDoubleEvents = DEFAULT_USE_DOUBLE_EVENTS;
 
         ResetSettingsFile();
     }

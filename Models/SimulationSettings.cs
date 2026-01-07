@@ -15,4 +15,14 @@ public record SimulationSettings
     public int FamilyCloseness { get; init; }
     public string SocialEnergyLevel { get; init; } = string.Empty;
     public string Gender { get; init; } = string.Empty;
+    
+    /// <summary>
+    /// The maximum age until which the simulation runs (30-80).
+    /// </summary>
+    public int MaxAge { get; init; } = 30;
+    
+    /// <summary>
+    /// Whether to use two events per age cycle instead of one.
+    /// </summary>
+    public bool UseDoubleEvents { get; init; } = true;
 }
