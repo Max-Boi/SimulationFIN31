@@ -347,7 +347,7 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Home,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
+                new InfluenceFactor("SocialEnergyLevel", 1.0),
                 new InfluenceFactor("IncomeLevel", 1.8),
                 new InfluenceFactor("ParentsEducationLevel", 1.5),
                 new InfluenceFactor("AnxietyLevel", -1.3)
@@ -395,9 +395,7 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -3.5),
-                new InfluenceFactor("JobStatus", -3.0),
-                new InfluenceFactor("ParentsEducationLevel", -2.0)
+              
             ]
         },
         new()

@@ -9,12 +9,14 @@ namespace SimulationFIN31.Models.Data;
 public static class AdulthoodEvents
 {
     private const int ADULTHOOD_MIN = 24;
-    private const int ADULTHOOD_MAX = 100;
+    private const int ADULTHOOD_MAX = 67;
+    private const int ADULTHOOD_SENIOR_WORK = 50;
 
-    #region Adulthood Personal Events (Ages 24-100)
+
+    #region Adulthood Personal Events (Ages 24-80)
 
     /// <summary>
-    ///     Personal events specific to Adulthood phase (ages 24-30).
+    ///     Personal events specific to Adulthood phase (ages 24-80).
     ///     Focus on career establishment, family formation, and life stability.
     /// </summary>
     public static IReadOnlyList<PersonalEvent> AdulthoodPersonalEvents { get; } =
@@ -26,7 +28,7 @@ public static class AdulthoodEvents
             Description = "Der Erwachsene erhält eine bedeutsame Beförderung oder beruflichen Aufstieg.",
             BaseProbability = 0.35,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_MAX,
+            MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = false,
             IsTraumatic = false,
             StressImpact = 5,
@@ -70,8 +72,7 @@ public static class AdulthoodEvents
                 new InfluenceFactor("FamilyCloseness", 2.0),
                 new InfluenceFactor("ParentsRelationshipQuality", 1.8),
                 new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("IncomeLevel", 1.3),
-                
+                new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
         new()
@@ -81,7 +82,7 @@ public static class AdulthoodEvents
             Description = "Der Erwachsene erwirbt sein erstes Eigenheim und schafft Wohnstabilität.",
             BaseProbability = 0.30,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_MAX,
+            MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = true,
             IsTraumatic = false,
             StressImpact = 25,
@@ -107,7 +108,7 @@ public static class AdulthoodEvents
             Description = "Der Erwachsene wird mit der Geburt eines Kindes Elternteil.",
             BaseProbability = 0.2,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_MAX,
+            MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = false,
             IsTraumatic = false,
             StressImpact = 20,
@@ -123,8 +124,7 @@ public static class AdulthoodEvents
             [
                 new InfluenceFactor("FamilyCloseness", 0.9),
                 new InfluenceFactor("IncomeLevel", 0.3),
-                new InfluenceFactor("SocialEnvironmentLevel", 0.5),
-                
+                new InfluenceFactor("SocialEnvironmentLevel", 0.5)
             ]
         },
         new()
@@ -134,7 +134,7 @@ public static class AdulthoodEvents
             Description = "Der Erwachsene wechselt in ein völlig neues Berufsfeld.",
             BaseProbability = 0.25,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_MAX,
+            MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = false,
             IsTraumatic = false,
             StressImpact = 18,
@@ -241,7 +241,7 @@ public static class AdulthoodEvents
             Description = "Der Erwachsene startet ein eigenes Unternehmen oder unternehmerisches Projekt.",
             BaseProbability = 0.15,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_MAX,
+            MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = true,
             IsTraumatic = false,
             StressImpact = 18,
@@ -270,7 +270,7 @@ public static class AdulthoodEvents
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
             IsTraumatic = false,
-            StressImpact = -10,
+            StressImpact = -20,
             MoodImpact = 15,
             SocialBelongingImpact = 10,
             ResilienceImpact = 5,
@@ -310,10 +310,7 @@ public static class AdulthoodEvents
             ResilienceImpact = 5,
             HealthImpact = 0,
             VisualCategory = VisualCategory.Career,
-            InfluenceFactors =
-            [
-              
-            ]
+            InfluenceFactors = []
         },
         new()
         {
@@ -322,7 +319,7 @@ public static class AdulthoodEvents
             Description = "Der Erwachsene übernimmt eine Führungsrolle in einer Gemeinschaftsorganisation.",
             BaseProbability = 0.20,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_MAX,
+            MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = true,
             IsTraumatic = false,
             StressImpact = 8,
@@ -380,10 +377,7 @@ public static class AdulthoodEvents
             ResilienceImpact = 8,
             HealthImpact = -5,
             VisualCategory = VisualCategory.Financial,
-            InfluenceFactors =
-            [
-                
-            ]
+            InfluenceFactors = []
         },
         new()
         {

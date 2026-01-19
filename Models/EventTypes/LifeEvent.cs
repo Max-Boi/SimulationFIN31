@@ -28,7 +28,7 @@ public class LifeEvent
     public string Description { get; init; } = string.Empty;
 
     /// <summary>
-    ///     Indicates if this event is traumatic and can trigger PTSD/trauma-related conditions.
+    ///     Indicates if this event is traumatic and can trigger PTBS/trauma-related conditions.
     ///     Based on psychological severity criteria (death, abuse, violence, severe rejection, etc.).
     /// </summary>
     public bool IsTraumatic { get; init; }

@@ -202,7 +202,7 @@
                             </StackPanel>
                             <StackPanel Spacing="8">
                                 <TextBlock Text="Maximales Alter der Simulation" Foreground="AliceBlue"/>
-                                <Slider Minimum="30" Maximum="80" Value="{Binding MaxAge}" TickFrequency="5"
+                                <Slider Minimum="30" Maximum="67" Value="{Binding MaxAge}" TickFrequency="5"
                                         IsSnapToTickEnabled="True" />
                                 <TextBlock Text="{Binding MaxAge, StringFormat='Simulation läuft bis Alter: {0} Jahre'}" Foreground="AliceBlue"/>
 

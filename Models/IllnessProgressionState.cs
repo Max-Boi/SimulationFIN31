@@ -6,7 +6,7 @@ namespace SimulationFIN31.Models;
 public sealed class IllnessProgressionState
 {
     /// <summary>
-    ///     The illness key (e.g., "MildDepression", "Alcoholism").
+    ///     The illness key (e.g., "MildDepression", "Alkoholismus").
     /// </summary>
     public required string IllnessKey { get; init; }
 

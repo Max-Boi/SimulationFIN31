@@ -146,7 +146,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Functional,
-            Trigger = new CopingTrigger(45),
+            Trigger = new CopingTrigger(40),
             IsHabitForming = true,
             StressImpact = -20,
             MoodImpact = 10,
@@ -236,7 +236,7 @@ public static class CopingMechanism
             IsUnique = false,
             IsTraumatic = false,
             Type = CopingType.Dysfunctional,
-            Trigger = new CopingTrigger(moodThreshold: -25),
+            Trigger = new CopingTrigger(moodThreshold: -15),
             IsHabitForming = true,
             StressImpact = 10,
             MoodImpact = -15,
@@ -247,7 +247,6 @@ public static class CopingMechanism
             [
                 new InfluenceFactor("AnxietyLevel", 2.5),
                 new InfluenceFactor("IntelligenceScore", 1.1),
-                new InfluenceFactor("ResilienceScore", -1.2),
                 new InfluenceFactor("CurrentStress", 1.5),
                 new InfluenceFactor("GenderFemale", 1.5)
             ]
@@ -276,7 +275,6 @@ public static class CopingMechanism
             [
                 new InfluenceFactor("AnxietyLevel", 1.5),
                 new InfluenceFactor("PhysicalHealth", -1.0),
-                new InfluenceFactor("ResilienceScore", -1.0),
                 new InfluenceFactor("CurrentStress", 1.2),
                 new InfluenceFactor("GenderFemale", 1.5)
             ]

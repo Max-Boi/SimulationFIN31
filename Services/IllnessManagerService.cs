@@ -26,14 +26,14 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ["MildDepression"] = "Avatar befindet sich nun in einer depressiven Episode",
         ["generalisierte Angststörung"] = "Avatar leidet nun unter einer generalisierten Angststörung",
         ["sozialePhobie"] = "Avatar entwickelt eine Soziale Angststörung",
-        ["PanicDisorder"] = "Avatar entwickelt eine Panikstörung",
-        ["PTSD"] = "Avatar entwickelt eine Posttraumatische Belastungsstörung",
-        ["Alcoholism"] = "Avatar entwickelt eine Alkoholabhaengigkeit",
-        ["SubstanceAbuse"] = "Avatar entwickelt eine Substanzabhängigkeit",
+        ["Panikstörung"] = "Avatar entwickelt eine Panikstörung",
+        ["PTBS"] = "Avatar entwickelt eine Posttraumatische Belastungsstörung",
+        ["Alkoholismus"] = "Avatar entwickelt eine Alkoholabhaengigkeit",
+        ["Substanzmissbrauch"] = "Avatar entwickelt eine Substanzabhängigkeit",
         ["Magersucht"] = "Avatar entwickelt Magersucht",
         ["Bulimie"] = "Avatar entwickelt Bulimie",
         ["BingeEatingStörung"] = "Avatar entwickelt eine Binge-Eating-störung",
-        ["OCD"] = "Avatar entwickelt eine Zwangsstörung",
+        ["Zwangsstörung"] = "Avatar entwickelt eine Zwangsstörung",
         ["BorderlinePersonality"] = "Avatar entwickelt eine Borderline-Persönlichkeitsstörung",
         ["DissociativeDisorder"] = "Avatar entwickelt eine dissoziative störung"
     };
@@ -43,14 +43,14 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ["MildDepression"] = "Avatar hat die depressive Episode überwunden",
         ["generalisierte Angststörung"] = "Avatar hat die Angststörung in den Griff bekommen",
         ["sozialePhobie"] = "Avatar hat die soziale Angst überwunden",
-        ["PanicDisorder"] = "Avatar hat die Panikstörung überwunden",
-        ["PTSD"] = "Avatar hat die Posttraumatische Belastungsstörung überwunden",
-        ["Alcoholism"] = "Avatar hat die Alkoholabhaengigkeit überwunden",
-        ["SubstanceAbuse"] = "Avatar hat die Substanzabhängigkeit überwunden",
+        ["Panikstörung"] = "Avatar hat die Panikstörung überwunden",
+        ["PTBS"] = "Avatar hat die Posttraumatische Belastungsstörung überwunden",
+        ["Alkoholismus"] = "Avatar hat die Alkoholabhaengigkeit überwunden",
+        ["Substanzmissbrauch"] = "Avatar hat die Substanzabhängigkeit überwunden",
         ["Magersucht"] = "Avatar hat Magersucht überwunden",
         ["Bulimie"] = "Avatar hat Bulimie überwunden",
         ["BingeEatingStörung"] = "Avatar hat die Binge-Eating-störung überwunden",
-        ["OCD"] = "Avatar hat die Zwangsstörung in den Griff bekommen",
+        ["Zwangsstörung"] = "Avatar hat die Zwangsstörung in den Griff bekommen",
         ["BorderlinePersonality"] = "Avatar hat die Borderline-Persönlichkeitsstörung stabilisiert",
         ["DissociativeDisorder"] = "Avatar hat die dissoziative störung überwunden"
     };
@@ -225,13 +225,13 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
             "sozialePhobie" => state is { SocialBelonging: < 40, AnxietyLevel: > 50 },
 
-            "PanicDisorder" => state is { AnxietyLevel: > 70, CurrentStress: > 70 },
+            "Panikstörung" => state is { AnxietyLevel: > 70, CurrentStress: > 70 },
 
-            "PTSD" => HasRecentTraumaticEvent(state, 2),
+            "PTBS" => HasRecentTraumaticEvent(state, 2),
 
-            "Alcoholism" => GetCopingPreference(state, "coping_substance_use") > 0.5,
+            "Alkoholismus" => GetCopingPreference(state, "coping_substance_use") > 0.5,
 
-            "SubstanceAbuse" => GetCopingPreference(state, "coping_substance_use") > 0.3
+            "Substanzmissbrauch" => GetCopingPreference(state, "coping_substance_use") > 0.3
                                 && state.ParentsWithAddiction,
 
             "Magersucht" => state is { CurrentStress: > 70, CurrentMood: < -60 },
@@ -242,7 +242,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
             "BingeEatingStörung" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
                                     && state.CurrentStress > 50,
 
-            "OCD" => state is { AnxietyLevel: > 60, CurrentStress: > 60 },
+            "Zwangsstörung" => state is { AnxietyLevel: > 90, CurrentStress: > 70 },
 
             "BorderlinePersonality" => state is
                 { FamilyCloseness: < 30, CurrentMood: < -40, LifePhase: >= LifePhase.Adolescence },
@@ -299,7 +299,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
     /// <summary>
     ///     Checks if a traumatic event occurred within the last N years.
-    ///     Used for PTSD trigger which requires recent trauma exposure.
+    ///     Used for PTBS trigger which requires recent trauma exposure.
     /// </summary>
     /// <param name="state">Current simulation state.</param>
     /// <param name="yearsBack">Number of years to look back (default 2).</param>

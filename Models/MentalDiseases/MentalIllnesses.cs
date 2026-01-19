@@ -62,9 +62,9 @@ public static class MentalIllnesses
             }
         },
 
-        ["PanicDisorder"] = new DiseaseConfig
+        ["Panikstörung"] = new DiseaseConfig
         {
-            Name = "Panic Disorder",
+            Name = "Panikstörung",
             StressDebuff = 1.22,
             MoodDebuff = 0.92,
             SocialProximityDebuff = 0.90,
@@ -73,7 +73,7 @@ public static class MentalIllnesses
             MinAge = 15, // Meist späte Adoleszenz
             GenderModifiers = new Dictionary<GenderType, double>
             {
-                { GenderType.Female, 2.0 }, // Women have ~2x higher risk for panic disorder
+                { GenderType.Female, 2.0 }, // Women have ~2x higher risk for Panikstörung
                 { GenderType.Male, 1.0 },
                 { GenderType.NonBinary, 1.5 }
             }
@@ -81,9 +81,9 @@ public static class MentalIllnesses
 
         // === TRAUMA-BEZOGENE STÖRUNGEN ===
 
-        ["PTSD"] = new DiseaseConfig
+        ["PTBS"] = new DiseaseConfig
         {
-            Name = "Post-Traumatic Stress Disorder",
+            Name = "Posttraumatische Belastungsstörung",
             StressDebuff = 1.25,
             MoodDebuff = 0.85,
             SocialProximityDebuff = 0.85,
@@ -94,9 +94,9 @@ public static class MentalIllnesses
 
         // === SUCHTERKRANKUNGEN ===
 
-        ["Alcoholism"] = new DiseaseConfig
+        ["Alkoholismus"] = new DiseaseConfig
         {
-            Name = "Alcohol Use Disorder",
+            Name = "Alkoholismus",
             StressDebuff = 1.05,
             MoodDebuff = 0.82,
             SocialProximityDebuff = 0.80,
@@ -105,15 +105,15 @@ public static class MentalIllnesses
             MinAge = 16, // Erfordert Zugang zu Alkohol
             GenderModifiers = new Dictionary<GenderType, double>
             {
-                { GenderType.Male, 2.5 }, // Men have ~2.5x higher risk for alcohol use disorder
+                { GenderType.Male, 2.5 }, // Men have ~2.5x higher risk for Alkoholismus
                 { GenderType.Female, 1.0 },
                 { GenderType.NonBinary, 1.75 }
             }
         },
 
-        ["SubstanceAbuse"] = new DiseaseConfig
+        ["Substanzmissbrauch"] = new DiseaseConfig
         {
-            Name = "Substance Use Disorder",
+            Name = "Substanzmissbrauch",
             StressDebuff = 1.15,
             MoodDebuff = 0.80,
             SocialProximityDebuff = 0.78,
@@ -183,9 +183,9 @@ public static class MentalIllnesses
 
         // === ZWANGSSTÖRUNGEN ===
 
-        ["OCD"] = new DiseaseConfig
+        ["Zwangsstörung"] = new DiseaseConfig
         {
-            Name = "Obsessive-Compulsive Disorder",
+            Name = "Zwangsstörung",
             StressDebuff = 1.22,
             MoodDebuff = 0.85,
             SocialProximityDebuff = 0.88,

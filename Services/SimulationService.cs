@@ -209,7 +209,7 @@ public sealed class SimulationService : ISimulationService
 
         state.EventHistory.Add(lifeEvent.Id);
 
-        // Track traumatic events with current age for PTSD/trauma-related illness triggers
+        // Track traumatic events with current age for PTBS/trauma-related illness triggers
         if (lifeEvent.IsTraumatic) state.TraumaticEventAges.Add(state.CurrentAge);
 
         // Record event to history (excluding coping mechanisms which are recorded separately)
