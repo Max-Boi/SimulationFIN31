@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SimulationFIN31.Models.Enums;
@@ -19,11 +18,7 @@ public partial class EvaluationViewModel : ViewModelBase
     public EvaluationViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
-
-        GoHomeCommand = new RelayCommand(NavigateHome);
     }
-
-    public ICommand GoHomeCommand { get; }
 
     public void Initialize(SimulationHistory history)
     {
@@ -48,7 +43,8 @@ public partial class EvaluationViewModel : ViewModelBase
         }
     }
 
-    private void NavigateHome()
+    [RelayCommand]
+    private void GoHome()
     {
         _navigationService.NavigateTo<HomeViewModel>();
     }

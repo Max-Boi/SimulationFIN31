@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using ScottPlot;
@@ -215,7 +216,7 @@ public partial class EvaluationView : UserControl
         plot.Axes.Left.FrameLineStyle.Color = axisColor;
 
         // Legend styling
-        plot.ShowLegend();
+        plot.ShowLegend(Alignment.LowerLeft);
         plot.Legend.BackgroundColor = new Color(50, 50, 50);
         plot.Legend.FontColor = Colors.White;
         plot.Legend.OutlineColor = new Color(80, 80, 80);
@@ -223,7 +224,7 @@ public partial class EvaluationView : UserControl
         // Set axis limits with some padding
         if (vm.Ages.Length > 0)
         {
-            plot.Axes.SetLimitsX(0, 32); // Age 0-30 with padding
+            plot.Axes.SetLimitsX(0, vm.Ages.Max() + 5); // Dynamic max age with padding
             plot.Axes.SetLimitsY(-110, 110); // Values with padding
         }
         
