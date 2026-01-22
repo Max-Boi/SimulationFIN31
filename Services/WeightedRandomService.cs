@@ -94,10 +94,20 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
         ArgumentNullException.ThrowIfNull(events);
         ArgumentNullException.ThrowIfNull(state);
 
-        var eligible = FilterEligible(events, state);
-        if (eligible.Count == 0) return null;
+        try
+        {
+            var eligible = FilterEligible(events, state);
+            if (eligible.Count == 0) return null;
 
-        return SelectSingleUsingSus(eligible, state) as GenericEvent;
+            return SelectSingleUsingSus(eligible, state) as GenericEvent;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler bei der Ereignisauswahl: {ex.Message}");
+            // Fallback: return random eligible event
+            var eligible = FilterEligible(events, state);
+            return eligible.Count > 0 ? eligible[_random.Next(eligible.Count)] : null;
+        }
     }
 
     /// <inheritdoc />

@@ -29,12 +29,23 @@ public partial class EvaluationViewModel : ViewModelBase
     {
         _history = history ?? throw new ArgumentNullException(nameof(history));
 
-        ProcessChartData();
-        ProcessTopEvents();
-        ProcessTraumaticEvents();
-        ProcessIllnessTimeline();
-        ProcessCopingUsage();
-        CalculateSummaryStatistics();
+        try
+        {
+            ProcessChartData();
+            ProcessTopEvents();
+            ProcessTraumaticEvents();
+            ProcessIllnessTimeline();
+            ProcessCopingUsage();
+            CalculateSummaryStatistics();
+        }
+        catch (InvalidOperationException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Ungültige Historiendaten: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler bei der Verarbeitung der Simulationshistorie: {ex.Message}");
+        }
     }
 
     private void NavigateHome()

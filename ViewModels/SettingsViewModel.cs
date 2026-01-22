@@ -122,35 +122,50 @@ public partial class SettingsViewModel : ViewModelBase
     [RelayCommand]
     public async Task SaveSettingsAsync()
     {
-        var settings = new SimulationSettings
+        try
         {
-            IncomeLevel = IncomeLevel,
-            ParentsEducationLevel = ParentsEducationLevel,
-            JobStatus = JobStatus,
-            SocialEnvironmentLevel = SocialEnvironmentLevel,
-            HasAdhd = HasAdhd,
-            HasAutism = HasAutism,
-            ParentsWithAddiction = ParentsWithAddiction,
-            IntelligenceScore = IntelligenceScore,
-            AnxietyLevel = AnxietyLevel,
-            ParentsRelationshipQuality = ParentsRelationshipQuality,
-            FamilyCloseness = FamilyCloseness,
-            SocialEnergyLevel = SocialEnergyLevel,
-            Gender = Gender,
-            MaxAge = MaxAge,
-            UseDoubleEvents = UseDoubleEvents
-        };
+            var settings = new SimulationSettings
+            {
+                IncomeLevel = IncomeLevel,
+                ParentsEducationLevel = ParentsEducationLevel,
+                JobStatus = JobStatus,
+                SocialEnvironmentLevel = SocialEnvironmentLevel,
+                HasAdhd = HasAdhd,
+                HasAutism = HasAutism,
+                ParentsWithAddiction = ParentsWithAddiction,
+                IntelligenceScore = IntelligenceScore,
+                AnxietyLevel = AnxietyLevel,
+                ParentsRelationshipQuality = ParentsRelationshipQuality,
+                FamilyCloseness = FamilyCloseness,
+                SocialEnergyLevel = SocialEnergyLevel,
+                Gender = Gender,
+                MaxAge = MaxAge,
+                UseDoubleEvents = UseDoubleEvents
+            };
 
-        var json = JsonSerializer.Serialize(settings, new JsonSerializerOptions
+            var json = JsonSerializer.Serialize(settings, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+
+            await File.WriteAllTextAsync(SettingsFilePath, json);
+
+            ShowSaveConfirmation = true;
+            await Task.Delay(1000);
+            ShowSaveConfirmation = false;
+        }
+        catch (JsonException ex)
         {
-            WriteIndented = true
-        });
-
-        await File.WriteAllTextAsync(SettingsFilePath, json);
-
-        ShowSaveConfirmation = true;
-        await Task.Delay(1000);
-        ShowSaveConfirmation = false;
+            System.Diagnostics.Debug.WriteLine($"Fehler beim Serialisieren der Einstellungen: {ex.Message}");
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Keine Berechtigung zum Speichern der Einstellungen: {ex.Message}");
+        }
+        catch (IOException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler beim Schreiben der Einstellungsdatei: {ex.Message}");
+        }
     }
 
     [RelayCommand]
@@ -186,8 +201,19 @@ public partial class SettingsViewModel : ViewModelBase
 
     private static void ResetSettingsFile()
     {
-        if (!File.Exists(SettingsFilePath)) return;
+        try
+        {
+            if (!File.Exists(SettingsFilePath)) return;
 
-        File.Delete(SettingsFilePath);
+            File.Delete(SettingsFilePath);
+        }
+        catch (IOException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler beim Löschen der Einstellungsdatei: {ex.Message}");
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Keine Berechtigung zum Löschen der Einstellungsdatei: {ex.Message}");
+        }
     }
 }

@@ -23,10 +23,21 @@ public partial class NavigationService : ObservableObject, INavigationService
     /// <inheritdoc />
     public void NavigateTo<T>() where T : ViewModelBase
     {
-        var viewModel = _viewModelFactory(typeof(T));
+        try
+        {
+            var viewModel = _viewModelFactory(typeof(T));
 
-        // Sicherheitshalber immer auf den UI-Thread zwingen
-        Dispatcher.UIThread.Post(() => { CurrentViewModel = viewModel; });
+            // Sicherheitshalber immer auf den UI-Thread zwingen
+            Dispatcher.UIThread.Post(() => { CurrentViewModel = viewModel; });
+        }
+        catch (InvalidOperationException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"ViewModel konnte nicht erstellt werden: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Navigationsfehler: {ex.Message}");
+        }
     }
 
     /// <inheritdoc />
@@ -34,9 +45,24 @@ public partial class NavigationService : ObservableObject, INavigationService
     {
         ArgumentNullException.ThrowIfNull(initializer);
 
-        var viewModel = (T)_viewModelFactory(typeof(T));
-        initializer(viewModel);
+        try
+        {
+            var viewModel = (T)_viewModelFactory(typeof(T));
+            initializer(viewModel);
 
-        Dispatcher.UIThread.Post(() => { CurrentViewModel = viewModel; });
+            Dispatcher.UIThread.Post(() => { CurrentViewModel = viewModel; });
+        }
+        catch (InvalidCastException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"ViewModel-Typ stimmt nicht überein: {ex.Message}");
+        }
+        catch (InvalidOperationException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"ViewModel konnte nicht initialisiert werden: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Navigationsfehler: {ex.Message}");
+        }
     }
 }

@@ -174,15 +174,8 @@
                                     Margin="0,0,4,6"
                                     Height="40" />
 
-                            <Button Grid.Column="1" Grid.Row="0"
-                                    Content="Pause"
-                                    Classes="Glass"
-                                    Command="{Binding PauseSimulationCommand}"
-                                    Margin="4,0,0,6"
-                                    Height="40" />
-
                             <Button Grid.Column="0" Grid.Row="1"
-                                    Content="Stop"
+                                    Content="Pausiere"
                                     Classes="Glass"
                                     Command="{Binding StopSimulationCommand}"
                                     Margin="0,0,4,0"

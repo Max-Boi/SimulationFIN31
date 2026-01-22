@@ -140,23 +140,38 @@ public sealed class SimulationHistoryService : ISimulationHistoryService
 
         lock (_lock)
         {
-            // Convert any still-active illnesses to records with null HealedAge
-            var allIllnesses = new List<IllnessRecord>(_completedIllnesses);
-            foreach (var (key, (displayName, onsetAge)) in _activeIllnesses)
-                allIllnesses.Add(new IllnessRecord(
-                    key,
-                    displayName,
-                    onsetAge,
-                    null
-                ));
+            try
+            {
+                // Convert any still-active illnesses to records with null HealedAge
+                var allIllnesses = new List<IllnessRecord>(_completedIllnesses);
+                foreach (var (key, (displayName, onsetAge)) in _activeIllnesses)
+                    allIllnesses.Add(new IllnessRecord(
+                        key,
+                        displayName,
+                        onsetAge,
+                        null
+                    ));
 
-            return new SimulationHistory(
-                _turnSnapshots.ToList().AsReadOnly(),
-                _events.ToList().AsReadOnly(),
-                allIllnesses.AsReadOnly(),
-                _copingUsage.ToList().AsReadOnly(),
-                finalState
-            );
+                return new SimulationHistory(
+                    _turnSnapshots.ToList().AsReadOnly(),
+                    _events.ToList().AsReadOnly(),
+                    allIllnesses.AsReadOnly(),
+                    _copingUsage.ToList().AsReadOnly(),
+                    finalState
+                );
+            }
+            catch (InvalidOperationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Fehler beim Erstellen der Simulationshistorie: {ex.Message}");
+                // Return minimal history on error
+                return new SimulationHistory(
+                    new List<TurnSnapshot>().AsReadOnly(),
+                    new List<EventRecord>().AsReadOnly(),
+                    new List<IllnessRecord>().AsReadOnly(),
+                    new List<CopingUsageRecord>().AsReadOnly(),
+                    finalState
+                );
+            }
         }
     }
 }

@@ -72,30 +72,49 @@ public sealed class SimulationService : ISimulationService
         // Store current state for illness event handling
         _currentState = state;
 
-        var events = GetEventsForPhase(state.LifePhase);
-        var copingMechanisms = CopingMechanism.AllcopingMechanisms;
+        try
+        {
+            var events = GetEventsForPhase(state.LifePhase);
+            var copingMechanisms = CopingMechanism.AllcopingMechanisms;
 
-        // Calculate delay between events based on speed
-        var eventDelay = GetEventDelay(speedMultiplier);
-        
-        // Determine number of events to select per category
-        var eventCount = useDoubleEvents ? 2 : 1;
+            // Calculate delay between events based on speed
+            var eventDelay = GetEventDelay(speedMultiplier);
+            
+            // Determine number of events to select per category
+            var eventCount = useDoubleEvents ? 2 : 1;
 
-        // Process generic events (1 or 2 events with delay)
-        await ProcessGenericEventsAsync(events.GenericEvents, state, eventDelay, cancellationToken, eventCount);
+            // Process generic events (1 or 2 events with delay)
+            await ProcessGenericEventsAsync(events.GenericEvents, state, eventDelay, cancellationToken, eventCount);
 
-        // Process personal events (1 or 2 events with delay)
-        await ProcessPersonalEventsAsync(events.PersonalEvents, state, eventDelay, cancellationToken, eventCount);
+            // Process personal events (1 or 2 events with delay)
+            await ProcessPersonalEventsAsync(events.PersonalEvents, state, eventDelay, cancellationToken, eventCount);
 
-        // Process coping mechanisms (still single selection)
-        ProcessCopingMechanisms(copingMechanisms, state);
+            // Process coping mechanisms (still single selection)
+            ProcessCopingMechanisms(copingMechanisms, state);
 
-        // Process illness triggers and healing after all events
-        _illnessManagerService.ProcessIllnessStep(state);
+            // Process illness triggers and healing after all events
+            _illnessManagerService.ProcessIllnessStep(state);
 
-        AdvanceAge(state);
+            AdvanceAge(state);
 
-        StateUpdated?.Invoke(this, state);
+            StateUpdated?.Invoke(this, state);
+        }
+        catch (OperationCanceledException)
+        {
+            throw; // Re-throw cancellation to allow proper handling upstream
+        }
+        catch (InvalidOperationException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Ungültiger Zustand während Simulationsschritt: {ex.Message}");
+            throw;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler während Simulationsschritt: {ex.Message}");
+            // Still advance age to prevent infinite loop
+            AdvanceAge(state);
+            StateUpdated?.Invoke(this, state);
+        }
     }
 
     /// <inheritdoc />

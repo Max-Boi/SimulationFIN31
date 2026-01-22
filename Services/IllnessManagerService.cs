@@ -21,7 +21,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
     private const double MIN_MOOD_DEBUFF = 0.3;
     private const double MIN_SOCIAL_DEBUFF = 0.3;
 
-    private static readonly Dictionary<string, string> GermanOnsetMessages = new()
+    private static readonly Dictionary<string, string> OnsetMessages = new()
     {
         ["MildDepression"] = "Avatar befindet sich nun in einer depressiven Episode",
         ["generalisierte Angststörung"] = "Avatar leidet nun unter einer generalisierten Angststörung",
@@ -68,16 +68,31 @@ public sealed class IllnessManagerService : IIllnessManagerService
     {
         ArgumentNullException.ThrowIfNull(state);
 
-        ProcessHealing(state);
+        try
+        {
+            ProcessHealing(state);
 
-        // Apply bounce-back bonus during cooldown period
-        if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN) ApplyBounceBackBonus(state);
+            // Apply bounce-back bonus during cooldown period
+            if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN) ApplyBounceBackBonus(state);
 
-        ProcessTriggers(state);
-        IncrementActiveIllnessSteps(state);
+            ProcessTriggers(state);
+            IncrementActiveIllnessSteps(state);
 
-        // Increment cooldown counter each step
-        state.StepsSinceLastIllnessTrigger++;
+            // Increment cooldown counter each step
+            state.StepsSinceLastIllnessTrigger++;
+        }
+        catch (KeyNotFoundException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Krankheit nicht gefunden: {ex.Message}");
+        }
+        catch (InvalidOperationException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Ungültiger Krankheitszustand: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler bei der Krankheitsverarbeitung: {ex.Message}");
+        }
     }
 
     /// <inheritdoc />
@@ -266,7 +281,7 @@ public sealed class IllnessManagerService : IIllnessManagerService
         // Reset cooldown counter to prevent rapid illness triggers
         state.StepsSinceLastIllnessTrigger = 0;
 
-        var message = GermanOnsetMessages.GetValueOrDefault(key, $"Avatar entwickelt {config.Name}");
+        var message = OnsetMessages.GetValueOrDefault(key, $"Avatar entwickelt {config.Name}");
         RaiseIllnessChanged(key, config.Name, IllnessChangeType.Onset, message);
     }
 

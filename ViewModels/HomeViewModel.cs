@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.Input;
@@ -12,12 +13,21 @@ public partial class HomeViewModel : ViewModelBase
 
     public HomeViewModel(INavigationService navigationService)
     {
-        var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-        var cherryPath = $"avares://{assemblyName}/Assets/blossom.png";
-        var sunsetPath = $"avares://{assemblyName}/Assets/sunset.png";
+        try
+        {
+            var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+            var cherryPath = $"avares://{assemblyName}/Assets/blossom.png";
+            var sunsetPath = $"avares://{assemblyName}/Assets/sunset.png";
 
-        SunsetPic = ImageHelper.LoadFromResource(sunsetPath);
-        CherryBlossomPic = ImageHelper.LoadFromResource(cherryPath);
+            SunsetPic = ImageHelper.LoadFromResource(sunsetPath);
+            CherryBlossomPic = ImageHelper.LoadFromResource(cherryPath);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler beim Laden der Bilder: {ex.Message}");
+            SunsetPic = null;
+            CherryBlossomPic = null;
+        }
         _navigationService = navigationService;
     }
 

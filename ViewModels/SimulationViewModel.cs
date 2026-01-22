@@ -145,6 +145,15 @@ public partial class SimulationViewModel : ViewModelBase
         }
         catch (OperationCanceledException)
         {
+            // Simulation wurde abgebrochen - normaler Ablauf
+        }
+        catch (InvalidOperationException ex)
+        {
+            Debug.WriteLine($"Ungültiger Simulationszustand: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unerwarteter Fehler während der Simulation: {ex.Message}");
         }
         finally
         {

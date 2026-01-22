@@ -38,19 +38,27 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
         ArgumentNullException.ThrowIfNull(lifeEvent);
         ArgumentNullException.ThrowIfNull(state);
 
-        var weight = lifeEvent.BaseProbability;
-
-        foreach (var factor in lifeEvent.InfluenceFactors)
+        try
         {
-            var normalizedValue = _factorNormalizer.Normalize(state, factor.FactorName);
-            var influence = _influenceCalculator.CalculateInfluence(normalizedValue, factor.Exponent);
-            weight *= influence;
+            var weight = lifeEvent.BaseProbability;
+
+            foreach (var factor in lifeEvent.InfluenceFactors)
+            {
+                var normalizedValue = _factorNormalizer.Normalize(state, factor.FactorName);
+                var influence = _influenceCalculator.CalculateInfluence(normalizedValue, factor.Exponent);
+                weight *= influence;
+            }
+
+            if (lifeEvent is CopingMechanism copingMechanism && copingMechanism.IsHabitForming)
+                weight *= CalculateHabitBoost(copingMechanism, state);
+
+            return Math.Clamp(weight, MINIMUM_WHEIGHT, MAXIMUM_WHEIGHT);
         }
-
-        if (lifeEvent is CopingMechanism copingMechanism && copingMechanism.IsHabitForming)
-            weight *= CalculateHabitBoost(copingMechanism, state);
-
-        return Math.Clamp(weight, MINIMUM_WHEIGHT, MAXIMUM_WHEIGHT);
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler bei der Gewichtungsberechnung für '{lifeEvent.Name}': {ex.Message}");
+            return lifeEvent.BaseProbability; // Fallback to base probability
+        }
     }
 
     
