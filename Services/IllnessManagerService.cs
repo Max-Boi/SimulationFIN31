@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using SimulationFIN31.Models;
 using SimulationFIN31.Models.Enums;
 using SimulationFIN31.Models.EventTypes;
@@ -15,11 +14,9 @@ namespace SimulationFIN31.Services;
 /// </summary>
 public sealed class IllnessManagerService : IIllnessManagerService
 {
-    private const int MAX_ACTIVE_ILLNESSES = 3;
-    private const int ILLNESS_TRIGGER_COOLDOWN = 2;
-    private const double MAX_STRESS_DEBUFF = 2.5;
-    private const double MIN_MOOD_DEBUFF = 0.3;
-    private const double MIN_SOCIAL_DEBUFF = 0.3;
+    private const int MaxConcurrentIllnesses = 3;
+    private const int IllnessTriggerCooldown = 2;
+    private const double BounceBackBonus = 10.0;
 
     private static readonly Dictionary<string, string> OnsetMessages = new()
     {
@@ -55,13 +52,14 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ["DissociativeDisorder"] = "Avatar hat die dissoziative störung überwunden"
     };
 
+    private readonly DebuffCalculator _debuffCalculator = new();
     private readonly Random _random = new();
 
     /// <inheritdoc />
     public event EventHandler<IllnessEventArgs>? IllnessChanged;
 
     /// <inheritdoc />
-    public int MaxActiveIllnesses => MAX_ACTIVE_ILLNESSES;
+    public int MaxActiveIllnesses => MaxConcurrentIllnesses;
 
     /// <inheritdoc />
     public void ProcessIllnessStep(SimulationState state)
@@ -71,14 +69,9 @@ public sealed class IllnessManagerService : IIllnessManagerService
         try
         {
             ProcessHealing(state);
-
-            // Apply bounce-back bonus during cooldown period
-            if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN) ApplyBounceBackBonus(state);
-
+            ApplyBounceBackIfInCooldown(state);
             ProcessTriggers(state);
             IncrementActiveIllnessSteps(state);
-
-            // Increment cooldown counter each step
             state.StepsSinceLastIllnessTrigger++;
         }
         catch (KeyNotFoundException ex)
@@ -102,40 +95,13 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ArgumentNullException.ThrowIfNull(lifeEvent);
 
         if (state.CurrentIllnesses.Count == 0)
-            return new DebuffedEffects(
-                lifeEvent.StressImpact,
-                lifeEvent.MoodImpact,
-                lifeEvent.SocialBelongingImpact,
-                lifeEvent.ResilienceImpact,
-                lifeEvent.HealthImpact
-            );
+            return CreateUnmodifiedEffects(lifeEvent);
 
-        var (stressDebuff, moodDebuff, socialDebuff) = CalculateCombinedDebuffs(state);
+        var (stressDebuff, moodDebuff, socialDebuff) = _debuffCalculator.CalculateCombinedDebuffs(
+            state.CurrentIllnesses,
+            state.IllnessProgressionStates);
 
-        var stressImpact = lifeEvent.StressImpact;
-        var moodImpact = lifeEvent.MoodImpact;
-        var socialImpact = lifeEvent.SocialBelongingImpact;
-
-        // StressDebuff: amplify stress from stressful events
-        if (stressImpact > 0) stressImpact *= stressDebuff;
-
-        // MoodDebuff: reduce mood gains, amplify mood losses
-        if (moodImpact > 0)
-            moodImpact *= moodDebuff;
-        else if (moodImpact < 0) moodImpact /= moodDebuff;
-
-        // SocialProximityDebuff: reduce social gains, amplify social losses
-        if (socialImpact > 0)
-            socialImpact *= socialDebuff;
-        else if (socialImpact < 0) socialImpact /= socialDebuff;
-
-        return new DebuffedEffects(
-            stressImpact,
-            moodImpact,
-            socialImpact,
-            lifeEvent.ResilienceImpact,
-            lifeEvent.HealthImpact
-        );
+        return ApplyDebuffsToEvent(lifeEvent, stressDebuff, moodDebuff, socialDebuff);
     }
 
     /// <inheritdoc />
@@ -145,203 +111,201 @@ public sealed class IllnessManagerService : IIllnessManagerService
         return state.IllnessProgressionStates;
     }
 
-    /// <summary>
-    ///     Applies a flat positive bonus to state metrics during illness trigger cooldown,
-    ///     signaling a bounce-back recovery period.
-    /// </summary>
-    private static void ApplyBounceBackBonus(SimulationState state)
-    {
-        const double bounceBackBonus = 10.0;
-
-        state.CurrentMood = Math.Clamp(state.CurrentMood + bounceBackBonus, -100, 100);
-        state.ResilienceScore = Math.Clamp(state.ResilienceScore + bounceBackBonus, 0, 95);
-        state.CurrentStress = Math.Clamp(state.CurrentStress - bounceBackBonus, 0, 100);
-    }
+    #region Healing Logic
 
     private void ProcessHealing(SimulationState state)
     {
-        var healedIllnesses = new List<string>();
-
-        foreach (var (key, progressionState) in state.IllnessProgressionStates)
-        {
-            if (!state.CurrentIllnesses.TryGetValue(key, out var config)) continue;
-
-            if (progressionState.StepsActive >= config.HealingTime) healedIllnesses.Add(key);
-        }
-
+        var healedIllnesses = FindHealedIllnesses(state);
         foreach (var key in healedIllnesses)
-        {
-            var config = state.CurrentIllnesses[key];
-            state.CurrentIllnesses.Remove(key);
-            state.IllnessProgressionStates.Remove(key);
-
-            var message = HealingMessages.GetValueOrDefault(key, $"Avatar hat {config.Name} überwunden");
-            RaiseIllnessChanged(key, config.Name, IllnessChangeType.Healed, message);
-        }
+            HealIllness(key, state);
     }
+
+    private static List<string> FindHealedIllnesses(SimulationState state)
+    {
+        var healed = new List<string>();
+        foreach (var (key, progression) in state.IllnessProgressionStates)
+        {
+            if (!state.CurrentIllnesses.TryGetValue(key, out var config))
+                continue;
+
+            if (progression.StepsActive >= config.HealingTime)
+                healed.Add(key);
+        }
+        return healed;
+    }
+
+    private void HealIllness(string key, SimulationState state)
+    {
+        var config = state.CurrentIllnesses[key];
+        state.CurrentIllnesses.Remove(key);
+        state.IllnessProgressionStates.Remove(key);
+
+        var message = HealingMessages.GetValueOrDefault(key, $"Avatar hat {config.Name} überwunden");
+        RaiseIllnessChanged(key, config.Name, IllnessChangeType.Healed, message);
+    }
+
+    #endregion
+
+    #region Trigger Logic
 
     private void ProcessTriggers(SimulationState state)
     {
-        // Check cooldown - must wait at least 2 steps between illness triggers
-        if (state.StepsSinceLastIllnessTrigger < ILLNESS_TRIGGER_COOLDOWN) return;
-
-        if (state.CurrentIllnesses.Count >= MAX_ACTIVE_ILLNESSES) return;
+        if (!CanTriggerNewIllness(state))
+            return;
 
         foreach (var (key, config) in MentalIllnesses.Illnesses)
         {
-            if (state.CurrentIllnesses.ContainsKey(key)) continue;
+            if (!ShouldConsiderIllness(key, config, state))
+                continue;
 
-            if (state.CurrentIllnesses.Count >= MAX_ACTIVE_ILLNESSES) break;
+            if (state.CurrentIllnesses.Count >= MaxConcurrentIllnesses)
+                break;
 
-            // Check minimum age requirement
-            if (state.CurrentAge < config.MinAge) continue;
-
-            if (!CheckTriggerCondition(key, state)) continue;
-
-            // Probability-based onset with gender-adjusted chance
-            var probability = CalculateGenderAdjustedProbability(config, state);
-            if (_random.NextInt64(0,20) < probability) TriggerIllness(key, config, state);
+            if (TryTriggerIllness(key, config, state))
+                break; // Only trigger one illness per step
         }
     }
 
-    /// <summary>
-    ///     Calculates the gender-adjusted probability for illness onset.
-    ///     Formula: (1 / TriggerChance) * GenderModifier
-    ///     Example:
-    ///     - Depression with TriggerChance=8, Female (1.8x modifier)
-    ///     Base: 1/8 = 0.125 (12.5%)
-    ///     Adjusted: 0.125 * 1.8 = 0.225 (22.5%)
-    /// </summary>
-    /// <param name="config">The illness configuration containing trigger chance and gender modifiers.</param>
-    /// <param name="state">Current simulation state containing gender information.</param>
-    /// <returns>Probability value between 0.0 and 1.0.</returns>
-    private static double CalculateGenderAdjustedProbability(DiseaseConfig config, SimulationState state)
+    private static bool CanTriggerNewIllness(SimulationState state)
     {
-        // Base probability: higher TriggerChance = lower probability per step
-        var baseProbability = 1.0 / config.TriggerChance;
-
-        // Apply gender modifier (defaults to 1.0 if not specified)
-        var genderModifier = config.GetGenderModifier(state.Gender);
-
-        // Final adjusted probability
-        var adjustedProbability = baseProbability * genderModifier;
-
-        // Cap at 100% probability (safety check)
-        return Math.Min(adjustedProbability, 1.0);
+        return state.StepsSinceLastIllnessTrigger >= IllnessTriggerCooldown
+               && state.CurrentIllnesses.Count < MaxConcurrentIllnesses;
     }
 
-    private bool CheckTriggerCondition(string illnessKey, SimulationState state)
+    private static bool ShouldConsiderIllness(string key, DiseaseConfig config, SimulationState state)
     {
-        return illnessKey switch
+        return !state.CurrentIllnesses.ContainsKey(key)
+               && state.CurrentAge >= config.MinAge
+               && IllnessTriggerChecker.CheckTriggerCondition(key, state);
+    }
+
+    private bool TryTriggerIllness(string key, DiseaseConfig config, SimulationState state)
+    {
+        var probability = CalculateGenderAdjustedProbability(config, state);
+        if (_random.NextInt64(0, 20) < probability)
         {
-            "MildDepression" => state.CurrentStress > state.ResilienceScore,
-
-            "generalisierteAngststörung" => state is { AnxietyLevel: > 60, CurrentStress: > 50 },
-
-            "sozialePhobie" => state is { SocialBelonging: < 40, AnxietyLevel: > 50 },
-
-            "Panikstörung" => state is { AnxietyLevel: > 70, CurrentStress: > 70 },
-
-            "PTBS" => HasRecentTraumaticEvent(state, 2),
-
-            "Alkoholismus" => GetCopingPreference(state, "coping_substance_use") > 0.5,
-
-            "Substanzmissbrauch" => GetCopingPreference(state, "coping_substance_use") > 0.3
-                                && state.ParentsWithAddiction,
-
-            "Magersucht" => state is { CurrentStress: > 70, CurrentMood: < -60 },
-
-            "Bulimie" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
-                         && state.CurrentMood < -20,
-
-            "BingeEatingStörung" => GetCopingPreference(state, "coping_emotional_eating") > 0.5
-                                    && state.CurrentStress > 50,
-
-            "Zwangsstörung" => state is { AnxietyLevel: > 90, CurrentStress: > 70 },
-
-            "BorderlinePersonality" => state is
-                { FamilyCloseness: < 30, CurrentMood: < -40, LifePhase: >= LifePhase.Adolescence },
-
-            "DissociativeDisorder" => HasLifetimeTrauma(state) && state.CurrentStress > 80,
-
-            _ => false
-        };
+            TriggerIllness(key, config, state);
+            return true;
+        }
+        return false;
     }
 
     private void TriggerIllness(string key, DiseaseConfig config, SimulationState state)
     {
+        var severity = RollEpisodeSeverity();
+        var perlinSeed = _random.Next();
+
         state.CurrentIllnesses[key] = config;
         state.IllnessProgressionStates[key] = new IllnessProgressionState
         {
             IllnessKey = key,
             StepsActive = 0,
-            OnsetAge = state.CurrentAge
+            OnsetAge = state.CurrentAge,
+            Severity = severity,
+            PerlinSeed = perlinSeed
         };
 
-        // Reset cooldown counter to prevent rapid illness triggers
         state.StepsSinceLastIllnessTrigger = 0;
 
         var message = OnsetMessages.GetValueOrDefault(key, $"Avatar entwickelt {config.Name}");
         RaiseIllnessChanged(key, config.Name, IllnessChangeType.Onset, message);
     }
 
-    private void IncrementActiveIllnessSteps(SimulationState state)
+    /// <summary>
+    ///     Rolls episode severity at illness onset.
+    ///     50% Mild, 35% Moderate, 15% Severe.
+    /// </summary>
+    private EpisodeSeverity RollEpisodeSeverity()
     {
-        foreach (var progressionState in state.IllnessProgressionStates.Values) progressionState.StepsActive++;
-    }
-
-    private (double stressDebuff, double moodDebuff, double socialDebuff) CalculateCombinedDebuffs(
-        SimulationState state)
-    {
-        var stressDebuff = 1.0;
-        var moodDebuff = 1.0;
-        var socialDebuff = 1.0;
-
-        foreach (var config in state.CurrentIllnesses.Values)
+        var roll = _random.Next(100);
+        return roll switch
         {
-            stressDebuff *= config.StressDebuff;
-            moodDebuff *= config.MoodDebuff;
-            socialDebuff *= config.SocialProximityDebuff;
-        }
-
-        // Cap at reasonable maximums
-        stressDebuff = Math.Min(stressDebuff, MAX_STRESS_DEBUFF);
-        moodDebuff = Math.Max(moodDebuff, MIN_MOOD_DEBUFF);
-        socialDebuff = Math.Max(socialDebuff, MIN_SOCIAL_DEBUFF);
-
-        return (stressDebuff, moodDebuff, socialDebuff);
+            < 50 => EpisodeSeverity.Mild,
+            < 85 => EpisodeSeverity.Moderate,
+            _ => EpisodeSeverity.Severe
+        };
     }
 
-    /// <summary>
-    ///     Checks if a traumatic event occurred within the last N years.
-    ///     Used for PTBS trigger which requires recent trauma exposure.
-    /// </summary>
-    /// <param name="state">Current simulation state.</param>
-    /// <param name="yearsBack">Number of years to look back (default 2).</param>
-    /// <returns>True if a traumatic event occurred within the specified timeframe.</returns>
-    private static bool HasRecentTraumaticEvent(SimulationState state, int yearsBack = 2)
+    private static double CalculateGenderAdjustedProbability(DiseaseConfig config, SimulationState state)
     {
-        if (state.TraumaticEventAges.Count == 0)
-            return false;
-
-        var recentThreshold = state.CurrentAge - yearsBack;
-        return state.TraumaticEventAges.Any(age => age >= recentThreshold);
+        var baseProbability = 1.0 / config.TriggerChance;
+        var genderModifier = config.GetGenderModifier(state.Gender);
+        return Math.Min(baseProbability * genderModifier, 1.0);
     }
 
-    /// <summary>
-    ///     Checks if any traumatic event occurred in the person's lifetime.
-    ///     Used for disorders that can develop from childhood trauma regardless of recency.
-    /// </summary>
-    /// <param name="state">Current simulation state.</param>
-    /// <returns>True if at least one traumatic event occurred.</returns>
-    private static bool HasLifetimeTrauma(SimulationState state)
+    #endregion
+
+    #region Bounce-Back Logic
+
+    private static void ApplyBounceBackIfInCooldown(SimulationState state)
     {
-        return state.TraumaticEventAges.Count > 0;
+        if (state.StepsSinceLastIllnessTrigger < IllnessTriggerCooldown)
+            ApplyBounceBackBonus(state);
     }
 
-    private static double GetCopingPreference(SimulationState state, string copingId)
+    private static void ApplyBounceBackBonus(SimulationState state)
     {
-        return state.CopingPreferences.GetValueOrDefault(copingId, 0.0);
+        state.CurrentMood = Math.Clamp(state.CurrentMood + BounceBackBonus, -100, 100);
+        state.ResilienceScore = Math.Clamp(state.ResilienceScore + BounceBackBonus, 0, 80);
+        state.CurrentStress = Math.Clamp(state.CurrentStress - BounceBackBonus, 0, 100);
+    }
+
+    #endregion
+
+    #region Debuff Application
+
+    private static DebuffedEffects CreateUnmodifiedEffects(LifeEvent lifeEvent)
+    {
+        return new DebuffedEffects(
+            lifeEvent.StressImpact,
+            lifeEvent.MoodImpact,
+            lifeEvent.SocialBelongingImpact,
+            lifeEvent.ResilienceImpact,
+            lifeEvent.HealthImpact);
+    }
+
+    private static DebuffedEffects ApplyDebuffsToEvent(
+        LifeEvent lifeEvent,
+        double stressDebuff,
+        double moodDebuff,
+        double socialDebuff)
+    {
+        var stressImpact = lifeEvent.StressImpact;
+        var moodImpact = lifeEvent.MoodImpact;
+        var socialImpact = lifeEvent.SocialBelongingImpact;
+
+        // StressDebuff: amplify stress from stressful events
+        if (stressImpact > 0)
+            stressImpact *= stressDebuff;
+
+        // MoodDebuff: reduce mood gains, amplify mood losses
+        if (moodImpact > 0)
+            moodImpact *= moodDebuff;
+        else if (moodImpact < 0)
+            moodImpact /= moodDebuff;
+
+        // SocialDebuff: reduce social gains, amplify social losses
+        if (socialImpact > 0)
+            socialImpact *= socialDebuff;
+        else if (socialImpact < 0)
+            socialImpact /= socialDebuff;
+
+        return new DebuffedEffects(
+            stressImpact,
+            moodImpact,
+            socialImpact,
+            lifeEvent.ResilienceImpact,
+            lifeEvent.HealthImpact);
+    }
+
+    #endregion
+
+    #region Utility Methods
+
+    private static void IncrementActiveIllnessSteps(SimulationState state)
+    {
+        foreach (var progression in state.IllnessProgressionStates.Values)
+            progression.StepsActive++;
     }
 
     private void RaiseIllnessChanged(string key, string name, IllnessChangeType changeType, string message)
@@ -354,4 +318,6 @@ public sealed class IllnessManagerService : IIllnessManagerService
             GermanMessage = message
         });
     }
+
+    #endregion
 }

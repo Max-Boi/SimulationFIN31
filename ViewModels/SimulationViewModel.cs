@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -213,7 +214,13 @@ public partial class SimulationViewModel : ViewModelBase
 
     [ObservableProperty] private bool _useDoubleEvents = true;
 
-    public ObservableCollection<string> ActiveIllnessNames { get; } = new();
+    
+
+    // Use ActiveIllnessViewModel instead of string
+    public ObservableCollection<ActiveIllnessViewModel> ActiveIllnessNames { get; } = new();
+    
+    // Track last logged status to prevent spamming logs
+    private readonly Dictionary<string, string> _lastIllnessStatus = new();
 
     public ObservableCollection<EventLogEntry> EventLog { get; } = new();
 
@@ -389,8 +396,88 @@ public partial class SimulationViewModel : ViewModelBase
 
     private void UpdateActiveIllnessNames()
     {
-        ActiveIllnessNames.Clear();
-        foreach (var illness in SimulationState.CurrentIllnesses.Values) ActiveIllnessNames.Add(illness.Name);
+        // 1. Remove healed illnesses
+        var activeKeys = new HashSet<string>(SimulationState.CurrentIllnesses.Keys);
+        for (var i = ActiveIllnessNames.Count - 1; i >= 0; i--)
+        {
+            var item = ActiveIllnessNames[i];
+            // Find key by name (a bit inefficient but safe)
+            var keyObj = SimulationState.CurrentIllnesses.FirstOrDefault(x => x.Value.Name == item.Name);
+            if (keyObj.Key == null)
+            {
+                ActiveIllnessNames.RemoveAt(i);
+            }
+        }
+
+        // 2. Add or Update active illnesses
+        foreach (var (key, config) in SimulationState.CurrentIllnesses)
+        {
+            if (!SimulationState.IllnessProgressionStates.TryGetValue(key, out var progression)) continue;
+
+            var existingItem = ActiveIllnessNames.FirstOrDefault(x => x.Name == config.Name);
+            
+            if (existingItem == null)
+            {
+                existingItem = new ActiveIllnessViewModel(config.Name, progression.Severity, progression.LastFluctuation);
+                ActiveIllnessNames.Add(existingItem);
+            }
+            else
+            {
+                existingItem.Update(progression.LastFluctuation);
+            }
+
+            // 3. Check for Status Log updates
+            CheckAndLogSymptomStatus(key, config.Name, progression.LastFluctuation);
+        }
+    }
+
+    private void CheckAndLogSymptomStatus(string key, string name, double fluctuation)
+    {
+        var currentStatus = "Normal";
+        if (fluctuation > 0.75) currentStatus = "Bad";
+        else if (fluctuation < 0.25) currentStatus = "Good";
+
+        // Get last status (default to Normal if new)
+        var lastStatus = _lastIllnessStatus.GetValueOrDefault(key, "Normal");
+
+        if (currentStatus != lastStatus)
+        {
+            // Only log if moving TO an extreme state (Start of bad/good period)
+            // or returning to Normal FROM an extreme state (End of period)
+            
+            if (currentStatus == "Bad")
+            {
+                LogSymptomEvent(name, "Symptome verschlimmern sich merklich.", VisualCategory.MentalHealth);
+            }
+            else if (currentStatus == "Good")
+            {
+                LogSymptomEvent(name, "Hat einen besonders guten Tag.", VisualCategory.MentalHealth);
+            }
+            else if (lastStatus == "Bad")
+            {
+                LogSymptomEvent(name, "Symptome stabilisieren sich wieder.", VisualCategory.MentalHealth);
+            }
+             // Optional: Log return to normal from Good? "Phase des Wohlbefindens endet" - might be too spammy.
+
+            _lastIllnessStatus[key] = currentStatus;
+        }
+    }
+
+    private void LogSymptomEvent(string name, string message, VisualCategory category)
+    {
+        var entry = new EventLogEntry(
+            name,
+            message,
+            SimulationState.CurrentAge,
+            DateTime.UtcNow,
+            EventCategory.Personal, // Or a new specific category? Personal fits well.
+            category);
+
+        Dispatcher.UIThread.Post(() =>
+        {
+            EventLog.Insert(0, entry);
+            if (EventLog.Count > 150) EventLog.RemoveAt(EventLog.Count - 1);
+        });
     }
 
     private static string GetAvatarPath(LifePhase phase, int illnessCount, int animationFrame)
@@ -436,7 +523,7 @@ public partial class SimulationViewModel : ViewModelBase
             CurrentStress = 20,
             CurrentMood = 0,
             SocialBelonging = 50,
-            ResilienceScore = 85,
+            ResilienceScore = 70,
             PhysicalHealth = 100,
 
             IncomeLevel = EnumConverter.MapIncomeLevel(settings.IncomeLevel),

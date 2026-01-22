@@ -224,7 +224,7 @@ public partial class EvaluationView : UserControl
         // Set axis limits with some padding
         if (vm.Ages.Length > 0)
         {
-            plot.Axes.SetLimitsX(0, vm.Ages.Max() + 5); // Dynamic max age with padding
+            plot.Axes.SetLimitsX(0, vm.Ages.Max() + 2); // Dynamic max age with padding
             plot.Axes.SetLimitsY(-110, 110); // Values with padding
         }
         

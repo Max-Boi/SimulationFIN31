@@ -214,11 +214,21 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="#20E74C3C"
+                                    <Border Background="{Binding BackgroundBrush}"
                                             CornerRadius="6"
-                                            Padding="8,4">
-                                        <TextBlock Text="{Binding}"
-                                                   Classes="IllnessName" />
+                                            Padding="10,6"
+                                            MinHeight="40">
+                                        <StackPanel Spacing="2" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}"
+                                                       Classes="IllnessName"
+                                                       FontWeight="SemiBold"
+                                                       FontSize="12"
+                                                       Foreground="#212121"/>
+                                            <TextBlock Text="{Binding StatusMessage}"
+                                                       FontSize="10"
+                                                       Foreground="{Binding StatusColor}"
+                                                       IsVisible="{Binding StatusMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+                                        </StackPanel>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -232,7 +242,7 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Tree Animation Area with Event Icons Around It -->
+                <!-- Avatar Animation Area with Event Icons Around It -->
                 <Border Grid.Row="1" Classes="TreeContainer">
                     <Grid>
                         <Grid.ColumnDefinitions>
