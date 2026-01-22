@@ -40,10 +40,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 3.0),
-                new InfluenceFactor("ParentsRelationshipQuality", 2.5),
-                new InfluenceFactor("ParentsWithAddiction", -2.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.2)
+                new InfluenceFactor("FamilyCloseness", 1.6),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.5),
+                new InfluenceFactor("ParentsWithAddiction", -1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.1)
             ]
         },
         new()
@@ -67,10 +67,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 2.5),
-                new InfluenceFactor("FamilyCloseness", 1.8),
-                new InfluenceFactor("SocialEnergyLevel", 1.5),
-                new InfluenceFactor("HasAutism", -1.0)
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("FamilyCloseness", 1.3),
+                new InfluenceFactor("SocialEnergyLevel", 1.2),
+                new InfluenceFactor("HasAutism", -0.9)
             ]
         },
         new()
@@ -94,9 +94,9 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.8),
-                new InfluenceFactor("ParentsEducationLevel", 2.0),
-                new InfluenceFactor("ParentsWithAddiction", -2.0)
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.4),
+                new InfluenceFactor("ParentsWithAddiction", -1.3)
             ]
         },
         new()
@@ -119,8 +119,8 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.5),
-                new InfluenceFactor("ParentsRelationshipQuality", 2.0)
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.4)
             ]
         },
         new()
@@ -144,10 +144,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Creativity,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("IncomeLevel", 1.5),
-                new InfluenceFactor("HasAutism", 1.2)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("IncomeLevel", 1.2),
+                new InfluenceFactor("HasAutism", 1.1)
             ]
         },
         new()
@@ -170,11 +170,11 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.MentalHealth,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.5),
-                new InfluenceFactor("FamilyCloseness", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.0),
-                new InfluenceFactor("ParentsRelationshipQuality", -1.8),
-                new InfluenceFactor("GenderFemale", 1.1)
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", -1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.3),
+                new InfluenceFactor("ParentsRelationshipQuality", -1.2),
+                new InfluenceFactor("GenderFemale", 1.05)
             ],
             Exclusions = ["childhood_secure_attachment"]
         },
@@ -188,19 +188,19 @@ public static class ChildhoodEvents
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
             IsTraumatic = true,
-            StressImpact = 25,
-            MoodImpact = -22,
-            SocialBelongingImpact = -18,
-            ResilienceImpact = -8,
-            HealthImpact = -5,
-            AnxietyChange = 20,
-            SocialEnergyChange = -12,
+            StressImpact = 18,
+            MoodImpact = -15,
+            SocialBelongingImpact = -12,
+            ResilienceImpact = -5,
+            HealthImpact = -3,
+            AnxietyChange = 15,
+            SocialEnergyChange = -8,
             VisualCategory = VisualCategory.Trauma,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsRelationshipQuality", -3.5),
-                new InfluenceFactor("ParentsWithAddiction", 3.0),
-                new InfluenceFactor("IncomeLevel", -1.5)
+                new InfluenceFactor("ParentsRelationshipQuality", -1.5),
+                new InfluenceFactor("ParentsWithAddiction", 1.4),
+                new InfluenceFactor("IncomeLevel", -1.1)
             ]
         },
         new()
@@ -224,9 +224,9 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.5)
+                new InfluenceFactor("IncomeLevel", -1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.3),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.1)
             ]
         },
         new()
@@ -250,10 +250,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 2.5),
-                new InfluenceFactor("AnxietyLevel", -2.0),
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8)
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("AnxietyLevel", -1.3),
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.3)
             ]
         },
         new()
@@ -266,23 +266,23 @@ public static class ChildhoodEvents
             MaxAge = CHILDHOOD_MAX,
             IsUnique = false,
             IsTraumatic = true,
-            StressImpact = 30,
-            MoodImpact = -35,
-            SocialBelongingImpact = -30,
-            ResilienceImpact = -15,
-            HealthImpact = -8,
-            AnxietyChange = 25,
-            SocialEnergyChange = -18,
+            StressImpact = 20,
+            MoodImpact = -25,
+            SocialBelongingImpact = -20,
+            ResilienceImpact = -10,
+            HealthImpact = -5,
+            AnxietyChange = 18,
+            SocialEnergyChange = -12,
             VisualCategory = VisualCategory.Trauma,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsWithAddiction", 4.0),
-                new InfluenceFactor("FamilyCloseness", -4.0),
-                new InfluenceFactor("ParentsRelationshipQuality", -3.0),
-                new InfluenceFactor("IncomeLevel", -2.0),
-                new InfluenceFactor("ParentsEducationLevel", -1.5),
-                new InfluenceFactor("GenderMale", 1.2),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.5)
+                new InfluenceFactor("ParentsWithAddiction", 1.6),
+                new InfluenceFactor("FamilyCloseness", -1.6),
+                new InfluenceFactor("ParentsRelationshipQuality", -1.4),
+                new InfluenceFactor("IncomeLevel", -1.2),
+                new InfluenceFactor("ParentsEducationLevel", -1.1),
+                new InfluenceFactor("GenderMale", 1.1),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.1)
             ],
             Exclusions = ["childhood_secure_attachment"]
         },
@@ -307,10 +307,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.5),
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("GenderFemale", 1.4),
+                new InfluenceFactor("IntelligenceScore", 1.5),
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("GenderFemale", 1.2),
                 new InfluenceFactor("HasAutism", -0.8)
             ]
         },
@@ -334,10 +334,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("GenderMale", 1.6),
-                new InfluenceFactor("HasAdhd", 2.0)
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
+                new InfluenceFactor("GenderMale", 1.3),
+                new InfluenceFactor("HasAdhd", 1.4)
             ]
         },
         new()
@@ -360,10 +360,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("IntelligenceScore", 1.5),
-                new InfluenceFactor("GenderFemale", 1.5)
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("IntelligenceScore", 1.2),
+                new InfluenceFactor("GenderFemale", 1.2)
             ]
         },
         new()
@@ -386,9 +386,9 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
-                new InfluenceFactor("ParentsEducationLevel", -1.5),
-                new InfluenceFactor("GenderNonBinary", 2.0)
+                new InfluenceFactor("SocialEnvironmentLevel", -1.3),
+                new InfluenceFactor("ParentsEducationLevel", -1.1),
+                new InfluenceFactor("GenderNonBinary", 1.4)
             ]
         }
     ];
@@ -421,9 +421,9 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 3.0),
-                new InfluenceFactor("FamilyCloseness", 2.5),
-                new InfluenceFactor("ParentsRelationshipQuality", 2.0)
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.3)
             ]
         },
         new()
@@ -444,8 +444,8 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Pet,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 2.5),
-                new InfluenceFactor("FamilyCloseness", 2.0)
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("FamilyCloseness", 1.4)
             ],
             TriggersFollowUpEvents = ["childhood_pet_loss"]
         },
@@ -467,7 +467,7 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.8)
+                new InfluenceFactor("FamilyCloseness", 1.5)
             ]
         },
         new()
@@ -488,8 +488,8 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("ParentsRelationshipQuality", 2.0)
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.3)
             ]
         },
         new()
@@ -551,10 +551,10 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -3.0),
-                new InfluenceFactor("ParentsEducationLevel", -2.5),
-                new InfluenceFactor("JobStatus", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.0)
+                new InfluenceFactor("IncomeLevel", -1.4),
+                new InfluenceFactor("ParentsEducationLevel", -1.3),
+                new InfluenceFactor("JobStatus", -1.3),
+                new InfluenceFactor("ParentsWithAddiction", 1.3)
             ]
         },
         new()
@@ -575,8 +575,8 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 2.5),
-                new InfluenceFactor("IncomeLevel", 1.8)
+                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
+                new InfluenceFactor("IncomeLevel", 1.3)
             ]
         },
         new()
@@ -597,8 +597,8 @@ public static class ChildhoodEvents
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 2.5),
-                new InfluenceFactor("ParentsEducationLevel", 2.0)
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.4)
             ]
         },
         new()
@@ -612,18 +612,18 @@ public static class ChildhoodEvents
             MaxAge = CHILDHOOD_MAX,
             IsUnique = true,
             IsTraumatic = true,
-            StressImpact = 30,
-            MoodImpact = -30,
-            SocialBelongingImpact = -25,
-            ResilienceImpact = -10,
-            HealthImpact = -8,
+            StressImpact = 22,
+            MoodImpact = -22,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = -7,
+            HealthImpact = -5,
             VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsRelationshipQuality", -4.0),
-                new InfluenceFactor("ParentsWithAddiction", 3.5),
-                new InfluenceFactor("IncomeLevel", -2.0),
-                new InfluenceFactor("FamilyCloseness", -2.5)
+                new InfluenceFactor("ParentsRelationshipQuality", -1.5),
+                new InfluenceFactor("ParentsWithAddiction", 1.5),
+                new InfluenceFactor("IncomeLevel", -1.2),
+                new InfluenceFactor("FamilyCloseness", -1.4)
             ],
             TriggersFollowUpEvents = ["school_custody_adjustment"]
         }

@@ -35,11 +35,11 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Romance,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.8),
-                new InfluenceFactor("AnxietyLevel", -1.5),
-                new InfluenceFactor("FamilyCloseness", 1.3),
-                new InfluenceFactor("GenderFemale", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
+                new InfluenceFactor("AnxietyLevel", -1.2),
+                new InfluenceFactor("FamilyCloseness", 1.1),
+                new InfluenceFactor("GenderFemale", 1.1)
             ]
         },
         new()
@@ -62,13 +62,13 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 3.0),
-                new InfluenceFactor("ParentsEducationLevel", 2.8),
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("IncomeLevel", 1.8),
-                new InfluenceFactor("ParentsWithAddiction", -2.0),
-                new InfluenceFactor("HasAdhd", -1.5),
-                new InfluenceFactor("GenderFemale", 1.2)
+                new InfluenceFactor("IntelligenceScore", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.5),
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("IncomeLevel", 1.3),
+                new InfluenceFactor("ParentsWithAddiction", -1.2),
+                new InfluenceFactor("HasAdhd", -1.1),
+                new InfluenceFactor("GenderFemale", 1.1)
             ]
         },
         new()
@@ -117,12 +117,12 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.5),
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("FamilyCloseness", 1.8),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("AnxietyLevel", -1.5),
-                new InfluenceFactor("GenderFemale", 1.3)
+                new InfluenceFactor("SocialEnergyLevel", 1.5),
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("FamilyCloseness", 1.3),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
+                new InfluenceFactor("AnxietyLevel", -1.1),
+                new InfluenceFactor("GenderFemale", 1.15)
             ]
         },
         new()
@@ -164,21 +164,21 @@ public static class AdolescenceEvents
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
             IsTraumatic = false,
-            StressImpact = 25,
-            MoodImpact = -28,
-            SocialBelongingImpact = -18,
+            StressImpact = 18,
+            MoodImpact = -20,
+            SocialBelongingImpact = -12,
             ResilienceImpact = 5,
-            HealthImpact = -5,
-            AnxietyChange = 28,
-            SocialEnergyChange = -20,
+            HealthImpact = -3,
+            AnxietyChange = 20,
+            SocialEnergyChange = -15,
             VisualCategory = VisualCategory.Romance,
             Prerequisites = ["adolescence_first_romance"],
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.5),
-                new InfluenceFactor("FamilyCloseness", -2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.5),
-                new InfluenceFactor("GenderFemale", 1.4)
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", -1.3),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.1),
+                new InfluenceFactor("GenderFemale", 1.2)
             ]
         },
         new()
@@ -191,23 +191,23 @@ public static class AdolescenceEvents
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
             IsTraumatic = false,
-            StressImpact = 22,
-            MoodImpact = -15,
-            SocialBelongingImpact = -8,
-            ResilienceImpact = -8,
-            HealthImpact = -8,
-            AnxietyChange = 18,
-            SocialEnergyChange = -5,
+            StressImpact = 15,
+            MoodImpact = -10,
+            SocialBelongingImpact = -5,
+            ResilienceImpact = -5,
+            HealthImpact = -5,
+            AnxietyChange = 12,
+            SocialEnergyChange = -3,
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("ParentsWithAddiction", 3.0),
-                new InfluenceFactor("FamilyCloseness", -2.5),
-                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
-                new InfluenceFactor("ParentsEducationLevel", -1.5),
-                new InfluenceFactor("GenderMale", 1.4),
-                new InfluenceFactor("HasAdhd", 2.0)
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.5),
+                new InfluenceFactor("FamilyCloseness", -1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.3),
+                new InfluenceFactor("ParentsEducationLevel", -1.1),
+                new InfluenceFactor("GenderMale", 1.2),
+                new InfluenceFactor("HasAdhd", 1.4)
             ]
         },
         new()
@@ -220,26 +220,26 @@ public static class AdolescenceEvents
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
             IsTraumatic = false,
-            StressImpact = 32,
-            MoodImpact = -38,
-            SocialBelongingImpact = -28,
-            ResilienceImpact = -15,
-            HealthImpact = -15,
-            AnxietyChange = 35,
-            SocialEnergyChange = -25,
+            StressImpact = 22,
+            MoodImpact = -28,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = -10,
+            HealthImpact = -10,
+            AnxietyChange = 25,
+            SocialEnergyChange = -18,
             VisualCategory = VisualCategory.MentalHealth,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.3),
-                new InfluenceFactor("FamilyCloseness", -1.3),
-                new InfluenceFactor("ParentsWithAddiction", 1.5),
-                new InfluenceFactor("ParentsRelationshipQuality", -3.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -2.5),
-                new InfluenceFactor("IncomeLevel", -2.0),
-                new InfluenceFactor("GenderFemale", 1.8),
-                new InfluenceFactor("HasAdhd", 2.0),
-                new InfluenceFactor("HasAutism", 2.0),
-                new InfluenceFactor("GenderNonBinary", 2.5)
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", -1.1),
+                new InfluenceFactor("ParentsWithAddiction", 1.2),
+                new InfluenceFactor("ParentsRelationshipQuality", -1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.4),
+                new InfluenceFactor("IncomeLevel", -1.2),
+                new InfluenceFactor("GenderFemale", 1.3),
+                new InfluenceFactor("HasAdhd", 1.3),
+                new InfluenceFactor("HasAutism", 1.3),
+                new InfluenceFactor("GenderNonBinary", 1.5)
             ]
         },
         new()
@@ -280,25 +280,25 @@ public static class AdolescenceEvents
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
             IsTraumatic = true,
-            StressImpact = 28,
-            MoodImpact = -28,
-            SocialBelongingImpact = -25,
-            ResilienceImpact = -10,
-            HealthImpact = -8,
-            AnxietyChange = 28,
-            SocialEnergyChange = -20,
+            StressImpact = 20,
+            MoodImpact = -20,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = -7,
+            HealthImpact = -5,
+            AnxietyChange = 20,
+            SocialEnergyChange = -15,
             VisualCategory = VisualCategory.Trauma,
             Prerequisites = ["school_technology_access"],
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", -2.5),
-                new InfluenceFactor("AnxietyLevel", 2.5),
-                new InfluenceFactor("HasAutism", 2.5),
-                new InfluenceFactor("HasAdhd", 2.0),
-                new InfluenceFactor("FamilyCloseness", -2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.8),
-                new InfluenceFactor("GenderFemale", 1.5),
-                new InfluenceFactor("GenderNonBinary", 3.0)
+                new InfluenceFactor("SocialEnergyLevel", -1.4),
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("HasAutism", 1.4),
+                new InfluenceFactor("HasAdhd", 1.3),
+                new InfluenceFactor("FamilyCloseness", -1.2),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.2),
+                new InfluenceFactor("GenderFemale", 1.2),
+                new InfluenceFactor("GenderNonBinary", 1.5)
             ]
         },
         new()
@@ -359,20 +359,20 @@ public static class AdolescenceEvents
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
             IsTraumatic = false,
-            StressImpact = 22,
-            MoodImpact = -25,
-            SocialBelongingImpact = -15,
-            ResilienceImpact = -10,
-            HealthImpact = -8,
-            AnxietyChange = 25,
-            SocialEnergyChange = -15,
+            StressImpact = 15,
+            MoodImpact = -18,
+            SocialBelongingImpact = -10,
+            ResilienceImpact = -7,
+            HealthImpact = -5,
+            AnxietyChange = 18,
+            SocialEnergyChange = -10,
             VisualCategory = VisualCategory.MentalHealth,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 3.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
-                new InfluenceFactor("FamilyCloseness", -2.0),
-                new InfluenceFactor("GenderFemale", 2.0)
+                new InfluenceFactor("AnxietyLevel", 1.5),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.3),
+                new InfluenceFactor("FamilyCloseness", -1.2),
+                new InfluenceFactor("GenderFemale", 1.4)
             ]
         },
         new()
@@ -385,21 +385,21 @@ public static class AdolescenceEvents
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = true,
             IsTraumatic = true,
-            StressImpact = 35,
-            MoodImpact = -40,
-            SocialBelongingImpact = -25,
-            ResilienceImpact = -20,
-            HealthImpact = -30,
-            AnxietyChange = 35,
-            SocialEnergyChange = -25,
+            StressImpact = 25,
+            MoodImpact = -30,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = -15,
+            HealthImpact = -22,
+            AnxietyChange = 25,
+            SocialEnergyChange = -18,
             VisualCategory = VisualCategory.MentalHealth,
             Prerequisites = ["adolescence_body_image_concerns"],
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 4.0),
-                new InfluenceFactor("FamilyCloseness", -3.5),
-                new InfluenceFactor("ParentsWithAddiction", 3.0),
-                new InfluenceFactor("GenderFemale", 2.5)
+                new InfluenceFactor("AnxietyLevel", 1.6),
+                new InfluenceFactor("FamilyCloseness", -1.5),
+                new InfluenceFactor("ParentsWithAddiction", 1.4),
+                new InfluenceFactor("GenderFemale", 1.5)
             ]
         },
         new()
@@ -412,19 +412,19 @@ public static class AdolescenceEvents
             MaxAge = ADOLESCENCE_MAX,
             IsUnique = false,
             IsTraumatic = true,
-            StressImpact = 35,
-            MoodImpact = -35,
-            SocialBelongingImpact = -25,
-            ResilienceImpact = -15,
-            HealthImpact = -10,
-            AnxietyChange = 35,
-            SocialEnergyChange = -25,
+            StressImpact = 25,
+            MoodImpact = -25,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = -10,
+            HealthImpact = -7,
+            AnxietyChange = 25,
+            SocialEnergyChange = -18,
             VisualCategory = VisualCategory.Trauma,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", -2.5),
-                new InfluenceFactor("FamilyCloseness", -2.0),
-                new InfluenceFactor("GenderFemale", 2.2)
+                new InfluenceFactor("SocialEnvironmentLevel", -1.4),
+                new InfluenceFactor("FamilyCloseness", -1.2),
+                new InfluenceFactor("GenderFemale", 1.5)
             ]
         },
         new()
@@ -448,12 +448,12 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("ParentsWithAddiction", 3.0),
-                new InfluenceFactor("FamilyCloseness", -2.5),
-                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
-                new InfluenceFactor("GenderMale", 1.8),
-                new InfluenceFactor("HasAdhd", 2.5)
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.5),
+                new InfluenceFactor("FamilyCloseness", -1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.3),
+                new InfluenceFactor("GenderMale", 1.3),
+                new InfluenceFactor("HasAdhd", 1.5)
             ]
         },
         new()
@@ -466,20 +466,20 @@ public static class AdolescenceEvents
             MaxAge = 13,
             IsUnique = true,
             IsTraumatic = false,
-            StressImpact = 22,
-            MoodImpact = -20,
-            SocialBelongingImpact = -18,
-            ResilienceImpact = -8,
-            HealthImpact = -5,
-            AnxietyChange = 22,
-            SocialEnergyChange = -15,
+            StressImpact = 15,
+            MoodImpact = -13,
+            SocialBelongingImpact = -12,
+            ResilienceImpact = -5,
+            HealthImpact = -3,
+            AnxietyChange = 15,
+            SocialEnergyChange = -10,
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.5),
-                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
-                new InfluenceFactor("FamilyCloseness", -1.8),
-                new InfluenceFactor("GenderFemale", 1.8)
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.3),
+                new InfluenceFactor("FamilyCloseness", -1.2),
+                new InfluenceFactor("GenderFemale", 1.3)
             ]
         },
         new()
@@ -502,10 +502,10 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Identity,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 1.5),
-                new InfluenceFactor("FamilyCloseness", 1.5),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
-                new InfluenceFactor("GenderNonBinary", 3.0)
+                new InfluenceFactor("IntelligenceScore", 1.2),
+                new InfluenceFactor("FamilyCloseness", 1.2),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.1),
+                new InfluenceFactor("GenderNonBinary", 1.5)
             ]
         },
         new()
@@ -528,10 +528,10 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", -2.5),
-                new InfluenceFactor("ParentsEducationLevel", -1.5),
-                new InfluenceFactor("GenderFemale", 1.5),
-                new InfluenceFactor("GenderNonBinary", 3.0)
+                new InfluenceFactor("SocialEnvironmentLevel", -1.4),
+                new InfluenceFactor("ParentsEducationLevel", -1.1),
+                new InfluenceFactor("GenderFemale", 1.2),
+                new InfluenceFactor("GenderNonBinary", 1.5)
             ]
         },
         new()
@@ -555,9 +555,9 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.MentalHealth,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 3.0),
-                new InfluenceFactor("ParentsEducationLevel", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.8),
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
                 new InfluenceFactor("GenderMale", 10.0)
             ]
         }
@@ -733,9 +733,9 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Leisure,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 2.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("FamilyCloseness", 1.5)
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("FamilyCloseness", 1.2)
             ]
         },
         new()
@@ -756,10 +756,10 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -4.0),
-                new InfluenceFactor("JobStatus", -3.5),
-                new InfluenceFactor("ParentsEducationLevel", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 3.0)
+                new InfluenceFactor("IncomeLevel", -1.5),
+                new InfluenceFactor("JobStatus", -1.4),
+                new InfluenceFactor("ParentsEducationLevel", -1.3),
+                new InfluenceFactor("ParentsWithAddiction", 1.4)
             ]
         },
         new()
@@ -780,10 +780,10 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
-                new InfluenceFactor("FamilyCloseness", 1.8),
-                new InfluenceFactor("SocialEnergyLevel", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.3)
+                new InfluenceFactor("SocialEnvironmentLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", 1.3),
+                new InfluenceFactor("SocialEnergyLevel", 1.2),
+                new InfluenceFactor("ParentsEducationLevel", 1.1)
             ]
         },
         new()
@@ -804,10 +804,10 @@ public static class AdolescenceEvents
             VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("FamilyCloseness", 1.5),
-                new InfluenceFactor("IntelligenceScore", 1.3)
+                new InfluenceFactor("SocialEnvironmentLevel", 1.4),
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", 1.2),
+                new InfluenceFactor("IntelligenceScore", 1.1)
             ]
         }
     ];

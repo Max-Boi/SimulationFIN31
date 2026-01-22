@@ -26,9 +26,9 @@ public static class AdulthoodEvents
             Id = "adulthood_career_promotion",
             Name = "Bedeutende Karrierebeförderung",
             Description = "Der Erwachsene erhält eine bedeutsame Beförderung oder beruflichen Aufstieg.",
-            BaseProbability = 0.35,
+            BaseProbability = 0.25,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_SENIOR_WORK,
+            MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
             IsTraumatic = false,
             StressImpact = 5,
@@ -41,11 +41,11 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("JobStatus", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("SocialEnergyLevel", 1.5),
-                new InfluenceFactor("GenderMale", 1.1)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("JobStatus", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("SocialEnergyLevel", 1.2),
+                new InfluenceFactor("GenderMale", 1.05)
             ]
         },
         new()
@@ -53,7 +53,7 @@ public static class AdulthoodEvents
             Id = "adulthood_engagement",
             Name = "Verlobung oder Heirat",
             Description = "Der Erwachsene verlobt sich oder heiratet den Partner.",
-            BaseProbability = 0.40,
+            BaseProbability = 0.30,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
@@ -69,10 +69,10 @@ public static class AdulthoodEvents
             Prerequisites = ["emerging_serious_relationship"],
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("ParentsRelationshipQuality", 1.8),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("IncomeLevel", 1.3)
+                new InfluenceFactor("FamilyCloseness", 1.5),
+                new InfluenceFactor("ParentsRelationshipQuality", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
+                new InfluenceFactor("IncomeLevel", 1.1)
             ]
         },
         new()
@@ -80,9 +80,9 @@ public static class AdulthoodEvents
             Id = "adulthood_home_purchase",
             Name = "Erster Eigenheimkauf",
             Description = "Der Erwachsene erwirbt sein erstes Eigenheim und schafft Wohnstabilität.",
-            BaseProbability = 0.30,
+            BaseProbability = 0.20,
             MinAge = ADULTHOOD_MIN,
-            MaxAge = ADULTHOOD_SENIOR_WORK,
+            MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
             IsTraumatic = false,
             StressImpact = 25,
@@ -95,10 +95,10 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Home,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 2.5),
-                new InfluenceFactor("JobStatus", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.5),
-                new InfluenceFactor("FamilyCloseness", 1.3)
+                new InfluenceFactor("IncomeLevel", 1.6),
+                new InfluenceFactor("JobStatus", 1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.2),
+                new InfluenceFactor("FamilyCloseness", 1.1)
             ]
         },
         new()
@@ -106,7 +106,7 @@ public static class AdulthoodEvents
             Id = "adulthood_child_born",
             Name = "Geburt eines Kindes",
             Description = "Der Erwachsene wird mit der Geburt eines Kindes Elternteil.",
-            BaseProbability = 0.2,
+            BaseProbability = 0.15,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = false,
@@ -122,9 +122,9 @@ public static class AdulthoodEvents
             Prerequisites = ["adulthood_engagement"],
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 0.9),
-                new InfluenceFactor("IncomeLevel", 0.3),
-                new InfluenceFactor("SocialEnvironmentLevel", 0.5)
+                new InfluenceFactor("FamilyCloseness", 1.3),
+                new InfluenceFactor("IncomeLevel", 1.1),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.1)
             ]
         },
         new()
@@ -132,7 +132,7 @@ public static class AdulthoodEvents
             Id = "adulthood_career_pivot",
             Name = "Beruflicher Neustart",
             Description = "Der Erwachsene wechselt in ein völlig neues Berufsfeld.",
-            BaseProbability = 0.25,
+            BaseProbability = 0.18,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = false,
@@ -147,11 +147,11 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("IncomeLevel", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.5),
-                new InfluenceFactor("AnxietyLevel", -1.3),
-                new InfluenceFactor("HasAdhd", 1.5)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("IncomeLevel", 1.2),
+                new InfluenceFactor("ParentsEducationLevel", 1.2),
+                new InfluenceFactor("AnxietyLevel", -0.9),
+                new InfluenceFactor("HasAdhd", 1.3)
             ]
         },
         new()
@@ -159,26 +159,26 @@ public static class AdulthoodEvents
             Id = "adulthood_job_loss",
             Name = "Jobverlust",
             Description = "Der Erwachsene erlebt einen unerwarteten Arbeitsplatzverlust.",
-            BaseProbability = 0.18,
+            BaseProbability = 0.06,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
             IsTraumatic = false,
-            StressImpact = 32,
-            MoodImpact = -32,
-            SocialBelongingImpact = -22,
-            ResilienceImpact = -10,
-            HealthImpact = -12,
-            AnxietyChange = 30,
-            SocialEnergyChange = -18,
+            StressImpact = 22,
+            MoodImpact = -22,
+            SocialBelongingImpact = -15,
+            ResilienceImpact = -7,
+            HealthImpact = -8,
+            AnxietyChange = 22,
+            SocialEnergyChange = -12,
             VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
-                new InfluenceFactor("JobStatus", -3.5),
-                new InfluenceFactor("IncomeLevel", -3.0),
-                new InfluenceFactor("ParentsEducationLevel", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.5),
-                new InfluenceFactor("HasAdhd", 2.0)
+                new InfluenceFactor("JobStatus", -1.2),
+                new InfluenceFactor("IncomeLevel", -1.1),
+                new InfluenceFactor("ParentsEducationLevel", -0.9),
+                new InfluenceFactor("ParentsWithAddiction", 1.3),
+                new InfluenceFactor("HasAdhd", 1.2)
             ]
         },
         new()
@@ -186,27 +186,27 @@ public static class AdulthoodEvents
             Id = "adulthood_divorce",
             Name = "Scheidung oder Trennung",
             Description = "Der Erwachsene durchlebt eine Scheidung oder die Trennung einer langjährigen Beziehung.",
-            BaseProbability = 0.25,
+            BaseProbability = 0.08,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
             IsTraumatic = false,
-            StressImpact = 38,
-            MoodImpact = -38,
-            SocialBelongingImpact = -32,
-            ResilienceImpact = -5,
-            HealthImpact = -15,
-            AnxietyChange = 35,
-            SocialEnergyChange = -25,
+            StressImpact = 28,
+            MoodImpact = -28,
+            SocialBelongingImpact = -22,
+            ResilienceImpact = -3,
+            HealthImpact = -10,
+            AnxietyChange = 25,
+            SocialEnergyChange = -18,
             Prerequisites = ["adulthood_engagement"],
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsRelationshipQuality", -4.0),
-                new InfluenceFactor("FamilyCloseness", -3.0),
-                new InfluenceFactor("ParentsWithAddiction", 3.5),
-                new InfluenceFactor("IncomeLevel", -2.0),
-                new InfluenceFactor("AnxietyLevel", 2.5),
-                new InfluenceFactor("GenderFemale", 1.2)
+                new InfluenceFactor("ParentsRelationshipQuality", -1.4),
+                new InfluenceFactor("FamilyCloseness", -1.2),
+                new InfluenceFactor("ParentsWithAddiction", 1.4),
+                new InfluenceFactor("IncomeLevel", -1.0),
+                new InfluenceFactor("AnxietyLevel", 1.3),
+                new InfluenceFactor("GenderFemale", 1.05)
             ]
         },
         new()
@@ -215,23 +215,23 @@ public static class AdulthoodEvents
             Name = "Tod eines Elternteils",
             Description = "Der Erwachsene erlebt den Tod eines Elternteils.",
             VisualCategory = VisualCategory.Death,
-            BaseProbability = 0.2,
+            BaseProbability = 0.12,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
             IsTraumatic = true,
-            StressImpact = 35,
-            MoodImpact = -40,
-            SocialBelongingImpact = -15,
+            StressImpact = 25,
+            MoodImpact = -30,
+            SocialBelongingImpact = -10,
             ResilienceImpact = 5,
-            HealthImpact = -12,
-            AnxietyChange = 30,
-            SocialEnergyChange = -20,
+            HealthImpact = -8,
+            AnxietyChange = 22,
+            SocialEnergyChange = -15,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("ParentsWithAddiction", 2.0),
-                new InfluenceFactor("IncomeLevel", -1.3)
+                new InfluenceFactor("FamilyCloseness", 1.3),
+                new InfluenceFactor("ParentsWithAddiction", 1.4),
+                new InfluenceFactor("IncomeLevel", -0.9)
             ]
         },
         new()
@@ -239,7 +239,7 @@ public static class AdulthoodEvents
             Id = "adulthood_entrepreneurship",
             Name = "Gründung eines Unternehmens",
             Description = "Der Erwachsene startet ein eigenes Unternehmen oder unternehmerisches Projekt.",
-            BaseProbability = 0.15,
+            BaseProbability = 0.10,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = true,
@@ -253,11 +253,11 @@ public static class AdulthoodEvents
             SocialEnergyChange = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("IncomeLevel", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("SocialEnergyLevel", 1.5),
-                new InfluenceFactor("GenderMale", 1.2)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("SocialEnergyLevel", 1.2),
+                new InfluenceFactor("GenderMale", 1.1)
             ]
         },
         new()
@@ -265,7 +265,7 @@ public static class AdulthoodEvents
             Id = "adulthood_mental_health_support",
             Name = "Psychologische Unterstützung gesucht",
             Description = "Der Erwachsene nimmt professionelle psychologische Unterstützung in Anspruch.",
-            BaseProbability = 0.30,
+            BaseProbability = 0.20,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
@@ -278,8 +278,8 @@ public static class AdulthoodEvents
             AnxietyChange = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 1.4),
-                new InfluenceFactor("ParentsEducationLevel", 1.2),
+                new InfluenceFactor("AnxietyLevel", 1.3),
+                new InfluenceFactor("ParentsEducationLevel", 1.1),
                 new InfluenceFactor("IncomeLevel", 1.1)
             ]
         }
@@ -317,7 +317,7 @@ public static class AdulthoodEvents
             Id = "adulthood_community_involvement",
             Name = "Führungsrolle in der Gemeinschaft",
             Description = "Der Erwachsene übernimmt eine Führungsrolle in einer Gemeinschaftsorganisation.",
-            BaseProbability = 0.20,
+            BaseProbability = 0.15,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_SENIOR_WORK,
             IsUnique = true,
@@ -330,11 +330,11 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 2.0),
-                new InfluenceFactor("FamilyCloseness", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.3),
-                new InfluenceFactor("GenderFemale", 1.1)
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", 1.2),
+                new InfluenceFactor("ParentsEducationLevel", 1.1),
+                new InfluenceFactor("GenderFemale", 1.05)
             ]
         },
         new()
@@ -342,7 +342,7 @@ public static class AdulthoodEvents
             Id = "adulthood_health_milestone",
             Name = "Gesundheitlicher Meilenstein",
             Description = "Der Erwachsene erreicht ein bedeutendes Gesundheits- oder Fitnessziel.",
-            BaseProbability = 0.25,
+            BaseProbability = 0.20,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -355,9 +355,9 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 1.8),
-                new InfluenceFactor("SocialEnergyLevel", 1.5),
-                new InfluenceFactor("AnxietyLevel", -1.5)
+                new InfluenceFactor("IncomeLevel", 1.3),
+                new InfluenceFactor("SocialEnergyLevel", 1.2),
+                new InfluenceFactor("AnxietyLevel", -1.1)
             ]
         },
         new()
@@ -384,7 +384,7 @@ public static class AdulthoodEvents
             Id = "adulthood_reunion",
             Name = "Bedeutsames Wiedersehen",
             Description = "Der Erwachsene trifft alte Freunde oder Familienangehörige wieder.",
-            BaseProbability = 0.30,
+            BaseProbability = 0.22,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -397,9 +397,9 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("SocialEnergyLevel", 1.8),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5)
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("SocialEnergyLevel", 1.3),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2)
             ]
         },
         new()
@@ -407,7 +407,7 @@ public static class AdulthoodEvents
             Id = "adulthood_major_purchase",
             Name = "Große Anschaffung",
             Description = "Der Erwachsene tätigt eine bedeutende Anschaffung (Fahrzeug, Ausstattung, etc.).",
-            BaseProbability = 0.45,
+            BaseProbability = 0.30,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -420,8 +420,8 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 2.5),
-                new InfluenceFactor("JobStatus", 1.8)
+                new InfluenceFactor("IncomeLevel", 1.5),
+                new InfluenceFactor("JobStatus", 1.3)
             ]
         },
         new()
@@ -429,7 +429,7 @@ public static class AdulthoodEvents
             Id = "adulthood_professional_recognition",
             Name = "Berufliche Anerkennung",
             Description = "Der Erwachsene erhält Anerkennung oder eine Auszeichnung im beruflichen Bereich.",
-            BaseProbability = 0.20,
+            BaseProbability = 0.15,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -442,11 +442,11 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Achievement,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("JobStatus", 2.0),
-                new InfluenceFactor("SocialEnergyLevel", 1.5),
-                new InfluenceFactor("ParentsEducationLevel", 1.3),
-                new InfluenceFactor("GenderMale", 1.2)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("JobStatus", 1.4),
+                new InfluenceFactor("SocialEnergyLevel", 1.2),
+                new InfluenceFactor("ParentsEducationLevel", 1.1),
+                new InfluenceFactor("GenderMale", 1.05)
             ]
         },
         new()
@@ -454,7 +454,7 @@ public static class AdulthoodEvents
             Id = "adulthood_chronic_health",
             Name = "Chronische Erkrankung diagnostiziert",
             Description = "Beim Erwachsenen wird eine behandelbare chronische Erkrankung diagnostiziert.",
-            BaseProbability = 0.15,
+            BaseProbability = 0.08,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = true,
@@ -467,8 +467,8 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -1.5),
-                new InfluenceFactor("GenderFemale", 1.3)
+                new InfluenceFactor("IncomeLevel", -1.1),
+                new InfluenceFactor("GenderFemale", 1.1)
             ]
         },
         new()
@@ -476,7 +476,7 @@ public static class AdulthoodEvents
             Id = "adulthood_friend_loss",
             Name = "Entfremdung von Freund",
             Description = "Der Erwachsene entfremdet sich natürlich von einem engen Freund.",
-            BaseProbability = 0.40,
+            BaseProbability = 0.25,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -489,9 +489,9 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", -1.8),
-                new InfluenceFactor("AnxietyLevel", 1.5),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.3)
+                new InfluenceFactor("SocialEnergyLevel", -1.2),
+                new InfluenceFactor("AnxietyLevel", 1.2),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.0)
             ]
         },
         new()
@@ -499,7 +499,7 @@ public static class AdulthoodEvents
             Id = "adulthood_sibling_milestone",
             Name = "Meilenstein im Leben des Geschwisters",
             Description = "Das Geschwister erlebt ein bedeutendes Lebensereignis (Hochzeit, Kind, etc.).",
-            BaseProbability = 0.45,
+            BaseProbability = 0.30,
             MinAge = ADULTHOOD_MIN,
             MaxAge = ADULTHOOD_MAX,
             IsUnique = false,
@@ -512,8 +512,8 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5)
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2)
             ]
         }
     ];

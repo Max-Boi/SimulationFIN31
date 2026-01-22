@@ -25,7 +25,7 @@ public static class CopingMechanism
                 "Regelmäßige körperliche Aktivität zur Stressbewältigung. Sport fördert die Ausschüttung von Endorphinen und verbessert das allgemeine Wohlbefinden.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
-            BaseProbability = 0.40,
+            BaseProbability = 0.2,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -53,7 +53,7 @@ public static class CopingMechanism
                 "Sich an Freunde oder Familie wenden, um emotionale Unterstützung zu erhalten. Der Austausch mit nahestehenden Personen kann Stress reduzieren und das Wohlbefinden steigern.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
-            BaseProbability = 0.45,
+            BaseProbability = 0.3,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -141,7 +141,7 @@ public static class CopingMechanism
                 "Die Stressquelle systematisch angehen und lösen. Diese proaktive Strategie stärkt das Gefühl von Kontrolle und Selbstwirksamkeit.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
-            BaseProbability = 0.40,
+            BaseProbability = 0.3,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -155,11 +155,11 @@ public static class CopingMechanism
             HealthImpact = 5,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("IncomeLevel", 1.5),
-                new InfluenceFactor("ResilienceScore", 1.5),
+                new InfluenceFactor("IntelligenceScore", 1.1),
+                new InfluenceFactor("IncomeLevel", 1.3),
+                new InfluenceFactor("ResilienceScore", 1.2),
                 new InfluenceFactor("ParentsEducationLevel", 1.2),
-                new InfluenceFactor("GenderMale", 1.2)
+                new InfluenceFactor("GenderMale", 1.1)
             ]
         },
 
@@ -172,7 +172,7 @@ public static class CopingMechanism
                 "Stressauslöser meiden und sich aus sozialen Situationen zurückziehen. Dies bringt kurzfristige Erleichterung, verstärkt jedoch langfristig Ängste und Isolation.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
-            BaseProbability = 0.45,
+            BaseProbability = 0.2,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -186,9 +186,9 @@ public static class CopingMechanism
             HealthImpact = -3,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.0),
-                new InfluenceFactor("SocialEnergyLevel", -2.5),
-                new InfluenceFactor("ResilienceScore", -1.5),
+                new InfluenceFactor("AnxietyLevel", 1.8),
+                new InfluenceFactor("SocialEnergyLevel", -1.5),
+                new InfluenceFactor("ResilienceScore", -1.2),
                 new InfluenceFactor("HasAutism", 1.0)
             ]
         },
@@ -200,7 +200,7 @@ public static class CopingMechanism
                 "Alkohol oder andere Substanzen zur Stressbewältigung nutzen. Dies führt zu kurzfristiger Betäubung, birgt jedoch erhebliche Risiken für Abhängigkeit und Gesundheit.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
-            BaseProbability = 0.4,
+            BaseProbability = 0.25,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -216,10 +216,10 @@ public static class CopingMechanism
             [
                 new InfluenceFactor("ParentsWithAddiction", 3.0),
                 new InfluenceFactor("AnxietyLevel", 1.7),
-                new InfluenceFactor("FamilyCloseness", -2.0),
+                new InfluenceFactor("FamilyCloseness", -1.2),
                 new InfluenceFactor("SocialEnvironmentLevel", -1.5),
                 new InfluenceFactor("HasAdhd", 1.2),
-                new InfluenceFactor("ResilienceScore", -1.5),
+                new InfluenceFactor("ResilienceScore", -1.2),
                 new InfluenceFactor("GenderMale", 1.5)
             ]
         },
@@ -231,7 +231,7 @@ public static class CopingMechanism
                 "Wiederkehrendes negatives Denken über Probleme und Gefühle. Diese Gedankenschleifen verstärken negative Emotionen und beeinträchtigen die Problemlösefähigkeit.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
-            BaseProbability = 0.50,
+            BaseProbability = 0.3,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -245,7 +245,7 @@ public static class CopingMechanism
             HealthImpact = -5,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.5),
+                new InfluenceFactor("AnxietyLevel", 1.5),
                 new InfluenceFactor("IntelligenceScore", 1.1),
                 new InfluenceFactor("CurrentStress", 1.5),
                 new InfluenceFactor("GenderFemale", 1.5)
@@ -259,7 +259,7 @@ public static class CopingMechanism
                 "Nahrung zur Bewältigung negativer Emotionen nutzen. Diese Strategie bietet kurzfristige Beruhigung, kann jedoch zu Essstörungen und gesundheitlichen Problemen führen.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
-            BaseProbability = 0.40,
+            BaseProbability = 0.25,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -287,7 +287,7 @@ public static class CopingMechanism
                 "Frustration durch verbale oder körperliche Aggression ausdrücken. Dies schädigt zwischenmenschliche Beziehungen und verschlimmert langfristig das emotionale Befinden.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingDysfunctional,
-            BaseProbability = 0.30,
+            BaseProbability = 0.2,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -319,7 +319,7 @@ public static class CopingMechanism
                 "Unterhaltung oder Aktivitäten nutzen, um sich vom Stress abzulenken. Diese Strategie bietet zeitweilige Entlastung ohne langfristige positive oder negative Effekte.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingNeutral,
-            BaseProbability = 0.60,
+            BaseProbability = 0.45,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -346,7 +346,7 @@ public static class CopingMechanism
                 "Schlaf als Flucht oder zur Erholung von Stress nutzen. Ausreichender Schlaf unterstützt die Regeneration, exzessiver Schlaf kann jedoch zur Vermeidung werden.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingNeutral,
-            BaseProbability = 0.55,
+            BaseProbability = 0.4,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -373,7 +373,7 @@ public static class CopingMechanism
                 "Humor nutzen, um die Stimmung und Perspektive aufzuhellen. Lachen kann Spannungen lösen und das soziale Miteinander stärken.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingNeutral,
-            BaseProbability = 0.45,
+            BaseProbability = 0.3,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -401,7 +401,7 @@ public static class CopingMechanism
                 "Zeit in der Natur verbringen, um sich zu entspannen. Naturerlebnisse fördern das psychische Wohlbefinden und reduzieren Stresshormone.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
-            BaseProbability = 0.35,
+            BaseProbability = 0.25,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,
@@ -428,7 +428,7 @@ public static class CopingMechanism
                 "Gedanken und Gefühle niederschreiben, um Emotionen zu verarbeiten. Journaling fördert Selbstreflexion und hilft, Gedankenmuster zu erkennen.",
             Category = EventCategory.Coping,
             VisualCategory = VisualCategory.CopingFunctional,
-            BaseProbability = 0.30,
+            BaseProbability = 0.3,
             MaxAge = 100,
             IsUnique = false,
             IsTraumatic = false,

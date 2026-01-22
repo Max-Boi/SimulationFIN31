@@ -40,13 +40,13 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Education,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 3.0),
-                new InfluenceFactor("ParentsEducationLevel", 3.0),
-                new InfluenceFactor("IncomeLevel", 2.5),
-                new InfluenceFactor("FamilyCloseness", 1.8),
-                new InfluenceFactor("ParentsWithAddiction", -2.5),
-                new InfluenceFactor("GenderFemale", 1.1),
-                new InfluenceFactor("HasAdhd", -1.5)
+                new InfluenceFactor("IntelligenceScore", 1.5),
+                new InfluenceFactor("ParentsEducationLevel", 1.5),
+                new InfluenceFactor("IncomeLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", 1.3),
+                new InfluenceFactor("ParentsWithAddiction", -1.3),
+                new InfluenceFactor("GenderFemale", 1.05),
+                new InfluenceFactor("HasAdhd", -1.1)
             ]
         },
         new()
@@ -69,11 +69,11 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Romance,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.8),
-                new InfluenceFactor("FamilyCloseness", 1.5),
-                new InfluenceFactor("AnxietyLevel", -1.5),
-                new InfluenceFactor("GenderFemale", 1.2)
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.3),
+                new InfluenceFactor("FamilyCloseness", 1.2),
+                new InfluenceFactor("AnxietyLevel", -1.1),
+                new InfluenceFactor("GenderFemale", 1.1)
             ]
         },
         new()
@@ -96,10 +96,10 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Home,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", 2.0),
-                new InfluenceFactor("JobStatus", 1.8),
-                new InfluenceFactor("ParentsEducationLevel", 1.5),
-                new InfluenceFactor("FamilyCloseness", 1.3)
+                new InfluenceFactor("IncomeLevel", 1.4),
+                new InfluenceFactor("JobStatus", 1.3),
+                new InfluenceFactor("ParentsEducationLevel", 1.2),
+                new InfluenceFactor("FamilyCloseness", 1.1)
             ]
         },
         new()
@@ -122,11 +122,11 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsEducationLevel", 2.0),
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("IncomeLevel", 1.5),
-                new InfluenceFactor("GenderMale", 1.1)
+                new InfluenceFactor("ParentsEducationLevel", 1.4),
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
+                new InfluenceFactor("IncomeLevel", 1.2),
+                new InfluenceFactor("GenderMale", 1.05)
             ]
         },
         new()
@@ -150,10 +150,10 @@ public static class EmergingAdulthoodEvents
             Prerequisites = ["emerging_university_acceptance"],
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("FamilyCloseness", 1.8),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("ParentsWithAddiction", -2.0)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("FamilyCloseness", 1.3),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("ParentsWithAddiction", -1.3)
             ]
         },
         new()
@@ -166,21 +166,21 @@ public static class EmergingAdulthoodEvents
             MaxAge = EMERGING_ADULTHOOD_MAX,
             IsUnique = false,
             IsTraumatic = true,
-            StressImpact = 28,
-            MoodImpact = -30,
-            SocialBelongingImpact = -25,
+            StressImpact = 20,
+            MoodImpact = -22,
+            SocialBelongingImpact = -18,
             ResilienceImpact = 3,
-            HealthImpact = -8,
-            AnxietyChange = 25,
-            SocialEnergyChange = -18,
+            HealthImpact = -5,
+            AnxietyChange = 18,
+            SocialEnergyChange = -12,
             VisualCategory = VisualCategory.Romance,
             Prerequisites = ["emerging_serious_relationship"],
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.5),
-                new InfluenceFactor("FamilyCloseness", -2.0),
-                new InfluenceFactor("ParentsRelationshipQuality", -2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", -1.5)
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("FamilyCloseness", -1.3),
+                new InfluenceFactor("ParentsRelationshipQuality", -1.3),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.1)
             ]
         },
         new()
@@ -194,24 +194,24 @@ public static class EmergingAdulthoodEvents
             MaxAge = EMERGING_ADULTHOOD_MAX,
             IsUnique = true,
             IsTraumatic = true,
-            StressImpact = 28,
-            MoodImpact = -28,
-            SocialBelongingImpact = -22,
-            ResilienceImpact = -12,
-            HealthImpact = -8,
-            AnxietyChange = 28,
-            SocialEnergyChange = -15,
+            StressImpact = 20,
+            MoodImpact = -20,
+            SocialBelongingImpact = -15,
+            ResilienceImpact = -8,
+            HealthImpact = -5,
+            AnxietyChange = 20,
+            SocialEnergyChange = -10,
             VisualCategory = VisualCategory.Education,
             Prerequisites = ["emerging_university_acceptance"],
             Exclusions = ["emerging_degree_completion"],
             InfluenceFactors =
             [
-                new InfluenceFactor("HasAdhd", 3.5),
-                new InfluenceFactor("AnxietyLevel", 3.0),
-                new InfluenceFactor("IntelligenceScore", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 3.0),
-                new InfluenceFactor("FamilyCloseness", -2.5),
-                new InfluenceFactor("IncomeLevel", -2.0)
+                new InfluenceFactor("HasAdhd", 1.5),
+                new InfluenceFactor("AnxietyLevel", 1.5),
+                new InfluenceFactor("IntelligenceScore", -1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.4),
+                new InfluenceFactor("FamilyCloseness", -1.4),
+                new InfluenceFactor("IncomeLevel", -1.2)
             ]
         },
         new()
@@ -234,10 +234,10 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Financial,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("JobStatus", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("IncomeLevel", 1.5)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("JobStatus", 1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("IncomeLevel", 1.2)
             ]
         },
         new()
@@ -250,22 +250,22 @@ public static class EmergingAdulthoodEvents
             MaxAge = EMERGING_ADULTHOOD_MAX,
             IsUnique = true,
             IsTraumatic = true,
-            StressImpact = 25,
-            MoodImpact = -25,
-            SocialBelongingImpact = -18,
+            StressImpact = 18,
+            MoodImpact = -18,
+            SocialBelongingImpact = -12,
             ResilienceImpact = 3,
-            HealthImpact = -8,
-            AnxietyChange = 25,
-            SocialEnergyChange = -15,
+            HealthImpact = -5,
+            AnxietyChange = 18,
+            SocialEnergyChange = -10,
             VisualCategory = VisualCategory.Identity,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 3.0),
-                new InfluenceFactor("FamilyCloseness", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.5),
-                new InfluenceFactor("SocialEnvironmentLevel", -2.0),
-                new InfluenceFactor("ParentsRelationshipQuality", -2.0),
-                new InfluenceFactor("GenderNonBinary", 2.0)
+                new InfluenceFactor("AnxietyLevel", 1.5),
+                new InfluenceFactor("FamilyCloseness", -1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.3),
+                new InfluenceFactor("ParentsRelationshipQuality", -1.3),
+                new InfluenceFactor("GenderNonBinary", 1.4)
             ]
         },
         new()
@@ -289,10 +289,10 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Identity,
             InfluenceFactors =
             [
-                new InfluenceFactor("IntelligenceScore", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("FamilyCloseness", 1.5),
-                new InfluenceFactor("IncomeLevel", 1.3)
+                new InfluenceFactor("IntelligenceScore", 1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("FamilyCloseness", 1.2),
+                new InfluenceFactor("IncomeLevel", 1.1)
             ]
         }
     ];
@@ -324,9 +324,9 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Community,
             InfluenceFactors =
             [
-                new InfluenceFactor("ParentsEducationLevel", 2.0),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("IntelligenceScore", 1.3)
+                new InfluenceFactor("ParentsEducationLevel", 1.4),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
+                new InfluenceFactor("IntelligenceScore", 1.1)
             ]
         },
         new()
@@ -371,10 +371,10 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Social,
             InfluenceFactors =
             [
-                new InfluenceFactor("SocialEnergyLevel", 2.0),
-                new InfluenceFactor("ParentsEducationLevel", 1.8),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.5),
-                new InfluenceFactor("IntelligenceScore", 1.3)
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("ParentsEducationLevel", 1.3),
+                new InfluenceFactor("SocialEnvironmentLevel", 1.2),
+                new InfluenceFactor("IntelligenceScore", 1.1)
             ]
         },
         new()
@@ -440,9 +440,9 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Health,
             InfluenceFactors =
             [
-                new InfluenceFactor("AnxietyLevel", 2.0),
-                new InfluenceFactor("IncomeLevel", -1.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.0)
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("IncomeLevel", -1.1),
+                new InfluenceFactor("ParentsWithAddiction", 1.3)
             ]
         },
         new()
@@ -463,10 +463,10 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Family,
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 2.0),
-                new InfluenceFactor("ParentsWithAddiction", 2.0),
-                new InfluenceFactor("IncomeLevel", -1.3),
-                new InfluenceFactor("GenderFemale", 1.2)
+                new InfluenceFactor("FamilyCloseness", 1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.3),
+                new InfluenceFactor("IncomeLevel", -1.1),
+                new InfluenceFactor("GenderFemale", 1.1)
             ]
         },
         new()
@@ -509,9 +509,9 @@ public static class EmergingAdulthoodEvents
             VisualCategory = VisualCategory.Home,
             InfluenceFactors =
             [
-                new InfluenceFactor("IncomeLevel", -3.5),
-                new InfluenceFactor("JobStatus", -2.5),
-                new InfluenceFactor("ParentsWithAddiction", 2.0)
+                new InfluenceFactor("IncomeLevel", -1.5),
+                new InfluenceFactor("JobStatus", -1.4),
+                new InfluenceFactor("ParentsWithAddiction", 1.3)
             ]
         },
         new()
