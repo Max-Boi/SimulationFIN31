@@ -8,9 +8,12 @@ using SimulationFIN31.Services.Interfaces;
 namespace SimulationFIN31.Services;
 
 
+/// <summary>
+///     Calculates the probability weights for life events based on current simulation state.
+///     Computes dynamic weights using influence factors defined for each event.
+/// </summary>
 public sealed class EventWeightCalculator : IEventWeightCalculator
 {
-   
     private const double MINIMUM_WHEIGHT = 0.01;
     
     private const double MAXIMUM_WHEIGHT = 0.99;
@@ -21,6 +24,9 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
     private readonly IInfluenceCalculator _influenceCalculator;
 
    
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="EventWeightCalculator"/> class.
+    /// </summary>
     /// <param name="factorNormalizer">Service to normalize state values to [0,1] range.</param>
     /// <param name="influenceCalculator">Service to calculate influence multipliers.</param>
     /// <exception cref="ArgumentNullException">When any dependency is null.</exception>
@@ -33,6 +39,7 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
     }
 
   
+    /// <inheritdoc />
     public double CalculateWeight(LifeEvent lifeEvent, SimulationState state)
     {
         ArgumentNullException.ThrowIfNull(lifeEvent);
@@ -62,6 +69,7 @@ public sealed class EventWeightCalculator : IEventWeightCalculator
     }
 
     
+    /// <inheritdoc />
     public List<WeightedEvent> CalculateAllWeights(IEnumerable<LifeEvent> events, SimulationState state)
     {
         ArgumentNullException.ThrowIfNull(events);

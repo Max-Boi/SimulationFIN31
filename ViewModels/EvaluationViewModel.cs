@@ -9,6 +9,10 @@ using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.ViewModels;
 
+/// <summary>
+///     ViewModel for the evaluation screen shown after simulation completion.
+///     Calculates and displays statistics, charts, and event history.
+/// </summary>
 public partial class EvaluationViewModel : ViewModelBase
 {
     private readonly INavigationService _navigationService;
@@ -20,6 +24,10 @@ public partial class EvaluationViewModel : ViewModelBase
         _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
     }
 
+    /// <summary>
+    ///     Initializes the view model with the simulation history data.
+    ///     Processes the history to generate charts and statistics.
+    /// </summary>
     public void Initialize(SimulationHistory history)
     {
         _history = history ?? throw new ArgumentNullException(nameof(history));

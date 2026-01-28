@@ -63,6 +63,10 @@ public sealed class SimulationService : ISimulationService
     public event EventHandler<IllnessEventArgs>? IllnessChanged;
 
     /// <inheritdoc />
+    /// <summary>
+    ///     Executes a single step of the simulation, processing all events, illness triggers,
+    ///     and age advancement.
+    /// </summary>
     public async Task RunStepAsync(SimulationState state, CancellationToken cancellationToken = default, double speedMultiplier = 1.0, bool useDoubleEvents = true)
     {
         ArgumentNullException.ThrowIfNull(state);

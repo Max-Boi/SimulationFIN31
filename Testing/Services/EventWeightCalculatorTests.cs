@@ -322,7 +322,7 @@ public sealed class EventWeightCalculatorTests
             CurrentAge = 25,
             IncomeLevel = IncomeLevel.Medium,
             ParentsEducationLevel = ParentsEducationLevel.Medium,
-            JobStatus = JobStatus.MediumPrestige,
+            JobStatus = JobStatus.MediumPrestige2,
             SocialEnvironmentLevel = 50,
             FamilyCloseness = 60,
             ParentsRelationshipQuality = ParentsRelationshipQuality.Harmonious,

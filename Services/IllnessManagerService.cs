@@ -113,6 +113,9 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
     #region Healing Logic
 
+    /// <summary>
+    ///     Checks all active illnesses to see if they have reached their healing time.
+    /// </summary>
     private void ProcessHealing(SimulationState state)
     {
         var healedIllnesses = FindHealedIllnesses(state);
@@ -148,6 +151,10 @@ public sealed class IllnessManagerService : IIllnessManagerService
 
     #region Trigger Logic
 
+    /// <summary>
+    ///     Evaluates conditions for new illness onseats.
+    ///     Checks cooldowns, max active illnesses, and individual triggers.
+    /// </summary>
     private void ProcessTriggers(SimulationState state)
     {
         if (!CanTriggerNewIllness(state))
@@ -243,6 +250,10 @@ public sealed class IllnessManagerService : IIllnessManagerService
             ApplyBounceBackBonus(state);
     }
 
+    /// <summary>
+    ///     Applies a "Bounce Back" bonus to mood and resilience if in the cooldown period after an illness.
+    ///     Simulates the relief/recovery phase.
+    /// </summary>
     private static void ApplyBounceBackBonus(SimulationState state)
     {
         state.CurrentMood = Math.Clamp(state.CurrentMood + BounceBackBonus, -100, 100);

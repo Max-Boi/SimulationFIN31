@@ -6,6 +6,10 @@ using SimulationFIN31.Models.Enums;
 
 namespace SimulationFIN31.ViewModels;
 
+/// <summary>
+///     ViewModel representing a currently active mental illness for display in the UI.
+///     Handles visual representation of severity and fluctuation status.
+/// </summary>
 public sealed partial class ActiveIllnessViewModel : ObservableObject
 {
     [ObservableProperty] 
@@ -40,10 +44,8 @@ public sealed partial class ActiveIllnessViewModel : ObservableObject
 
     private void UpdateVisuals()
     {
-        // 1. Determine Background Color based on Severity (Pastel/Solid)
         BackgroundBrush = GetSeverityColor(Severity);
 
-        // 2. Determine Status Message
         if (Fluctuation > 0.7)
         {
             StatusMessage = "Symptome stark ausgeprägt";

@@ -1,0 +1,530 @@
+@startuml SimulationFIN31 Class Diagram
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam packageStyle rectangle
+
+' ============================
+' STRUCTS
+' ============================
+package "Models.structs" {
+    struct InfluenceFactor <<readonly>> {
+        + FactorName : string
+        + Exponent : double
+    }
+
+    struct CopingTrigger <<readonly>> {
+        + StressThreshold : double?
+        + MoodThreshold : double?
+        + BelongingThreshold : double?
+        + HasAnyTrigger() : bool
+    }
+
+    struct WeightedEvent <<readonly>> {
+        + Event : LifeEvent
+        + Weight : double
+        + NormalizedProbability : double
+    }
+
+    struct DebuffedEffects <<record>> {
+        + StressImpact : double
+        + MoodImpact : double
+        + SocialBelongingImpact : double
+        + ResilienceImpact : double
+        + HealthImpact : double
+    }
+}
+
+' ============================
+' MODELS - Core
+' ============================
+package "Models" {
+    class SimulationState {
+        + IncomeLevel : IncomeLevel
+        + ParentsEducationLevel : ParentsEducationLevel
+        + JobStatus : JobStatus
+        + SocialEnvironmentLevel : int
+        + FamilyCloseness : int
+        + ParentsRelationshipQuality : ParentsRelationshipQuality
+        + ParentsWithAddiction : bool
+        + HasAdhd : bool
+        + HasAutism : bool
+        + IntelligenceScore : int
+        + AnxietyLevel : int
+        + SocialEnergyLevel : SocialEnergyLevel
+        + CurrentStress : double
+        + CurrentMood : double
+        + SocialBelonging : double
+        + ResilienceScore : double
+        + PhysicalHealth : double
+        + CurrentAge : int
+        + Gender : GenderType
+        + LifePhase : LifePhase
+        + EventHistory : List<string>
+        + CurrentIllnesses : Dictionary<string, DiseaseConfig>
+        + CopingPreferences : Dictionary<string, double>
+        + IllnessProgressionStates : Dictionary<string, IllnessProgressionState>
+        + TraumaticEventAges : List<int>
+    }
+
+    class SimulationSettings <<record>> {
+        + IncomeLevel : int
+        + ParentsEducationLevel : int
+        + JobStatus : int
+        + SocialEnvironmentLevel : int
+        + HasAdhd : bool
+        + HasAutism : bool
+        + ParentsWithAddiction : bool
+        + IntelligenceScore : int
+        + AnxietyLevel : int
+        + ParentsRelationshipQuality : string
+        + FamilyCloseness : int
+        + SocialEnergyLevel : string
+        + Gender : string
+        + MaxAge : int
+        + UseDoubleEvents : bool
+    }
+
+    class IllnessProgressionState <<sealed>> {
+        + IllnessKey : string
+        + StepsActive : int
+        + OnsetAge : int
+        + Severity : EpisodeSeverity
+        + PerlinSeed : int
+        + LastFluctuation : double
+    }
+
+    class IllnessEventArgs <<sealed>> {
+        + IllnessKey : string
+        + IllnessName : string
+        + ChangeType : IllnessChangeType
+        + GermanMessage : string
+    }
+}
+
+' ============================
+' MODELS - Event Types
+' ============================
+package "Models.EventTypes" {
+    class LifeEvent {
+        + Id : string
+        + Name : string
+        + Description : string
+        + IsTraumatic : bool
+        + BaseProbability : double
+        + MinAge : int
+        + MaxAge : int
+        + Category : EventCategory
+        + VisualCategory : VisualCategory
+        + InfluenceFactors : List<InfluenceFactor>
+        + IsUnique : bool
+        + Prerequisites : List<string>
+        + Exclusions : List<string>
+        + StressImpact : double
+        + MoodImpact : double
+        + SocialBelongingImpact : double
+        + ResilienceImpact : double
+        + HealthImpact : double
+        --
+        + CanOccur(state: SimulationState) : bool
+    }
+
+    class GenericEvent {
+        + TriggersFollowUpEvents : List<string>
+    }
+
+    class PersonalEvent {
+        + AnxietyChange : double
+        + SocialEnergyChange : double
+    }
+
+    class CopingMechanism {
+        + Type : CopingType
+        + Trigger : CopingTrigger
+        + IsHabitForming : bool
+    }
+}
+
+' ============================
+' MODELS - Mental Diseases
+' ============================
+package "Models.MentalDiseases" {
+    class DiseaseConfig {
+        + Name : string
+        + StressDebuff : double
+        + MoodDebuff : double
+        + SocialProximityDebuff : double
+        + StressDebuffMin : double
+        + StressDebuffMax : double
+        + MoodDebuffMin : double
+        + MoodDebuffMax : double
+        + SocialDebuffMin : double
+        + SocialDebuffMax : double
+        + Volatility : double
+        + TriggerChance : int
+        + HealingTime : int
+        + MinAge : int
+        + GenderModifiers : IReadOnlyDictionary<GenderType, double>?
+        + HasDebuffRanges : bool
+        --
+        + GetGenderModifier(gender: GenderType) : double
+    }
+}
+
+' ============================
+' MODELS - History
+' ============================
+package "Models.History" {
+    class SimulationHistory <<record>> {
+        + TurnSnapshots : IReadOnlyList<TurnSnapshot>
+        + Events : IReadOnlyList<EventRecord>
+        + Illnesses : IReadOnlyList<IllnessRecord>
+        + CopingUsage : IReadOnlyList<CopingUsageRecord>
+        + FinalState : SimulationState
+    }
+
+    class TurnSnapshot <<record>> {
+        + Age : int
+        + Stress : double
+        + Mood : double
+        + SocialBelonging : double
+        + Resilience : double
+        + PhysicalHealth : double
+        + LifePhase : LifePhase
+    }
+
+    class EventRecord <<record>> {
+        + Id : string
+        + Name : string
+        + Description : string
+        + AgeOccurred : int
+        + IsTraumatic : bool
+        + StressImpact : double
+        + MoodImpact : double
+        + SocialImpact : double
+        + ResilienceImpact : double
+        + HealthImpact : double
+        + Category : EventCategory
+        + TotalAbsoluteImpact : double
+    }
+
+    class IllnessRecord <<record>> {
+        + IllnessKey : string
+        + DisplayName : string
+        + OnsetAge : int
+        + HealedAge : int?
+        + IsOngoing : bool
+        + Duration : int?
+    }
+
+    class CopingUsageRecord <<record>> {
+        + CopingId : string
+        + Name : string
+        + Type : CopingType
+        + AgeUsed : int
+    }
+}
+
+' ============================
+' SERVICES
+' ============================
+package "Services" {
+    class NavigationService {
+        - _viewModelFactory : Func<Type, ViewModelBase>
+        - _currentViewModel : ViewModelBase
+        --
+        + NavigateTo<T>() : void
+        + NavigateTo<T>(initializer: Action<T>) : void
+    }
+
+    class SimulationService {
+        - _weightedRandomService : IWeightedRandomService
+        - _illnessManagerService : IIllnessManagerService
+        - _historyService : ISimulationHistoryService
+        + {event} EventOccurred
+        + {event} StateUpdated
+        + {event} IllnessChanged
+        --
+        + RunStepAsync(state, cancellationToken, speedMultiplier, useDoubleEvents) : Task
+        + GetStepDelay(speedMultiplier: double) : int
+        - ProcessGenericEventsAsync(...) : Task
+        - ProcessPersonalEventsAsync(...) : Task
+        - ProcessCopingMechanisms(state) : void
+        - ApplyEvent(state, lifeEvent) : void
+        - AdvanceAge(state) : void
+        - DetermineLifePhase(age: int) : LifePhase
+    }
+
+    class WeightedRandomService {
+        - _weightCalculator : IEventWeightCalculator
+        - _triggerChecker : ICopingTriggerChecker
+        - _random : Random
+        --
+        + SelectGenericEvent(events, state) : GenericEvent?
+        + SelectPersonalEvent(events, state) : PersonalEvent?
+        + SelectCopingMechanism(mechanisms, state) : CopingMechanism?
+        + SelectMultiple<TEvent>(events, state, count) : IReadOnlyList<TEvent>
+        - SelectSingleUsingSus<TEvent>(eligible, state) : TEvent
+        - SelectMultipleUsingSus<TEvent>(eligible, state, count) : List<TEvent>
+        - BuildCumulativeProbabilities(weightedEvents) : double[]
+    }
+
+    class SimulationHistoryService <<sealed>> {
+        - _turnSnapshots : List<TurnSnapshot>
+        - _events : List<EventRecord>
+        - _copingUsage : List<CopingUsageRecord>
+        --
+        + BeginNewSimulation() : void
+        + RecordTurnSnapshot(state) : void
+        + RecordEvent(lifeEvent, age) : void
+        + RecordCopingUsage(mechanism, age) : void
+        + RecordIllnessOnset(illnessKey, displayName, onsetAge) : void
+        + RecordIllnessHealed(illnessKey, healedAge) : void
+        + GetCompleteHistory(finalState) : SimulationHistory
+    }
+
+    class IllnessManagerService {
+        - _debuffCalculator : DebuffCalculator
+        - _random : Random
+        + MaxActiveIllnesses : int
+        + {event} IllnessChanged
+        --
+        + ProcessIllnessStep(state) : void
+        + ApplyDebuffs(state, lifeEvent) : DebuffedEffects
+        + GetActiveIllnessStates(state) : IReadOnlyDictionary
+        - ProcessHealing(state) : void
+        - ProcessTriggers(state) : void
+        - TriggerIllness(state, key, config) : void
+        - RollEpisodeSeverity() : EpisodeSeverity
+    }
+
+    class EventWeightCalculator <<sealed>> {
+        - _factorNormalizer : IFactorNormalizer
+        - _influenceCalculator : IInfluenceCalculator
+        --
+        + CalculateWeight(lifeEvent, state) : double
+        + CalculateAllWeights(events, state) : List<WeightedEvent>
+        - CalculateHabitBoost(mechanism, state) : double
+    }
+
+    class FactorNormalizer {
+        + Normalize(profile, factorName) : double
+        - GetRawValue(profile, factorName) : double
+        - MapIncomeLevel(level) : double
+        - MapEducationLevel(level) : double
+        - MapJobStatus(status) : double
+        - MapGender(gender) : double
+        - MapSocialEnergyLevel(level) : double
+        - NormalizeByType(value, factorName) : double
+    }
+
+    class InfluenceCalculator <<sealed>> {
+        + CalculateInfluence(normalizedValue, exponent) : double
+    }
+
+    class DebuffCalculator <<sealed>> {
+        - _noiseGenerators : Dictionary<string, PerlinNoise>
+        --
+        + CalculateCombinedDebuffs(currentIllnesses, progressionStates) : (double, double, double)
+        - CalculateSingleDebuff(config, progression) : (double, double, double)
+        - GetSeverityMultiplier(severity) : double
+        - CalculateRecoveryFactor(stepsActive, healingTime) : double
+        + Reset() : void
+    }
+
+    class CopingTriggerChecker <<sealed>> {
+        + IsTriggered(coping, state) : bool
+        + FilterTriggered(mechanisms, state) : List<CopingMechanism>
+    }
+
+    class IllnessTriggerChecker <<static>> {
+        + {static} CheckTriggerCondition(illnessKey, state) : bool
+        - {static} HasRecentTraumaticEvent(state, yearsBack) : bool
+        - {static} HasLifetimeTrauma(state) : bool
+    }
+
+    class EventEngine {
+        + ApplyEffectsWithDebuffs(profile, debuffs) : void
+    }
+
+    class PerlinNoise <<sealed>> {
+        - _permutation : int[]
+        --
+        + Noise1D(x: double) : double
+        + GetFluctuationValue(step, volatility) : double
+    }
+}
+
+' ============================
+' VIEWMODELS
+' ============================
+package "ViewModels" {
+    abstract class ViewModelBase <<ObservableObject>> {
+    }
+
+    class MainWindowViewModel {
+        - _navigationService : INavigationService
+        - _currentViewModel : ViewModelBase
+        --
+        - OnServicePropertyChanged(sender, e) : void
+    }
+
+    class HomeViewModel {
+        - _navigationService : INavigationService
+        + CherryBlossomPic : Bitmap?
+        + SunsetPic : Bitmap?
+        --
+        + NavigateSettings() : void
+        + NavigateSimulation() : void
+    }
+
+    class SettingsViewModel {
+        - _navigationService : INavigationService
+        - _anxietyLevel : int
+        - _familyCloseness : int
+        - _gender : string
+        - _incomeLevel : int
+        - _maxAge : int
+        + ParentsRelationshipOptions : IReadOnlyList<string>
+        + SocialEnergyOptions : IReadOnlyList<string>
+        + GenderOptions : IReadOnlyList<string>
+        --
+        + NavigateStart() : void
+        + SaveSettingsAsync() : Task
+        + ResetSettings() : void
+    }
+
+    class SimulationViewModel {
+        - _navigationService : INavigationService
+        - _simulationService : ISimulationService
+        - _historyService : ISimulationHistoryService
+        - _simulationState : SimulationState
+        - _simulationSpeed : double
+        - _isRunning : bool
+        - _isPaused : bool
+        + GoBackCommand : ICommand
+        + ActiveIllnessNames : ObservableCollection<ActiveIllnessViewModel>
+        + EventLog : ObservableCollection<EventLogEntry>
+        --
+        + StartSimulationAsync() : Task
+        + PauseSimulation() : void
+        + StopSimulationAsync() : Task
+        + ResetSimulationAsync() : Task
+        - RunSimulationLoopAsync(cancellationToken) : Task
+        - OnEventOccurred(sender, e) : void
+        - OnStateUpdated(sender, state) : void
+        - OnIllnessChanged(sender, e) : void
+        - UpdateDisplayProperties() : void
+        - CreateInitialState() : SimulationState
+        - NavigateBack() : void
+    }
+
+    class EvaluationViewModel {
+        - _navigationService : INavigationService
+        - _history : SimulationHistory?
+        - _ages : double[]
+        - _stressValues : double[]
+        - _moodValues : double[]
+        + TopImpactfulEvents : ObservableCollection<EventRecord>
+        + TraumaticEvents : ObservableCollection<EventRecord>
+        + IllnessTimeline : ObservableCollection<IllnessRecord>
+        + CopingUsageSummary : ObservableCollection<CopingUsageSummary>
+        --
+        + Initialize(history: SimulationHistory) : void
+        + GoHome() : void
+        - ProcessChartData() : void
+        - ProcessTopEvents() : void
+        - CalculateSummaryStatistics() : void
+    }
+
+    class ActiveIllnessViewModel <<sealed>> {
+        - _name : string
+        - _severity : EpisodeSeverity
+        - _fluctuation : double
+        - _backgroundBrush : IBrush
+        - _statusMessage : string
+        --
+        + Update(fluctuation: double) : void
+        - UpdateVisuals() : void
+    }
+
+    class EventLogEntry <<record>> {
+        + EventName : string
+        + Description : string
+        + Age : int
+        + Timestamp : DateTime
+        + Category : EventCategory
+        + VisualCategory : VisualCategory
+        + DisplayText : string
+        + Icon : Bitmap?
+    }
+
+    class CopingUsageSummary <<record>> {
+        + Name : string
+        + Type : CopingType
+        + UsageCount : int
+    }
+}
+
+' ============================
+' RELATIONSHIPS - Inheritance
+' ============================
+MainWindowViewModel --|> ViewModelBase
+HomeViewModel --|> ViewModelBase
+SettingsViewModel --|> ViewModelBase
+SimulationViewModel --|> ViewModelBase
+EvaluationViewModel --|> ViewModelBase
+
+GenericEvent --|> LifeEvent
+PersonalEvent --|> LifeEvent
+CopingMechanism --|> LifeEvent
+
+' ============================
+' RELATIONSHIPS - Composition & Aggregation
+' ============================
+SimulationState *-- "0..*" DiseaseConfig : CurrentIllnesses
+SimulationState *-- "0..*" IllnessProgressionState : IllnessProgressionStates
+LifeEvent *-- "0..*" InfluenceFactor : InfluenceFactors
+CopingMechanism *-- CopingTrigger : Trigger
+
+SimulationHistory *-- "0..*" TurnSnapshot
+SimulationHistory *-- "0..*" EventRecord
+SimulationHistory *-- "0..*" IllnessRecord
+SimulationHistory *-- "0..*" CopingUsageRecord
+SimulationHistory o-- SimulationState : FinalState
+
+WeightedEvent o-- LifeEvent : Event
+
+' ============================
+' RELATIONSHIPS - Dependencies
+' ============================
+SimulationViewModel --> SimulationService
+SimulationViewModel --> SimulationHistoryService
+SimulationViewModel --> NavigationService
+SimulationViewModel o-- SimulationState
+SimulationViewModel o-- "0..*" ActiveIllnessViewModel
+SimulationViewModel o-- "0..*" EventLogEntry
+
+EvaluationViewModel --> NavigationService
+EvaluationViewModel o-- SimulationHistory
+
+SettingsViewModel --> NavigationService
+HomeViewModel --> NavigationService
+MainWindowViewModel --> NavigationService
+
+SimulationService --> WeightedRandomService
+SimulationService --> IllnessManagerService
+SimulationService --> SimulationHistoryService
+SimulationService --> DebuffCalculator
+SimulationService --> EventEngine
+
+WeightedRandomService --> EventWeightCalculator
+WeightedRandomService --> CopingTriggerChecker
+
+EventWeightCalculator --> FactorNormalizer
+EventWeightCalculator --> InfluenceCalculator
+
+IllnessManagerService --> DebuffCalculator
+DebuffCalculator --> PerlinNoise
+
+@enduml

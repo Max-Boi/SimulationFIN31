@@ -216,15 +216,16 @@ public partial class SimulationViewModel : ViewModelBase
 
     
 
-    // Use ActiveIllnessViewModel instead of string
     public ObservableCollection<ActiveIllnessViewModel> ActiveIllnessNames { get; } = new();
     
-    // Track last logged status to prevent spamming logs
     private readonly Dictionary<string, string> _lastIllnessStatus = new();
 
     public ObservableCollection<EventLogEntry> EventLog { get; } = new();
 
     [RelayCommand]
+    /// <summary>
+    ///     Starts the simulation loop if not already running.
+    /// </summary>
     private async Task StartSimulationAsync()
     {
         if (IsRunning && !IsPaused) return;
@@ -253,6 +254,9 @@ public partial class SimulationViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    /// <summary>
+    ///     Fully stops the current simulation and cancels the loop.
+    /// </summary>
     private async Task StopSimulationAsync()
     {
         if (!IsRunning) return;
@@ -269,6 +273,9 @@ public partial class SimulationViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    /// <summary>
+    ///     Resets the simulation to the initial state.
+    /// </summary>
     private async Task ResetSimulationAsync()
     {
         await StopSimulationAsync();
@@ -313,7 +320,6 @@ public partial class SimulationViewModel : ViewModelBase
                     LatestGenericEvent = entry;
                     break;
                 case EventCategory.Personal:
-                    // Verschiebe das erste Personal Event zum zweiten Slot
                     if (LatestPersonalEvent != null)
                         SecondPersonalEvent = LatestPersonalEvent;
                     LatestPersonalEvent = entry;

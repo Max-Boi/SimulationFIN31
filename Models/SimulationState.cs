@@ -33,11 +33,11 @@ public class SimulationState
     public int CurrentAge { get; set; }
     public GenderType Gender { get; set; }
 
-    public List<string> EventHistory { get; } = new();
+    public List<string> EventHistory { get; set; } = new();
     public LifePhase LifePhase { get; set; } = LifePhase.Childhood;
 
     public Dictionary<string, DiseaseConfig> CurrentIllnesses { get; } = new();
-    public Dictionary<string, double> CopingPreferences { get; } = new();
+    public Dictionary<string, double> CopingPreferences { get; set; } = new();
     public Dictionary<string, IllnessProgressionState> IllnessProgressionStates { get; } = new();
 
     public int StepsSinceLastIllnessTrigger { get; set; } = 2;

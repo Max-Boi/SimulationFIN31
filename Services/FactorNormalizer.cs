@@ -5,11 +5,16 @@ using SimulationFIN31.Services.Interfaces;
 
 namespace SimulationFIN31.Services;
 
+/// <summary>
+///     Normalizes various simulation factors (skills, stats, demographics) into a standard [0, 1] range
+///     for probability calculations.
+/// </summary>
 public class FactorNormalizer : IFactorNormalizer
 {
     private const double MinValue = 0.01;
     private const double MaxValue = 0.99;
 
+    /// <inheritdoc />
     public double Normalize(SimulationState profile, string factorName)
     {
         var rawValue = GetRawValue(profile, factorName);

@@ -576,7 +576,7 @@ public sealed class WeightedRandomServiceTests
             CurrentAge = currentAge,
             IncomeLevel = IncomeLevel.Medium,
             ParentsEducationLevel = ParentsEducationLevel.Medium,
-            JobStatus = JobStatus.MediumPrestige,
+            JobStatus = JobStatus.MediumPrestige2,
             SocialEnvironmentLevel = 50,
             FamilyCloseness = 60,
             ParentsRelationshipQuality = ParentsRelationshipQuality.Harmonious,
