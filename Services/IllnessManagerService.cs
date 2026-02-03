@@ -25,14 +25,14 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ["sozialePhobie"] = "Avatar entwickelt eine Soziale Angststörung",
         ["Panikstörung"] = "Avatar entwickelt eine Panikstörung",
         ["PTBS"] = "Avatar entwickelt eine Posttraumatische Belastungsstörung",
-        ["Alkoholismus"] = "Avatar entwickelt eine Alkoholabhaengigkeit",
+        ["Alkoholismus"] = "Avatar entwickelt eine Alkoholabhängigkeit",
         ["Substanzmissbrauch"] = "Avatar entwickelt eine Substanzabhängigkeit",
         ["Magersucht"] = "Avatar entwickelt Magersucht",
         ["Bulimie"] = "Avatar entwickelt Bulimie",
         ["BingeEatingStörung"] = "Avatar entwickelt eine Binge-Eating-störung",
         ["Zwangsstörung"] = "Avatar entwickelt eine Zwangsstörung",
-        ["BorderlinePersonality"] = "Avatar entwickelt eine Borderline-Persönlichkeitsstörung",
-        ["DissociativeDisorder"] = "Avatar entwickelt eine dissoziative störung"
+        ["BorderlineStörung"] = "Avatar entwickelt eine Borderline-Persönlichkeitsstörung",
+        ["DissoziativeStörung"] = "Avatar entwickelt eine Dissoziative Identitätsstörung"
     };
 
     private static readonly Dictionary<string, string> HealingMessages = new()
@@ -48,8 +48,8 @@ public sealed class IllnessManagerService : IIllnessManagerService
         ["Bulimie"] = "Avatar hat Bulimie überwunden",
         ["BingeEatingStörung"] = "Avatar hat die Binge-Eating-störung überwunden",
         ["Zwangsstörung"] = "Avatar hat die Zwangsstörung in den Griff bekommen",
-        ["BorderlinePersonality"] = "Avatar hat die Borderline-Persönlichkeitsstörung stabilisiert",
-        ["DissociativeDisorder"] = "Avatar hat die dissoziative störung überwunden"
+        ["BorderlineStörung"] = "Avatar hat die Borderline-Persönlichkeitsstörung stabilisiert",
+        ["DissoziativeStörung"] = "Avatar hat die Dissoziative Identitätsstörung überwunden"
     };
 
     private readonly DebuffCalculator _debuffCalculator = new();
