@@ -284,9 +284,9 @@ public static class MentalIllnesses
 
         // === PERSÖNLICHKEITSSTÖRUNGEN ===
 
-        ["BorderlinePersonality"] = new DiseaseConfig
+        ["BorderlineStörung"] = new DiseaseConfig
         {
-            Name = "Borderline Personality Disorder",
+            Name = "Borderline Identitätsstörung",
             StressDebuff = 1.30,
             MoodDebuff = 0.75,
             SocialProximityDebuff = 0.80,
@@ -303,11 +303,11 @@ public static class MentalIllnesses
             MinAge = 16
         },
 
-        // === DISSOZIATIVE STÖRUNGEN ===
+        // === Dissoziative IdentitätsstörungEN ===
 
-        ["DissociativeDisorder"] = new DiseaseConfig
+        ["DissoziativeStörung"] = new DiseaseConfig
         {
-            Name = "Dissociative Disorder",
+            Name = "Dissoziative Identitätsstörung",
             StressDebuff = 1.25,
             MoodDebuff = 0.80,
             SocialProximityDebuff = 0.82,

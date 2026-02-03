@@ -45,10 +45,10 @@ public static class IllnessTriggerChecker
 
             "Zwangsstörung" => state is { AnxietyLevel: > 90, CurrentStress: > 70 },
 
-            "BorderlinePersonality" => state is
+            "BorderlineStörung" => state is
                 { FamilyCloseness: < 30, CurrentMood: < -40, LifePhase: >= LifePhase.Adolescence },
 
-            "DissociativeDisorder" => HasLifetimeTrauma(state) && state.CurrentStress > 80,
+            "DissoziativeStörung" => HasLifetimeTrauma(state) && state.CurrentStress > 80,
 
             _ => false
         };
