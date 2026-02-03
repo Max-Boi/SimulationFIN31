@@ -73,8 +73,8 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
             var invertedValue = 1.0 - clampedValue;
             invertedValue = Math.Max(invertedValue, MINIMUM_NORMALIZED_VALUE);
             
-            // Apply same logic to inverted value
-            influence = Math.Pow(invertedValue * 2.0, Math.Abs(exponent));
+            // Apply same logic to inverted value with reduced intensity (1.5x instead of 2.0x)
+            influence = Math.Pow(invertedValue * 1.5, Math.Abs(exponent));
         }
 
         return Math.Clamp(influence, MIN_MULTIPLIER, MAX_MULTIPLIER);

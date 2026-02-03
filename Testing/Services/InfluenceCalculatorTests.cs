@@ -81,7 +81,7 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        // New Logic: 0.9 -> inv 0.1 -> 0.2. 0.2^1.5 approx 0.089
+        // New Logic: 0.9 -> inv 0.1 -> 0.15. 0.15^1.5 approx 0.058
         Assert.True(result < 1.0, "High value with negative exponent should yield penalty (< 1.0)");
     }
 
@@ -96,7 +96,7 @@ public sealed class InfluenceCalculatorTests
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
 
         // Assert
-        // New Logic: 0.1 -> inv 0.9 -> 1.8. 1.8^1.5 approx 2.41
+        // New Logic: 0.1 -> inv 0.9 -> 1.35. 1.35^1.5 approx 1.56
         Assert.True(result > 1.0, "Low value with negative exponent should yield boost (> 1.0)");
     }
 
@@ -209,7 +209,7 @@ public sealed class InfluenceCalculatorTests
         const double normalizedValue = 0.3;
         const double exponent = -2.0;
         var invertedValue = 1.0 - normalizedValue;
-        var expected = Math.Pow(invertedValue * 2.0, Math.Abs(exponent));
+        var expected = Math.Pow(invertedValue * 1.5, Math.Abs(exponent));
 
         // Act
         var result = _sut.CalculateInfluence(normalizedValue, exponent);
