@@ -1,0 +1,40 @@
+Benutzerhandbuch: Auswertung
+
+Nach Abschluss einer Simulation erhalten Sie in der Auswertung einen detaillierten Rückblick auf das gesamte Leben Ihres Avatars. Hier können Sie analysieren, wie sich die verschiedenen Faktoren über die Zeit entwickelt haben.
+
+1. Was Sie sehen
+Die Auswertung präsentiert die Daten in verschiedenen Formaten:
+
+Zusammenfassung (Oben):
+Komprimierte Kennzahlen zum Status am Ende der Simulation:
+- Endwerte: Die finalen Stände von Stress, Stimmung, Sozialer Zugehörigkeit und Resilienz.
+- Zähler: Gesamtzahl der erlebten Ereignisse und durchgemachten Krankheiten.
+- Bewältigung (Coping): Eine Übersicht, wie oft funktionale (gesunde) vs. dysfunktionale (ungesunde) Strategien genutzt wurden.
+
+Verlaufsgrafik (Mitte):
+Ein großes Liniendiagramm visualisiert die Lebenslinie:
+- Farben: Jede Linie steht für einen Wert (z.B. Rot für Stress, Blau für Stimmung).
+- Zeitachse: Verfolgen Sie die Auf- und Abwärtsbewegungen über die Jahre.
+- Interpretation: Achten Sie auf korrelierende Trends. Fällt die Stimmungskurve immer dann ab, wenn die Stresskurve steigt?
+
+Detaillierte Listen (Unten):
+- Einflussreichste Ereignisse: Welche Momente haben das Leben am stärksten geprägt? (Sortiert nach Stärke der Auswirkung).
+- Krankheitsverlauf: Eine chronologische Liste aller Diagnosen, wann sie begannen und wann (oder ob) sie geheilt wurden.
+- Traumatische Ereignisse: Spezielle Auflistung besonders schwerer Schicksalsschläge.
+- Verwendete Bewältigungsstrategien: Welche Methoden hat der Avatar genutzt, um mit Stress umzugehen (z.B. "Sport treiben" vs. "Rückzug")?
+
+2. Was Sie machen können
+- Analyse: Nutzen Sie die Daten, um Hypothesen zu prüfen. Hatte die frühe Scheidung der Eltern langfristige Folgen? Hat die Therapie in den 20ern geholfen?
+- Zurück zur Startseite: Beenden Sie die Analyse und kehren Sie zum Hauptmenü zurück, um eine neue Simulation mit anderen Einstellungen zu starten.
+
+3. Wissenschaftlicher Hintergrund
+Die Auswertung verdeutlicht die Langzeitfolgen von Entwicklungsprozessen:
+
+- Pfadabhängigkeit:
+  Entwicklung ist kein linearer Prozess. Ein Ereignis in der Kindheit (z.B. Trauma) kann den Pfad für das gesamte weitere Leben verändern ("Schmetterlingseffekt").
+
+- Kumulation von Risiken:
+  Oft ist es nicht das eine große Ereignis, das krank macht, sondern die Anhäufung vieler kleiner Belastungen (Allostatic Load), die in der Summe die Bewältigungskapazitäten überfordern.
+
+- Resilienz im Verlauf:
+  Die Grafiken zeigen oft, dass Menschen sich auch von tiefen Tälern erholen können. Diese Anpassungsfähigkeit ist ein zentrales Konzept der modernen Psychologie.

@@ -1,0 +1,49 @@
+Benutzerhandbuch: Einstellungen
+
+In den Einstellungen legen Sie das Fundament für das Leben Ihres Avatars. Hier konfigurieren Sie die Startbedingungen und biologischen Voraussetzungen, die den weiteren Verlauf der Simulation maßgeblich beeinflussen.
+
+1. Was Sie machen können
+Sie können verschiedene Parameter in drei Hauptkategorien anpassen. Nutzen Sie hierfür die Schieberegler und Auswahlmenüs.
+
+Kategorie 1: Sozioökonomischer Status
+Diese Faktoren bestimmen die gesellschaftliche und finanzielle Ausgangslage.
+- Einkommenslevel: Wie wohlhabend wächst der Avatar auf?
+- Bildungsniveau der Eltern: Welchen Bildungshintergrund haben die Eltern?
+- Beruflicher Status: Welches Ansehen genießt der Beruf der Eltern?
+
+Kategorie 2: Soziales Umfeld & Genetik
+Hier definieren Sie die familiäre Situation und angeborene Eigenschaften.
+- Soziale Eingebundenheit (Subjektiv): Wie gut fühlt sich der Avatar in sein Umfeld integriert?
+- Beziehungsqualität der Eltern: Ist die Ehe der Eltern harmonisch oder konfliktreich?
+- Familiäre Nähe: Wie eng ist der Zusammenhalt in der Familie?
+- Besondere Belastungen: Aktivieren Sie "Eltern mit Sucht", wenn ein Elternteil suchterkrankt sein soll.
+- Neurodivergenz: Sie können wählen, ob der Avatar mit ADHS oder Autismus geboren wird.
+
+Kategorie 3: Persönliche Ressourcen
+Diese Werte bestimmen die individuelle Widerstandskraft und Persönlichkeit.
+- Intelligenzscore (IQ): Kognitive Leistungsfähigkeit.
+- Angstniveau: Eine grundlegende Neigung zu Ängstlichkeit.
+- Soziale Energie: Ist der Avatar eher introvertiert (zieht Energie aus Ruhe) oder extrovertiert (zieht Energie aus Gesellschaft)?
+
+Simulationseinstellungen
+- Laufzeit: Bestimmen Sie, bis zu welchem Alter die Simulation laufen soll (Standard: 30 Jahre).
+- Ereignisdichte: "Zwei Ereignisse pro Alter" sorgt für einen abwechslungsreicheren Verlauf.
+
+2. Was Ihnen die Informationen sagen
+Die gewählten Einstellungen sind keine bloßen Zahlen, sondern Startwerte für komplexe psychologische Entwicklungen:
+
+- Risikofaktoren: Niedriger sozioökonomischer Status, familiäre Konflikte oder ein hohes Angstniveau erhöhen das Risiko (Vulnerabilität) für psychische Erkrankungen.
+- Schutzfaktoren: Hohe Intelligenz, familiäre Harmonie und finanzielle Sicherheit wirken als Puffer gegen Stress und Krisen.
+- Wechselwirkungen: Ein Avatar mit hohem genetischen Risiko (z.B. hohes Angstniveau) kann in einer stabilen, fördernden Umgebung trotzdem gesund bleiben. Umgekehrt kann eine sehr belastende Umgebung auch robuste Avatare krank machen.
+
+3. Wissenschaftlicher Hintergrund
+Die Einstellungsoptionen basieren auf zentralen Erkenntnissen der Entwicklungspsychologie und Epidemiologie:
+
+- Sozialer Gradient der Gesundheit:
+  Studien belegen eindeutig, dass Menschen mit niedrigerem sozioökonomischen Status ein höheres Risiko für psychische und physische Erkrankungen haben. Armut und Bildungsferne erzeugen chronischen Stress.
+
+- Diathese-Stress-Modell:
+  Dieses Modell erklärt psychische Störungen als Ergebnis des Zusammenspiels von Veranlagung (Diathese) und Stress. Ihre Einstellungen definieren die "Diathese" (Genetik, Persönlichkeit) und den "Stress" (Umweltfaktoren).
+
+- Transmission von Belastungen:
+  Psychische Belastungen der Eltern (z.B. Sucht, Konflikte) übertragen sich oft auf die Kinder, nicht nur genetisch, sondern auch durch das Aufwachsen in einer instabilen Umgebung.

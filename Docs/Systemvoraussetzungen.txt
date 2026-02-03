@@ -1,0 +1,44 @@
+Systemvoraussetzungen
+
+Damit die Simulation flüssig und zuverlässig läuft, sollte Ihr System die folgenden Anforderungen erfüllen. Diese orientieren sich an modernen Standards (vergleichbar mit Windows 11), um eine optimale Nutzererfahrung zu gewährleisten.
+
+1. Betriebssystem
+- Empfohlen: Windows 11 (Version 21H2 oder neuer) oder Windows 10 (Version 2004 oder neuer).
+- Alternativ:
+  - macOS: Version 10.13 (High Sierra) oder neuer.
+  - Linux: Eine aktuelle Distribution (z.B. Ubuntu 20.04+, Fedora 33+) mit installierten .NET Laufzeitumgebungen und GTK3/X11-Unterstützung.
+
+2. Hardware
+Die Simulation nutzt Avalonia UI für die grafische Darstellung und führt im Hintergrund komplexe Berechnungen durch.
+
+Prozessor (CPU):
+- Empfohlen: 64-Bit-Prozessor mit mindestens 2 Kernen und 1 GHz Taktfrequenz (oder schneller).
+- Beispiele: Intel Core i5 (8. Generation) oder neuer / AMD Ryzen 2000 Serie oder neuer.
+- Hinweis: Für eine schnelle Berechnung der Simulationsschritte profitieren Sie von modernen Mehrkernprozessoren.
+
+Arbeitsspeicher (RAM):
+- Minimum: 4 Gigabyte (GB).
+- Empfohlen: 8 GB oder mehr.
+- Begründung: Während die Anwendung selbst sparsam ist, benötigen das Betriebssystem und Hintergrundprozesse Ressourcen. 8 GB sorgen für reibungsloses Multitasking.
+
+Grafikkarte (GPU):
+- Anforderung: Unterstützung für DirectX 12, OpenGL 3.0 oder Vulkan.
+- Treiber: WDDM 2.0 kompatibler Treiber (unter Windows).
+- Hinweis: Auch wenn keine Hochleistungsgrafikkarte erforderlich ist, sorgt eine kompatible GPU für flüssige Animationen und eine scharfe Darstellung der Oberfläche (Hardwarebeschleunigung).
+
+Speicherplatz:
+- Benötigter Speicher: ca. 500 MB freier Speicherplatz auf der Festplatte (HDD oder SSD).
+- Empfehlung: SSD für schnellere Start- und Ladezeiten.
+
+Bildschirm:
+- Auflösung: Mindestens 1280 x 720 Pixel (HD).
+- Empfohlen: 1920 x 1080 Pixel (Full HD) für die beste Übersicht in der Auswertung.
+- Farbtiefe: 8 Bit pro Farbkanal.
+
+3. Software-Komponenten
+- .NET Runtime: Die Anwendung benötigt die .NET 8.0 Desktop Runtime (falls nicht in der Anwendung integriert).
+- Internetverbindung: Nicht erforderlich (Offline-Anwendung), es sei denn für Updates.
+
+4. Eingabegeräte
+- Standard: Maus, Touchpad und Tastatur.
+- Touchscreens: Werden unterstützt, die Bedienung ist jedoch für Maus/Touchpad optimiert.

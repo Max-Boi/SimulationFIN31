@@ -1,0 +1,54 @@
+Benutzerhandbuch: Simulationsansicht
+
+Willkommen in der Simulationsansicht. Dieser Bereich ist das Herzstück der Anwendung, in dem Sie die Lebensreise Ihres Avatars hautnah miterleben können.
+
+1. Was Sie sehen
+Die Ansicht ist in drei Hauptbereiche unterteilt:
+
+Linker Bereich (Status & Steuerung):
+Hier finden Sie die vitalen Kennzahlen Ihres Avatars.
+- Balkendiagramme: Drei farbige Balken visualisieren den aktuellen psychischen Zustand:
+  - Stress: Der aktuelle Stresspegel (0-100%). Ein hoher Wert deutet auf Belastung hin.
+  - Stimmung: Die emotionale Verfassung (von negativ bis positiv).
+  - Soziale Zugehörigkeit: Wie gut der Avatar in sein soziales Umfeld integriert ist.
+- Steuerelemente: Buttons zum Starten, Pausieren und Zurücksetzen der Simulation sowie ein Schieberegler für die Simulationsgeschwindigkeit.
+
+Mittlerer Bereich (Der Avatar):
+- Avatar: In der Mitte sehen Sie Ihren Avatar, der sich optisch verändert, je nachdem in welcher Lebensphase (Kindheit, Jugend, Erwachsenenalter) er sich befindet. Die Darstellung passt sich auch an, wenn der Avatar unter mehreren Erkrankungen leidet.
+- Ereignis-Symbole: Um den Avatar herum erscheinen Symbole, wenn Ereignisse eintreten. Diese repräsentieren verschiedene Lebensbereiche wie Familie, Karriere, Gesundheit oder persönliche Erlebnisse.
+- Aktive Erkrankungen: Über dem Avatar werden diagnostizierte psychische Erkrankungen aufgelistet, falls welche vorhanden sind. Farbcodes können auf den Status der Symptome (stabil, verschlechtert, verbessert) hinweisen.
+
+Rechter Bereich (Protokoll):
+- Ereignisprotokoll: Eine chronologische Liste aller Geschehnisse. Hier können Sie genau nachlesen, was passiert ist und welche Auswirkungen dies hatte.
+
+2. Was Sie machen können
+Sie haben die volle Kontrolle über den Ablauf der Simulation:
+
+- Simulation starten: Beginnen Sie die Lebensreise. Der Avatar wird älter und erlebt Ereignisse.
+- Pausieren: Halten Sie die Zeit an, um sich Statuswerte oder das Protokoll in Ruhe anzusehen.
+- Zurücksetzen (Reset): Beendet die aktuelle Simulation und setzt den Avatar auf den Startzustand (Geburt) zurück, bereit für einen neuen Durchlauf.
+- Geschwindigkeit anpassen: Nutzen Sie den Schieberegler, um die Simulation schneller oder langsamer ablaufen zu lassen.
+- Navigation: Mit dem "Zurück"-Button gelangen Sie jederzeit zum Hauptmenü.
+
+3. Was Ihnen die Informationen sagen
+Die angezeigten Daten helfen Ihnen zu verstehen, wie es Ihrem Avatar geht:
+
+- Dynamische Entwicklung: Sie werden beobachten, dass Stress, Stimmung und soziale Werte ständig schwanken. Das ist normal und spiegelt die Höhen und Tiefen des Lebens wider.
+- Lebensphasen: Achten Sie auf den Übergang zwischen Lebensphasen (z.B. Schulbeginn, Eintritt ins Berufsleben). Diese bringen oft neue Arten von Herausforderungen und Ereignissen mit sich.
+- Erkrankungen: Wenn eine Erkrankung auftritt, sehen Sie dies nicht nur in der Liste, sondern merken oft auch, dass sich Werte wie Stimmung schwerer erholen oder Stress schneller ansteigt.
+
+4. Wissenschaftlicher Hintergrund
+Die Simulation basiert auf etablierten psychologischen Modellen, um eine realistische Entwicklung darzustellen:
+
+- Das Biopsychosoziale Modell:
+  Die Simulation berücksichtigt, dass psychische Gesundheit von drei Faktoren abhängt:
+  1. Biologisch: Genetische Veranlagungen (z.B. Temperament, Geschlecht).
+  2. Psychologisch: Individuelle Resilienz, Stressbewältigung und Stimmung.
+  3. Sozial: Umfeld, Familie, Arbeit und soziale Bindungen.
+  All diese Faktoren spielen zusammen und beeinflussen, ob und wann eine psychische Erkrankung auftritt.
+
+- Das Stress-Vulnerabilitäts-Modell:
+  Nicht jeder Stress macht krank. Die Simulation berechnet eine individuelle "Verwundbarkeit" (Vulnerabilität). Wenn hohe Belastungen (Stress durch Lebensereignisse) auf eine hohe Verwundbarkeit (z.B. durch Vorerkrankungen oder geringe Resilienz) treffen, steigt das Risiko für psychische Störungen.
+
+- Resilienz und Bewältigung (Coping):
+  Der Avatar verfügt über eine psychische Widerstandskraft (Resilienz). Nach negativen Ereignissen oder überstandenen Krankheiten gibt es oft eine Erholungsphase ("Bounce-Back-Effekt"), in der sich Stimmung und Widerstandskraft regenerieren. Dies simuliert die menschliche Fähigkeit, sich von Krisen zu erholen.
