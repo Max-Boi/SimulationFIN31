@@ -160,27 +160,27 @@ public sealed class CopingTriggerCheckerTests
 
     #endregion
 
-    #region IsTriggered - Multiple Thresholds (OR Logic) Tests
+    #region IsTriggered - Functional Coping Multiple Thresholds (OR Logic) Tests
 
     [Fact]
-    public void IsTriggered_WithMultipleThresholdsAndOneTriggered_ReturnsTrue()
+    public void IsTriggered_FunctionalWithMultipleThresholdsAndOneTriggered_ReturnsTrue()
     {
-        // Arrange
-        var coping = CreateCopingMechanism(stressThreshold: 70, moodThreshold: -30);
+        // Arrange - Functional coping uses OR logic
+        var coping = CreateCopingMechanism(stressThreshold: 70, moodThreshold: -30, copingType: CopingType.Functional);
         var state = CreateSimulationState(currentStress: 80, currentMood: 10);
 
         // Act
         var result = _sut.IsTriggered(coping, state);
 
         // Assert
-        Assert.True(result, "Should trigger when stress threshold is met even if mood is fine");
+        Assert.True(result, "Functional coping should trigger when stress threshold is met even if mood is fine (OR logic)");
     }
 
     [Fact]
-    public void IsTriggered_WithMultipleThresholdsAllTriggered_ReturnsTrue()
+    public void IsTriggered_FunctionalWithMultipleThresholdsAllTriggered_ReturnsTrue()
     {
         // Arrange
-        var coping = CreateCopingMechanism(stressThreshold: 50, moodThreshold: -20, belongingThreshold: 40);
+        var coping = CreateCopingMechanism(stressThreshold: 50, moodThreshold: -20, belongingThreshold: 40, copingType: CopingType.Functional);
         var state = CreateSimulationState(currentStress: 70, currentMood: -40, socialBelonging: 20);
 
         // Act
@@ -191,10 +191,10 @@ public sealed class CopingTriggerCheckerTests
     }
 
     [Fact]
-    public void IsTriggered_WithMultipleThresholdsNoneTriggered_ReturnsFalse()
+    public void IsTriggered_FunctionalWithMultipleThresholdsNoneTriggered_ReturnsFalse()
     {
         // Arrange
-        var coping = CreateCopingMechanism(stressThreshold: 70, moodThreshold: -30);
+        var coping = CreateCopingMechanism(stressThreshold: 70, moodThreshold: -30, copingType: CopingType.Functional);
         var state = CreateSimulationState(currentStress: 40, currentMood: 20);
 
         // Act
@@ -202,6 +202,94 @@ public sealed class CopingTriggerCheckerTests
 
         // Assert
         Assert.False(result);
+    }
+
+    [Fact]
+    public void IsTriggered_NeutralWithMultipleThresholdsAndOneTriggered_ReturnsTrue()
+    {
+        // Arrange - Neutral coping also uses OR logic
+        var coping = CreateCopingMechanism(stressThreshold: 60, moodThreshold: -25, copingType: CopingType.Neutral);
+        var state = CreateSimulationState(currentStress: 70, currentMood: 10);
+
+        // Act
+        var result = _sut.IsTriggered(coping, state);
+
+        // Assert
+        Assert.True(result, "Neutral coping should trigger when any threshold is met (OR logic)");
+    }
+
+    #endregion
+
+    #region IsTriggered - Dysfunctional Coping Multiple Thresholds (AND Logic) Tests
+
+    [Fact]
+    public void IsTriggered_DysfunctionalWithMultipleThresholdsAndOneTriggered_ReturnsFalse()
+    {
+        // Arrange - Dysfunctional coping uses AND logic, so only stress being met is not enough
+        var coping = CreateCopingMechanism(stressThreshold: 70, moodThreshold: -30, copingType: CopingType.Dysfunctional);
+        var state = CreateSimulationState(currentStress: 80, currentMood: 10);
+
+        // Act
+        var result = _sut.IsTriggered(coping, state);
+
+        // Assert
+        Assert.False(result, "Dysfunctional coping should NOT trigger when only stress threshold is met (AND logic)");
+    }
+
+    [Fact]
+    public void IsTriggered_DysfunctionalWithMultipleThresholdsAllTriggered_ReturnsTrue()
+    {
+        // Arrange - All thresholds met for dysfunctional coping
+        var coping = CreateCopingMechanism(stressThreshold: 50, moodThreshold: -20, belongingThreshold: 40, copingType: CopingType.Dysfunctional);
+        var state = CreateSimulationState(currentStress: 70, currentMood: -40, socialBelonging: 20);
+
+        // Act
+        var result = _sut.IsTriggered(coping, state);
+
+        // Assert
+        Assert.True(result, "Dysfunctional coping should trigger when ALL thresholds are met");
+    }
+
+    [Fact]
+    public void IsTriggered_DysfunctionalWithMultipleThresholdsNoneTriggered_ReturnsFalse()
+    {
+        // Arrange
+        var coping = CreateCopingMechanism(stressThreshold: 70, moodThreshold: -30, copingType: CopingType.Dysfunctional);
+        var state = CreateSimulationState(currentStress: 40, currentMood: 20);
+
+        // Act
+        var result = _sut.IsTriggered(coping, state);
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void IsTriggered_DysfunctionalWithOnlyMoodThresholdMet_ReturnsFalse()
+    {
+        // Arrange - Only mood threshold met, but stress is not
+        var coping = CreateCopingMechanism(stressThreshold: 70, moodThreshold: -30, copingType: CopingType.Dysfunctional);
+        var state = CreateSimulationState(currentStress: 50, currentMood: -50);
+
+        // Act
+        var result = _sut.IsTriggered(coping, state);
+
+        // Assert
+        Assert.False(result, "Dysfunctional coping requires ALL thresholds to be met");
+    }
+
+    [Fact]
+    public void IsTriggered_DysfunctionalWithSingleThreshold_TriggersLikeFunctional()
+    {
+        // Arrange - Single threshold behaves the same for both types
+        var coping = CreateCopingMechanism(stressThreshold: 60, copingType: CopingType.Dysfunctional);
+        var state = CreateSimulationState(currentStress: 70);
+
+        // Act
+        var result = _sut.IsTriggered(coping, state);
+
+        // Assert
+        Assert.True(result, "Single threshold should trigger regardless of coping type");
     }
 
     #endregion
@@ -381,7 +469,8 @@ public sealed class CopingTriggerCheckerTests
         double? belongingThreshold = null,
         int minAge = 0,
         int maxAge = 100,
-        bool isUnique = false)
+        bool isUnique = false,
+        CopingType copingType = CopingType.Functional)
     {
         return new CopingMechanism
         {
@@ -391,7 +480,7 @@ public sealed class CopingTriggerCheckerTests
             MinAge = minAge,
             MaxAge = maxAge,
             IsUnique = isUnique,
-            Type = CopingType.Functional,
+            Type = copingType,
             Trigger = new CopingTrigger(stressThreshold, moodThreshold, belongingThreshold),
             IsHabitForming = false,
             InfluenceFactors = []
