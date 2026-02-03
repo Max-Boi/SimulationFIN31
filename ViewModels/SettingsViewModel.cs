@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -62,11 +63,99 @@ public partial class SettingsViewModel : ViewModelBase
     {
         _navigationService = navigationService;
 
-        _socialEnergyLevel = SocialEnergyOptions[2];
-        _parentsRelationshipQuality = ParentsRelationshipOptions[1];
-        _gender = GenderOptions[0];
+        // Load saved settings (or defaults) on initialization
+        LoadSettingsFromFile();
 
         RegisterCleanup();
+    }
+
+    /// <summary>
+    /// Loads settings from the saved JSON file. If no file exists or loading fails,
+    /// default values are used. This method resets all properties to the persisted state,
+    /// discarding any unsaved in-memory changes.
+    /// </summary>
+    public void LoadSettingsFromFile()
+    {
+        try
+        {
+            if (File.Exists(SettingsFilePath))
+            {
+                var json = File.ReadAllText(SettingsFilePath);
+                var settings = JsonSerializer.Deserialize<SimulationSettings>(json);
+
+                if (settings != null)
+                {
+                    ApplySettings(settings);
+                    return;
+                }
+            }
+        }
+        catch (JsonException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler beim Deserialisieren der Einstellungen: {ex.Message}");
+        }
+        catch (IOException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Fehler beim Lesen der Einstellungsdatei: {ex.Message}");
+        }
+
+        // If no file exists or loading failed, use default values
+        ApplyDefaultSettings();
+    }
+
+    /// <summary>
+    /// Applies the given settings to all observable properties.
+    /// </summary>
+    private void ApplySettings(SimulationSettings settings)
+    {
+        IncomeLevel = settings.IncomeLevel > 0 ? settings.IncomeLevel : DEFAULT_INCOME_LEVEL;
+        ParentsEducationLevel = settings.ParentsEducationLevel > 0 ? settings.ParentsEducationLevel : DEFAULT_PARENTS_EDUCATION_LEVEL;
+        JobStatus = settings.JobStatus > 0 ? settings.JobStatus : DEFAULT_JOB_STATUS;
+        SocialEnvironmentLevel = settings.SocialEnvironmentLevel > 0 ? settings.SocialEnvironmentLevel : DEFAULT_SOCIAL_ENVIRONMENT_LEVEL;
+        IntelligenceScore = settings.IntelligenceScore > 0 ? settings.IntelligenceScore : DEFAULT_INTELLIGENCE_SCORE;
+        AnxietyLevel = settings.AnxietyLevel >= 0 ? settings.AnxietyLevel : DEFAULT_ANXIETY_LEVEL;
+        FamilyCloseness = settings.FamilyCloseness >= 0 ? settings.FamilyCloseness : DEFAULT_FAMILY_CLOSENESS;
+        MaxAge = settings.MaxAge > 0 ? settings.MaxAge : DEFAULT_MAX_AGE;
+        UseDoubleEvents = settings.UseDoubleEvents;
+
+        HasAdhd = settings.HasAdhd;
+        HasAutism = settings.HasAutism;
+        ParentsWithAddiction = settings.ParentsWithAddiction;
+
+        // Map string options to valid values or use defaults
+        SocialEnergyLevel = SocialEnergyOptions.Contains(settings.SocialEnergyLevel) 
+            ? settings.SocialEnergyLevel 
+            : SocialEnergyOptions[2];
+        ParentsRelationshipQuality = ParentsRelationshipOptions.Contains(settings.ParentsRelationshipQuality)
+            ? settings.ParentsRelationshipQuality
+            : ParentsRelationshipOptions[1];
+        Gender = GenderOptions.Contains(settings.Gender)
+            ? settings.Gender
+            : GenderOptions[0];
+    }
+
+    /// <summary>
+    /// Applies default settings to all observable properties.
+    /// </summary>
+    private void ApplyDefaultSettings()
+    {
+        IncomeLevel = DEFAULT_INCOME_LEVEL;
+        ParentsEducationLevel = DEFAULT_PARENTS_EDUCATION_LEVEL;
+        JobStatus = DEFAULT_JOB_STATUS;
+        SocialEnvironmentLevel = DEFAULT_SOCIAL_ENVIRONMENT_LEVEL;
+        IntelligenceScore = DEFAULT_INTELLIGENCE_SCORE;
+        AnxietyLevel = DEFAULT_ANXIETY_LEVEL;
+        FamilyCloseness = DEFAULT_FAMILY_CLOSENESS;
+        MaxAge = DEFAULT_MAX_AGE;
+        UseDoubleEvents = DEFAULT_USE_DOUBLE_EVENTS;
+
+        HasAdhd = false;
+        HasAutism = false;
+        ParentsWithAddiction = false;
+
+        SocialEnergyLevel = SocialEnergyOptions[2];
+        ParentsRelationshipQuality = ParentsRelationshipOptions[1];
+        Gender = GenderOptions[0];
     }
 
     public string SesToolTip { get; } =

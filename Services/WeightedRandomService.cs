@@ -200,7 +200,7 @@ public sealed class WeightedRandomService : IWeightedRandomService, IEventSelect
 
         if (totalProbability <= 0.0)
         {
-            Thread.Sleep(2);
+          
             return eligible[_random.Next(eligible.Count)];
         }
 

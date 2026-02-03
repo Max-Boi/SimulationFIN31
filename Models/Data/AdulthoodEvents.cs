@@ -122,9 +122,9 @@ public static class AdulthoodEvents
             Prerequisites = ["adulthood_engagement"],
             InfluenceFactors =
             [
-                new InfluenceFactor("FamilyCloseness", 1.3),
-                new InfluenceFactor("IncomeLevel", 1.1),
-                new InfluenceFactor("SocialEnvironmentLevel", 1.1)
+                new InfluenceFactor("FamilyCloseness", 0.9),
+                new InfluenceFactor("IncomeLevel", 0.9),
+                new InfluenceFactor("SocialEnvironmentLevel", 0.9)
             ]
         },
         new()

@@ -38,7 +38,9 @@ public partial class HomeViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateSettings()
     {
-        _navigationService.NavigateTo<SettingsViewModel>();
+        // Reload settings from file when navigating to settings
+        // This ensures unsaved in-memory changes are discarded
+        _navigationService.NavigateTo<SettingsViewModel>(vm => vm.LoadSettingsFromFile());
     }
 
     [RelayCommand]
