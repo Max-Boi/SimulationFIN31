@@ -24,7 +24,7 @@ public static class MentalIllnesses
             SocialDebuffMax = 1.0,
             Volatility = 0.6, // High volatility - good days/bad days
             TriggerChance = 8,
-            HealingTime = 2,
+            HealingTime = 5,
             MinAge = 10,
             GenderModifiers = new Dictionary<GenderType, double>
             {
@@ -127,7 +127,7 @@ public static class MentalIllnesses
             SocialDebuffMin = 0.70,
             SocialDebuffMax = 0.95,
             Volatility = 0.7, // High volatility - trauma triggers
-            TriggerChance = 15,
+            TriggerChance = 20,
             HealingTime = 10,
             MinAge = 3
         },
