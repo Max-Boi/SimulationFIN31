@@ -15,6 +15,7 @@ namespace SimulationFIN31.Services;
 /// </summary>
 public sealed class InfluenceCalculator : IInfluenceCalculator
 {
+    private const double NEGATIVE_MULTIPLICATOR = 1.3;
     /// <summary>
     ///     Minimum value to prevent division by zero or extreme amplification.
     /// </summary>
@@ -74,7 +75,7 @@ public sealed class InfluenceCalculator : IInfluenceCalculator
             invertedValue = Math.Max(invertedValue, MINIMUM_NORMALIZED_VALUE);
             
             // Apply same logic to inverted value with reduced intensity (1.5x instead of 2.0x)
-            influence = Math.Pow(invertedValue * 1.5, Math.Abs(exponent));
+            influence = Math.Pow(invertedValue * NEGATIVE_MULTIPLICATOR, Math.Abs(exponent));
         }
 
         return Math.Clamp(influence, MIN_MULTIPLIER, MAX_MULTIPLIER);

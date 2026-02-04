@@ -174,9 +174,9 @@ public static class AdulthoodEvents
             VisualCategory = VisualCategory.Career,
             InfluenceFactors =
             [
-                new InfluenceFactor("JobStatus", -1.2),
-                new InfluenceFactor("IncomeLevel", -1.1),
-                new InfluenceFactor("ParentsEducationLevel", -0.9),
+                new InfluenceFactor("JobStatus", -0.5),
+                new InfluenceFactor("IncomeLevel", -0.8),
+                new InfluenceFactor("ParentsEducationLevel", -0.6),
                 new InfluenceFactor("ParentsWithAddiction", 1.3),
                 new InfluenceFactor("HasAdhd", 1.2)
             ]
@@ -281,6 +281,93 @@ public static class AdulthoodEvents
                 new InfluenceFactor("AnxietyLevel", 1.3),
                 new InfluenceFactor("ParentsEducationLevel", 1.1),
                 new InfluenceFactor("IncomeLevel", 1.1)
+            ]
+        },
+        new()
+        {
+            Id = "adulthood_burnout",
+            Name = "Burnout-Krise",
+            Description = "Der Erwachsene erlebt eine ernsthafte Erschöpfungskrise durch berufliche und private Überlastung.",
+            BaseProbability = 0.12,
+            MinAge = ADULTHOOD_MIN,
+            MaxAge = ADULTHOOD_MAX,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 30,
+            MoodImpact = -25,
+            SocialBelongingImpact = -15,
+            ResilienceImpact = -10,
+            HealthImpact = -18,
+            AnxietyChange = 25,
+            SocialEnergyChange = -20,
+            VisualCategory = VisualCategory.Health,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("CurrentStress", 1.6),
+                new InfluenceFactor("AnxietyLevel", 1.4),
+                new InfluenceFactor("JobStatus", 1.3),
+                new InfluenceFactor("SocialEnergyLevel", -1.2),
+                new InfluenceFactor("ResilienceScore", -1.3),
+                new InfluenceFactor("FamilyCloseness", -1.1),
+                new InfluenceFactor("HasAdhd", 1.2)
+            ]
+        },
+        new()
+        {
+            Id = "adulthood_volunteer_work",
+            Name = "Ehrenamtliches Engagement",
+            Description = "Der Erwachsene beginnt ein regelmäßiges ehrenamtliches Engagement in einer sozialen Organisation.",
+            BaseProbability = 0.18,
+            MinAge = ADULTHOOD_MIN,
+            MaxAge = ADULTHOOD_MAX,
+            IsUnique = true,
+            IsTraumatic = false,
+            StressImpact = 5,
+            MoodImpact = 18,
+            SocialBelongingImpact = 22,
+            ResilienceImpact = 10,
+            HealthImpact = 5,
+            AnxietyChange = -8,
+            SocialEnergyChange = 10,
+            VisualCategory = VisualCategory.Community,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("SocialEnergyLevel", 1.4),
+                new InfluenceFactor("SocialBelonging", 1.3),
+                new InfluenceFactor("FamilyCloseness", 1.2),
+                new InfluenceFactor("ParentsEducationLevel", 1.2),
+                new InfluenceFactor("CurrentMood", 1.1),
+                new InfluenceFactor("AnxietyLevel", -1.1),
+                new InfluenceFactor("GenderFemale", 1.08)
+            ]
+        },
+        new()
+        {
+            Id = "adulthood_relocation",
+            Name = "Umzug in eine neue Stadt",
+            Description = "Der Erwachsene zieht aus beruflichen oder persönlichen Gründen in eine neue Stadt.",
+            BaseProbability = 0.15,
+            MinAge = ADULTHOOD_MIN,
+            MaxAge = ADULTHOOD_SENIOR_WORK,
+            IsUnique = false,
+            IsTraumatic = false,
+            StressImpact = 20,
+            MoodImpact = 5,
+            SocialBelongingImpact = -18,
+            ResilienceImpact = 8,
+            HealthImpact = 0,
+            AnxietyChange = 15,
+            SocialEnergyChange = -5,
+            VisualCategory = VisualCategory.Home,
+            InfluenceFactors =
+            [
+                new InfluenceFactor("JobStatus", 1.4),
+                new InfluenceFactor("IntelligenceScore", 1.2),
+                new InfluenceFactor("IncomeLevel", 1.3),
+                new InfluenceFactor("SocialEnvironmentLevel", -1.2),
+                new InfluenceFactor("FamilyCloseness", -1.1),
+                new InfluenceFactor("HasAdhd", 1.15),
+                new InfluenceFactor("ParentsRelationshipQuality", -0.9)
             ]
         }
     ];
